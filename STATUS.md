@@ -1,8 +1,7 @@
 # Status
 
-M0 in progress. No measurements completed. No claims established.
-The local host is macOS/Apple Silicon. Enforceable CPU affinity and a JAX GPU
-backend must be checked before benchmark labels are assigned.
+M0: research notes, source manifest, design and pinned environment prepared.
+M1: complex-field, dtype, power and dynamic-input tests passed. Full sweep pending.
+No performance claims yet. JAX exposes CPU only. Single-core affinity is unavailable on this OS.
 
-All work stays local. Drafts will be under outbox. Sources in the parent mirror
-are read-only. Nothing has been sent or published.
+All work is local. No publication, messages or collaboration claims.

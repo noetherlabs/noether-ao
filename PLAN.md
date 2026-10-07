@@ -1,11 +1,11 @@
 # Plan
 
-Current position: M0 research and setup. No experimental claims yet.
+Current position: M0 research/design complete; M1 correctness tests passed; full latency run next.
 
 | Milestone | Required gate | State |
 |---|---|---|
-| M0 | Opened-source notes and design for every experiment | in progress |
-| M1 | dLux/JAX agreement; full specified timing sweep and raw samples | pending |
+| M0 | Opened-source notes and design for every experiment | pass |
+| M1 | dLux/JAX agreement; full specified timing sweep and raw samples | in progress |
 | M2 | Small local Dragrace branch; existing/new tests pass; drafts | pending |
 | M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | pending |
 | M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pending |
