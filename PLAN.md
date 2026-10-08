@@ -1,12 +1,12 @@
 # Plan
 
-Current position: M0 research/design complete; M1 correctness tests passed; full latency run next.
+Current position: M1 complete; M2 adapter installation, tests and scan next.
 
 | Milestone | Required gate | State |
 |---|---|---|
 | M0 | Opened-source notes and design for every experiment | pass |
-| M1 | dLux/JAX agreement; full specified timing sweep and raw samples | in progress |
-| M2 | Small local Dragrace branch; existing/new tests pass; drafts | pending |
+| M1 | dLux/JAX agreement; full specified timing sweep and raw samples | pass on available CPU; affinity/GPU skipped |
+| M2 | Small local Dragrace branch; existing/new tests pass; drafts | in progress |
 | M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | pending |
 | M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pending |
 | M5 | Fidelity/flux table and plot with at least five seeds | pending |
@@ -50,3 +50,11 @@ The requested scope is substantial and deliberately retained. Keep a small funct
 simulation core separate from experiment drivers. Public artifacts identify synthetic
 plant assumptions. Validate physical gates separately from numerical software tests.
 Do not turn an unavailable platform or failed physical validation into a pass.
+
+## Current implementation review
+
+The delayed plant, ideal pyramid, sensor calibration, causal detector, fidelity
+sweep and differentiable mixture are prepared. Their physical gates remain pending.
+The review checks explicitly distinguish pre-existing false alarms from new fault
+detections, failed control from useful fidelity equivalence, component propagation
+latency from a full control deadline, and training from held-out evaluation seeds.

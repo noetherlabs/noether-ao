@@ -1,0 +1,4 @@
+{
+  "reason": "Tool process ended without a completion record; partial saved points retained and verified. Only unfinished points resumed. No latency samples were filtered.",
+  "resume_source_change": "Added saved-point validation and skip; timed region unchanged."
+}

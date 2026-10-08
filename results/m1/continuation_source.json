@@ -1,0 +1,22 @@
+{
+  "measure": {
+    "unchanged_from_original_run": true,
+    "ast_sha256": "18aba99098ac82c3eaf2f59a9f6061bb0d3232dfb3dfc71cf076be17d2b71379"
+  },
+  "statistics": {
+    "unchanged_from_original_run": true,
+    "ast_sha256": "7a3ee862a0230444ab01e61967afc0f8e2b3be48f0d06e37869e14fc4de3a660"
+  },
+  "propagation": {
+    "unchanged_from_original_run": true,
+    "ast_sha256": "1c987c4990640d9d90886df3dc499571078dd9d994a8ba1b0dde0dcb4afb1592"
+  },
+  "aperture": {
+    "unchanged_from_original_run": true,
+    "ast_sha256": "53609fd11b3741a002dcd0be28dcb5fc2d9e5c3dfe599eacbe41d67d6f35cde6"
+  },
+  "relative_l2": {
+    "unchanged_from_original_run": true,
+    "ast_sha256": "9b96424bb10e170ebad08894c903945b02771b0600f19b14b30b71352f8839f0"
+  }
+}

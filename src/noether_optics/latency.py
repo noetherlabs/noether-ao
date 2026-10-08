@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import gc
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -11,7 +12,7 @@ import time
 import jax
 import numpy as np
 
-from .artifacts import start_run, write_json
+from .artifacts import start_run, write_json, fingerprint
 from .optics import propagation, relative_l2
 
 
@@ -52,11 +53,20 @@ def measure(fn, opd: np.ndarray, wavelengths: np.ndarray, device,
 def run_mode(config: dict, out: Path, mode: str) -> None:
     """Run one backend/affinity mode in its own process, before importing XLA."""
     device = jax.devices("gpu" if mode == "gpu" else "cpu")[0]
-    rows = []
+    summary_path = out / f"{mode}_summary.json"
+    rows = json.loads(summary_path.read_text()) if summary_path.exists() else []
     for n in config["sizes"]:
         for nw in config["wavelength_counts"]:
             for dtype in config["precisions"]:
                 key = f"{mode}_n{n}_w{nw}_{dtype}"
+                existing = [r for r in rows if r["raw"] == f"{key}.npz"]
+                if existing:
+                    if len(existing) != 4:
+                        raise ValueError(f"Incomplete saved point: {key}")
+                    with np.load(out / f"{key}.npz") as saved:
+                        if not all(len(saved[f"{r['engine']}_{r['path']}_seconds"]) == config["repeats"] for r in existing):
+                            raise ValueError(f"Saved sample count changed: {key}")
+                    continue
                 rng = np.random.default_rng(config["seed"])
                 opd = (rng.normal(size=(n, n)) * config["opd_rms_m"]).astype(dtype)
                 wavelengths = np.linspace(*config["wavelength_range_m"], nw).astype(dtype)
@@ -92,13 +102,20 @@ def run_mode(config: dict, out: Path, mode: str) -> None:
                 gc.collect()
 
 
-def run(config: dict, destination: str) -> None:
+def run(config: dict, destination: str, resume: bool = False) -> None:
     """Run all supported modes, with explicit skip records for unsupported modes."""
     if config["repeats"] < 10000:
         raise ValueError("Published latency runs require at least 10000 evaluations per point")
     if os.environ.get("CI"):
         raise RuntimeError("Timing runs are forbidden in CI")
-    out = start_run(config, destination)
+    if resume:
+        out = Path(destination)
+        if json.loads((out / "config.json").read_text()) != config:
+            raise ValueError("Cannot resume with a different config")
+        if json.loads((out / "machine.json").read_text())["id"] != fingerprint()["id"]:
+            raise ValueError("Cannot merge timing points from different machine/runtime fingerprints")
+    else:
+        out = start_run(config, destination)
     skips = []
     for mode in config["modes"]:
         if mode == "cpu_one" and not hasattr(os, "sched_setaffinity"):
@@ -117,10 +134,13 @@ def run(config: dict, destination: str) -> None:
 
 
 def render(out: Path) -> None:
-    """Regenerate tables and plot exclusively from saved timing summaries."""
+    """Regenerate tables and plot from raw clocks, retaining compile metadata."""
     import json
     import matplotlib.pyplot as plt
     rows = [r for p in sorted(out.glob("*_summary.json")) for r in json.loads(p.read_text())]
+    for row in rows:
+        with np.load(out / row["raw"]) as raw:
+            row.update(statistics(raw[f"{row['engine']}_{row['path']}_seconds"]))
     write_json(out / "summary.json", rows)
     columns = ["mode", "n", "wavelengths", "precision", "engine", "path", "p50_ms", "p90_ms", "p99_ms", "p99.9_ms", "max_ms", "miss_1ms", "miss_0.5ms", "compile_s"]
     lines = ["# Measured latency", "", "All units ms except compile_s and miss fractions. Host roundtrip includes forced copies.", "", "| " + " | ".join(columns) + " |", "|" + "---|" * len(columns)]

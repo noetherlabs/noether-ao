@@ -121,3 +121,22 @@ the baseline for a small learned network trained through short differentiable
 rollouts. Training uses an explicitly labelled Gaussian shot-noise surrogate;
 evaluation uses Poisson counts. Hold out turbulence/noise seeds and compare across
 flux, wind and injected faults. Report paired uncertainty and every losing cell.
+
+### HCIPy publication (opened after the documentation)
+
+[Por et al., HCIPy](https://ehpor.github.io/assets/pdf/Por-2018-HCIPy.pdf).
+The author-hosted paper describes Field/Grid abstractions and modular optical
+propagation and AO components. It supplies an independent implementation for
+our pupil/focal intensity check; using its propagator is not validation of our
+entire atmosphere, pyramid, detector or controller.
+
+### Adapter installation sources
+
+[POPPY installation](https://poppy-optics.readthedocs.io/en/latest/installation.html),
+[prysm source](https://github.com/brandondube/prysm),
+[lentil source](https://github.com/andykee/lentil), and
+[PROPER releases](https://sourceforge.net/projects/proper-library/files/) were opened.
+POPPY and lentil use package releases; the Dragrace prysm adapter needs the source
+API rather than the older PyPI release. PROPER uses its official source archive.
+Installation success and case support are separate outcomes; unsupported adapters
+must retain that status and are not assigned a timing.

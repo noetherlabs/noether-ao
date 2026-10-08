@@ -1,7 +1,10 @@
 # Status
 
-M0: research notes, source manifest, design and pinned environment prepared.
-M1: complex-field, dtype, power and dynamic-input tests passed. Full sweep pending.
-No performance claims yet. JAX exposes CPU only. Single-core affinity is unavailable on this OS.
+M0: pass. Opened-source notes, design and pinned environment are recorded.
+M1: pass on the available CPU configuration. GPU and enforced single-core affinity skipped.
+All 144 engine/path/shape rows contain 10000 saved evaluations, for 1440000 measured calls. Maximum complex-field relative L2 error: 0.0.
+Raw results, machine fingerprint, interruption record, tests, table and plot: `results/m1/`.
+C1: configuration-dependent support; no full control-loop deadline guarantee.
 
+M2: in progress. M3–M7: pending. Simulation code is prepared but not yet validated.
 All work is local. No publication, messages or collaboration claims.
