@@ -409,6 +409,19 @@ wheels = [
 ]
 
 [[package]]
+name = "lentil"
+version = "0.8.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/05/39/de9bd0df60aad3d2ba8c2290a77eb10272fe48a647aa702ccff7fb452d02/lentil-0.8.9.tar.gz", hash = "sha256:ab597573dcdaecceee3b120e7d133e5b4a04bc9dfc75120edb33905c7c216d83", size = 67028, upload-time = "2026-07-16T19:28:21.545Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/aa/81/23e1228d1795b08489eacc0505205f5d056045209a80754c73be0e393600/lentil-0.8.9-py3-none-any.whl", hash = "sha256:33fd19b53dfd137f8f029cde3cd5bdfceeddcb3fed6ba2009deb3234d97c1bdf", size = 63351, upload-time = "2026-07-16T19:28:20.291Z" },
+]
+
+[[package]]
 name = "lineax"
 version = "0.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -502,6 +515,15 @@ dependencies = [
     { name = "zodiax" },
 ]
 
+[package.optional-dependencies]
+dragrace = [
+    { name = "lentil" },
+    { name = "poppy" },
+    { name = "prysm" },
+    { name = "pyproper3" },
+    { name = "threadpoolctl" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "abcdlux", git = "https://github.com/LouisDesdoigts/abcdLux?rev=62bfb8be619ce7387ab0df4f9f74bb5f6f833979" },
@@ -510,15 +532,21 @@ requires-dist = [
     { name = "hcipy", specifier = "==0.7.1" },
     { name = "jax", specifier = "==0.10.2" },
     { name = "jaxlib", specifier = "==0.10.2" },
+    { name = "lentil", marker = "extra == 'dragrace'", specifier = "==0.8.9" },
     { name = "matplotlib", specifier = "==3.11.2" },
     { name = "numpy", specifier = "==2.4.6" },
     { name = "optax", specifier = "==0.2.8" },
+    { name = "poppy", marker = "extra == 'dragrace'", specifier = "==1.1.2" },
+    { name = "prysm", marker = "extra == 'dragrace'", git = "https://github.com/brandondube/prysm.git?rev=5008f47803af6ff69eed474fca049456076e4a7d" },
     { name = "psutil", specifier = "==7.2.2" },
+    { name = "pyproper3", marker = "extra == 'dragrace'", url = "https://downloads.sourceforge.net/project/proper-library/proper_v3.3.7_python.zip" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "scipy", specifier = "==1.17.1" },
+    { name = "threadpoolctl", marker = "extra == 'dragrace'", specifier = "==3.7.0" },
     { name = "zodiax", specifier = "==0.5.0" },
 ]
+provides-extras = ["dragrace"]
 
 [[package]]
 name = "numexpr"
@@ -660,6 +688,31 @@ wheels = [
 ]
 
 [[package]]
+name = "poppy"
+version = "1.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "astropy" },
+    { name = "matplotlib" },
+    { name = "numexpr" },
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5c/9e/c609687e8697123860139ede7552c9155749ae5da4ac8794d69eba049e06/poppy-1.1.2.tar.gz", hash = "sha256:d8bdee1fb01d0048ffcfa0f43102ab9dc46dbba7a26da5206661d147736a7657", size = 16509450, upload-time = "2025-01-14T15:23:13.81Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6c/88/25bf4c2a945f671597f7264e0e3e2902b04b8d5e875d2f49a2101d612141/poppy-1.1.2-py3-none-any.whl", hash = "sha256:7585bd44fc0bfc1a3fe4928012c86491d251b07de6d5a9ac935257c9dbbe7e59", size = 2806177, upload-time = "2025-01-14T15:23:09.874Z" },
+]
+
+[[package]]
+name = "prysm"
+version = "0.22"
+source = { git = "https://github.com/brandondube/prysm.git?rev=5008f47803af6ff69eed474fca049456076e4a7d#5008f47803af6ff69eed474fca049456076e4a7d" }
+dependencies = [
+    { name = "numpy" },
+    { name = "scipy" },
+]
+
+[[package]]
 name = "psutil"
 version = "7.2.2"
 source = { registry = "https://pypi.org/simple" }
@@ -710,6 +763,26 @@ sdist = { url = "https://files.pythonhosted.org/packages/e4/11/b213bebff18258436
 wheels = [
     { url = "https://files.pythonhosted.org/packages/38/bb/d215ee7c73b61497b28a5503f9f53523f294fcc936762b7caf90e0c1c2b5/pyparsing-3.3.3-py3-none-any.whl", hash = "sha256:ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4", size = 126420, upload-time = "2026-09-20T20:59:04.025Z" },
 ]
+
+[[package]]
+name = "pyproper3"
+version = "3.3.7"
+source = { url = "https://downloads.sourceforge.net/project/proper-library/proper_v3.3.7_python.zip" }
+dependencies = [
+    { name = "astropy" },
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { hash = "sha256:07a0da4285fa5a36863ad7a86e373d1daca8b27c9845c0c5fd59724a99abaecb" }
+
+[package.metadata]
+requires-dist = [
+    { name = "astropy", specifier = ">=1.3" },
+    { name = "numpy", specifier = ">=1.8" },
+    { name = "pyfftw", marker = "extra == 'pyfftw'", specifier = ">=0.10" },
+    { name = "scipy", specifier = ">=0.14" },
+]
+provides-extras = ["pyfftw"]
 
 [[package]]
 name = "pytest"
@@ -813,6 +886,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
+]
+
+[[package]]
+name = "threadpoolctl"
+version = "3.7.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/00/dc/6c58154c1c65f758ea979e7139cb76993a9cfc662d14e9be3c4a667cfb77/threadpoolctl-3.7.0.tar.gz", hash = "sha256:61348cfb77d53b9242e0017029244b559b810c142ced65b4e21eeca1843959a7", size = 31961, upload-time = "2026-09-15T15:46:20.263Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/43/3f/f88a53f60a472b46f4023f56d204dd7de33d34c5d2acbfa0d70a674e639e/threadpoolctl-3.7.0-py3-none-any.whl", hash = "sha256:cd8b60b5641b45c67bbf73c64c843235fc2d8a480c87389f52f5dbee893b86be", size = 26362, upload-time = "2026-09-15T15:46:19.168Z" },
 ]
 
 [[package]]

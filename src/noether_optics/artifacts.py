@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import csv
 import importlib.metadata
 import json
 import os
@@ -74,3 +75,19 @@ def mean_se(values: list[float]) -> tuple[float, float]:
     """Return across-seed mean and standard error (not across-frame error)."""
     a = np.asarray(values, dtype=float)
     return float(a.mean()), float(a.std(ddof=1) / np.sqrt(a.size)) if a.size > 1 else 0.0
+
+
+def write_table(path: Path, rows: list[dict]) -> None:
+    """Write CSV and Markdown from the same numerical rows."""
+    if not rows:
+        return
+    keys = list(rows[0])
+    with path.with_suffix('.csv').open('w', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader(); writer.writerows(rows)
+    def cell(v):
+        return f'{v:.6g}' if isinstance(v,float) else str(v)
+    path.with_suffix('.md').write_text('| ' + ' | '.join(keys) + ' |\n| ' +
+        ' | '.join('---' for _ in keys) + ' |\n' + '\n'.join(
+        '| ' + ' | '.join(cell(row[k]) for k in keys) + ' |' for row in rows) + '\n')
+

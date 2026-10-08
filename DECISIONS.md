@@ -67,3 +67,10 @@ Unavailable twin outputs are discarded. Without fallback, the advanced controlle
 holds its last command; with fallback, the independently calibrated integrator
 can issue a fresh command from the current WFS frame. Synthetic availability flags
 model missing/deadline-late outputs; they do not measure real scheduler failures.
+
+## Dragrace adapter environment
+
+The current POPPY release rejected Python 3.11 during dependency resolution.
+Use the newest compatible POPPY release instead, pinned in the optional Dragrace
+extra. PROPER installs from its official archive and prysm from the inspected
+source commit. No core numerical dependency was unpinned or silently upgraded.

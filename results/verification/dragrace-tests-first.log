@@ -1,0 +1,28 @@
+....................ss.................................................. [ 50%]
+............sF........................................................   [100%]
+=================================== FAILURES ===================================
+________________ test_dlux_stops_on_the_same_criteria_as_scipy _________________
+
+case = Case(id='pr_zernike11_analytic_scan@n_pupil=64', kind='phase_retrieval', algorithm_class='matrix_dft', wavelength_m=6....ion boards give it, and it is why its first_call_s is seconds where prysm's is milliseconds. Read the two together.\n")
+config = Config(id='cpu_numpy_1t', device='cpu', fft_backend='numpy', blas_backend='openblas', threads=1, precision_override=No...ut changing a single line of output. envs/README.md covers why the OpenBLAS and MKL environments are kept separate.\n')
+
+    def test_dlux_stops_on_the_same_criteria_as_scipy(case, config):
+        """optax has no stopping rule of its own, so the adapter transcribes
+        scipy's. Without that dLux would run the full iteration cap while the
+        scipy-driven codes stopped at ~22, and would look slow for doing four times
+        the work."""
+        pytest.importorskip("jax")
+        pytest.importorskip("dLux")
+        pytest.importorskip("optax")
+    
+        adapter_mod.discover("adapters")
+        ad = adapter_mod.get("dlux")
+>       assert ad.configure(config)
+E       assert Unsupported(reason="JAX_ENABLE_X64 is False, config needs True. The flag must be set before the first jax import, so i... seeing this means jax was imported earlier than the worker's preamble, or the config's own `env:` block overrode it.")
+E        +  where Unsupported(reason="JAX_ENABLE_X64 is False, config needs True. The flag must be set before the first jax import, so i... seeing this means jax was imported earlier than the worker's preamble, or the config's own `env:` block overrode it.") = configure(Config(id='cpu_numpy_1t', device='cpu', fft_backend='numpy', blas_backend='openblas', threads=1, precision_override=No...ut changing a single line of output. envs/README.md covers why the OpenBLAS and MKL environments are kept separate.\n'))
+E        +    where configure = <dragrace_adapters.dlux.DLuxAdapter object at 0x14109be10>.configure
+
+tests/test_retrieval.py:283: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_retrieval.py::test_dlux_stops_on_the_same_criteria_as_scipy
+1 failed, 138 passed, 3 skipped in 23.34s

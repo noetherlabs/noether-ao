@@ -1,0 +1,10 @@
+id: dragrace_cpu_all
+device: cpu
+fft_backend: numpy
+blas_backend: accelerate
+threads: 8
+conda_env: null
+notes: >
+  Local Apple Silicon run. Affinity cannot be enforced on macOS. All available
+  cores; actual CPU/wall ratio remains in raw data. FFT/BLAS nonselectability
+  and strict backend verification remain enforced by the upstream adapters.
