@@ -44,8 +44,9 @@ using the actual issued command state. Fallback latches until the run ends.
 
 Detector thresholds are empirical clean-training quantiles. No statistical
 independence, formal safety proof, or out-of-distribution guarantee is assumed.
-ROC curves concern the optical score. Missing/late outputs additionally trigger
-an explicit availability rule, which is reported separately from score ROC.
+ROC curves include the optical score OR the explicit missing/late availability
+rule, matching the deployed decision logic. Score-only ROC values are also saved;
+synthetic availability flags are not evidence of optical fault discrimination.
 Fidelity uses a common higher-resolution plant and a shared detector. M1 latency
 is a component cost only; a pyramid and its derivatives cost additional work.
 Across-seed error bars are standard errors. Paired confidence intervals are
@@ -74,3 +75,12 @@ The current POPPY release rejected Python 3.11 during dependency resolution.
 Use the newest compatible POPPY release instead, pinned in the optional Dragrace
 extra. PROPER installs from its official archive and prysm from the inspected
 source commit. No core numerical dependency was unpinned or silently upgraded.
+
+M4 retains every frame's score, alarm, fallback state, variance and Strehl for
+all seeds. Full predicted/observed WFS frames are also retained for the first
+held-out seed of every fault/switch condition. This bounds disk use while keeping
+all raw values needed to regenerate the published detector and WFE statistics.
+
+A unit test caught NumPy's batched-vector solve shape convention in the predictor.
+The solve now supplies an explicit singleton right-hand-side dimension; the
+predictor alignment test remains unchanged.
