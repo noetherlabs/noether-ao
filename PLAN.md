@@ -1,13 +1,13 @@
 # Plan
 
-Current position: M1 complete; M2 adapter installation, tests and scan next.
+Current position: M2 complete; M3 software and physical validation next.
 
 | Milestone | Required gate | State |
 |---|---|---|
 | M0 | Opened-source notes and design for every experiment | pass |
 | M1 | dLux/JAX agreement; full specified timing sweep and raw samples | pass on available CPU; affinity/GPU skipped |
-| M2 | Small local Dragrace branch; existing/new tests pass; drafts | in progress |
-| M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | pending |
+| M2 | Small local Dragrace branch; existing/new tests pass; drafts | pass |
+| M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | in progress |
 | M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pending |
 | M5 | Fidelity/flux table and plot with at least five seeds | pending |
 | M6 | Held-out controller comparison; fixed and trained modal weights | pending |

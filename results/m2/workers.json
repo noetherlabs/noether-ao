@@ -1,0 +1,34 @@
+[
+  {
+    "adapter": "numpy_baseline",
+    "returncode": 0
+  },
+  {
+    "adapter": "dlux",
+    "returncode": 0
+  },
+  {
+    "adapter": "abcdlux",
+    "returncode": 0
+  },
+  {
+    "adapter": "hcipy",
+    "returncode": 0
+  },
+  {
+    "adapter": "poppy",
+    "returncode": 0
+  },
+  {
+    "adapter": "lentil",
+    "returncode": 0
+  },
+  {
+    "adapter": "prysm",
+    "returncode": 0
+  },
+  {
+    "adapter": "proper",
+    "returncode": 0
+  }
+]
