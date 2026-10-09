@@ -8,5 +8,6 @@ C1: configuration-dependent support; no full control-loop deadline guarantee.
 
 M2: pass. Clean local branch d194dab, 140 tests passed and two platform affinity skips. Seven adapters passed all six scan sizes; PROPER installed but correctly reports unsupported MFT. Both drafts exist in outbox. Raw results and fingerprints: results/m2.
 M3: pass. Independent HCIPy PSFs, fitting scaling, delay growth and nominal stability all passed. Pyramid predictor reduction: 26.372725760970482 percent in mean WFE; this is not an exact replication of an unspecified earlier setup. Raw data: results/m3.
-M4: in progress. M5–M7: pending.
+M4: pass for experimental coverage; C4 is partial and does not establish safety. All 80 fault/switch/seed trials are finite. Optical-gain drift was missed, vibration fallback worsened WFE, and one of five clean runs triggered a false alarm (one of 600 evaluated frames). Raw results, score/availability ROC and paired differences: results/m4.
+M5: in progress. M6–M7: pending.
 All work is local. No publication, messages or collaboration claims.

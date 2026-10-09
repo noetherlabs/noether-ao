@@ -1,6 +1,6 @@
 # Plan
 
-Current position: M3 gates passed; M4 fault and fallback experiment next.
+Current position: M4 coverage passed with negative safety findings; M5 fidelity/flux experiment next.
 
 | Milestone | Required gate | State |
 |---|---|---|
@@ -8,8 +8,8 @@ Current position: M3 gates passed; M4 fault and fallback experiment next.
 | M1 | dLux/JAX agreement; full specified timing sweep and raw samples | pass on available CPU; affinity/GPU skipped |
 | M2 | Small local Dragrace branch; existing/new tests pass; drafts | pass |
 | M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | pass |
-| M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | in progress |
-| M5 | Fidelity/flux table and plot with at least five seeds | pending |
+| M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pass; C4 partial |
+| M5 | Fidelity/flux table and plot with at least five seeds | in progress |
 | M6 | Held-out controller comparison; fixed and trained modal weights | pending |
 | M7 | Reproduction commands, claims, plots, limits and private drafts | pending |
 

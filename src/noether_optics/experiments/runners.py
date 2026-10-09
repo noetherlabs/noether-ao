@@ -235,7 +235,9 @@ def mixed(cfg: dict, destination: str) -> Path:
             raise RuntimeError('Nonfinite training objective or gradients')
         print('Training',i,float(loss),flush=True)
     np.savez_compressed(path/'raw/training.npz',history=history,**{f'initial_{i}':np.asarray(v) for i,v in enumerate(initial)},**{f'final_{i}':np.asarray(v) for i,v in enumerate(params)})
-    write_json(path/'training.json',{'training_seeds':cfg['training_seeds'],'evaluation_seeds':cfg['seeds'],'final_loss':float(objective(params)),'noise':'Gaussian reparameterization in training; exact Poisson in evaluation'})
+    write_json(path/'training.json',{'training_seeds':cfg['training_seeds'],'evaluation_seeds':cfg['seeds'],'final_loss':float(objective(params)),
+        'conditions':[{'seed':seed,'photons':c['photons'],'wind_scale':c['wind_scale'],'frames':c['frames']} for c,p,seed in training],
+        'noise':'Gaussian reparameterization in training; exact Poisson in evaluation'})
     jax.clear_caches(); gc.collect()
     for flux in mc['fluxes']:
         for wind in mc['winds']:
@@ -249,6 +251,38 @@ def mixed(cfg: dict, destination: str) -> Path:
                     print('Mixed completed:',flux,wind,fault,controller,flush=True)
                 jax.clear_caches(); gc.collect()
     render(path,'mixed'); return path
+
+
+def completeness(path: Path, experiment: str) -> dict:
+    """Check saved trial coverage and finite data without claiming scientific success."""
+    from itertools import product
+    cfg=json.loads((path/'config.json').read_text())
+    records=json.loads((path/'index.json').read_text())
+    if experiment=='faults':
+        keys=('fault','fallback_enabled','seed')
+        expected=set(product(FAULTS,[False,True],cfg['seeds']))
+    elif experiment=='fidelity':
+        keys=('level','flux','seed')
+        expected=set(product([x['name'] for x in cfg['fidelity']['levels']],cfg['fidelity']['fluxes'],cfg['seeds']))
+    elif experiment=='mixed':
+        keys=('flux','wind','fault','controller','seed')
+        expected=set(product(cfg['mixed']['fluxes'],cfg['mixed']['winds'],cfg['mixed']['faults'],CONTROLLERS,cfg['seeds']))
+    else:
+        raise ValueError(experiment)
+    actual=[tuple(r['labels'][key] for key in keys) for r in records]
+    finite=True
+    for record in records:
+        with np.load(path/record['file']) as data:
+            finite=finite and bool(data['all_finite_full_outputs']) and all(np.isfinite(data[k]).all() for k in data.files)
+    gates={'complete_unique_trials':len(actual)==len(expected) and set(actual)==expected,
+           'finite_raw_outputs':bool(finite),
+           'training_evaluation_disjoint':not bool(set(cfg['seeds'])&set(cfg['training_seeds']))}
+    if experiment=='mixed':
+        with np.load(path/'raw/training.npz') as data:
+            gates['finite_nonzero_training_gradients']=bool(np.isfinite(data['history']).all() and np.any(data['history'][:,2]>0))
+            gates['weights_updated']=bool(any(not np.array_equal(data[f'initial_{i}'],data[f'final_{i}']) for i in range(4)))
+    write_json(path/'gates.json',gates)
+    return gates
 
 
 def validation_tables(path: Path, rows: list[dict], cfg: dict) -> None:
@@ -327,6 +361,14 @@ def render(path: Path, experiment: str) -> None:
         for record in records:
             if record['labels']['fault']=='none' and not record['labels']['fallback_enabled']:
                 clean.extend(np.load(path/record['file'])['score'][cfg['burn_in']:].tolist())
+        threshold=json.loads((path/'detector.json').read_text())['threshold']
+        clean_run_flags=[]
+        for record in records:
+            if record['labels']['fault']=='none' and not record['labels']['fallback_enabled']:
+                with np.load(path/record['file']) as data:
+                    clean_run_flags.append(bool(np.any(data['alarm'][cfg['burn_in']:])))
+        clean_fpr=float(np.mean(np.asarray(clean)>threshold))
+        write_json(path/'clean_false_alarms.json',{'frame_false_alarm_rate':clean_fpr,'run_false_alarm_rate':float(np.mean(clean_run_flags)),'evaluated_clean_frames':len(clean),'threshold':threshold})
         roc_data={}
         for fault in FAULTS:
             no=[r['wfe_nm'] for r in rows if r['fault']==fault and not r['fallback_enabled']]
@@ -346,7 +388,7 @@ def render(path: Path, experiment: str) -> None:
                     fault_scores.extend(data['score'][start:stop].tolist())
                     availability.extend(data['unavailable'][start:stop].tolist())
             delta,lo,hi=paired_interval(yes,no)
-            output.append({'fault':fault,'detected_without_prior_alarm':detections,'post_onset_alarm_runs':postalarms,'total_runs':len(no),'delay_ms_detected_only':float(np.mean(delays)) if delays else None,'pre_onset_frame_fpr':float(np.mean(alarms)),'pre_onset_run_fpr':float(np.mean(pretrigger)),'wfe_without_nm':float(np.mean(no)),'wfe_fallback_nm':float(np.mean(yes)),'fallback_delta_nm':delta,'ci95_low_nm':lo,'ci95_high_nm':hi})
+            output.append({'fault':fault,'detected_without_prior_alarm':detections,'post_onset_alarm_runs':postalarms,'total_runs':len(no),'delay_ms_detected_only':float(np.mean(delays)) if delays else None,'clean_frame_fpr':clean_fpr,'pre_onset_frame_fpr':float(np.mean(alarms)),'pre_onset_run_fpr':float(np.mean(pretrigger)),'wfe_without_nm':float(np.mean(no)),'without_seed_se_nm':mean_se(no)[1],'wfe_fallback_nm':float(np.mean(yes)),'fallback_seed_se_nm':mean_se(yes)[1],'fallback_delta_nm':delta,'ci95_low_nm':lo,'ci95_high_nm':hi})
             thresholds=np.r_[np.inf,np.quantile(np.r_[clean,fault_scores],np.linspace(1,0,101)),-np.inf]
             fpr=np.array([np.mean(np.asarray(clean)>t) for t in thresholds]); score_tpr=np.array([np.mean(np.asarray(fault_scores)>t) for t in thresholds])
             tpr=np.array([np.mean((np.asarray(fault_scores)>t)|np.asarray(availability)) for t in thresholds])
@@ -354,7 +396,7 @@ def render(path: Path, experiment: str) -> None:
             rocax.plot(fpr,tpr,label=fault)
         np.savez_compressed(path/'raw/roc.npz',**roc_data)
         rocax.plot([0,1],[0,1],':',color='gray'); rocax.set(xlabel='Clean frame false-positive rate',ylabel='Post-onset score OR availability true-positive rate'); rocax.legend(fontsize=8); rocfig.savefig(path/'roc.png',dpi=160); plt.close(rocfig)
-        x=np.arange(len(output)); ax.bar(x-.18,[r['wfe_without_nm'] for r in output],.36,label='forward'); ax.bar(x+.18,[r['wfe_fallback_nm'] for r in output],.36,label='fallback'); ax.set_xticks(x,[r['fault'] for r in output],rotation=35,ha='right'); ax.legend()
+        x=np.arange(len(output)); ax.bar(x-.18,[r['wfe_without_nm'] for r in output],.36,yerr=[r['without_seed_se_nm'] for r in output],label='forward'); ax.bar(x+.18,[r['wfe_fallback_nm'] for r in output],.36,yerr=[r['fallback_seed_se_nm'] for r in output],label='fallback'); ax.set_xticks(x,[r['fault'] for r in output],rotation=35,ha='right'); ax.legend()
     elif experiment=='mixed':
         for flux in cfg['mixed']['fluxes']:
             for wind in cfg['mixed']['winds']:
@@ -377,6 +419,8 @@ def render(path: Path, experiment: str) -> None:
     ax.set_title(experiment+' — '+json.loads((path/'machine.json').read_text())['id'])
     fig.savefig(path/'result.png',dpi=160); plt.close(fig)
     table(path/'table',output); write_json(path/'summary.json',output)
+    if experiment!='validate':
+        completeness(path,experiment)
 
 
 def run(experiment: str, config: dict, destination: str) -> Path:

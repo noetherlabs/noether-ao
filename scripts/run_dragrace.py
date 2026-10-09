@@ -15,34 +15,9 @@ os.environ.setdefault('MPLBACKEND','Agg')
 from noether_optics.artifacts import start_run,write_json
 
 
-def main() -> None:
-    """Run the exact AO case with strict backend checks in separate workers."""
-    if os.environ.get('CI'):
-        raise RuntimeError('No benchmark timings in CI')
-    p=argparse.ArgumentParser()
-    p.add_argument('--repo',type=Path,default=Path('../Diffraction-Dragrace'))
-    p.add_argument('--config',type=Path,default=Path('configs/dragrace_cpu_all.yaml'))
-    p.add_argument('--out',type=Path,required=True)
-    args=p.parse_args(); repo=args.repo.resolve(); config=args.config.resolve()
-    case=repo/'cases/pupil_to_focus/mft_ao_scan.yaml'
-    details={'seed':17,'randomness':'None: deterministic upstream circular pupil case',
-             'upstream_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),
-             'case_sha256':hashlib.sha256(case.read_bytes()).hexdigest(),
-             'case_text':case.read_text(),'config_text':config.read_text(),
-             'adapters':['numpy_baseline','dlux','abcdlux','hcipy','poppy','lentil','prysm','proper']}
-    path=start_run(details,args.out).resolve()
-    shutil.copyfile(case,path/'mft_ao_scan.yaml'); shutil.copyfile(config,path/config.name)
-    env=os.environ.copy();env['PYTHONPATH']=str(repo/'src')
-    states=[]
-    for adapter in details['adapters']:
-        output=path/'raw'/adapter
-        output.mkdir(parents=True)
-        command=[sys.executable,'-m','dragrace.worker','--case',str(case),'--config',str(config),'--adapter',adapter,'--mode','timing','--out',str(output)]
-        with (output/'worker.log').open('w') as log:
-            result=subprocess.run(command,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)
-        states.append({'adapter':adapter,'returncode':result.returncode})
-        write_json(path/'workers.json',states)
-        print(adapter,result.returncode,flush=True)
+def render_results(path: Path, repo: Path) -> None:
+    """Rebuild the report, table and figure from existing worker results."""
+    details=json.loads((path/'config.json').read_text())
     sys.path.insert(0,str(repo/'src'))
     from dragrace.report import aggregate,render_text
     rows=aggregate(path/'raw')
@@ -62,6 +37,42 @@ def main() -> None:
             ax.plot([r['scan_value'] for r in selection],[r['p99_s']*1000 for r in selection],'.-',label=adapter)
     ax.set(xlabel='Pupil samples per side (fixed focal grid)',ylabel='p99 propagation time (ms)',yscale='log',title='Local Dragrace AO MFT scan')
     ax.legend();fig.savefig(path/'tails.png',dpi=160);plt.close(fig)
+
+
+def main() -> None:
+    """Run the exact AO case with strict backend checks in separate workers."""
+    if os.environ.get('CI'):
+        raise RuntimeError('No benchmark timings in CI')
+    p=argparse.ArgumentParser()
+    p.add_argument('--repo',type=Path,default=Path('../Diffraction-Dragrace'))
+    p.add_argument('--config',type=Path,default=Path('configs/dragrace_cpu_all.yaml'))
+    p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--render-only',action='store_true')
+    args=p.parse_args(); repo=args.repo.resolve(); config=args.config.resolve()
+    if args.render_only:
+        render_results(args.out.resolve(),repo)
+        return
+    case=repo/'cases/pupil_to_focus/mft_ao_scan.yaml'
+    details={'seed':17,'randomness':'None: deterministic upstream circular pupil case',
+             'upstream_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),
+             'case_sha256':hashlib.sha256(case.read_bytes()).hexdigest(),
+             'case_text':case.read_text(),'config_text':config.read_text(),
+             'adapters':['numpy_baseline','dlux','abcdlux','hcipy','poppy','lentil','prysm','proper']}
+    path=start_run(details,args.out).resolve()
+    shutil.copyfile(case,path/'mft_ao_scan.yaml'); shutil.copyfile(config,path/config.name)
+    env=os.environ.copy();env['PYTHONPATH']=str(repo/'src')
+    states=[]
+    for adapter in details['adapters']:
+        output=path/'raw'/adapter
+        output.mkdir(parents=True)
+        command=[sys.executable,'-m','dragrace.worker','--case',str(case),'--config',str(config),'--adapter',adapter,'--mode','timing','--out',str(output)]
+        with (output/'worker.log').open('w') as log:
+            result=subprocess.run(command,cwd=repo,env=env,stdout=log,stderr=subprocess.STDOUT)
+        states.append({'adapter':adapter,'returncode':result.returncode})
+        write_json(path/'workers.json',states)
+        print(adapter,result.returncode,flush=True)
+    render_results(path,repo)
+
 
 
 if __name__=='__main__': main()

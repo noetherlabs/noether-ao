@@ -84,3 +84,15 @@ all raw values needed to regenerate the published detector and WFE statistics.
 A unit test caught NumPy's batched-vector solve shape convention in the predictor.
 The solve now supplies an explicit singleton right-hand-side dimension; the
 predictor alignment test remains unchanged.
+
+The brief was resubmitted unchanged when this task resumed. Previously measured
+results retain their original UTC timestamps and fingerprints. M3 had completed
+successfully; it was reviewed and committed before starting M4. New measurements
+receive new provenance rather than being relabeled as part of the earlier run.
+
+Fault WFE comparisons use the same post-burn-in interval for both switch states,
+including the pre-fault portion of that interval. Detection delays use the configured
+fault interval and exclude runs already alarmed before onset. Clean false-alarm
+rates use the entire clean post-burn-in interval; pre-onset rates are also reported.
+Frame ROC points are correlated in time and are not independent event trials.
+No detector threshold was retuned after seeing held-out faults.
