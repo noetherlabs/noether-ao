@@ -1,0 +1,10 @@
+| sensor | controller | wfe_nm | seed_se_nm |
+| --- | --- | --- | --- |
+| linear | open | 170.84 | 25.9534 |
+| linear | integrator | 29.0179 | 0.341221 |
+| linear | predictive | 21.713 | 0.153556 |
+| linear | forward | 29.7466 | 0.361564 |
+| pyramid | open | 170.84 | 25.9534 |
+| pyramid | integrator | 29.8495 | 0.420585 |
+| pyramid | predictive | 21.9774 | 0.15015 |
+| pyramid | forward | 29.7407 | 0.37704 |

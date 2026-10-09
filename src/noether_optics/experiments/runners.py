@@ -251,6 +251,37 @@ def mixed(cfg: dict, destination: str) -> Path:
     render(path,'mixed'); return path
 
 
+def validation_tables(path: Path, rows: list[dict], cfg: dict) -> None:
+    """Regenerate physical validation details from the saved per-seed metrics."""
+    delay_rows=[]; improvement=[]
+    fig,axes=plt.subplots(1,2,figsize=(10,4),layout='constrained')
+    for sensor in ['linear','pyramid']:
+        cell=[r for r in rows if r['sensor']==sensor]
+        for delay in cfg['validation']['delays']:
+            group=[r for r in cell if r['controller']=='integrator' and r['delay']==delay]
+            wfe,se=mean_se([r['wfe_nm'] for r in group])
+            delay_rows.append({'sensor':sensor,'delay_frames':delay,'wfe_nm':wfe,'seed_se_nm':se,
+                'variance_rad2':float(np.mean([r['residual_variance_rad2'] for r in group])),
+                'strehl':float(np.mean([r['strehl'] for r in group]))})
+        a=sorted([r for r in cell if r['controller']=='integrator' and r['delay']==cfg['delay_frames']],key=lambda r:r['seed'])
+        b=sorted([r for r in cell if r['controller']=='predictive'],key=lambda r:r['seed'])
+        av=[r['wfe_nm'] for r in a];bv=[r['wfe_nm'] for r in b]
+        delta,lo,hi=paired_interval(bv,av)
+        improvement.append({'sensor':sensor,'integrator_nm':float(np.mean(av)),'predictive_nm':float(np.mean(bv)),
+            'reduction_percent':float(100*(1-np.mean(bv)/np.mean(av))),
+            'paired_delta_nm':delta,'ci95_low_nm':lo,'ci95_high_nm':hi})
+        group=[r for r in delay_rows if r['sensor']==sensor]
+        axes[1].errorbar([r['delay_frames'] for r in group],[r['wfe_nm'] for r in group],yerr=[r['seed_se_nm'] for r in group],marker='o',label=sensor)
+    with np.load(path/'raw/fitting_laws.npz') as data:
+        d=cfg['diameter_m']/np.sqrt(data['modes'])
+        axes[0].loglog(d,data['variance'],'o-',label='measured')
+        axes[0].loglog(d,data['variance'][0]*(d/d[0])**(5/3),'--',label='5/3 slope, anchored')
+    axes[0].set(xlabel='Effective spacing D / sqrt(modes), m',ylabel='Fitting variance, rad²');axes[0].legend()
+    axes[1].set(xlabel='Command delay, frames',ylabel='Residual WFE, nm (seed SE)');axes[1].legend()
+    fig.savefig(path/'physical_checks.png',dpi=160);plt.close(fig)
+    table(path/'delay',delay_rows);table(path/'predictive_improvement',improvement)
+
+
 def render(path: Path, experiment: str) -> None:
     """Rebuild reported controller metrics, tables and plots from saved raw arrays."""
     cfg=json.loads((path/'config.json').read_text())
@@ -266,6 +297,7 @@ def render(path: Path, experiment: str) -> None:
     fig,ax=plt.subplots(figsize=(8,4.8),layout='constrained')
     output=[]
     if experiment=='validate':
+        validation_tables(path,rows,cfg)
         for sensor in ['linear','pyramid']:
             for controller in ['open','integrator','predictive','forward']:
                 selected=[r['wfe_nm'] for r in rows if r['sensor']==sensor and r['controller']==controller and (r['delay']==cfg['delay_frames'] or controller=='open')]
