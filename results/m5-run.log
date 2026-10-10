@@ -1,0 +1,40 @@
+Calibrating fidelity: low
+Fidelity completed: low 100.0
+Fidelity completed: low 1000.0
+Fidelity completed: low 10000.0
+Fidelity completed: low 100000.0
+Fidelity completed: low 1000000.0
+Calibrating fidelity: medium
+Fidelity completed: medium 100.0
+Fidelity completed: medium 1000.0
+Fidelity completed: medium 10000.0
+Fidelity completed: medium 100000.0
+Fidelity completed: medium 1000000.0
+Calibrating fidelity: high
+Fidelity completed: high 100.0
+Fidelity completed: high 1000.0
+Fidelity completed: high 10000.0
+Fidelity completed: high 100000.0
+Traceback (most recent call last):
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/.venv/bin/noether-optics", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/src/noether_optics/cli.py", line 31, in main
+    run(config, args.out)
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/src/noether_optics/experiments/runners.py", line 200, in fidelity
+    c=fc|{'photons':flux}; fn=compiled(c,cal,'forward',pred)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/src/noether_optics/experiments/runners.py", line 45, in save
+    np.savez_compressed(self.path/name, **arrays)
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py", line 753, in savez_compressed
+    _savez(file, args, kwds, True, allow_pickle=allow_pickle)
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py", line 779, in _savez
+    zipf = zipfile_factory(file, mode="w", compression=compression)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py", line 112, in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/salma/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/zipfile.py", line 1311, in __init__
+    self.fp = io.open(file, filemode)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device: 'results/m5/raw/trial_0071.npz'

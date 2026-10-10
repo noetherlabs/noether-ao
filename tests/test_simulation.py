@@ -106,3 +106,9 @@ def test_missing_twin_holds_advanced_command_without_fallback(cfg):
     predictor=jnp.stack((jnp.ones(8)*2,-jnp.ones(8)),axis=1)
     out=loop(cfg,cal,phase,4,'forward',predictor,fault='missing_twin')
     np.testing.assert_allclose(out['command'][8:],jnp.broadcast_to(out['command'][7],(8,8)))
+
+
+@pytest.mark.parametrize('a,b',[([1],[2]),([1,2],[1]),([1,float('nan')],[1,2])])
+def test_paired_intervals_reject_invalid_cohorts(a,b):
+    with pytest.raises(ValueError,match='matching finite vectors'):
+        paired_interval(a,b)

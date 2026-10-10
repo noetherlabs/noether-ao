@@ -96,3 +96,23 @@ fault interval and exclude runs already alarmed before onset. Clean false-alarm
 rates use the entire clean post-burn-in interval; pre-onset rates are also reported.
 Frame ROC points are correlated in time and are not independent event trials.
 No detector threshold was retuned after seeing held-out faults.
+
+Fresh-checkout verification has two distinct checks. It rebuilds every published
+table from its preserved raw data, and exercises all experiment commands with
+explicit shorter smoke configurations. Smoke outputs are excluded from C1–C4
+claim tables. The latency smoke retains the minimum evaluation count. The full
+scientific configurations and their original gates remain unchanged.
+
+Before the mixed-controller run, review replaced the average modal noise estimate
+with the per-mode diagonal of the calibrated reconstructed noise covariance.
+This affects only the fixed and learned mixture features; the completed standalone
+controller experiments do not use that quantity in their issued commands.
+
+M5 exhausted available disk space while saving its final four trials. Recovery
+verified every source hash against the original commit, required an identical
+runtime fingerprint, reused preserved atmosphere arrays and appended only missing
+trials. All pre-existing raw files retained their hashes. This was an artifact
+write failure, not a failed physical gate. No results were selected or discarded.
+The non-monotonic fidelity result is retained: fixed estimator steps and penalties
+are not re-tuned after seeing evaluation data. It does not isolate photon noise
+from controller conditioning, mode count and sampling.

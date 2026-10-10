@@ -155,7 +155,7 @@ def weights(params, residual: jax.Array, forward: jax.Array, variance: jax.Array
     """Shared small network produces a forward-command weight for each mode."""
     w1, b1, w2, b2 = params
     features = jnp.stack((jnp.log1p(residual**2/(variance+1e-8)),
-                          jnp.log1p(forward**2), jnp.full_like(residual, jnp.log1p(variance))), axis=-1)
+                          jnp.log1p(forward**2), jnp.broadcast_to(jnp.log1p(variance),residual.shape)), axis=-1)
     return jax.nn.sigmoid(jnp.tanh(features @ w1 + b1) @ w2 + b2).squeeze(-1)
 
 
@@ -191,7 +191,7 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
     keys = jax.random.split(jax.random.PRNGKey(seed+100000), len(phases))
     fcfg = config['faults']
     step_gain = config['forward_step']
-    modal_noise = (1/flux + read**2/flux**2) if config['sensor']=='linear' else jnp.mean(jnp.sum(recon**2 * (ref[None,:]/flux + read**2/flux**2),axis=1))
+    modal_noise = (1/flux + read**2/flux**2) if config['sensor']=='linear' else jnp.sum(recon**2 * (ref[None,:]/flux + read**2/flux**2),axis=1)
 
     def frame(carry, inputs):
         fifo, command, previous, predicted, latched = carry
@@ -297,7 +297,10 @@ def summarize(outputs: dict, config: dict) -> dict[str,float]:
 
 def paired_interval(a: list[float], b: list[float]) -> tuple[float,float,float]:
     """Return paired mean difference and Student-t interval across seeds."""
-    delta = np.asarray(a)-np.asarray(b)
+    aa,bb=np.asarray(a,dtype=float),np.asarray(b,dtype=float)
+    if aa.ndim!=1 or aa.shape!=bb.shape or len(aa)<2 or not np.isfinite(aa).all() or not np.isfinite(bb).all():
+        raise ValueError('Paired intervals need matching finite vectors with at least two seeds')
+    delta = aa-bb
     mean = float(delta.mean())
     half = float(student_t.ppf(.975,len(delta)-1)*delta.std(ddof=1)/np.sqrt(len(delta)))
     return mean, mean-half, mean+half

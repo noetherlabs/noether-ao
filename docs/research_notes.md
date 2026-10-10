@@ -101,7 +101,7 @@ missing distributions and all existing tests. Run installed adapters locally.
 M3 uses two von Karman frozen-flow layers, a piston-free orthonormal modal DM,
 a linear calibration stage and a dLux unmodulated pyramid stage. A command FIFO
 implements delay. Integrator, linear predictor and fixed-iteration inverse fit
-share observations. Validate PSF independently with HCIPy, fitting-error scaling,
+share the plant and seeded noise model. Validate PSF independently with HCIPy, fitting-error scaling,
 delay response, bounded loop state and diffraction-based Strehl.
 
 M4 predicts measurements causally from past estimates and queued commands. Compare

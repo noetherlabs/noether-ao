@@ -32,7 +32,7 @@ def predictor_for(cfg: dict, cal: dict) -> np.ndarray:
 
 class Recorder:
     """Save raw outputs immediately, retaining per-trial configs and inputs."""
-    def __init__(self, path: Path):
+    def __init__(self, path: Path) -> None:
         self.path = path
         (path/'raw').mkdir()
         self.index = []
@@ -170,9 +170,8 @@ def faults(cfg: dict, destination: str) -> Path:
     render(path,'faults'); return path
 
 
-def fidelity(cfg: dict, destination: str) -> Path:
-    """Vary only the twin against a common higher-resolution plant and noise seeds."""
-    path=start_run(cfg,destination); rec=Recorder(path)
+def fidelity_latency(path: Path, cfg: dict) -> None:
+    """Regenerate the explicitly limited M1 component-cost reference."""
     m1=Path(cfg['fidelity']['m1_result'])
     measurements=json.loads((m1/'summary.json').read_text())
     latency_rows=[]
@@ -184,6 +183,12 @@ def fidelity(cfg: dict, destination: str) -> Path:
         latency_rows.append({'level':level['name'],'n':level['n'],'wavelengths':len(level['wavelengths_m']),'p50_ms':r['p50_ms'],'p99_ms':r['p99_ms'],'max_ms':r['max_ms'],'miss_1ms':r['miss_1ms'],'source_raw':str(m1/r['raw'])})
     table(path/'component_latency',latency_rows)
     write_json(path/'m1_machine.json',json.loads((m1/'machine.json').read_text()))
+
+
+def fidelity(cfg: dict, destination: str) -> Path:
+    """Vary only the twin against a common higher-resolution plant and noise seeds."""
+    path=start_run(cfg,destination); rec=Recorder(path)
+    fidelity_latency(path,cfg)
     fc=cfg|cfg['fidelity']['truth']
     phases_by_seed={seed:phase_sequence(fc,seed) for seed in cfg['seeds']}
     for seed,phases in phases_by_seed.items():
@@ -340,6 +345,7 @@ def render(path: Path, experiment: str) -> None:
         x=np.arange(len(output)); ax.bar(x,[r['wfe_nm'] for r in output],yerr=[r['seed_se_nm'] for r in output])
         ax.set_xticks(x,[r['sensor']+'\n'+r['controller'] for r in output],rotation=35,ha='right')
     elif experiment=='fidelity':
+        fidelity_latency(path,cfg)
         levels=[l['name'] for l in cfg['fidelity']['levels']]
         for level in levels:
             group=[]
@@ -405,7 +411,7 @@ def render(path: Path, experiment: str) -> None:
                     values={c:[r['wfe_nm'] for r in sorted(cell,key=lambda r:r['seed']) if r['controller']==c] for c in CONTROLLERS}
                     for controller in CONTROLLERS:
                         mean,se=mean_se(values[controller]); row={'flux':flux,'wind':wind,'fault':fault,'controller':controller,'wfe_nm':mean,'seed_se_nm':se}
-                        for baseline in ['integrator','forward']:
+                        for baseline in ['integrator','forward','predictive']:
                             delta,lo,hi=paired_interval(values[controller],values[baseline])
                             row.update({baseline+'_delta_nm':delta,baseline+'_ci95_low':lo,baseline+'_ci95_high':hi,baseline+'_verdict':'wins' if hi<0 else 'loses' if lo>0 else 'inside_noise'})
                         output.append(row)
@@ -413,6 +419,19 @@ def render(path: Path, experiment: str) -> None:
             group=[r for r in output if r['controller']==controller]
             ax.errorbar(np.arange(len(group)),[r['wfe_nm'] for r in group],yerr=[r['seed_se_nm'] for r in group],marker='o',label=controller)
         ax.set_xlabel('Condition index (table order)'); ax.legend(fontsize=8)
+        comparison=[r for r in output if r['controller']=='learned']
+        advantage,view=plt.subplots(figsize=(11,7),layout='constrained')
+        y=np.arange(len(comparison))
+        for baseline,offset in [('integrator',-.12),('forward',.12)]:
+            delta=np.array([r[baseline+'_delta_nm'] for r in comparison])
+            low=np.array([r[baseline+'_ci95_low'] for r in comparison])
+            high=np.array([r[baseline+'_ci95_high'] for r in comparison])
+            view.errorbar(delta,y+offset,xerr=np.stack((delta-low,high-delta)),fmt='o',label='vs '+baseline)
+        view.axvline(0,color='black',linestyle=':')
+        view.set_yticks(y,[f"{r['flux']:g} photons | wind x{r['wind']:g} | {r['fault']}" for r in comparison])
+        view.set_xscale('symlog',linthresh=2)
+        view.set_xlabel('Learned minus baseline WFE (nm); paired 95% intervals; negative is better')
+        view.invert_yaxis();view.legend();advantage.savefig(path/'learned_comparison.png',dpi=160);plt.close(advantage)
     else:
         raise ValueError(experiment)
     ax.set_ylabel('Residual WFE (nm RMS; bars = across-seed SE)')
