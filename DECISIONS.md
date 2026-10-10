@@ -116,3 +116,15 @@ write failure, not a failed physical gate. No results were selected or discarded
 The non-monotonic fidelity result is retained: fixed estimator steps and penalties
 are not re-tuned after seeing evaluation data. It does not isolate photon noise
 from controller conditioning, mode count and sampling.
+
+The provenance audit found that M2's broad source inventory included then-untracked,
+unused AO drafts. Two draft snapshots were modified before their first commit and
+cannot be recovered by hash. M2's committed driver imports only the committed
+artifact helper from this package; the unresolved files did not execute in M2.
+Keep this inventory limitation explicit and retain the original provenance.
+
+M6 retains the predeclared training budget and all held-out outcomes, including
+losses. No evaluation-driven re-training or controller tuning was performed.
+Before fresh-checkout reproduction, report-only review made the fidelity axis
+logarithmic, labeled the combined useful/unsaturated criterion explicitly, and
+standardized generated CSV line endings. Scientific arrays and gates did not change.

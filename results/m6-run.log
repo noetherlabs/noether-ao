@@ -1,0 +1,80 @@
+Training 0 0.1149997255829126
+Training 1 0.11451802984451015
+Training 2 0.11414519268554414
+Training 3 0.11380108843340975
+Training 4 0.11350131501488708
+Training 5 0.11322271749892922
+Training 6 0.11294250722054844
+Training 7 0.112660165326417
+Training 8 0.11238487935352584
+Training 9 0.11212136547741021
+Training 10 0.1118733512389086
+Training 11 0.11164271387801905
+Training 12 0.11142945680341645
+Training 13 0.11123287519032404
+Training 14 0.11105296535431797
+Training 15 0.11089047805496621
+Training 16 0.11074608696129234
+Training 17 0.11061985563156908
+Training 18 0.11051121350802598
+Training 19 0.11041910512683042
+Mixed completed: 1000.0 0.5 none integrator
+Mixed completed: 1000.0 0.5 none predictive
+Mixed completed: 1000.0 0.5 none forward
+Mixed completed: 1000.0 0.5 none fixed
+Mixed completed: 1000.0 0.5 none learned
+Mixed completed: 1000.0 0.5 optical_gain integrator
+Mixed completed: 1000.0 0.5 optical_gain predictive
+Mixed completed: 1000.0 0.5 optical_gain forward
+Mixed completed: 1000.0 0.5 optical_gain fixed
+Mixed completed: 1000.0 0.5 optical_gain learned
+Mixed completed: 1000.0 0.5 vibration integrator
+Mixed completed: 1000.0 0.5 vibration predictive
+Mixed completed: 1000.0 0.5 vibration forward
+Mixed completed: 1000.0 0.5 vibration fixed
+Mixed completed: 1000.0 0.5 vibration learned
+Mixed completed: 1000.0 2.0 none integrator
+Mixed completed: 1000.0 2.0 none predictive
+Mixed completed: 1000.0 2.0 none forward
+Mixed completed: 1000.0 2.0 none fixed
+Mixed completed: 1000.0 2.0 none learned
+Mixed completed: 1000.0 2.0 optical_gain integrator
+Mixed completed: 1000.0 2.0 optical_gain predictive
+Mixed completed: 1000.0 2.0 optical_gain forward
+Mixed completed: 1000.0 2.0 optical_gain fixed
+Mixed completed: 1000.0 2.0 optical_gain learned
+Mixed completed: 1000.0 2.0 vibration integrator
+Mixed completed: 1000.0 2.0 vibration predictive
+Mixed completed: 1000.0 2.0 vibration forward
+Mixed completed: 1000.0 2.0 vibration fixed
+Mixed completed: 1000.0 2.0 vibration learned
+Mixed completed: 100000.0 0.5 none integrator
+Mixed completed: 100000.0 0.5 none predictive
+Mixed completed: 100000.0 0.5 none forward
+Mixed completed: 100000.0 0.5 none fixed
+Mixed completed: 100000.0 0.5 none learned
+Mixed completed: 100000.0 0.5 optical_gain integrator
+Mixed completed: 100000.0 0.5 optical_gain predictive
+Mixed completed: 100000.0 0.5 optical_gain forward
+Mixed completed: 100000.0 0.5 optical_gain fixed
+Mixed completed: 100000.0 0.5 optical_gain learned
+Mixed completed: 100000.0 0.5 vibration integrator
+Mixed completed: 100000.0 0.5 vibration predictive
+Mixed completed: 100000.0 0.5 vibration forward
+Mixed completed: 100000.0 0.5 vibration fixed
+Mixed completed: 100000.0 0.5 vibration learned
+Mixed completed: 100000.0 2.0 none integrator
+Mixed completed: 100000.0 2.0 none predictive
+Mixed completed: 100000.0 2.0 none forward
+Mixed completed: 100000.0 2.0 none fixed
+Mixed completed: 100000.0 2.0 none learned
+Mixed completed: 100000.0 2.0 optical_gain integrator
+Mixed completed: 100000.0 2.0 optical_gain predictive
+Mixed completed: 100000.0 2.0 optical_gain forward
+Mixed completed: 100000.0 2.0 optical_gain fixed
+Mixed completed: 100000.0 2.0 optical_gain learned
+Mixed completed: 100000.0 2.0 vibration integrator
+Mixed completed: 100000.0 2.0 vibration predictive
+Mixed completed: 100000.0 2.0 vibration forward
+Mixed completed: 100000.0 2.0 vibration fixed
+Mixed completed: 100000.0 2.0 vibration learned

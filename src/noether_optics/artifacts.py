@@ -83,11 +83,10 @@ def write_table(path: Path, rows: list[dict]) -> None:
         return
     keys = list(rows[0])
     with path.with_suffix('.csv').open('w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=keys)
+        writer = csv.DictWriter(f, fieldnames=keys, lineterminator='\n')
         writer.writeheader(); writer.writerows(rows)
     def cell(v):
         return f'{v:.6g}' if isinstance(v,float) else str(v)
     path.with_suffix('.md').write_text('| ' + ' | '.join(keys) + ' |\n| ' +
         ' | '.join('---' for _ in keys) + ' |\n' + '\n'.join(
         '| ' + ' | '.join(cell(row[k]) for k in keys) + ' |' for row in rows) + '\n')
-

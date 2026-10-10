@@ -1,0 +1,36 @@
+{
+  "training_seeds": [
+    11,
+    12,
+    13
+  ],
+  "evaluation_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "final_loss": 0.11034211663550549,
+  "conditions": [
+    {
+      "seed": 11,
+      "photons": 1000.0,
+      "wind_scale": 0.5,
+      "frames": 32
+    },
+    {
+      "seed": 12,
+      "photons": 100000.0,
+      "wind_scale": 2.0,
+      "frames": 32
+    },
+    {
+      "seed": 13,
+      "photons": 1000.0,
+      "wind_scale": 0.5,
+      "frames": 32
+    }
+  ],
+  "noise": "Gaussian reparameterization in training; exact Poisson in evaluation"
+}

@@ -1,4 +1,4 @@
-| level | photons | wfe_nm | seed_se_nm | delta_vs_high_nm | ci95_low_nm | ci95_high_nm | equivalent | unsaturated |
+| level | photons | wfe_nm | seed_se_nm | delta_vs_high_nm | ci95_low_nm | ci95_high_nm | equivalent | useful_unsaturated |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | low | 100 | 485.857 | 26.7996 | -591.609 | -779.392 | -403.826 | False | False |
 | low | 1000 | 38.5885 | 0.654911 | -126.74 | -153.761 | -99.7176 | False | False |

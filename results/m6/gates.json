@@ -1,0 +1,7 @@
+{
+  "complete_unique_trials": true,
+  "finite_raw_outputs": true,
+  "training_evaluation_disjoint": true,
+  "finite_nonzero_training_gradients": true,
+  "weights_updated": true
+}

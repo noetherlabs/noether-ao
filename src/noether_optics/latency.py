@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 
 import jax
 import numpy as np
@@ -26,7 +27,7 @@ def statistics(seconds: np.ndarray) -> dict[str, float]:
             "miss_1ms": float(np.mean(x > .001)), "miss_0.5ms": float(np.mean(x > .0005))}
 
 
-def measure(fn, opd: np.ndarray, wavelengths: np.ndarray, device,
+def measure(fn: Callable, opd: np.ndarray, wavelengths: np.ndarray, device: jax.Device,
             repeats: int, warmup: int, host_path: bool) -> tuple[np.ndarray, float]:
     """Time each synchronized call, optionally including fresh host/device copies."""
     x, wl = jax.device_put(opd, device), jax.device_put(wavelengths, device)

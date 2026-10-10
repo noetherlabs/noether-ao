@@ -19,22 +19,26 @@ session on a workstation, outside CI; maxima are observations, not bounds.
 Selected results follow. [All sizes and raw-result locations](../results/m2/table.md)
 are retained with [the original report](../results/m2/report.txt).
 
+<!-- BEGIN DRAGRACE -->
+
 | Adapter | Pupil grid | Median ms | p99 ms | Observed max ms |
-|---|---:|---:|---:|---:|
-| abcdlux | 128 | 0.349646 | 0.557959 | 1.150083 |
-| abcdlux | 256 | 0.997709 | 2.463709 | 4.358958 |
-| dlux | 128 | 0.857146 | 2.473000 | 4.819708 |
-| dlux | 256 | 2.116437 | 4.372625 | 5.388792 |
-| hcipy | 128 | 0.282063 | 0.460667 | 1.320042 |
-| hcipy | 256 | 0.721917 | 1.063541 | 1.397958 |
-| lentil | 128 | 1.021688 | 1.286375 | 1.591500 |
-| lentil | 256 | 2.971458 | 9.091209 | 21.291834 |
+| --- | --- | --- | --- | --- |
+| abcdlux | 128 | 0.349646 | 0.557959 | 1.15008 |
+| abcdlux | 256 | 0.997709 | 2.46371 | 4.35896 |
+| dlux | 128 | 0.857146 | 2.473 | 4.81971 |
+| dlux | 256 | 2.11644 | 4.37263 | 5.38879 |
+| hcipy | 128 | 0.282063 | 0.460667 | 1.32004 |
+| hcipy | 256 | 0.721917 | 1.06354 | 1.39796 |
+| lentil | 128 | 1.02169 | 1.28637 | 1.5915 |
+| lentil | 256 | 2.97146 | 9.09121 | 21.2918 |
 | numpy_baseline | 128 | 0.270521 | 0.371917 | 0.437125 |
-| numpy_baseline | 256 | 0.717249 | 1.206750 | 1.460500 |
-| poppy | 128 | 2.203709 | 3.406792 | 5.016792 |
-| poppy | 256 | 3.558896 | 12.175416 | 34.945791 |
+| numpy_baseline | 256 | 0.717249 | 1.20675 | 1.4605 |
+| poppy | 128 | 2.20371 | 3.40679 | 5.01679 |
+| poppy | 256 | 3.5589 | 12.1754 | 34.9458 |
 | prysm | 128 | 0.248708 | 0.349333 | 0.689958 |
-| prysm | 256 | 0.703875 | 0.986167 | 1.426833 |
+| prysm | 256 | 0.703875 | 0.986167 | 1.42683 |
+
+<!-- END DRAGRACE -->
 
 Machine: Apple M1; macOS-14.6-arm64-arm-64bit; 8 available
 logical cores; Python 3.11.15; JAX 0.10.2.

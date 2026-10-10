@@ -151,7 +151,8 @@ def predict_fit(telemetry: np.ndarray, horizon: int, ridge: float) -> np.ndarray
     return np.linalg.solve(gram + ridge*np.eye(2), rhs[...,None])[...,0]
 
 
-def weights(params, residual: jax.Array, forward: jax.Array, variance: jax.Array) -> jax.Array:
+def weights(params: tuple[jax.Array, ...], residual: jax.Array, forward: jax.Array,
+            variance: jax.Array) -> jax.Array:
     """Shared small network produces a forward-command weight for each mode."""
     w1, b1, w2, b2 = params
     features = jnp.stack((jnp.log1p(residual**2/(variance+1e-8)),

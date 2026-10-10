@@ -1,6 +1,6 @@
 # Plan
 
-Current position: M5 coverage passed; M6 held-out mixed-controller experiment next.
+Current position: M6 coverage passed with a negative C3 result; M7 fresh-checkout verification in progress.
 
 | Milestone | Required gate | State |
 |---|---|---|
@@ -10,8 +10,8 @@ Current position: M5 coverage passed; M6 held-out mixed-controller experiment ne
 | M3 | HCIPy PSF, fitting scaling, delay response, stable integrator | pass |
 | M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pass; C4 partial |
 | M5 | Fidelity/flux table and plot with at least five seeds | pass; no equivalence threshold |
-| M6 | Held-out controller comparison; fixed and trained modal weights | in progress |
-| M7 | Reproduction commands, claims, plots, limits and private drafts | pending |
+| M6 | Held-out controller comparison; fixed and trained modal weights | pass; C3 not established |
+| M7 | Reproduction commands, claims, plots, limits and private drafts | in progress |
 
 For each milestone: read source, specify gate, implement, pytest, seeded run,
 store provenance, review full diff, commit locally. Gates are never relaxed.
@@ -54,7 +54,7 @@ Do not turn an unavailable platform or failed physical validation into a pass.
 ## Current implementation review
 
 The delayed plant, ideal pyramid, sensor calibration, causal detector, fidelity
-sweep and differentiable mixture are prepared. M3 physical gates passed; mixed-controller performance remains unmeasured.
+sweep and differentiable mixture are prepared. M3 physical gates passed; all held-out controller comparisons are recorded.
 The review checks explicitly distinguish pre-existing false alarms from new fault
 detections, failed control from useful fidelity equivalence, component propagation
 latency from a full control deadline, and training from held-out evaluation seeds.

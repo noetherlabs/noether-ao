@@ -357,10 +357,10 @@ def render(path: Path, experiment: str) -> None:
                 band=cfg['fidelity']['equivalence_fraction']*np.mean(b)
                 # Saturated controllers cannot establish useful equivalence.
                 stable=all(r['saturation_fraction']==0 and r['wfe_nm']<r['open_wfe_nm'] for r in selected+high)
-                row={'level':level,'photons':flux,'wfe_nm':mean,'seed_se_nm':se,'delta_vs_high_nm':delta,'ci95_low_nm':lo,'ci95_high_nm':hi,'equivalent':bool(lo>=-band and hi<=band and stable),'unsaturated':stable}
+                row={'level':level,'photons':flux,'wfe_nm':mean,'seed_se_nm':se,'delta_vs_high_nm':delta,'ci95_low_nm':lo,'ci95_high_nm':hi,'equivalent':bool(lo>=-band and hi<=band and stable),'useful_unsaturated':stable}
                 output.append(row); group.append(row)
             ax.errorbar([r['photons'] for r in group],[r['wfe_nm'] for r in group],yerr=[r['seed_se_nm'] for r in group],marker='o',label=level)
-        ax.set_xscale('log'); ax.set_xlabel('Photons per frame'); ax.legend()
+        ax.set_xscale('log'); ax.set_yscale('log'); ax.set_xlabel('Photons per frame'); ax.legend()
     elif experiment=='faults':
         rocfig,rocax=plt.subplots(figsize=(6,5),layout='constrained')
         clean=[]
@@ -418,7 +418,7 @@ def render(path: Path, experiment: str) -> None:
         for controller in CONTROLLERS:
             group=[r for r in output if r['controller']==controller]
             ax.errorbar(np.arange(len(group)),[r['wfe_nm'] for r in group],yerr=[r['seed_se_nm'] for r in group],marker='o',label=controller)
-        ax.set_xlabel('Condition index (table order)'); ax.legend(fontsize=8)
+        ax.set_yscale('log'); ax.set_xlabel('Condition index (table order)'); ax.legend(fontsize=8)
         comparison=[r for r in output if r['controller']=='learned']
         advantage,view=plt.subplots(figsize=(11,7),layout='constrained')
         y=np.arange(len(comparison))

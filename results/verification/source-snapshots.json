@@ -1,0 +1,372 @@
+{
+  "runs": {
+    "m1": {
+      "recorded_start_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "69861778b0abaf851760fbc358fcb70819a9f6536a2606f567698bd0df000b39",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "75e805d51e639f8e569e74c7103d0b3a1b633fbb0aade40c7efc45c6e6a34d0e",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "2387b405fa7dcab807930d597c0e48348ea61eb2535c1ca2706b70a6efcc5d83",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        },
+        "uv.lock": {
+          "sha256": "8f945ab8d932221f7abac98c1686e5eaca8781ceda08d48d5b2bf5733723f793",
+          "matching_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+          "in_recorded_start_commit": true
+        }
+      }
+    },
+    "m2": {
+      "recorded_start_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+          "matching_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/atmosphere.py": {
+          "sha256": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/config.py": {
+          "sha256": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/experiments/__init__.py": {
+          "sha256": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/experiments/rebuild.py": {
+          "sha256": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/experiments/runners.py": {
+          "sha256": "06662219fc8c71789b46237c18560c402f75fc14ba2e11845c768337281cb35c",
+          "matching_commit": null,
+          "in_recorded_start_commit": false
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+          "matching_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/simulation.py": {
+          "sha256": "fd36dc02db20e2b429d689edb4af24453612ffd41915eb2a660804270d49cae9",
+          "matching_commit": null,
+          "in_recorded_start_commit": false
+        },
+        "uv.lock": {
+          "sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+          "matching_commit": "5843dd3506ff1377e79eb7e818252d9c119a4b86",
+          "in_recorded_start_commit": true
+        }
+      }
+    },
+    "m3": {
+      "recorded_start_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/atmosphere.py": {
+          "sha256": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/config.py": {
+          "sha256": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/__init__.py": {
+          "sha256": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/rebuild.py": {
+          "sha256": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/runners.py": {
+          "sha256": "001c2369c7873eafb9bab5a1fdedcf862e789761e734b03ae32c008a3b06a486",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/simulation.py": {
+          "sha256": "1393eeb44705a3f0f42b2c74e869078f8cd8ac67432daa3d7d3f41549a0cb63d",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        },
+        "uv.lock": {
+          "sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+          "matching_commit": "89b32300cc2809c3a35949e8c37441b1b76aabf9",
+          "in_recorded_start_commit": true
+        }
+      }
+    },
+    "m4": {
+      "recorded_start_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/atmosphere.py": {
+          "sha256": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/config.py": {
+          "sha256": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/__init__.py": {
+          "sha256": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/rebuild.py": {
+          "sha256": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/runners.py": {
+          "sha256": "53cb425492c215c1a64c75b2c0d29c028df71e18f8edc7468e72352773b5b0fa",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/simulation.py": {
+          "sha256": "1393eeb44705a3f0f42b2c74e869078f8cd8ac67432daa3d7d3f41549a0cb63d",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        },
+        "uv.lock": {
+          "sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+          "matching_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+          "in_recorded_start_commit": true
+        }
+      }
+    },
+    "m5": {
+      "recorded_start_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/atmosphere.py": {
+          "sha256": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/config.py": {
+          "sha256": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/__init__.py": {
+          "sha256": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/rebuild.py": {
+          "sha256": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/runners.py": {
+          "sha256": "a1ae2651310d5c9e363c383e680c2ec60f2f398648391b057938d2a271eaaed0",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/simulation.py": {
+          "sha256": "1393eeb44705a3f0f42b2c74e869078f8cd8ac67432daa3d7d3f41549a0cb63d",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        },
+        "uv.lock": {
+          "sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+          "matching_commit": "9d6562522d2917c5c91b8927d667b51acd58a6bb",
+          "in_recorded_start_commit": true
+        }
+      }
+    },
+    "m6": {
+      "recorded_start_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+      "files": {
+        "src/noether_optics/__init__.py": {
+          "sha256": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/artifacts.py": {
+          "sha256": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/atmosphere.py": {
+          "sha256": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/cli.py": {
+          "sha256": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/config.py": {
+          "sha256": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/__init__.py": {
+          "sha256": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/rebuild.py": {
+          "sha256": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/experiments/runners.py": {
+          "sha256": "938d31bacb658725ac45799127316844cab5e6edad279f7a7a9433a9da4b84d6",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/latency.py": {
+          "sha256": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/optics.py": {
+          "sha256": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "src/noether_optics/simulation.py": {
+          "sha256": "658d11a80d0ca3f29cb273df40d91890a9f25f7ce4d8b83918210475eaf69f40",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        },
+        "uv.lock": {
+          "sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+          "matching_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+          "in_recorded_start_commit": true
+        }
+      }
+    }
+  },
+  "all_source_and_lock_snapshots_recoverable": false,
+  "unresolved": [
+    "m2: src/noether_optics/experiments/runners.py",
+    "m2: src/noether_optics/simulation.py"
+  ],
+  "executed_source_and_lock_snapshots_recoverable": true,
+  "unresolved_executed": [],
+  "note": "A later matching commit identifies a hashed working-tree snapshot; it does not rewrite original provenance. M2 imported only artifacts from this package; its inventory also hashed unused, then-untracked AO drafts. Two of those unused snapshots cannot be recovered."
+}
