@@ -119,6 +119,11 @@ It reruns the full physical validation and the full Dragrace AO case; other
 entry-point checks use the labeled shorter configurations. Run it outside CI,
 with no concurrent compute work, because it includes timing.
 
+The completed [fresh-checkout verification](results/verification/fresh-checkout/verification.json)
+passed. Its [table report](results/verification/fresh-checkout/table-reproduction.json)
+and [independent result review](results/verification/fresh-checkout/independent-result-review.json)
+record unchanged raw inputs and numerical agreement of the full physical rerun.
+
 ## Limits
 
 - The plant is a small unobstructed pupil, modal DM, ideal unmodulated pyramid and

@@ -1,0 +1,67 @@
+{
+  "all_commands_passed": true,
+  "full_m3_gates": {
+    "hcipy_psf": true,
+    "fitting_d": true,
+    "fitting_r0": true,
+    "linear_delay": true,
+    "linear_stable": true,
+    "pyramid_delay": true,
+    "pyramid_stable": true
+  },
+  "smoke_completeness_gates": {
+    "m4": {
+      "complete_unique_trials": true,
+      "finite_raw_outputs": true,
+      "training_evaluation_disjoint": true
+    },
+    "m5": {
+      "complete_unique_trials": true,
+      "finite_raw_outputs": true,
+      "training_evaluation_disjoint": true
+    },
+    "m6": {
+      "complete_unique_trials": true,
+      "finite_raw_outputs": true,
+      "training_evaluation_disjoint": true,
+      "finite_nonzero_training_gradients": true,
+      "weights_updated": true
+    }
+  },
+  "m2_workers": [
+    {
+      "adapter": "numpy_baseline",
+      "returncode": 0
+    },
+    {
+      "adapter": "dlux",
+      "returncode": 0
+    },
+    {
+      "adapter": "abcdlux",
+      "returncode": 0
+    },
+    {
+      "adapter": "hcipy",
+      "returncode": 0
+    },
+    {
+      "adapter": "poppy",
+      "returncode": 0
+    },
+    {
+      "adapter": "lentil",
+      "returncode": 0
+    },
+    {
+      "adapter": "prysm",
+      "returncode": 0
+    },
+    {
+      "adapter": "proper",
+      "returncode": 0
+    }
+  ],
+  "all_pass": true,
+  "scope": "Tables rebuilt from original raw data; M3 rerun fully; other simulation entry points exercised with labeled shorter horizons. New timing equality is not required."
+}

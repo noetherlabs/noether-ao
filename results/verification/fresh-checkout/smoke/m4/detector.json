@@ -1,0 +1,9 @@
+{
+  "threshold": 11.119594993241865,
+  "training_seeds": [
+    11,
+    12,
+    13
+  ],
+  "quantile": 0.995
+}

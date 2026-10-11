@@ -1,0 +1,18 @@
+{
+  "seed": 17,
+  "randomness": "None: deterministic upstream circular pupil case",
+  "upstream_commit": "d194dab2b7eb714bdeaf3cac07e283e8fca0d0f7",
+  "case_sha256": "cfd003d8a3a4f1ae5c6d9126a3c9d70f6ef4e63f70a71345729b2b1f1610a1c9",
+  "case_text": "# Small-pupil AO regime; identical optical physics to mft_array_scan.\n# The fixed focal grid makes this an MFT scan, not an FFT latency claim.\n# Tail estimates are empirical; the observed maximum is not a worst-case bound.\nid: mft_ao_scan\nkind: pupil_to_focus\nalgorithm_class: matrix_dft\nwavelength_m: 632.8e-9\npupil:\n  diameter_m: 0.01\n  samples_across_diameter: 32\n  array_samples: 32\n  aperture: circular\noutput:\n  focal_length_m: 1.0\n  samples_per_lambda_f_d: 4.0\n  extent_lambda_f_d: 32.0\ndtype: complex128\nbasis_caching: precomputed\nscan:\n  parameter: n_pupil\n  values: [32, 64, 96, 128, 192, 256]\nexecution:\n  warmup: 10\n  repeats: 1000\n  timeout_s: 300.0\naccuracy:\n  reference: internal_mft\n  max_rel_l2: 1.0e-10\nnotes: >\n  Small-pupil scan for AO component latency. Focal grid and accuracy gate match\n  mft_array_scan. Timing runs belong on a local machine, never in CI. Inspect\n  the full stored distribution and machine fingerprint before interpreting tails.\n",
+  "config_text": "id: dragrace_cpu_all\ndevice: cpu\nfft_backend: numpy\nblas_backend: accelerate\nthreads: 8\nconda_env: null\nnotes: >\n  Local Apple Silicon run. Affinity cannot be enforced on macOS. All available\n  cores; actual CPU/wall ratio remains in raw data. FFT/BLAS nonselectability\n  and strict backend verification remain enforced by the upstream adapters.\n",
+  "adapters": [
+    "numpy_baseline",
+    "dlux",
+    "abcdlux",
+    "hcipy",
+    "poppy",
+    "lentil",
+    "prysm",
+    "proper"
+  ]
+}

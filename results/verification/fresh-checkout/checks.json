@@ -1,0 +1,137 @@
+[
+  {
+    "check": "noether-tests",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "dragrace-tests",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/Diffraction-Dragrace/tests"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/Diffraction-Dragrace",
+    "returncode": 0
+  },
+  {
+    "check": "source-audit",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "scripts/audit_provenance.py",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/source-snapshots.json"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "tables",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "scripts/rebuild_all.py",
+      "--dragrace",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/Diffraction-Dragrace",
+      "--report",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/table-reproduction.json"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m1",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "noether_optics.cli",
+      "latency",
+      "--config",
+      "configs/latency_smoke.yaml",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/smoke/m1"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m2",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "scripts/run_dragrace.py",
+      "--repo",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/Diffraction-Dragrace",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/smoke/m2"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m3",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "noether_optics.cli",
+      "validate",
+      "--config",
+      "configs/simulation.yaml",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/full/m3"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m4",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "noether_optics.cli",
+      "faults",
+      "--config",
+      "configs/reproduction_smoke.yaml",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/smoke/m4"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m5",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "noether_optics.cli",
+      "fidelity",
+      "--config",
+      "configs/reproduction_smoke.yaml",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/smoke/m5"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  },
+  {
+    "check": "m6",
+    "command": [
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/bin/python",
+      "-m",
+      "noether_optics.cli",
+      "mixed",
+      "--config",
+      "configs/reproduction_smoke.yaml",
+      "--out",
+      "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/results/verification/fresh-checkout/smoke/m6"
+    ],
+    "cwd": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics",
+    "returncode": 0
+  }
+]

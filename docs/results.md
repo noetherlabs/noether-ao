@@ -220,6 +220,11 @@ Follow the [README commands](../README.md). The preserved raw tables can be
 regenerated independently of rerunning the expensive experiments. Short entry-point
 checks are labeled smoke runs and excluded from the claim evidence.
 
+The [fresh-checkout verification](../results/verification/fresh-checkout/verification.json)
+passed, including a full physical rerun and an independent installation from the
+lock. Its [table reproduction report](../results/verification/fresh-checkout/table-reproduction.json)
+checks all published tables and confirms that their raw inputs stayed unchanged.
+
 The [source inventory audit](../results/verification/source-snapshots.json) locates
 the source and lock snapshots used by each experiment. M2 also hashed unused,
 then-uncommitted AO drafts; two of those unused snapshots are unrecoverable.

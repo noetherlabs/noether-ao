@@ -1,0 +1,12 @@
+Independent PSF comparison: [{'case': 'flat', 'relative_l2': 4.336162992895752e-15, 'pass': True}, {'case': 'aberrated', 'relative_l2': 4.571075446133975e-15, 'pass': True}]
+Fitting law: 1.7531478126204292 -1.6666666666666659
+linear 1 integrator 28.3061
+linear 2 integrator 29.4139
+linear 2 predictive 22.1325
+linear 2 forward 30.151
+linear 4 integrator 35.1229
+pyramid 1 integrator 28.9509
+pyramid 2 integrator 30.1624
+pyramid 2 predictive 22.3947
+pyramid 2 forward 30.058
+pyramid 4 integrator 36.2865

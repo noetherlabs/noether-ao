@@ -1,0 +1,22 @@
+{
+  "m2_passing_scan_sizes": {
+    "dlux": 6,
+    "abcdlux": 6,
+    "numpy_baseline": 6,
+    "prysm": 6,
+    "hcipy": 6,
+    "poppy": 6,
+    "lentil": 6
+  },
+  "m2_proper_status": [
+    "unsupported"
+  ],
+  "m3_original_table_numeric_agreement": {
+    "trials.csv": true,
+    "table.csv": true,
+    "fitting.csv": true,
+    "delay.csv": true,
+    "psf.csv": true,
+    "predictive_improvement.csv": true
+  }
+}

@@ -128,3 +128,12 @@ losses. No evaluation-driven re-training or controller tuning was performed.
 Before fresh-checkout reproduction, report-only review made the fidelity axis
 logarithmic, labeled the combined useful/unsaturated criterion explicitly, and
 standardized generated CSV line endings. Scientific arrays and gates did not change.
+
+M7 used independent local Git clones of both repositories and a new environment
+installed from the lock. Cached distribution files were hard-linked to conserve
+disk space; source checkouts and editable installation paths were separate.
+Verification rebuilt all published report/table files without changing raw inputs,
+reran M3 with the full configuration, reran the full Dragrace scan, and exercised
+M1/M4/M5/M6 with the explicitly labeled smoke configurations. M3 numerical CSVs
+matched the original run within the strict reproduction tolerance. Fresh smoke
+outputs are retained separately and never substituted into the scientific claims.

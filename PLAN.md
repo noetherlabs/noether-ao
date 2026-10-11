@@ -1,6 +1,6 @@
 # Plan
 
-Current position: M6 coverage passed with a negative C3 result; M7 fresh-checkout verification in progress.
+Current position: M0–M7 complete. All required available-platform gates passed; negative claim results retained.
 
 | Milestone | Required gate | State |
 |---|---|---|
@@ -11,7 +11,7 @@ Current position: M6 coverage passed with a negative C3 result; M7 fresh-checkou
 | M4 | Every injected fault; delay, false alarm, ROC, fallback comparison | pass; C4 partial |
 | M5 | Fidelity/flux table and plot with at least five seeds | pass; no equivalence threshold |
 | M6 | Held-out controller comparison; fixed and trained modal weights | pass; C3 not established |
-| M7 | Reproduction commands, claims, plots, limits and private drafts | in progress |
+| M7 | Reproduction commands, claims, plots, limits and private drafts | pass; fresh clone verified |
 
 For each milestone: read source, specify gate, implement, pytest, seeded run,
 store provenance, review full diff, commit locally. Gates are never relaxed.

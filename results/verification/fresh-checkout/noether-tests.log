@@ -1,0 +1,12 @@
+..........................                                               [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/zodiax/stats.py:23
+  /Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/lib/python3.11/site-packages/zodiax/stats.py:23: DeprecationWarning: invalid escape sequence '\m'
+    """
+
+.venv/lib/python3.11/site-packages/zodiax/stats.py:45
+  /Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/verification/noether-optics/.venv/lib/python3.11/site-packages/zodiax/stats.py:45: DeprecationWarning: invalid escape sequence '\m'
+    """
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+26 passed, 2 warnings in 66.98s (0:01:06)

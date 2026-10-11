@@ -1,0 +1,1 @@
+Executed source and lock snapshots are recoverable; unresolved unused inventory: ['m2: src/noether_optics/experiments/runners.py', 'm2: src/noether_optics/simulation.py']

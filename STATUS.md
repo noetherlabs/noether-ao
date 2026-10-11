@@ -1,13 +1,73 @@
-# Status
+# Final status
 
-M0: pass. Opened-source notes, design and pinned environment are recorded.
-M1: pass on the available CPU configuration. GPU and enforced single-core affinity skipped.
-All 144 engine/path/shape rows contain 10000 saved evaluations, for 1440000 measured calls. Maximum complex-field relative L2 error: 0.0.
-Raw results, machine fingerprint, interruption record, tests, table and plot: `results/m1/`.
-C1: configuration-dependent support; no full control-loop deadline guarantee.
+All required available-platform gates passed. Negative scientific findings remain
+negative. All commits and drafts are local; nothing was published or sent.
 
-M2: pass. Clean local branch d194dab, 140 tests passed and two platform affinity skips. Seven adapters passed all six scan sizes; PROPER installed but correctly reports unsupported MFT. Both drafts exist in outbox. Raw results and fingerprints: results/m2.
-M3: pass. Independent HCIPy PSFs, fitting scaling, delay growth and nominal stability all passed. Pyramid predictor reduction: 26.372725760970482 percent in mean WFE; this is not an exact replication of an unspecified earlier setup. Raw data: results/m3.
-M4: pass for experimental coverage; C4 is partial and does not establish safety. All 80 fault/switch/seed trials are finite. Optical-gain drift was missed, vibration fallback worsened WFE, and one of five clean runs triggered a false alarm (one of 600 evaluated frames). Raw results, score/availability ROC and paired differences: results/m4.
-M5: pass for coverage. All 75 trials are finite and all cells have five held-out seeds. No low-flux equivalence threshold passed the predeclared useful-equivalence criterion. Lower fidelities often improved WFE under the fixed estimator; model resolution, mode count and estimator conditioning are confounded. The last four trials were recovered after ENOSPC using the verified original source commit and identical fingerprint; the first 71 raw trials were unchanged. M6: pass for coverage. All 300 held-out trials are finite; training gradients are finite and weights changed. Learned weights beat both integrator and forward in 0/12 conditions and lose to at least one in 5/12. C3 is not established in this configured experiment. M7: in progress; report and all three unsent drafts exist, fresh-checkout verification pending.
-All work is local. No publication, messages or collaboration claims.
+| Milestone | Gate | Evidence and reason |
+| --- | --- | --- |
+| M0 | pass | Pinned environment, opened-source notes and design in docs/research_notes.md. |
+| M1 | pass on available CPU; platform skips | 144 rows, 10000 samples each, 1440000 calls; maximum complex-field relative L2 error 0. GPU and enforced single-core affinity unavailable. |
+| M2 | pass | Clean four-file Dragrace change d194dab; 140 tests passed, two affinity skips; seven adapters pass all six sizes. PROPER installed but MFT unsupported. Both drafts exist. |
+| M3 | pass | HCIPy PSFs, fitting laws, delay response and stable integrator gates pass. Full fresh-clone rerun reproduces all six numerical CSV tables. |
+| M4 | pass for coverage | All 80 fault/switch/seed trials finite; delays, false alarms, ROC and paired errors saved. This is not a safety gate. |
+| M5 | pass for coverage | All 75 trials finite; five seeds per cell, raw data, uncertainty and plot saved. No useful-equivalence threshold found. |
+| M6 | pass for coverage | All 300 held-out trials finite; disjoint seeds, finite nonzero gradients and changed weights. All comparisons retained. |
+| M7 | pass | Fresh clones install from lock; both suites pass; 33 report/table files regenerate with unchanged raw inputs; every experiment entry point succeeds. |
+
+## Claim results
+
+- **C1: configuration-dependent support.** Float32 dLux CPU device-path p99 is
+  0.0592937 ms at N=32 with one wavelength and 6.38013 ms at N=256 with five.
+  A small median is not a deadline guarantee. No GPU or full-loop timing claim.
+- **C2: proposed noise-equivalence threshold not established.** No flux passes the
+  predeclared useful equivalence criterion across all three fidelities. Lower
+  fidelity often performs better with this fixed estimator; conditioning, modes,
+  sampling and photon noise are confounded.
+- **C3: learned advantage not established.** Paired intervals show learned weights
+  beating both integrator and forward in 0/12 conditions and losing to at least
+  one in 5/12. Training loss reduction is not held-out improvement.
+- **C4: partial detection/recovery, no general safety result.** Optical-gain drift
+  is missed. Vibration fallback worsens WFE. One of five clean runs alarms, with
+  one alarm frame out of 600 evaluated clean frames. Availability fallback helps
+  in its synthetic test; pupil-shift fallback does not restore nominal correction.
+
+The nominal pyramid predictor reduces mean WFE by 26.372725760970482 percent.
+This is a new configured result, not exact replication of an unspecified earlier
+setup. It does not generalize to every noise/fault condition in M6.
+
+See [the claim report](docs/results.md) for numbers, plots and caveats, and
+[the README](README.md) for installation and reproduction commands.
+
+## Reproduction evidence
+
+[Fresh-checkout verification](results/verification/fresh-checkout/verification.json)
+records every command, configuration, fingerprint and gate. The fresh suites have
+26 Noether passes and 140 Dragrace passes, with two platform skips. Noether's two
+fresh-import warnings are upstream zodiax docstring escape deprecations.
+
+M3 was rerun with the full scientific configuration; every original numerical CSV
+agrees at the declared strict comparison tolerance. M2 reran its full scan, with
+the same accuracy/support outcomes. M1 uses a selected-point smoke with the full
+sample count. M4–M6 use shorter functional configurations. These smoke outputs
+are separate from the claim tables. All raw verification outputs are retained.
+
+The M1 interruption and M5 disk-space recovery are recorded beside their raw data.
+M5 appended only four missing trials from the exact original source and identical
+runtime; the first 71 raw trial files were unchanged. The source-inventory audit
+also records two unrecoverable, unused AO draft snapshots from M2; its executed
+driver/artifact code and numerical dependencies are recoverable.
+
+## Drafts needing human review
+
+- [Dragrace issue](outbox/dragrace_issue.md)
+- [Dragrace PR description](outbox/dragrace_pr.md)
+- [Summary and three questions for Louis](outbox/summary_for_louis.md)
+
+## Three largest correctness risks
+
+1. Shared ideal plant/twin sensor code and a finite periodic atmosphere. Independent
+   open-loop PSF agreement does not validate a real pyramid or instrument.
+2. Short runs and few seeds, ideal predictor telemetry, fixed baseline gains and
+   Gaussian training versus Poisson evaluation noise limit fairness/generalization.
+3. Component timings and synthetic availability faults do not establish real-time
+   or physical safety. Missed faults, harmful fallback and false alarms are observed.

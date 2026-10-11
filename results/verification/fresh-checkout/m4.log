@@ -1,0 +1,8 @@
+Fault completed: none
+Fault completed: stuck_actuator
+Fault completed: optical_gain
+Fault completed: misregistration
+Fault completed: vibration
+Fault completed: model_mismatch
+Fault completed: late_twin
+Fault completed: missing_twin

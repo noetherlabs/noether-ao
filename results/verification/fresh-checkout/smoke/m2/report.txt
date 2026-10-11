@@ -1,0 +1,68 @@
+
+=== machine sha256:d4ec86edc24f9711  arm   [idiomatic-v1] ===
+
+adapter         case                    config            median ms    GFLOP   GFLOP/s      A  gate     p99 ms     max ms
+--------------------------------------------------------------------------------------------------------------------------
+prysm           mft_ao_scan@32          dragrace_cpu_all      0.063    0.005     82.67      -  pass      0.069      0.071
+numpy_baseline  mft_ao_scan@32          dragrace_cpu_all      0.065    0.005     80.92      -  pass      0.088      0.140
+hcipy           mft_ao_scan@32          dragrace_cpu_all      0.127    0.005     41.16      -  pass      0.134      0.219
+abcdlux         mft_ao_scan@32          dragrace_cpu_all      0.138    0.005     38.06      -  pass      0.158      0.187
+lentil          mft_ao_scan@32          dragrace_cpu_all      0.256    0.005     20.51      -  pass      0.274      0.402
+dlux            mft_ao_scan@32          dragrace_cpu_all      0.265    0.005     19.80      -  pass      0.289      0.346
+poppy           mft_ao_scan@32          dragrace_cpu_all      1.696    0.005      3.09      -  pass      2.460      4.831
+hcipy           mft_ao_scan@64          dragrace_cpu_all      0.114    0.013    110.40      -  pass      0.128      0.132
+numpy_baseline  mft_ao_scan@64          dragrace_cpu_all      0.124    0.013    101.39      -  pass      0.266      0.604
+prysm           mft_ao_scan@64          dragrace_cpu_all      0.142    0.013     88.77      -  pass      0.156      0.174
+abcdlux         mft_ao_scan@64          dragrace_cpu_all      0.203    0.013     62.09      -  pass      0.835      1.990
+dlux            mft_ao_scan@64          dragrace_cpu_all      0.439    0.013     28.69      -  pass      0.492      0.552
+lentil          mft_ao_scan@64          dragrace_cpu_all      0.445    0.013     28.29      -  pass      0.492      0.988
+poppy           mft_ao_scan@64          dragrace_cpu_all      1.921    0.013      6.55      -  pass      2.510      2.709
+prysm           mft_ao_scan@96          dragrace_cpu_all      0.156    0.022    141.57      -  pass      0.171      0.463
+numpy_baseline  mft_ao_scan@96          dragrace_cpu_all      0.168    0.022    131.20      -  pass      0.296      0.433
+hcipy           mft_ao_scan@96          dragrace_cpu_all      0.193    0.022    114.27      -  pass      0.260      0.352
+abcdlux         mft_ao_scan@96          dragrace_cpu_all      0.279    0.022     78.83      -  pass      0.400      0.601
+dlux            mft_ao_scan@96          dragrace_cpu_all      0.519    0.022     42.40      -  pass      0.789      2.846
+lentil          mft_ao_scan@96          dragrace_cpu_all      0.710    0.022     31.01      -  pass      0.976      1.310
+poppy           mft_ao_scan@96          dragrace_cpu_all      2.090    0.022     10.54      -  pass      3.239      8.996
+prysm           mft_ao_scan@128         dragrace_cpu_all      0.269    0.034    124.94      -  pass      0.289      0.294
+numpy_baseline  mft_ao_scan@128         dragrace_cpu_all      0.272    0.034    123.15      -  pass      0.513      1.393
+hcipy           mft_ao_scan@128         dragrace_cpu_all      0.284    0.034    118.07      -  pass      0.356      0.457
+abcdlux         mft_ao_scan@128         dragrace_cpu_all      0.328    0.034    102.28      -  pass      0.449      0.514
+dlux            mft_ao_scan@128         dragrace_cpu_all      0.783    0.034     42.87      -  pass      1.452      1.790
+lentil          mft_ao_scan@128         dragrace_cpu_all      0.976    0.034     34.39      -  pass      1.024      1.200
+poppy           mft_ao_scan@128         dragrace_cpu_all      2.349    0.034     14.29      -  pass      4.313    247.719
+prysm           mft_ao_scan@192         dragrace_cpu_all      0.467    0.063    134.77      -  pass      0.618      0.733
+hcipy           mft_ao_scan@192         dragrace_cpu_all      0.476    0.063    132.28      -  pass      0.586      0.661
+numpy_baseline  mft_ao_scan@192         dragrace_cpu_all      0.478    0.063    131.56      -  pass      0.638      0.804
+abcdlux         mft_ao_scan@192         dragrace_cpu_all      0.527    0.063    119.49      -  pass      1.068      1.380
+dlux            mft_ao_scan@192         dragrace_cpu_all      1.371    0.063     45.90      -  pass      3.855      5.934
+lentil          mft_ao_scan@192         dragrace_cpu_all      1.669    0.063     37.70      -  pass      1.892      2.046
+poppy           mft_ao_scan@192         dragrace_cpu_all      2.661    0.063     23.64      -  pass      3.349      3.893
+numpy_baseline  mft_ao_scan@256         dragrace_cpu_all      0.683    0.101    147.41      -  pass      0.779      0.890
+prysm           mft_ao_scan@256         dragrace_cpu_all      0.685    0.101    146.97      -  pass      0.805      0.953
+hcipy           mft_ao_scan@256         dragrace_cpu_all      0.719    0.101    139.96      -  pass      0.774      0.984
+abcdlux         mft_ao_scan@256         dragrace_cpu_all      0.891    0.101    112.98      -  pass      1.923      2.830
+dlux            mft_ao_scan@256         dragrace_cpu_all      2.070    0.101     48.62      -  pass      3.693      5.020
+lentil          mft_ao_scan@256         dragrace_cpu_all      2.588    0.101     38.90      -  pass      3.224      4.438
+poppy           mft_ao_scan@256         dragrace_cpu_all      3.351    0.101     30.04      -  pass      6.290     16.346
+
+SCAN mft_ao_scan [dragrace_cpu_all] [idiomatic-v1]  n_pupil, median ms
+adapter                  32         64         96        128        192        256
+----------------------------------------------------------------------------------
+abcdlux               0.138      0.203      0.279      0.328      0.527      0.891
+dlux                  0.265      0.439      0.519      0.783      1.371      2.070
+hcipy                 0.127      0.114      0.193      0.284      0.476      0.719
+lentil                0.256      0.445      0.710      0.976      1.669      2.588
+numpy_baseline        0.065      0.124      0.168      0.272      0.478      0.683
+poppy                 1.696      1.921      2.090      2.349      2.661      3.351
+prysm                 0.063      0.142      0.156      0.269      0.467      0.685
+ideal GFLOP           0.005      0.013      0.022      0.034      0.063      0.101
+
+BACKEND AXES THAT DID NOT APPLY
+  abcdlux         dragrace_cpu_allblas, fft
+  dlux            dragrace_cpu_allblas, fft
+  These rows measure the code honestly but are not data points along those
+  axes -- the library has no such knob, or the harness cannot verify it.
+
+NOT MEASURED
+  unsupported       proper          mft_ao_scan             dragrace_cpu_allPROPER is FFT/Fresnel-based; no matrix-DFT path for matrix_dft. Sampli

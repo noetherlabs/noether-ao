@@ -1,0 +1,167 @@
+[
+  {
+    "level": "low",
+    "photons": 100.0,
+    "wfe_nm": 300.5105460350751,
+    "seed_se_nm": 18.268543639449618,
+    "delta_vs_high_nm": -250.29293118572974,
+    "ci95_low_nm": -301.1117730291211,
+    "ci95_high_nm": -199.47408934233843,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "low",
+    "photons": 1000.0,
+    "wfe_nm": 53.826135676118746,
+    "seed_se_nm": 12.374449001521146,
+    "delta_vs_high_nm": -96.55308150596237,
+    "ci95_low_nm": -125.57536912092041,
+    "ci95_high_nm": -67.53079389100432,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "low",
+    "photons": 10000.0,
+    "wfe_nm": 52.36883930781308,
+    "seed_se_nm": 18.064553618856678,
+    "delta_vs_high_nm": -24.866994439711885,
+    "ci95_low_nm": -59.00527777888422,
+    "ci95_high_nm": 9.271288899460455,
+    "equivalent": false,
+    "useful_unsaturated": true
+  },
+  {
+    "level": "low",
+    "photons": 100000.0,
+    "wfe_nm": 51.48291692334865,
+    "seed_se_nm": 18.235805579253974,
+    "delta_vs_high_nm": -49.76505891367669,
+    "ci95_low_nm": -100.28566903069284,
+    "ci95_high_nm": 0.7555512033394578,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "low",
+    "photons": 1000000.0,
+    "wfe_nm": 51.83873732073679,
+    "seed_se_nm": 18.735704918591697,
+    "delta_vs_high_nm": -52.72342680857126,
+    "ci95_low_nm": -122.0104056790205,
+    "ci95_high_nm": 16.56355206187797,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "medium",
+    "photons": 100.0,
+    "wfe_nm": 372.59701646156435,
+    "seed_se_nm": 16.268775595290744,
+    "delta_vs_high_nm": -178.20646075924049,
+    "ci95_low_nm": -207.8413932956168,
+    "ci95_high_nm": -148.57152822286417,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "medium",
+    "photons": 1000.0,
+    "wfe_nm": 62.17455577931548,
+    "seed_se_nm": 6.917026063743114,
+    "delta_vs_high_nm": -88.20466140276562,
+    "ci95_low_nm": -130.9798743473884,
+    "ci95_high_nm": -45.42944845814284,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "medium",
+    "photons": 10000.0,
+    "wfe_nm": 44.03745415823557,
+    "seed_se_nm": 7.065154054754274,
+    "delta_vs_high_nm": -33.1983795892894,
+    "ci95_low_nm": -39.04643288176139,
+    "ci95_high_nm": -27.350326296817418,
+    "equivalent": false,
+    "useful_unsaturated": true
+  },
+  {
+    "level": "medium",
+    "photons": 100000.0,
+    "wfe_nm": 42.605457611396936,
+    "seed_se_nm": 7.333622487109388,
+    "delta_vs_high_nm": -58.64251822562839,
+    "ci95_low_nm": -103.71408393285859,
+    "ci95_high_nm": -13.570952518398201,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "medium",
+    "photons": 1000000.0,
+    "wfe_nm": 43.68657647572333,
+    "seed_se_nm": 8.168597962592466,
+    "delta_vs_high_nm": -60.87558765358473,
+    "ci95_low_nm": -123.06091851425053,
+    "ci95_high_nm": 1.3097432070810697,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "high",
+    "photons": 100.0,
+    "wfe_nm": 550.8034772208048,
+    "seed_se_nm": 15.512122379139008,
+    "delta_vs_high_nm": 0.0,
+    "ci95_low_nm": 0.0,
+    "ci95_high_nm": 0.0,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "high",
+    "photons": 1000.0,
+    "wfe_nm": 150.37921718208113,
+    "seed_se_nm": 16.96193611052962,
+    "delta_vs_high_nm": 0.0,
+    "ci95_low_nm": 0.0,
+    "ci95_high_nm": 0.0,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "high",
+    "photons": 10000.0,
+    "wfe_nm": 77.23583374752496,
+    "seed_se_nm": 8.199536360224085,
+    "delta_vs_high_nm": 0.0,
+    "ci95_low_nm": 0.0,
+    "ci95_high_nm": 0.0,
+    "equivalent": true,
+    "useful_unsaturated": true
+  },
+  {
+    "level": "high",
+    "photons": 100000.0,
+    "wfe_nm": 101.24797583702534,
+    "seed_se_nm": 18.808065796358537,
+    "delta_vs_high_nm": 0.0,
+    "ci95_low_nm": 0.0,
+    "ci95_high_nm": 0.0,
+    "equivalent": false,
+    "useful_unsaturated": false
+  },
+  {
+    "level": "high",
+    "photons": 1000000.0,
+    "wfe_nm": 104.56216412930806,
+    "seed_se_nm": 21.724628741658,
+    "delta_vs_high_nm": 0.0,
+    "ci95_low_nm": 0.0,
+    "ci95_high_nm": 0.0,
+    "equivalent": false,
+    "useful_unsaturated": false
+  }
+]

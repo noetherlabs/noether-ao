@@ -1,0 +1,50 @@
+[
+  {
+    "sensor": "linear",
+    "controller": "open",
+    "wfe_nm": 170.83986199604945,
+    "seed_se_nm": 25.953420196657717
+  },
+  {
+    "sensor": "linear",
+    "controller": "integrator",
+    "wfe_nm": 29.017905931767615,
+    "seed_se_nm": 0.3412211857738388
+  },
+  {
+    "sensor": "linear",
+    "controller": "predictive",
+    "wfe_nm": 21.71302350482523,
+    "seed_se_nm": 0.15355590589586363
+  },
+  {
+    "sensor": "linear",
+    "controller": "forward",
+    "wfe_nm": 29.746635489852196,
+    "seed_se_nm": 0.36156393896190764
+  },
+  {
+    "sensor": "pyramid",
+    "controller": "open",
+    "wfe_nm": 170.83986199604945,
+    "seed_se_nm": 25.953420196657717
+  },
+  {
+    "sensor": "pyramid",
+    "controller": "integrator",
+    "wfe_nm": 29.84947034514145,
+    "seed_se_nm": 0.4205852076613177
+  },
+  {
+    "sensor": "pyramid",
+    "controller": "predictive",
+    "wfe_nm": 21.977351389915086,
+    "seed_se_nm": 0.15014994357132655
+  },
+  {
+    "sensor": "pyramid",
+    "controller": "forward",
+    "wfe_nm": 29.74071135264963,
+    "seed_se_nm": 0.3770395989944568
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "frame_false_alarm_rate": 0.044444444444444446,
+  "run_false_alarm_rate": 0.6,
+  "evaluated_clean_frames": 90,
+  "threshold": 11.119594993241865
+}
