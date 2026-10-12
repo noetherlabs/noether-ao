@@ -5,11 +5,12 @@ TODOS.md before choosing the next bounded task. Use available gstack skills for
 matching planning, review and shipping workflows. Record assumptions and continue
 without routine confirmation questions.
 
-The owner authorized pushes and PRs only to the private `noetherlabs/noether-ao`
-repository. Keep PRs focused and reviewable, preserve dependencies, and do not
-merge automatically. Confirm the remote and visibility before publishing. Keep
-the original measured commit hashes reachable; never force-push measured history.
-Use `codex/` branches and the latest complete stack head, not a partial main.
+The owner's latest instruction is commits only, with no PRs, to the private
+`noetherlabs/noether-ao` repository. Work from complete main, keep commits focused
+and reviewable, run relevant checks, and push directly to main. Skip PR creation
+in shipping skills. Confirm the remote and visibility before publishing. Keep the
+original measured hashes reachable and preserve concurrent work. A force push is
+authorized if necessary; prefer fast-forward updates and avoid rewriting evidence.
 
 Follow CONTRIBUTING.md. Run relevant correctness tests before publishing. Never
 collect timing measurements in CI or alongside other compute work. Do not weaken

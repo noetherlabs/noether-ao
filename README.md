@@ -8,7 +8,7 @@ This is a reproducible prototype. It is not a deployed observatory controller.
 Repository: [noetherlabs/noether-ao](https://github.com/noetherlabs/noether-ao).
 The Python package and command remain `noether-optics` / `noether_optics` so the
 recorded v0 environments and reproduction commands keep their original names.
-See [the PR review order](docs/pr-series.md) and [next work](TODOS.md).
+See [the milestone history](docs/history.md) and [next work](TODOS.md).
 
 ## Results
 
@@ -32,9 +32,11 @@ Measurements in reports are calculated from saved runs.
 ## Install
 
 Use Python 3.11 and uv. Clone the private repository with an authorized GitHub
-account, select the latest branch listed in the PR series, then install from its root:
+account, then install from its root:
 
 ```sh
+git clone https://github.com/noetherlabs/noether-ao.git
+cd noether-ao
 uv sync --frozen --extra dragrace --python 3.11
 .venv/bin/python -m pytest -q
 ```
@@ -94,7 +96,7 @@ NOETHER_PYTHON="$PWD/.venv/bin/python"
 This runs every installed adapter. An installed adapter may still report an
 unsupported case. Timing never runs in CI. No `reviewed_by` field was filled.
 The issue and PR descriptions in [outbox](outbox/) are unsent upstream drafts.
-The private Noether PR series archives this patch; it does not submit it upstream.
+This private repository archives the patch; it does not submit it upstream.
 
 ## Reproduce the published tables
 
@@ -148,4 +150,4 @@ record unchanged raw inputs and numerical agreement of the full physical rerun.
 The [decision log](DECISIONS.md) records modeling assumptions and interruptions.
 Publication to this private repository is authorized. External correspondence and
 the upstream Dragrace submission remain unsent. [Contributor instructions](CONTRIBUTING.md)
-describe the checks and evidence required for subsequent PRs.
+describe the checks and evidence required for subsequent commits.

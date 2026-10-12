@@ -2,8 +2,9 @@
 
 All required available-platform gates passed. Negative scientific findings remain
 negative. The owner subsequently authorized publication to the private
-`noetherlabs/noether-ao` repository as progressive PRs. Upstream Dragrace drafts
-and correspondence remain unsent. See [PR order](docs/pr-series.md) and [next work](TODOS.md).
+`noetherlabs/noether-ao` repository, then requested commits only on main. Upstream
+Dragrace drafts and correspondence remain unsent. See [milestone history](docs/history.md)
+and [next work](TODOS.md).
 
 | Milestone | Gate | Evidence and reason |
 | --- | --- | --- |
@@ -76,12 +77,14 @@ driver/artifact code and numerical dependencies are recoverable.
 
 ## Private publication follow-up
 
-Eight milestone PRs now preserve the complete original history in
-`noetherlabs/noether-ao`; the setup PR adds portable instructions, correctness-only
-CI and the follow-up queue. Current local publication checks pass: 29 Noether
+The complete original history is retained for publication on main in
+`noetherlabs/noether-ao`; setup commits add portable instructions, correctness-only
+CI and the follow-up queue. Eight milestone PRs were opened before the owner
+changed the preference to commits only; they are historical review records.
+Current local publication checks pass: 29 Noether
 tests, 140 Dragrace tests with two platform skips, and 33 reproduced table/report
 files with raw inputs unchanged. Evidence is in `results/publication`.
 
 The app has an active four-hour follow-up for this task, configured to address
-checks/review feedback and then one bounded item from TODOS.md per run. It leaves
-PRs open for review and reports meaningful progress or changed blockers.
+checks and then one bounded item from TODOS.md per run. It publishes focused
+commits to main, creates no PRs, and reports meaningful progress or changed blockers.

@@ -1,9 +1,10 @@
 # Contributing
 
 This private repository contains a reproducible civil-astronomy research prototype.
-Use the [PR series](docs/pr-series.md) to find the latest complete branch. Keep
-changes focused, describe the problem and resulting behavior, and include the
-checks actually run. Use `codex/` branches and explicit PR dependencies.
+The complete code is on main; [milestone history](docs/history.md) maps the
+preserved scientific stages. Keep commits focused, describe the problem and
+resulting behavior, and record the checks actually run. Publish commits directly
+to main as requested by the owner. Do not open PRs.
 
 ## Correctness
 
@@ -38,8 +39,9 @@ authorized; a PR here does not confer upstream or institutional approval.
 
 ## Review and integration
 
-Review stacked PRs in order, retarget the next PR to main after its predecessor is
-merged, and preserve measured commit history with merge commits. Do not squash or
-rebase the historical milestone commits. Do not delete prerequisite branches while
-other open PRs still target them. New automated work opens or updates PRs; it does
-not automatically merge them.
+Review the diff and run relevant checks before each focused commit. Fetch main
+before publishing and preserve concurrent changes. Keep the original measured
+commits reachable; do not squash or rebase that historical evidence. Prefer
+fast-forward updates. The owner permits a force push if necessary, but the initial
+publication does not require one. Record new assumptions and outcomes in the
+progress documents, then verify the pushed commit and correctness checks.

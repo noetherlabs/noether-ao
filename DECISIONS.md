@@ -164,3 +164,17 @@ For autonomous continuation, use a four-hour task follow-up cadence and one
 bounded task from TODOS.md per run. Prioritize test failures and actionable PR
 feedback, then independent sensor validation and fair controller comparisons.
 Record assumptions rather than requesting routine implementation choices.
+
+### Superseding delivery instruction: commits only
+
+During publication the owner explicitly changed the instruction to "no pr,
+commits only" and permitted a force push if necessary. Publish the complete tested
+history directly on main and close the eight PRs already opened. Do not create
+further PRs. The main update is a fast-forward, so no force push is necessary.
+Keep the original measured commits and progressive commit history intact. This
+supersedes the stacked-PR and no-direct-main instructions immediately above.
+
+The command-line OAuth credential cannot upload workflow changes. The connected
+GitHub app has the required access and created the pinned correctness workflow
+through the contents API. Its commit was merged without changing the tested tree.
+Use that authorized app for workflow changes; ordinary commits use Git push.

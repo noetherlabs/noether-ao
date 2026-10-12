@@ -2,8 +2,8 @@
 
 ## Unreleased
 
-- Publish the preserved v0 milestone history to the private noether-ao repository
-  as progressive review slices, retaining original source and measurement hashes.
+- Publish the preserved v0 milestone history to main in the private noether-ao
+  repository as requested, retaining original source and measurement hashes.
 - Add correctness-only GitHub Actions and allow saved Dragrace reports to rebuild
   under CI while continuing to reject new benchmark measurements.
 - Document the package/repository naming, portable reconstruction command,

@@ -2,8 +2,9 @@
 
 Current position: M0–M7 complete. All required available-platform gates passed; negative claim results retained.
 
-Next: publish the preserved milestone history to the authorized private repository,
-add correctness-only CI, then work through [TODOS.md](TODOS.md) in focused PRs.
+Next: publish the preserved milestone history to main in the authorized private
+repository, add correctness-only CI, then work through [TODOS.md](TODOS.md) in
+focused commits. The owner changed the delivery preference to commits only.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.
 
 | Milestone | Required gate | State |

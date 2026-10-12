@@ -1,7 +1,7 @@
 # Next work
 
 M0–M7 are complete; their negative findings remain part of the baseline. Handle
-new CI failures and actionable review feedback before the research tasks below.
+new CI failures and actionable owner feedback before the research tasks below.
 Complete one bounded task per autonomous run. Do not create speculative busywork
 if all actionable tasks are done or require new evidence unavailable locally.
 
@@ -23,8 +23,8 @@ results or assert instrument validation.
 The present controls use fixed gains, short runs and ideal predictor telemetry.
 Specify a bounded gain/horizon search on new training and validation seeds, with
 an equal search budget per controller and fresh held-out seeds reserved in advance.
-First land the protocol/configuration and seed-split checks; then implement and
-run it in a separate PR. Include all regimes selected before evaluation, failure
+First commit the protocol/configuration and seed-split checks; then implement and
+run it in a separate commit. Include all regimes selected before evaluation, failure
 rates, paired uncertainty and compute cost. No tuning based on old M3–M6 outcomes.
 
 Acceptance: provenance-backed comparison after equal validation effort; negative
@@ -43,6 +43,6 @@ does not establish a safe fallback or a general safety guarantee.
 
 ## Completed publication preparation
 
-- Preserved milestone review boundaries and documented the PR dependency order.
+- Preserved milestone commits and documented the history; delivery is commits only.
 - Added pinned correctness-only CI and regression checks for its timing boundary.
 - Made the Dragrace reconstruction command independent of the checkout name.
