@@ -1,0 +1,23 @@
+{
+  "kind": "component_smoke",
+  "pilot_episodes": 12,
+  "predictor_candidates": 6,
+  "controller_trials": 15,
+  "max_pilot_absolute_error": 9.43689570931383e-16,
+  "max_predictor_rebuild_error": 0.0,
+  "max_zero_dm_absolute_error": 1.2212453270876722e-15,
+  "omitted_vibration_variance_error": 1.0852514490041327,
+  "gates": {
+    "pilot_reconstruction": true,
+    "predictor_rebuild": true,
+    "paired_zero_dm": true,
+    "omitted_vibration_rejected": true,
+    "all_trial_outputs_finite": true,
+    "fallback_disabled": true,
+    "predictor_candidate_coverage": true,
+    "zero_dm_fault_coverage": true,
+    "controller_fault_coverage": true
+  },
+  "all_pass": true,
+  "scope": "Small numerical wiring check; no full-study outcomes, learned training, fair selection, timing or superiority claim."
+}

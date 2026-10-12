@@ -160,7 +160,19 @@ as the controlled plant. The baseline simulation is unchanged.
 The local suite passes **148 tests**, including **31 new numerical/runner-guard
 tests**. Separate tests cover measured-only inputs, independent fitting windows,
 causality, noise-path equivalence, zero-DM fault pairing, malformed/raw nonfinite
-data, reserved-stream exclusion and CI refusal. A component smoke command and its
-inputs/gates are prepared; run it from this committed source before recording any
-physical smoke result. Learned fitting, actual study provenance and ledger-backed
-stage commands are still pending. No reserved-cohort outcomes have been generated.
+data, reserved-stream exclusion and CI refusal.
+
+The [component smoke](results/controller_physics_smoke_v1/README.md) passes all nine
+predeclared gates from clean source `dc16e2f`. It retains 12 pilot episodes, six
+predictor fits, 15 controller/fault trials and three zero-DM checks. Maximum pilot
+reconstruction error is 9.43689570931383e-16; maximum zero-DM variance/Strehl error
+is 1.2212453270876722e-15, both below the 1e-12 gate. Omitting vibration produces
+variance error 1.0852514490041327, exceeding the 1e-8 rejection threshold. All
+trial outputs are finite and fallback is absent; usefulness is not a smoke gate.
+
+Both generated reports rebuild byte-for-byte with all 53 protected files unchanged.
+All 48 raw NPZ files, actual configuration, machine/source records and untrained
+network weights are saved. The smaller model, first-candidate-only trials and
+untrained learned-controller weights limit this to component wiring evidence.
+Learned fitting, actual study provenance and ledger-backed stage commands are still
+pending. No reserved-cohort outcomes or new timing measurements were generated.

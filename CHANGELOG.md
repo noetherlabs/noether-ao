@@ -5,6 +5,8 @@
 - Add measured pilot reconstruction, independent episode predictor fitting and
   paired fault-aware raw scoring around the unchanged simulator. Prepare a
   separately seeded physical component smoke with explicit untrained-network limits.
+  Record all nine passing smoke gates and byte-identical report rebuilds while
+  retaining raw inputs, observations, commands, coefficients and provenance.
 - Add deterministic controller selection and an immutable study ledger that blocks
   evaluation until complete validation and frozen evidence pass integrity checks.
   Retain failed outcomes across resumable chunks. The physics adapter is pending.

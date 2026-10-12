@@ -15,7 +15,7 @@ evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Next connect the adapter and separate stage commands:
 actual provenance capture, all fixed learned-training budgets and durable raw
-recording through the ledger. First verify the separate component smoke. The
+recording through the ledger. The separate component smoke has passed. The
 adapter must enter evaluation through the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
 Commit the complete runner before the full study. Ledger fixtures are not physical
@@ -49,13 +49,16 @@ resume without replacing or retrying saved outcomes, including failures. Synthet
 tests cover blocked backend calls, interrupted writes, drift and concurrency.
 The actual scientific adapter and reserved-cohort runs remain pending above.
 
-## Implemented — Numerical study components
+## Completed — Numerical components and physical component smoke
 
 Configuration overrides preserve physical delay; pilot fitting uses complete,
 separate measured episodes; paired open-loop scoring includes vibration. Kernels
 use exact Poisson/read noise and no fallback. The local suite passes 148 tests.
-The predeclared component smoke records a smaller model with fresh seeds and an
-explicitly untrained network. It is not the full stage-runner or controller study.
+The [predeclared component smoke](results/controller_physics_smoke_v1/README.md)
+passes all nine gates: 12 pilots, six predictor fits and 15 controller/fault paths.
+Both reports rebuild exactly with 53 protected files unchanged. It uses a smaller
+model, fresh seeds and an explicitly untrained network; the full stage-runner and
+controller study remain pending.
 
 ## P2 — Optical-gain drift observability
 

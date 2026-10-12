@@ -1,0 +1,17 @@
+{
+  "source_commit": "dc16e2f171de47eb1ec45d634fb0c63d3c771178",
+  "tracked_source_clean": true,
+  "protected_files_unchanged": 53,
+  "reports_byte_identical": [
+    "summary.json",
+    "trials.json"
+  ],
+  "raw_npz_files": 48,
+  "bytes_in_run": 11867133,
+  "command": [
+    "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/.venv/bin/python",
+    "scripts/smoke_controller_physics.py",
+    "--rebuild",
+    "results/controller_physics_smoke_v1"
+  ]
+}

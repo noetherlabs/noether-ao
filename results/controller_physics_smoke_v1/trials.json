@@ -1,0 +1,422 @@
+[
+  {
+    "controller": "integrator",
+    "fault": "none",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 74.2983261110395,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6852595027826206
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 67.72947024040499,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7251883523705644
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "predictive",
+    "fault": "none",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 60.741201328887506,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7738124183592993
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 60.98265149112928,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.772728250879127
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "forward",
+    "fault": "none",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 70.65352113763907,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7086927798421851
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 65.41938492178751,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7407511197332779
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "fixed",
+    "fault": "none",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 71.10746865039036,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7057171637231542
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 65.66071829290686,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.739102393567343
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "learned",
+    "fault": "none",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 71.9273210350021,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7007063129315518
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 66.07777084119972,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7363688927042923
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": "untrained smoke initialization"
+  },
+  {
+    "controller": "integrator",
+    "fault": "optical_gain",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 74.44095740248392,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.684106506542223
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 67.96398644274763,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.723458858009968
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "predictive",
+    "fault": "optical_gain",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 60.74962283705244,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7737465794470915
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 60.99523331244869,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7726294925108151
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "forward",
+    "fault": "optical_gain",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 70.75244842500803,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7079294124881074
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 65.57956455348658,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7396060687021614
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "fixed",
+    "fault": "optical_gain",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 71.21187323842655,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7049068806923389
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 65.83022189792237,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7378869690211199
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "learned",
+    "fault": "optical_gain",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 72.04179718176955,
+      "open_wfe_nm": 119.9085951662122,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6998060967231471
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 66.26457080674825,
+      "open_wfe_nm": 119.9138225812553,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7350185683916851
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": "untrained smoke initialization"
+  },
+  {
+    "controller": "integrator",
+    "fault": "vibration",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 88.7973964821616,
+      "open_wfe_nm": 142.73292511262346,
+      "saturation_fraction": 0.0,
+      "strehl": 0.5866727600770509
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 90.19082923284193,
+      "open_wfe_nm": 152.8765839517472,
+      "saturation_fraction": 0.0,
+      "strehl": 0.57730823831221
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "predictive",
+    "fault": "vibration",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 65.34018219670493,
+      "open_wfe_nm": 142.73292511262346,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7454738428464543
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 67.73959395229464,
+      "open_wfe_nm": 152.8765839517472,
+      "saturation_fraction": 0.0,
+      "strehl": 0.7302203876098594
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "forward",
+    "fault": "vibration",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 85.34942954681193,
+      "open_wfe_nm": 142.73292511262346,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6100633078792568
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 87.8555834069418,
+      "open_wfe_nm": 152.8765839517472,
+      "saturation_fraction": 0.0,
+      "strehl": 0.5928069117888856
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "fixed",
+    "fault": "vibration",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 85.96187189341644,
+      "open_wfe_nm": 142.73292511262346,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6056208836371212
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 88.38035363739675,
+      "open_wfe_nm": 152.8765839517472,
+      "saturation_fraction": 0.0,
+      "strehl": 0.5889579734382936
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": null
+  },
+  {
+    "controller": "learned",
+    "fault": "vibration",
+    "metrics": {
+      "all_outputs_finite": true,
+      "wfe_nm": 86.63517667060333,
+      "open_wfe_nm": 142.73292511262346,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6013851992643734
+    },
+    "post_burn_frames": [
+      6,
+      24
+    ],
+    "fault_window": {
+      "all_outputs_finite": true,
+      "wfe_nm": 88.68169646298892,
+      "open_wfe_nm": 152.8765839517472,
+      "saturation_fraction": 0.0,
+      "strehl": 0.5873872222035245
+    },
+    "fault_window_frames": [
+      12,
+      24
+    ],
+    "fallback_used": false,
+    "learned_weights": "untrained smoke initialization"
+  }
+]

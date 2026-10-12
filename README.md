@@ -43,6 +43,8 @@ validation records and freezes selection before evaluation callbacks can run.
 Numerical helpers now supply measured pilot telemetry and fault-matched scoring.
 Separate [component smoke checks](docs/controller_study_execution.md#numerical-helpers-and-component-smoke)
 exercise those paths; the full stage runner and study outcomes remain pending.
+The [saved component smoke](results/controller_physics_smoke_v1/README.md) passes
+all nine gates, with byte-identical rebuilt reports and protected raw evidence.
 
 ## Install
 

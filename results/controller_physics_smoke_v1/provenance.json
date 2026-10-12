@@ -1,0 +1,31 @@
+{
+  "git_commit": "dc16e2f171de47eb1ec45d634fb0c63d3c771178",
+  "tracked_dirty": false,
+  "source_sha256": {
+    "src/noether_optics/__init__.py": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+    "src/noether_optics/artifacts.py": "83a8c74d118144344d348c152dbcdbb96c258785a4fac2badff28159eedd9b0b",
+    "src/noether_optics/atmosphere.py": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+    "src/noether_optics/cli.py": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+    "src/noether_optics/config.py": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+    "src/noether_optics/controller_physics.py": "0d3248232d8cdec9c43063f08c1779f0ec0003576f8e55a48bf41fce85b80882",
+    "src/noether_optics/controller_protocol.py": "807ab81d25ca06c01310dda651fffb98680a88608e5a14a6a51a008d0a87fc44",
+    "src/noether_optics/controller_selection.py": "3cb9f1acac681d9dfaf0b45540744c33f944b8b915dac5e2131320e2ca86aa8b",
+    "src/noether_optics/experiments/__init__.py": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+    "src/noether_optics/experiments/rebuild.py": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+    "src/noether_optics/experiments/runners.py": "99654b50d9c4da624b291e12a31a2e114881dc4d78b15e6c5375e749223bfafa",
+    "src/noether_optics/latency.py": "603299fc543fd0294481a5cba07cc58932135ff59055fd22566c026025fe3922",
+    "src/noether_optics/optics.py": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+    "src/noether_optics/pyramid_reference.py": "cf476be20080d0eb9599d8be84494e5ae3bcd63379eb3a6921128f694a5a8b19",
+    "src/noether_optics/simulation.py": "11bfd04b5bcbf2befa566f6a25ffef68e3aa90609996e637d6bd46703f8bc123"
+  },
+  "utc": "2026-10-12T16:16:44.919491+00:00",
+  "argv": [
+    "scripts/smoke_controller_physics.py",
+    "--out",
+    "results/controller_physics_smoke_v1"
+  ],
+  "lock_sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+  "runner_sha256": "954dcda91ab0e89852798774bd8e4eb9be82f383d373f7d00b23235fe9ae15ed",
+  "smoke_config_sha256": "c727ac84568c63c0b5f9029fd3876b96f1d0609f5c3d89698395142a800ba209",
+  "source_study_sha256": "ea6d332f279af75140f0eb462efa4b3e6a12fb73451f3aefb80d8bfbab6d87dd"
+}

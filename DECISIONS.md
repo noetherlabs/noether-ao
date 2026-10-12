@@ -290,3 +290,11 @@ reference substituted for vibration at a 1e-8 variance-error threshold. These ar
 wiring checks, not controller acceptance or superiority thresholds. Commit source
 before running, retain any failures, rebuild from protected raw files, and never
 generate reserved study cohorts or timings in this increment.
+
+The clean-source component smoke passed every predeclared gate. Retain its complete
+raw record and negative control under results/controller_physics_smoke_v1. Rebuilt
+summaries match byte-for-byte, with all protected inputs unchanged. Treat the
+untrained-network paths only as execution checks; do not infer learned improvement
+or tune the reserved study from these smoke outcomes. Next integrate learned
+training and real provenance with the ledger, then use a distinct end-to-end smoke
+cohort before full-study execution.
