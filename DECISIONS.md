@@ -137,3 +137,30 @@ reran M3 with the full configuration, reran the full Dragrace scan, and exercise
 M1/M4/M5/M6 with the explicitly labeled smoke configurations. M3 numerical CSVs
 matched the original run within the strict reproduction tolerance. Fresh smoke
 outputs are retained separately and never substituted into the scientific claims.
+
+## Private repository publication and continuation (2026-10-12)
+
+The owner explicitly authorized pushing all completed work to the private
+`noetherlabs/noether-ao` repository and opening progressive PRs. This supersedes
+the earlier no-push/no-PR restriction only for that repository. It does not
+authorize an upstream Dragrace submission or outbound personal messages.
+
+Preserve the eleven original commit hashes: raw provenance refers to them.
+Bootstrap main at the original planning commit and open eight stacked milestone
+PRs at existing boundaries, followed by a repository-setup PR. These are review
+slices of work already completed locally, not claims of earlier GitHub review.
+Keep them open for review. Merging should preserve original commits rather than
+squashing or rebasing measured history. Subsequent work builds on the latest
+unmerged stack head until its prerequisites are merged.
+
+The repository name is noether-ao; retain the existing Python distribution,
+imports, command and pinned version to avoid changing recorded environments.
+The setup change does not publish a new package release. CI runs correctness
+tests only, on CPU, with timing guards enabled; saved-data report rendering is
+allowed because it does not collect measurements. Timing runs remain local and
+isolated. Preserve the scientific gates, limits and all negative findings.
+
+For autonomous continuation, use a four-hour task follow-up cadence and one
+bounded task from TODOS.md per run. Prioritize test failures and actionable PR
+feedback, then independent sensor validation and fair controller comparisons.
+Record assumptions rather than requesting routine implementation choices.

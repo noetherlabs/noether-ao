@@ -107,7 +107,7 @@ The dLux CPU FFT sweep is configuration dependent: at N=32, one wavelength and
 float32, p99 was {small['p99_ms']:.6g} ms; at N=256 and five wavelengths it was
 {large['p99_ms']:.6g} ms. These are synchronized single-plane component measurements.
 There is no GPU result or full-loop deadline claim. The separate Dragrace MFT
-contribution adds a small-pupil case and stored p99/maximum columns; it remains local.
+contribution adds a small-pupil case and stored p99/maximum columns; it remains unsubmitted upstream.
 
 The delayed pyramid simulation passed independent HCIPy open-loop PSF, fitting-law,
 delay-growth and nominal stability checks. Its predictor reduced mean WFE by

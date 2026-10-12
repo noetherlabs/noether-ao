@@ -1,9 +1,14 @@
-# noether-optics v0
+# noether-ao
 
 Config-driven experiments for civil-astronomy adaptive optics: synchronized dLux
 propagation timings, a differentiable delayed AO simulation, empirical fault
 detection, and fixed or learned blends of classical and forward-model commands.
 This is a reproducible prototype. It is not a deployed observatory controller.
+
+Repository: [noetherlabs/noether-ao](https://github.com/noetherlabs/noether-ao).
+The Python package and command remain `noether-optics` / `noether_optics` so the
+recorded v0 environments and reproduction commands keep their original names.
+See [the PR review order](docs/pr-series.md) and [next work](TODOS.md).
 
 ## Results
 
@@ -26,7 +31,8 @@ Measurements in reports are calculated from saved runs.
 
 ## Install
 
-Use Python 3.11 and uv. From the repository root:
+Use Python 3.11 and uv. Clone the private repository with an authorized GitHub
+account, select the latest branch listed in the PR series, then install from its root:
 
 ```sh
 uv sync --frozen --extra dragrace --python 3.11
@@ -80,13 +86,15 @@ To reconstruct the branch in a new sibling directory:
 git clone https://github.com/Jashcraf/Diffraction-Dragrace ../Diffraction-Dragrace
 git -C ../Diffraction-Dragrace checkout -b codex/ao-tail-latency 1bf53802950c5f76905d3dee0ba73b75147401bf
 git -C ../Diffraction-Dragrace apply "$PWD/contributions/dragrace.patch"
-(cd ../Diffraction-Dragrace && JAX_ENABLE_X64=1 PYTHONPATH=src ../noether-optics/.venv/bin/python -m pytest -q)
+NOETHER_PYTHON="$PWD/.venv/bin/python"
+(cd ../Diffraction-Dragrace && JAX_ENABLE_X64=1 PYTHONPATH=src "$NOETHER_PYTHON" -m pytest -q)
 .venv/bin/python scripts/run_dragrace.py --repo ../Diffraction-Dragrace --out runs/m2
 ```
 
 This runs every installed adapter. An installed adapter may still report an
 unsupported case. Timing never runs in CI. No `reviewed_by` field was filled.
-The issue and PR descriptions in [outbox](outbox/) are unsent drafts.
+The issue and PR descriptions in [outbox](outbox/) are unsent upstream drafts.
+The private Noether PR series archives this patch; it does not submit it upstream.
 
 ## Reproduce the published tables
 
@@ -138,4 +146,6 @@ record unchanged raw inputs and numerical agreement of the full physical rerun.
   hardware acquisition or hard real-time result is claimed.
 
 The [decision log](DECISIONS.md) records modeling assumptions and interruptions.
-All work is local. No issue, pull request or message has been sent.
+Publication to this private repository is authorized. External correspondence and
+the upstream Dragrace submission remain unsent. [Contributor instructions](CONTRIBUTING.md)
+describe the checks and evidence required for subsequent PRs.

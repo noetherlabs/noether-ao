@@ -41,8 +41,6 @@ def render_results(path: Path, repo: Path) -> None:
 
 def main() -> None:
     """Run the exact AO case with strict backend checks in separate workers."""
-    if os.environ.get('CI'):
-        raise RuntimeError('No benchmark timings in CI')
     p=argparse.ArgumentParser()
     p.add_argument('--repo',type=Path,default=Path('../Diffraction-Dragrace'))
     p.add_argument('--config',type=Path,default=Path('configs/dragrace_cpu_all.yaml'))
@@ -52,6 +50,8 @@ def main() -> None:
     if args.render_only:
         render_results(args.out.resolve(),repo)
         return
+    if os.environ.get('CI'):
+        raise RuntimeError('No benchmark timings in CI')
     case=repo/'cases/pupil_to_focus/mft_ao_scan.yaml'
     details={'seed':17,'randomness':'None: deterministic upstream circular pupil case',
              'upstream_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip(),

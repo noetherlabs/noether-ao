@@ -1,7 +1,9 @@
 # Final status
 
 All required available-platform gates passed. Negative scientific findings remain
-negative. All commits and drafts are local; nothing was published or sent.
+negative. The owner subsequently authorized publication to the private
+`noetherlabs/noether-ao` repository as progressive PRs. Upstream Dragrace drafts
+and correspondence remain unsent. See [PR order](docs/pr-series.md) and [next work](TODOS.md).
 
 | Milestone | Gate | Evidence and reason |
 | --- | --- | --- |
@@ -71,3 +73,15 @@ driver/artifact code and numerical dependencies are recoverable.
    Gaussian training versus Poisson evaluation noise limit fairness/generalization.
 3. Component timings and synthetic availability faults do not establish real-time
    or physical safety. Missed faults, harmful fallback and false alarms are observed.
+
+## Private publication follow-up
+
+Eight milestone PRs now preserve the complete original history in
+`noetherlabs/noether-ao`; the setup PR adds portable instructions, correctness-only
+CI and the follow-up queue. Current local publication checks pass: 29 Noether
+tests, 140 Dragrace tests with two platform skips, and 33 reproduced table/report
+files with raw inputs unchanged. Evidence is in `results/publication`.
+
+The app has an active four-hour follow-up for this task, configured to address
+checks/review feedback and then one bounded item from TODOS.md per run. It leaves
+PRs open for review and reports meaningful progress or changed blockers.

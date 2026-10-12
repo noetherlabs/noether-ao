@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-10-12T04:04:24.299625+00:00",
+  "base_commit": "e11be4c",
+  "scope": "repository setup and CI report-rendering boundary; scientific runtime and stored measurements unchanged",
+  "checks": [
+    {
+      "command": "CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q",
+      "passed": 29,
+      "failed": 0
+    },
+    {
+      "command": "CI=true JAX_ENABLE_X64=1 PYTHONPATH=src ../noether-optics/.venv/bin/python -m pytest -q",
+      "cwd": "../Diffraction-Dragrace",
+      "passed": 140,
+      "skipped": 2,
+      "failed": 0
+    },
+    {
+      "command": "CI=true .venv/bin/python scripts/rebuild_all.py --dragrace ../Diffraction-Dragrace --report results/publication/rebuild.json",
+      "report": "rebuild.json",
+      "all_pass": true,
+      "tables": 33,
+      "raw_inputs_unchanged": true
+    }
+  ],
+  "workflow_review": {
+    "permissions": "contents: read",
+    "actions_pinned": true,
+    "timing_measurements": false,
+    "github_execution": "pending first PR run"
+  },
+  "diff_review": "No unresolved findings in the repository-setup change."
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "order": 1,
+    "number": 1,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/1",
+    "head": "codex/01-latency-harness",
+    "base": "main",
+    "preserved_tip": "2a76d9e",
+    "title": "[1/9] Add pinned optics research and synchronized latency harness"
+  },
+  {
+    "order": 2,
+    "number": 2,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/2",
+    "head": "codex/02-cpu-latency-results",
+    "base": "codex/01-latency-harness",
+    "preserved_tip": "ce469cb",
+    "title": "[2/9] Preserve the complete CPU latency sweep and tail distributions"
+  },
+  {
+    "order": 3,
+    "number": 3,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/3",
+    "head": "codex/03-dragrace-contribution",
+    "base": "codex/02-cpu-latency-results",
+    "preserved_tip": "5ba5266",
+    "title": "[3/9] Add the portable Dragrace AO contribution and gated adapter results"
+  },
+  {
+    "order": 4,
+    "number": 4,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/4",
+    "head": "codex/04-ao-physics",
+    "base": "codex/03-dragrace-contribution",
+    "preserved_tip": "5fc820d",
+    "title": "[4/9] Add the delayed AO plant and independent physical acceptance checks"
+  },
+  {
+    "order": 5,
+    "number": 5,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/5",
+    "head": "codex/05-fault-assurance",
+    "base": "codex/04-ao-physics",
+    "preserved_tip": "9d65625",
+    "title": "[5/9] Record fault coverage, missed gain drift and harmful fallback"
+  },
+  {
+    "order": 6,
+    "number": 6,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/6",
+    "head": "codex/06-fidelity-study",
+    "base": "codex/05-fault-assurance",
+    "preserved_tip": "810b14e",
+    "title": "[6/9] Preserve the fidelity sweep and source-verified disk recovery"
+  },
+  {
+    "order": 7,
+    "number": 7,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/7",
+    "head": "codex/07-learned-mixtures",
+    "base": "codex/06-fidelity-study",
+    "preserved_tip": "af09c43",
+    "title": "[7/9] Report learned-mixture losses and the complete scientific claim review"
+  },
+  {
+    "order": 8,
+    "number": 8,
+    "url": "https://github.com/noetherlabs/noether-ao/pull/8",
+    "head": "codex/08-reproduction",
+    "base": "codex/07-learned-mixtures",
+    "preserved_tip": "e11be4c",
+    "title": "[8/9] Verify the v0 results from fresh checkouts"
+  }
+]
