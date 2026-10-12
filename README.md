@@ -35,6 +35,10 @@ checks against an HCIPy matrix-integral reference. Its [predeclared protocol](do
 matches the existing finite-grid ideal sensor conventions; it does not claim real
 instrument validation or alter the original C1–C4 verdicts.
 
+The next [controller-comparison protocol](docs/controller_study_v1.md) fixes fresh
+cohorts and equal candidate-search budgets before any new outcomes are generated.
+Its [plan](plans/controller_study_v1.json) is a specification, not a result.
+
 ## Install
 
 Use Python 3.11 and uv. Clone the private repository with an authorized GitHub

@@ -5,18 +5,33 @@ new CI failures and actionable owner feedback before the research tasks below.
 Complete one bounded task per autonomous run. Do not create speculative busywork
 if all actionable tasks are done or require new evidence unavailable locally.
 
-## P1 — Fair controller validation protocol
+## P1 — Execute the predeclared controller study
 
-The present controls use fixed gains, short runs and ideal predictor telemetry.
-Specify a bounded gain/horizon search on new training and validation seeds, with
-an equal search budget per controller and fresh held-out seeds reserved in advance.
-First commit the protocol/configuration and seed-split checks; then implement and
-run it in a separate commit. Include all regimes selected before evaluation, failure
-rates, paired uncertainty and compute cost. No tuning based on old M3–M6 outcomes.
+The [protocol](docs/controller_study_v1.md), [inputs](configs/controller_study_v1.yaml)
+and [unexecuted plan](plans/controller_study_v1.json) are predeclared. First implement
+separate training/selection/evaluation stages with a frozen-selection barrier,
+measured pseudo-open-loop predictor telemetry, complete trial-identity checks and
+resumable raw recording. Verify on separately labeled smoke seeds without using
+the reserved study cohorts. Commit that runner before the full study.
+
+Then run the fixed candidate budgets in bounded resumable chunks. Include every
+predeclared regime, failed candidates, paired uncertainty and resource costs. Do
+not use old M3–M6 outcomes or reserved evaluation outcomes to retune candidates,
+training budgets or gates. If no candidate is eligible, retain the failed selection
+and withhold that controller's evaluation as the protocol requires.
 
 Acceptance: provenance-backed comparison after equal validation effort; negative
 or uncertain results are valid. Keep Gaussian-training/Poisson-evaluation limits
 explicit and do not silently replace the original claim tables.
+
+## Completed — Fair comparison protocol and seed checks
+
+Five controllers have six meaningful candidates each. The predictor uses horizon
+and ridge, since its existing command ignores gain. Training, validation and
+evaluation cohorts and initialization are separated, including derived detector
+keys and legacy exclusions. The base simulation configuration is hash-pinned.
+The deterministic plan records 600 validation trials and at most 600 evaluation
+trials as budgets only; no training or controller outcomes have been generated.
 
 ## P2 — Optical-gain drift observability
 

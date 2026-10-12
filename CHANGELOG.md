@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Predeclare a fair five-controller study with equal meaningful candidate budgets,
+  isolated stochastic cohorts, pinned baseline settings and an unexecuted plan.
+  Add checks for seed leakage, inert searches and changes to the fixed protocol.
 - Validate the ideal pyramid's pixels and derivatives against independent HCIPy
   matrix integrals with predeclared gates, deliberate-error controls and retained
   raw evidence. Add 13 correctness tests and a reproducible comparison report.

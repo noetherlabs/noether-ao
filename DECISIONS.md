@@ -204,3 +204,34 @@ this numerical agreement into native-default, convergence, instrument, controlle
 fairness or safe-recovery claims. Rebuilding all generated reports reproduced
 their exact bytes and preserved protected inputs. Next freeze a fair controller
 protocol before generating any new training/validation/evaluation outcomes.
+
+## Predeclared fair-controller study v1
+
+The current predictive command ignores config.gain, so a common gain grid would
+give it duplicate candidates. Give each controller six actual candidate settings:
+gain/leak for integrator, forward, fixed and learned; horizon/ridge for predictive.
+Equal validation/search opportunities are not equal wall-clock compute budgets;
+report actual costs separately when the study is run.
+
+Reserve fresh disjoint training, validation, evaluation and initialization seeds.
+Audit the existing loop's seed+100000 detector derivation as well as atmosphere
+roots, including cross-role collisions, overflow and all recorded baseline seeds.
+The original ideal-telemetry predictor helper is unsuitable for this protocol:
+future fitting must use noisy pseudo-open-loop pilot estimates from training only.
+Learned fitting retains its explicitly labeled Gaussian approximation; validation
+and evaluation use exact Poisson/read noise. Train each candidate for the same
+fixed number of steps, freeze one global choice per controller on clean validation,
+and never refit after selection or add candidates based on outcomes.
+
+Use declared endpoint fluxes and slow/fast winds, with predeclared held-out drift
+and vibration conditions. Hold physical delay and estimator budgets fixed. Require
+each validation trial to be useful, finite and within the saturation limit; if no
+candidate qualifies, record failure and withhold evaluation for that controller.
+Use a fixed simultaneous comparison family instead of selecting favorable nominal
+95% intervals from many conditions. These are protocol choices, not findings.
+
+Gstack's small-change engineering/review workflow is applied autonomously: reuse
+the existing simulation in a later runner, add only protocol validation/planning
+now, and keep the test-flow/failure map in docs/controller_study_v1.md. User delivery
+instructions override main-branch/PR steps: review, test and commit directly to
+main without creating a PR. This increment generates no new scientific outcomes.

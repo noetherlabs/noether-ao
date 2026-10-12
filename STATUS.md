@@ -110,4 +110,20 @@ The clean-source run points to commit `56ed79f`; its frozen configuration matche
 the earlier protocol commit `e11d3bb`. Verification reproduced nine report files
 byte-for-byte with all nine protected data/provenance files unchanged. The core
 suite now passes 42 tests. Original M0–M7 runtime code, raw data and claims are
-unchanged. The next task is the fair controller-validation protocol.
+unchanged.
+
+## Fair controller-comparison protocol
+
+The [new protocol](docs/controller_study_v1.md) is predeclared with a hash-pinned
+base configuration, fresh training/validation/evaluation seeds, meaningful equal
+candidate budgets, frozen selection and simultaneous paired intervals. Its
+[generated plan](plans/controller_study_v1.json) is explicitly unexecuted: all
+trial counts are planned budgets, not observed results.
+
+Validation rejects direct/derived seed collisions, legacy reuse, uint32 overflow,
+duplicate or unequal search candidates, an inert predictor-gain search, changed
+base settings and changes to evaluation noise/refitting. No production controller,
+baseline raw artifact or C1–C4 verdict changed. The next task is staged runner
+implementation and smoke verification before generating any reserved-cohort data.
+The core suite passes 71 tests, including 29 protocol checks. The generated plan
+reproduces byte-for-byte, and its existing-file guard preserves a frozen output.
