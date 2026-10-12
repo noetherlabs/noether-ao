@@ -5,8 +5,10 @@ Current position: M0–M7 complete. All required available-platform gates passed
 Independent ideal-pyramid validation passed under its predeclared
 [protocol](docs/pyramid_validation.md). The fair controller-validation
 [protocol](docs/controller_study_v1.md), frozen inputs and seed/search checks are
-now prepared. Next: implement staged execution and its frozen-selection barrier
-before generating any reserved training, validation or evaluation outcomes.
+now prepared. The [execution ledger](docs/controller_study_execution.md) implements
+complete validation checks, immutable records and the frozen-selection barrier.
+Next: connect the physics adapter, measured training telemetry and real provenance,
+then verify on separate smoke cohorts before generating any reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.

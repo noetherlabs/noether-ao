@@ -235,3 +235,32 @@ the existing simulation in a later runner, add only protocol validation/planning
 now, and keep the test-flow/failure map in docs/controller_study_v1.md. User delivery
 instructions override main-branch/PR steps: review, test and commit directly to
 main without creating a PR. This increment generates no new scientific outcomes.
+
+## Controller-study stage barrier (2026-10-12)
+
+Split runner implementation into reviewable increments: first the immutable
+ledger and selection/evaluation barrier, then the scientific adapter and physical
+smoke verification. This keeps reserved seeds untouched while lifecycle checks are
+tested. The full study, budgets and scientific gates are unchanged. Use gstack's
+small-change planning, two-pass review and shipping checks under the existing
+autonomous/direct-main instructions. The test map is in
+docs/controller_study_execution.md; no PR, version bump or new dependency is needed.
+
+Reuse controller_protocol for candidate identities and fixed rules. Keep the
+baseline simulation and raw evidence untouched. Use exclusive atomic metadata
+publication and one process lock, because generic replace-in-place writers can
+silently alter a resumed study. Every validation record binds its original
+training bundle; frozen selection binds the entire validation set. Candidate
+comparisons must share paired open-loop references, and recorded failures never
+disappear or get retried as if unobserved. Unexpected adapter exceptions stop a
+chunk; scientifically failed trials must be explicitly recorded by the adapter.
+
+The ledger validates supplied source/runtime fingerprints but cannot independently
+prove their capture or the physical meaning of raw arrays. The future adapter must
+capture real inventories, derive metrics from retained arrays, enforce measured
+telemetry, audit frame counts/disturbance pairing and remain lazy until the gate.
+Record this boundary explicitly rather than calling synthetic fixtures a physical
+smoke run. Resume currently requires the exact source commit as well as source,
+runtime and configuration hashes. Use a pinned source checkout when committing
+output artifacts separately. Full integrity rereads favor correctness; budget
+their I/O separately from scientific resource costs when building the adapter.

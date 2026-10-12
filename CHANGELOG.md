@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add deterministic controller selection and an immutable study ledger that blocks
+  evaluation until complete validation and frozen evidence pass integrity checks.
+  Retain failed outcomes across resumable chunks. The physics adapter is pending.
 - Predeclare a fair five-controller study with equal meaningful candidate budgets,
   isolated stochastic cohorts, pinned baseline settings and an unexecuted plan.
   Add checks for seed leakage, inert searches and changes to the fixed protocol.

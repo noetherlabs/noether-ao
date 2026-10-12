@@ -8,11 +8,16 @@ if all actionable tasks are done or require new evidence unavailable locally.
 ## P1 — Execute the predeclared controller study
 
 The [protocol](docs/controller_study_v1.md), [inputs](configs/controller_study_v1.yaml)
-and [unexecuted plan](plans/controller_study_v1.json) are predeclared. First implement
-separate training/selection/evaluation stages with a frozen-selection barrier,
-measured pseudo-open-loop predictor telemetry, complete trial-identity checks and
-resumable raw recording. Verify on separately labeled smoke seeds without using
-the reserved study cohorts. Commit that runner before the full study.
+and [unexecuted plan](plans/controller_study_v1.json) are predeclared. The
+[execution ledger and selection barrier](docs/controller_study_execution.md) now
+check complete trial identities, training bindings, immutable evidence and resumed
+evaluation chunks. Next implement the physics adapter and separate stage commands:
+actual provenance capture, measured pseudo-open-loop pilot telemetry, all fixed
+training budgets, per-frame raw recording and metrics derived from arrays. The
+adapter must enter evaluation through the ledger's lazy callback, after the gate.
+Verify on separately labeled physical smoke seeds without using reserved cohorts.
+Commit the complete runner before the full study. Ledger fixtures are not physical
+smoke evidence or study outcomes.
 
 Then run the fixed candidate budgets in bounded resumable chunks. Include every
 predeclared regime, failed candidates, paired uncertainty and resource costs. Do
@@ -32,6 +37,15 @@ evaluation cohorts and initialization are separated, including derived detector
 keys and legacy exclusions. The base simulation configuration is hash-pinned.
 The deterministic plan records 600 validation trials and at most 600 evaluation
 trials as budgets only; no training or controller outcomes have been generated.
+
+## Completed — Selection barrier and immutable study ledger
+
+The ledger requires every declared validation identity, applies all candidate
+gates with a deterministic tie-break, withholds failed controllers and binds
+evaluation to frozen source/configuration/training/validation evidence. Chunks
+resume without replacing or retrying saved outcomes, including failures. Synthetic
+tests cover blocked backend calls, interrupted writes, drift and concurrency.
+The actual scientific adapter and reserved-cohort runs remain pending above.
 
 ## P2 — Optical-gain drift observability
 

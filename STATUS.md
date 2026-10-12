@@ -127,3 +127,25 @@ baseline raw artifact or C1–C4 verdict changed. The next task is staged runner
 implementation and smoke verification before generating any reserved-cohort data.
 The core suite passes 71 tests, including 29 protocol checks. The generated plan
 reproduces byte-for-byte, and its existing-file guard preserves a frozen output.
+
+## Controller-study execution safeguards
+
+The [study ledger](docs/controller_study_execution.md) now implements deterministic
+selection, complete validation-identity checks, model and open-loop bindings,
+immutable records and a gate that verifies frozen evidence before any evaluation
+callback runs. Recorded failures are retained and skipped on resume; interrupted
+chunks preserve earlier records. Controllers without eligible candidates are
+withheld without changing the predeclared comparison family.
+
+The local core suite passes **117 tests**, including **46 new ledger tests**.
+They cover changed source/runtime/configuration, altered artifacts, incomplete or
+duplicate trials, failed training, nonfinite metrics, interruption, failed atomic
+publication, concurrent writers, path escapes and completed-run resumption.
+All new test records are synthetic fixtures on separate seeds, not physical
+smoke data or scientific outcomes. No reserved study cohort was simulated, no
+timings were acquired, and the base model, frozen protocol/plan and original
+evidence are unchanged.
+
+The complete scientific runner is still pending: actual provenance capture,
+measured pilot telemetry, training, array-derived metrics and stage commands must
+be connected to this ledger and physically smoke-tested before the full study.

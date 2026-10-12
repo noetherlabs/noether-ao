@@ -38,6 +38,9 @@ instrument validation or alter the original C1–C4 verdicts.
 The next [controller-comparison protocol](docs/controller_study_v1.md) fixes fresh
 cohorts and equal candidate-search budgets before any new outcomes are generated.
 Its [plan](plans/controller_study_v1.json) is a specification, not a result.
+The [execution ledger](docs/controller_study_execution.md) now checks complete
+validation records and freezes selection before evaluation callbacks can run.
+Its tests use synthetic fixtures; the study's physics adapter and runs are pending.
 
 ## Install
 
