@@ -7,8 +7,10 @@ Independent ideal-pyramid validation passed under its predeclared
 [protocol](docs/controller_study_v1.md), frozen inputs and seed/search checks are
 now prepared. The [execution ledger](docs/controller_study_execution.md) implements
 complete validation checks, immutable records and the frozen-selection barrier.
-Next: connect the physics adapter, measured training telemetry and real provenance,
-then verify on separate smoke cohorts before generating any reserved outcomes.
+Numerical helpers now supply measured training telemetry, predictor fits and
+paired physical scoring. Verify their separate component smoke, then connect
+learned fitting, real provenance and stage commands to the ledger before a full
+runner smoke or any reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.

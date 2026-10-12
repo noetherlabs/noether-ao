@@ -1,0 +1,19 @@
+# Component wiring checks only. These are inputs, not study results.
+kind: controller_physics_smoke
+base_overrides: {n: 16, modes: 8, detector_n: 32, screen_factor: 2}
+training_seeds: [51001, 51002, 51003]
+validation_seeds: [52001, 52002, 52003, 52004, 52005]
+evaluation_seeds: [53001, 53002, 53003, 53004, 53005, 53006, 53007, 53008, 53009, 53010]
+initialization_seed: 54001
+frames: 24
+burn_in: 6
+fault_onset: 12
+fault_end: 24
+# One smoke validation root/regime; no candidate selection or trained-network claim.
+trial_seed: 52001
+trial_photons: 1000000.0
+trial_wind_scale: 0.5
+tolerances:
+  pilot_absolute: 1.0e-12
+  zero_dm_absolute: 1.0e-12
+  minimum_omitted_vibration_error: 1.0e-8

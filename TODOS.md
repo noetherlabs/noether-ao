@@ -11,9 +11,11 @@ The [protocol](docs/controller_study_v1.md), [inputs](configs/controller_study_v
 and [unexecuted plan](plans/controller_study_v1.json) are predeclared. The
 [execution ledger and selection barrier](docs/controller_study_execution.md) now
 check complete trial identities, training bindings, immutable evidence and resumed
-evaluation chunks. Next implement the physics adapter and separate stage commands:
-actual provenance capture, measured pseudo-open-loop pilot telemetry, all fixed
-training budgets, per-frame raw recording and metrics derived from arrays. The
+evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
+telemetry, separate per-episode predictor fits, exact-noise controller kernels
+and paired raw-array scoring. Next connect the adapter and separate stage commands:
+actual provenance capture, all fixed learned-training budgets and durable raw
+recording through the ledger. First verify the separate component smoke. The
 adapter must enter evaluation through the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
 Commit the complete runner before the full study. Ledger fixtures are not physical
@@ -46,6 +48,14 @@ evaluation to frozen source/configuration/training/validation evidence. Chunks
 resume without replacing or retrying saved outcomes, including failures. Synthetic
 tests cover blocked backend calls, interrupted writes, drift and concurrency.
 The actual scientific adapter and reserved-cohort runs remain pending above.
+
+## Implemented — Numerical study components
+
+Configuration overrides preserve physical delay; pilot fitting uses complete,
+separate measured episodes; paired open-loop scoring includes vibration. Kernels
+use exact Poisson/read noise and no fallback. The local suite passes 148 tests.
+The predeclared component smoke records a smaller model with fresh seeds and an
+explicitly untrained network. It is not the full stage-runner or controller study.
 
 ## P2 — Optical-gain drift observability
 

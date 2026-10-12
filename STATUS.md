@@ -149,3 +149,18 @@ evidence are unchanged.
 The complete scientific runner is still pending: actual provenance capture,
 measured pilot telemetry, training, array-derived metrics and stage commands must
 be connected to this ledger and physically smoke-tested before the full study.
+
+## Numerical controller-study components
+
+The new numerical helpers implement measured pilot telemetry, complete-cohort
+per-episode predictor fits, exact Poisson/read-noise controller kernels and paired
+post-burn/fault-window metrics. The open-loop reference includes the same vibration
+as the controlled plant. The baseline simulation is unchanged.
+
+The local suite passes **148 tests**, including **31 new numerical/runner-guard
+tests**. Separate tests cover measured-only inputs, independent fitting windows,
+causality, noise-path equivalence, zero-DM fault pairing, malformed/raw nonfinite
+data, reserved-stream exclusion and CI refusal. A component smoke command and its
+inputs/gates are prepared; run it from this committed source before recording any
+physical smoke result. Learned fitting, actual study provenance and ledger-backed
+stage commands are still pending. No reserved-cohort outcomes have been generated.

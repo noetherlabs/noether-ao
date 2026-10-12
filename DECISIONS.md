@@ -264,3 +264,29 @@ smoke run. Resume currently requires the exact source commit as well as source,
 runtime and configuration hashes. Use a pinned source checkout when committing
 output artifacts separately. Full integrity rereads favor correctness; budget
 their I/O separately from scientific resource costs when building the adapter.
+
+## Numerical adapter and component smoke (2026-10-12)
+
+Implement the numerical boundary before the long-lived stage runner: reuse the
+unchanged simulator, reconstruct pilot telemetry from observations plus applied
+commands, and fit each burned-in training episode separately before averaging.
+Never use the old ideal-telemetry predictor helper. Add a paired zero-DM reference
+with the same physical vibration and score retained arrays in both required
+windows. Full-output finite evidence remains mandatory when streams are omitted.
+
+Use the gstack small-change engineering/review/shipping workflow under the existing
+one-engineer, autonomous direct-main instruction. Test flow is documented in
+docs/controller_study_execution.md. Preserve baseline source, protocol and data.
+This increment supplies functions and a bounded component smoke, not a finished
+study runner. Defer optimizer/training checkpoints, real study provenance and
+ledger stage integration to the next increment rather than bypassing those gates.
+
+Predeclare a 16-pixel/eight-mode 24-frame smoke with fresh roots and explicit
+derived-stream collision checks. Test all controller/fault code paths using the
+first declared candidate; the network is explicitly untrained. Save raw inputs,
+calibration, predictor episodes/coefficients, outputs and source/runtime metadata.
+Require 1e-12 absolute reconstruction/rebuild/zero-DM agreement and reject a clean
+reference substituted for vibration at a 1e-8 variance-error threshold. These are
+wiring checks, not controller acceptance or superiority thresholds. Commit source
+before running, retain any failures, rebuild from protected raw files, and never
+generate reserved study cohorts or timings in this increment.

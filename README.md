@@ -40,7 +40,9 @@ cohorts and equal candidate-search budgets before any new outcomes are generated
 Its [plan](plans/controller_study_v1.json) is a specification, not a result.
 The [execution ledger](docs/controller_study_execution.md) now checks complete
 validation records and freezes selection before evaluation callbacks can run.
-Its tests use synthetic fixtures; the study's physics adapter and runs are pending.
+Numerical helpers now supply measured pilot telemetry and fault-matched scoring.
+Separate [component smoke checks](docs/controller_study_execution.md#numerical-helpers-and-component-smoke)
+exercise those paths; the full stage runner and study outcomes remain pending.
 
 ## Install
 

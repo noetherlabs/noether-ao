@@ -2,10 +2,11 @@
 
 This is implementation infrastructure for the [predeclared study](controller_study_v1.md),
 not a controller result or a finished scientific runner. The selection and record
-ledger is implemented. The simulation adapter, actual provenance capture,
-training telemetry, study CLI and physical smoke run remain to be built before
-any reserved cohort is used. The frozen YAML, plan and original M0–M7 evidence
-are unchanged.
+ledger is implemented. Numerical helpers now connect the unchanged simulator to
+measured pilot telemetry, per-episode predictor fits and paired raw-array scoring.
+The full stage runner, learned fitting, study provenance capture and ledger-backed
+physical smoke remain pending before any reserved cohort is used. The frozen YAML,
+plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
 
@@ -112,6 +113,69 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
 - Test on separate, labeled physical smoke cohorts. Commit the complete runner
   before using any reserved study seed. Then run bounded study chunks and produce
   the declared simultaneous paired intervals without excluding failed pairs.
+
+## Numerical helpers and component smoke
+
+`controller_physics` provides reusable numerical components; it does not itself
+execute a reserved cohort or replace the ledger gate. Episode configuration copies
+the pinned plant and applies declared stage, regime and candidate overrides. It
+replaces legacy seed labels with the actual study cohort and keeps the two-frame
+physical delay distinct from prediction horizon. Training has no active fault.
+
+    retained measurement + applied command + calibration
+      -> measured pseudo-open-loop estimates (no phase-truth input)
+      -> complete training cohort, burn each episode separately
+      -> one fit per episode -> equally averaged predictor coefficients
+
+    frozen controller inputs -> exact Poisson/read-noise kernel, no fallback
+    atmosphere + same physical vibration -> paired zero-DM reference
+      -> full-output finite checks -> post-burn and fault-window raw summaries
+
+The pilot reconstruction ignores the simulator's estimate field and computes
+the result from observations and applied commands. Fitting rejects missing,
+duplicate, foreign, short or nonfinite episodes and returns every episode's
+coefficients alongside the mean. No temporal fit crosses an episode boundary.
+The kernel requires explicit predictive coefficients or the frozen width-eight
+network, checks array shapes and seed range, and uses exact Poisson/read noise.
+Gaussian learned fitting remains a separate unimplemented training path.
+
+Open-loop scoring includes the same vibration phase as the controlled loop;
+optical-gain drift changes sensing only. Raw metrics preserve a full-output finite
+flag when large streams are omitted, so a finite post-burn average cannot hide
+a nonfinite early frame. Nonfinite reported metrics become JSON nulls with a
+failed finite flag. The ledger remains responsible for reference identity and
+artifact integrity; the stage runner still has to connect both layers.
+
+The [component smoke configuration](../configs/controller_physics_smoke.yaml)
+predeclares smaller 16-pixel/eight-mode, 24-frame checks on separate 51001/52001/
+53001 cohorts and initialization 54001. It derives and hashes an explicit smoke
+base, rejects overlap with reserved roots or derived noise streams, and refuses
+artifact acquisition in CI or from a dirty tracked source checkout. It acquires
+no timings. The planned checks use 12 pilot episodes, six predictor fits and
+five controller paths under three faults. Only the first candidate of each
+controller is exercised; no selection is performed. Learned weights are the
+**untrained initialization**, so this cannot establish a training result or fair
+controller comparison.
+
+Predeclared smoke gates are 1e-12 maximum absolute error for pilot reconstruction,
+predictor rebuild and zero-DM variance/Strehl agreement; deliberately omitting
+vibration must cause variance error above 1e-8. Also require all controller/fault
+paths to be present, finite and free of fallback. Raw atmospheres, calibration,
+pilot streams, per-episode coefficients, untrained weights and full trial streams
+are saved before the verdict. A protected-file inventory guards rebuilds.
+
+```sh
+# Commit source first. The output directory must be new.
+.venv/bin/python scripts/smoke_controller_physics.py --out results/controller_physics_smoke_v1
+# Rebuild summaries from saved raw evidence without simulating.
+.venv/bin/python scripts/smoke_controller_physics.py --rebuild results/controller_physics_smoke_v1
+```
+
+Unit tests additionally verify exact noise-path agreement with the unchanged
+simulator, future-phase causality, command delay, same-disturbance zero-DM
+agreement, independent episode fits, strict raw shape/finite checks, reserved-seed
+rejection and CI refusal. This is component wiring verification; the eventual
+complete stage runner still needs its own independent smoke cohort.
 
 ## Engineering review and tests
 
