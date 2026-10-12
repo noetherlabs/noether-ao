@@ -90,3 +90,22 @@ source govern the version used here:
 
 - [HCIPy pyramid API](https://docs.hcipy.org/dev/api/hcipy.wavefront_sensing.PyramidWavefrontSensorOptics.html)
 - [HCIPy Fraunhofer API](https://docs.hcipy.org/dev/api/hcipy.propagation.FraunhoferPropagator.html)
+
+## Reproduction
+
+From the pinned repository environment, use a new output directory:
+
+```sh
+.venv/bin/python scripts/validate_pyramid.py --out runs/pyramid-validation
+```
+
+The runner saves every comparison array, the full configuration, machine details,
+the source commit and hashes of the runner and inspected HCIPy files. It exits
+unsuccessfully if any fixed gate fails. To rebuild the report from saved arrays:
+
+```sh
+.venv/bin/python scripts/validate_pyramid.py --out runs/pyramid-validation --render-only
+```
+
+The quick correctness suite includes `tests/test_pyramid_reference.py`. Neither
+the tests nor this validation runner collect benchmark timing samples.
