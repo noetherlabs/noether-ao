@@ -77,7 +77,7 @@ driver/artifact code and numerical dependencies are recoverable.
 
 ## Private publication follow-up
 
-The complete original history is retained for publication on main in
+The complete original history is published on main in
 `noetherlabs/noether-ao`; setup commits add portable instructions, correctness-only
 CI and the follow-up queue. Eight milestone PRs were opened before the owner
 changed the preference to commits only; they are historical review records.
@@ -85,6 +85,10 @@ Current local publication checks pass: 29 Noether
 tests, 140 Dragrace tests with two platform skips, and 33 reproduced table/report
 files with raw inputs unchanged. Evidence is in `results/publication`.
 
-The app has an active four-hour follow-up for this task, configured to address
+The app has an active hourly follow-up for this task, configured to address
 checks and then one bounded item from TODOS.md per run. It publishes focused
 commits to main, creates no PRs, and reports meaningful progress or changed blockers.
+
+The next increment is independent ideal-pyramid validation. Its coordinate
+contract and gates are predeclared in `docs/pyramid_validation.md` and
+`configs/pyramid_validation.yaml`; no comparison results are claimed yet.

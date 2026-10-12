@@ -178,3 +178,18 @@ The command-line OAuth credential cannot upload workflow changes. The connected
 GitHub app has the required access and created the pinned correctness workflow
 through the contents API. Its commit was merged without changing the tested tree.
 Use that authorized app for workflow changes; ordinary commits use Git push.
+
+## Hourly continuation and independent sensor validation
+
+The owner requested immediate work and changed the follow-up interval to one
+hour. Update the existing task automation rather than creating another. Continue
+with commits only on main, retaining original provenance and negative findings.
+
+The next bounded task uses HCIPy matrix Fourier transforms and a physical thin
+surface as an independent implementation of the existing ideal sensor contract.
+Native HCIPy pyramid defaults differ in centering, focal support and output
+parity; do not silently fit those differences away. Document them and predeclare
+gates before running comparisons. No production sensor or controller change is
+planned. Gstack engineering review is performed autonomously under the owner's
+no-questions instruction: the minimal reference/runner/test design is selected,
+with the test-flow diagram and failure modes in docs/pyramid_validation.md.

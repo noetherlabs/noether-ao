@@ -2,9 +2,10 @@
 
 Current position: M0–M7 complete. All required available-platform gates passed; negative claim results retained.
 
-Next: publish the preserved milestone history to main in the authorized private
-repository, add correctness-only CI, then work through [TODOS.md](TODOS.md) in
-focused commits. The owner changed the delivery preference to commits only.
+Current follow-up: independent pyramid-sensor validation under the predeclared
+[protocol](docs/pyramid_validation.md), then [TODOS.md](TODOS.md) in focused commits.
+The full repository and passing correctness CI are already on main. Delivery
+remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.
 
 | Milestone | Required gate | State |
