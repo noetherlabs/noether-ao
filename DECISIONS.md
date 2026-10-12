@@ -193,3 +193,14 @@ gates before running comparisons. No production sensor or controller change is
 planned. Gstack engineering review is performed autonomously under the owner's
 no-questions instruction: the minimal reference/runner/test design is selected,
 with the test-flow diagram and failure modes in docs/pyramid_validation.md.
+
+The full independent sensor comparison passed every predeclared gate without
+changing any tolerance or production code. Store the six raw grid/spectrum arrays
+in results/pyramid_validation_v1 with source/library hashes and clean-commit
+provenance. Both detector pixels and small-signal derivatives agree with the
+HCIPy matrix reference; sign, geometry, orientation and scale controls are rejected.
+The scope remains the matched finite-grid ideal optical contract. Do not promote
+this numerical agreement into native-default, convergence, instrument, controller
+fairness or safe-recovery claims. Rebuilding all generated reports reproduced
+their exact bytes and preserved protected inputs. Next freeze a fair controller
+protocol before generating any new training/validation/evaluation outcomes.

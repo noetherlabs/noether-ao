@@ -29,6 +29,12 @@ Every result directory contains its configuration, raw data, source commit/hashe
 machine fingerprint, tables and plots. Quantities in configuration files are inputs.
 Measurements in reports are calculated from saved runs.
 
+The subsequent [independent pyramid check](results/pyramid_validation_v1/report.md)
+passes 36 intensity comparisons, 30 derivative comparisons and 24 deliberate-error
+checks against an HCIPy matrix-integral reference. Its [predeclared protocol](docs/pyramid_validation.md)
+matches the existing finite-grid ideal sensor conventions; it does not claim real
+instrument validation or alter the original C1–C4 verdicts.
+
 ## Install
 
 Use Python 3.11 and uv. Clone the private repository with an authorized GitHub

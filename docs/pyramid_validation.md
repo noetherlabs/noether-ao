@@ -1,5 +1,8 @@
 # Independent ideal-pyramid validation protocol
 
+Completed evidence: [comparison report](../results/pyramid_validation_v1/report.md)
+and [reproduction checks](../results/pyramid_validation_v1/verification.json).
+
 This protocol is committed before evaluating the comparisons. The existing
 plant/twin implementation and M0–M7 data remain unchanged. The acceptance settings
 in `configs/pyramid_validation.yaml` are fixed numerical tolerances, not results.

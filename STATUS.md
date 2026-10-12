@@ -68,8 +68,9 @@ driver/artifact code and numerical dependencies are recoverable.
 
 ## Three largest correctness risks
 
-1. Shared ideal plant/twin sensor code and a finite periodic atmosphere. Independent
-   open-loop PSF agreement does not validate a real pyramid or instrument.
+1. Ideal plant/twin optics and a finite periodic atmosphere. Independent open-loop
+   PSF and matched finite-grid sensor agreement do not validate a real instrument
+   or establish convergence as the focal support grows.
 2. Short runs and few seeds, ideal predictor telemetry, fixed baseline gains and
    Gaussian training versus Poisson evaluation noise limit fairness/generalization.
 3. Component timings and synthetic availability faults do not establish real-time
@@ -89,6 +90,24 @@ The app has an active hourly follow-up for this task, configured to address
 checks and then one bounded item from TODOS.md per run. It publishes focused
 commits to main, creates no PRs, and reports meaningful progress or changed blockers.
 
-The next increment is independent ideal-pyramid validation. Its coordinate
-contract and gates are predeclared in `docs/pyramid_validation.md` and
-`configs/pyramid_validation.yaml`; no comparison results are claimed yet.
+## Independent ideal-pyramid validation
+
+The [saved comparison](results/pyramid_validation_v1/report.md) passes all
+predeclared gates: 36 pixel cases, 30 derivative cases and 24 deliberate-error
+controls on grids 32/64/96 with one or three wavelengths. Maximum intensity
+relative L2 error is 1.6942335379634155e-14; maximum derivative relative L2 error
+is 9.360885028878882e-11. Maximum absolute unit-power error is
+9.769962616701378e-15. The smallest deliberate error is 0.031291468420221256,
+above the required 1e-4 rejection threshold.
+
+The independent implementation uses HCIPy matrix Fourier integrals, physical
+surface phase and pixel powers. No alignment, scale or output normalization was
+fitted. Native HCIPy default centering/filter/parity differences are explicit in
+[the protocol](docs/pyramid_validation.md). This is a finite-grid ideal-model
+validation, not an instrument or safety result.
+
+The clean-source run points to commit `56ed79f`; its frozen configuration matches
+the earlier protocol commit `e11d3bb`. Verification reproduced nine report files
+byte-for-byte with all nine protected data/provenance files unchanged. The core
+suite now passes 42 tests. Original M0–M7 runtime code, raw data and claims are
+unchanged. The next task is the fair controller-validation protocol.

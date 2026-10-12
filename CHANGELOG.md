@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Validate the ideal pyramid's pixels and derivatives against independent HCIPy
+  matrix integrals with predeclared gates, deliberate-error controls and retained
+  raw evidence. Add 13 correctness tests and a reproducible comparison report.
+- Change autonomous continuation to hourly direct commits at the owner's request.
 - Publish the preserved v0 milestone history to main in the private noether-ao
   repository as requested, retaining original source and measurement hashes.
 - Add correctness-only GitHub Actions and allow saved Dragrace reports to rebuild

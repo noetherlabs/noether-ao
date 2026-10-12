@@ -1,0 +1,56 @@
+{
+  "git_commit": "56ed79f265d33269e91efec0a62d824146d7fd76",
+  "tracked_dirty": false,
+  "source_sha256": {
+    "src/noether_optics/__init__.py": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+    "src/noether_optics/artifacts.py": "83a8c74d118144344d348c152dbcdbb96c258785a4fac2badff28159eedd9b0b",
+    "src/noether_optics/atmosphere.py": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+    "src/noether_optics/cli.py": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+    "src/noether_optics/config.py": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+    "src/noether_optics/experiments/__init__.py": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+    "src/noether_optics/experiments/rebuild.py": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+    "src/noether_optics/experiments/runners.py": "99654b50d9c4da624b291e12a31a2e114881dc4d78b15e6c5375e749223bfafa",
+    "src/noether_optics/latency.py": "603299fc543fd0294481a5cba07cc58932135ff59055fd22566c026025fe3922",
+    "src/noether_optics/optics.py": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+    "src/noether_optics/pyramid_reference.py": "cf476be20080d0eb9599d8be84494e5ae3bcd63379eb3a6921128f694a5a8b19",
+    "src/noether_optics/simulation.py": "11bfd04b5bcbf2befa566f6a25ffef68e3aa90609996e637d6bd46703f8bc123"
+  },
+  "utc": "2026-10-12T04:56:42.542792+00:00",
+  "argv": [
+    "scripts/validate_pyramid.py",
+    "--out",
+    "results/pyramid_validation_v1"
+  ],
+  "lock_sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a",
+  "runner_sha256": "571eec9e4cb0b1ae383be2872fd24bd575a7cd89d10bede1ee6fcddeb4f9c00b",
+  "reference_library_sources": {
+    "PyramidWavefrontSensorOptics": {
+      "file": "wavefront_sensing/pyramid.py",
+      "sha256": "d257ba72d2d5a44757ae810c93ef58459f220c1dd53574939dbcc89c3a5b1e2c"
+    },
+    "FraunhoferPropagator": {
+      "file": "propagation/fraunhofer.py",
+      "sha256": "68334fdeb36bed5c59a1ba135adddddaf42b1a99a7eb5cc85f65049ebcf14219"
+    },
+    "MatrixFourierTransform": {
+      "file": "fourier/matrix_fourier_transform.py",
+      "sha256": "74aaf8909c5bcaed2ac20e68a01b971641becb222cea7ebb554fbb45a364bc4f"
+    },
+    "SurfaceApodizer": {
+      "file": "optics/apodization.py",
+      "sha256": "5f3c4402ab5ada8670530a7ab483d5608d50590c46762de24116477bb276b4ce"
+    },
+    "make_uniform_grid": {
+      "file": "field/util.py",
+      "sha256": "f42491b8daee4efdb3b1208ea3e590d016e8d3fca5644ba2821f42edda2a3ae8"
+    },
+    "Wavefront": {
+      "file": "optics/wavefront.py",
+      "sha256": "adadaf84d56e02f3aac88e5c6eb722de795470b6b92df2d8e60162d61020781e"
+    },
+    "subsample_field": {
+      "file": "field/util.py",
+      "sha256": "f42491b8daee4efdb3b1208ea3e590d016e8d3fca5644ba2821f42edda2a3ae8"
+    }
+  }
+}

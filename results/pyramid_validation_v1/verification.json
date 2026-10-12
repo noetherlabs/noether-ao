@@ -1,0 +1,37 @@
+{
+  "checked_at_utc": "2026-10-12T04:58:01.317196+00:00",
+  "predeclared_config_commit": "e11d3bbc0c0dcc24684d657542b10e0b12ea1d57",
+  "config_matches_predeclared": true,
+  "run_source_commit": "56ed79f265d33269e91efec0a62d824146d7fd76",
+  "source_hashes_match_committed_files": true,
+  "tracked_clean_at_run_start": true,
+  "core_tests": {
+    "passed": 42,
+    "command": "CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q"
+  },
+  "raw_and_provenance_unchanged": true,
+  "raw_sha256": {
+    "raw/n32_spectrum0.npz": "9a447f785cba6f1006eb08da6261f6e3e30d417a7a68b7c5a47c09136224e519",
+    "raw/n32_spectrum1.npz": "7290066cd2bed9b6083a2cca121eef7523927e7c4c437d43b604db84bc725ad5",
+    "raw/n64_spectrum0.npz": "4356bc5fbe543f3d953c3575ead7beab3e38391aa4fdbf691867ce489e468b02",
+    "raw/n64_spectrum1.npz": "5a8e589f59173f0ff2ce48dfef5afab83464e2aba9ec40530bce28de4b2c5bad",
+    "raw/n96_spectrum0.npz": "70208c6ac3447202b9698ec856fdc00302213bfcb610f27ed8faa474df7c9409",
+    "raw/n96_spectrum1.npz": "7b8a9c32b38aeff93d2446967af7d3ff520ee29fc16ee985cd5fa39f58998345",
+    "config.json": "d824470fc0eb4e36231ecf5f65109b363050cb5cc1c3147f7e2159f653f9bf9e",
+    "machine.json": "475cf38e37afe7d07eb7d97c0a3e37ef889e3632d6a09d48bd20f10fdc0aa17d",
+    "provenance.json": "5f503b125912c13baa747b65902bb4509c5c261698d931ee65ca651e19981b2b"
+  },
+  "reproduced_reports": {
+    "controls.csv": "95330a6132109313b5f9b7ff1b8d377796eaec366b212ab20931ebb023bd21c2",
+    "derivatives.csv": "84e335048e791e799e510c668b41613849eec986f85cf51cb4f1eba63051adf7",
+    "pixels.csv": "ae0d71e66e976f5f5893629a4e4ae7441870b17c5595b0483d8fdeb36556be22",
+    "report.md": "53e49d051d6f240bea1d92232ccd8c596c51e1834592b7f8447f9baa7477bbac",
+    "derivatives.md": "2e3db5dda18b2a5fe73df731e13d23f016629334d707d3a938fe2d525112a23d",
+    "pixels.md": "3e5cd46cf5afb0ecddb7df4ebcfdf25a1ea9321c55b5f86c2869c10af3149836",
+    "controls.md": "606457e05abfa99139a3462f55e87e66cb84bf62b20ff67a7b0496a0a9309c6d",
+    "summary.json": "6c2d7b169c28739f55a56ef418a235d7afc4040effc370abbcf156073eba8406",
+    "agreement.png": "c37d39b290f03aeeeba33a623aecdd9bed1e09951724e5e9e46564003267db23"
+  },
+  "reports_byte_identical": true,
+  "review": "No unresolved findings; only matched ideal finite-grid validation is claimed."
+}

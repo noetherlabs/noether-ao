@@ -5,19 +5,6 @@ new CI failures and actionable owner feedback before the research tasks below.
 Complete one bounded task per autonomous run. Do not create speculative busywork
 if all actionable tasks are done or require new evidence unavailable locally.
 
-## P1 — Independent pyramid sensor validation
-
-The current HCIPy check covers the open-loop PSF, while plant and twin share sensor
-code. Build an independent ideal, unmodulated pyramid reference after inspecting
-the pinned HCIPy API. First document sampling, phase sign, pupil layout, centering,
-wavelength and normalization conventions; then compare flat and single-mode
-responses and small-signal derivatives at multiple grid sizes.
-
-Acceptance: predeclared tolerances and deterministic tests that can catch sign,
-scale and layout errors, plus a saved comparison report. If conventions cannot be
-matched, retain the discrepancy and narrow the claim. Do not change baseline M3
-results or assert instrument validation.
-
 ## P1 — Fair controller validation protocol
 
 The present controls use fixed gains, short runs and ideal predictor telemetry.
@@ -40,6 +27,19 @@ new training/validation cohorts. Freeze thresholds before new held-out fault run
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection
 does not establish a safe fallback or a general safety guarantee.
+
+## Completed — Independent ideal-pyramid validation
+
+The [predeclared protocol](docs/pyramid_validation.md) passed on grids 32/64/96:
+36 intensity cases, 30 derivative cases and 24 deliberate-error controls. The
+reference uses HCIPy matrix integrals and a physical thin surface. See the
+[saved report](results/pyramid_validation_v1/report.md), raw arrays and provenance.
+All nine generated report files reproduce byte-for-byte; protected raw inputs
+are unchanged. The core suite has 42 passing tests.
+
+This validates the matched finite-grid ideal sensor contract. Native HCIPy
+defaults, focal-support convergence and instrument validation remain outside the
+claim. No M0–M7 production model, stored evidence or scientific verdict changed.
 
 ## Completed publication preparation
 
