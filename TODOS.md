@@ -13,10 +13,11 @@ and [unexecuted plan](plans/controller_study_v1.json) are predeclared. The
 check complete trial identities, training bindings, immutable evidence and resumed
 evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
-and paired raw-array scoring. Next connect the adapter and separate stage commands:
-actual provenance capture, all fixed learned-training budgets and durable raw
-recording through the ledger. The separate component smoke has passed. The
-adapter must enter evaluation through the ledger's lazy callback, after the gate.
+and paired raw-array scoring. Learned fitting now implements common initialization,
+normalized equal-episode gradients, fixed Adam budgets and failure records. Next
+connect the adapter and separate stage commands: actual provenance capture and
+durable pilot, training and trial recording through the ledger. The separate
+component smoke has passed. The adapter must enter evaluation through the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
 Commit the complete runner before the full study. Ledger fixtures are not physical
 smoke evidence or study outcomes.
@@ -59,6 +60,17 @@ passes all nine gates: 12 pilots, six predictor fits and 15 controller/fault pat
 Both reports rebuild exactly with 53 protected files unchanged. It uses a smaller
 model, fresh seeds and an explicitly untrained network; the full stage-runner and
 controller study remain pending.
+
+## Completed — Fixed-budget learned fitting helper
+
+Each declared learned candidate starts from the common initialization. Each Adam
+step averages independently normalized gradients from the complete training cohort
+at the same parameters. Histories retain every executed episode, gradient and
+parameter checkpoint, with a final objective evaluated after the last update.
+Numerical failures retain partial evidence and return no usable model. Correctness
+tests use analytic objectives and a reduced optical case on separate seeds; they
+are not full study training or held-out performance results. Durable integration
+and the full runner smoke remain in P1.
 
 ## P2 — Optical-gain drift observability
 

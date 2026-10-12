@@ -298,3 +298,35 @@ untrained-network paths only as execution checks; do not infer learned improveme
 or tune the reserved study from these smoke outcomes. Next integrate learned
 training and real provenance with the ledger, then use a distinct end-to-end smoke
 cohort before full-study execution.
+
+## Learned fitting helper (2026-10-13)
+
+Complete the next numerical boundary as one bounded increment: each learned
+candidate starts from the declared common width-eight initialization, computes
+an equal mean of all twelve episode gradients at the same parameters, and takes
+one Adam update per declared step. Normalize each post-burn phase variance by
+its own clean open-loop mean variance. Reject zero/nonfinite denominators rather
+than introducing an undeclared epsilon. Use the existing Gaussian training path;
+truth remains confined to the simulator/loss. Evaluation stays exact Poisson/read.
+
+Retain per-episode losses and gradients, parameter checkpoints, final objective
+and explicit partial numerical failures in the returned record. Never silently
+return the last finite model after a failed update. Invalid cohort inputs and
+unexpected implementation errors raise; the future adapter must persist records
+and distinguish those errors from a scientifically failed fit. This helper does
+not provide durable resumption or authorize reserved-cohort acquisition.
+
+Apply gstack small-change planning/review/shipping autonomously. Reuse existing
+simulation, protocol, configuration and reference helpers, with one new numerical
+module and tests; no baseline model, protocol, dependency or version change.
+The test map is saved under the project's gstack directory. Use independent test
+seeds and a reduced optical correctness case; do not claim a trained study model,
+new physical smoke result or improvement before the complete runner is committed.
+
+The bounded implementation passes all 175 local correctness tests (27 new).
+Review confirmed one averaged update per full cohort, raw failure retention,
+no usable model after failure, and final scoring after the last update. The
+existing ledger already accepts ready/failed model statuses; the future adapter
+must publish the returned arrays and bind their references, not pass the in-memory
+record directly as ledger metadata. Original simulator, protocol and evidence
+remain untouched. No reserved cohort or timing acquisition occurred.

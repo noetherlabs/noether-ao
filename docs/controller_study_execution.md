@@ -4,7 +4,8 @@ This is implementation infrastructure for the [predeclared study](controller_stu
 not a controller result or a finished scientific runner. The selection and record
 ledger is implemented. Numerical helpers now connect the unchanged simulator to
 measured pilot telemetry, per-episode predictor fits and paired raw-array scoring.
-The full stage runner, learned fitting, study provenance capture and ledger-backed
+A learned fitting helper now implements fixed-budget, equal-episode gradient
+averaging. The full stage runner, study provenance capture and ledger-backed
 physical smoke remain pending before any reserved cohort is used. The frozen YAML,
 plan and original M0–M7 evidence are unchanged.
 
@@ -96,8 +97,9 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
 - Save shared atmospheres, exact pilot observations and measured pseudo-open-loop
   estimates. Fit separate sequences, never bridge seeds or use phase truth as
   predictor telemetry. Preserve parameter arrays and training histories.
-- Implement the predeclared six learned fits and fixed optimizer budgets. Record
-  all training failures. Freeze training before validation.
+- Call the learned fitting helper for all six declared candidates, persist every
+  returned history/checkpoint and numerical failure, and bind their immutable
+  artifacts to the ledger. Freeze training before validation.
 - Derive summaries from retained per-frame arrays and full-output finite flags.
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
@@ -137,7 +139,8 @@ duplicate, foreign, short or nonfinite episodes and returns every episode's
 coefficients alongside the mean. No temporal fit crosses an episode boundary.
 The kernel requires explicit predictive coefficients or the frozen width-eight
 network, checks array shapes and seed range, and uses exact Poisson/read noise.
-Gaussian learned fitting remains a separate unimplemented training path.
+Gaussian learned fitting is implemented separately in `controller_training`, as
+described below; the trial kernel continues to use exact Poisson/read noise.
 
 Open-loop scoring includes the same vibration phase as the controlled loop;
 optical-gain drift changes sensing only. Raw metrics preserve a full-output finite
@@ -176,6 +179,67 @@ simulator, future-phase causality, command delay, same-disturbance zero-DM
 agreement, independent episode fits, strict raw shape/finite checks, reserved-seed
 rejection and CI refusal. This is component wiring verification; the eventual
 complete stage runner still needs its own independent smoke cohort.
+
+## Learned fitting and its evidence contract
+
+`controller_training.fit_learned_controller` fits one declared learned candidate
+using the complete training cohort. Its input episodes contain only an exact case
+identity and the full real phase array. Missing, duplicate, foreign, nonfinite or
+malformed episodes are rejected before initialization or gradient execution. The
+caller must verify the pinned base and supply matching calibration and atmospheres;
+the helper neither generates cohorts nor independently authenticates their origin.
+
+    all training episodes -> their own clean post-burn open-loop variances
+        -> common width-eight initialization for each candidate
+        -> sequential Gaussian optical loss/gradient at the same parameters
+        -> equal mean across episodes -> one Adam update -> checkpoint
+        -> fixed step budget -> final objective at the final parameters
+
+Each loss is post-burn phase variance divided by that episode's post-burn open-loop
+variance. The reference is calculated from the same input phases. A zero or
+nonfinite denominator rejects the input; it is never replaced by an epsilon.
+Candidate gain/leak settings apply to training; the fixed physical delay remains
+unchanged. The existing simulator controls measurement access, and truth appears
+only in the plant and loss. Training uses its explicit Gaussian pathwise branch,
+clean conditions and no fallback. The protocol still requires exact Poisson/read
+noise for validation/evaluation.
+
+The helper executes the declared number of Adam steps with the declared learning
+rate and one common initialization per candidate. Every episode's derivative is
+evaluated at the same current parameters before a single averaged update. It does
+not update between episodes, concatenate temporal sequences, stop early on finite
+loss, or restart. Sequential gradients keep only one reverse-mode episode tape
+live; phase inputs and small per-episode/parameter histories remain in memory.
+Kernels are reused across seeds within each regime. No timings are acquired.
+
+The returned record contains case order, open-loop denominators, initial and
+updated parameter checkpoints, per-episode losses/full-output finite flags and
+gradients, per-step mean loss/gradient/norm, and final-parameter loss/gradients.
+Final scoring performs no further optimizer update. A numerical failure stops
+immediately, retains completed and partial records (including failed values), and
+returns `status="failed"` with `parameters=null`. Nonfinite optimizer state is
+retained with the failed update. A prior finite checkpoint is not a usable fallback
+model. Only a fully finite fit returns `status="ready"` and final parameters.
+
+Invalid inputs and unexpected implementation/backend exceptions raise instead of
+being mislabeled scientific failures. This numerical helper is not a durable
+checkpoint writer; the future stage runner must preserve raw evidence and manage
+interruption/resumption. In-memory records can contain nonfinite arrays on failure,
+so persist them as raw arrays with strict JSON metadata/diagnostics, not JSON NaN.
+The ledger still needs immutable model/history references for every candidate.
+
+Correctness tests use independent 61001/62001/63001 cohorts and initialization
+64001, with reduced arrays. An analytic multi-episode objective is checked against
+an independent NumPy Adam calculation for all twenty updates; all six candidates
+are checked for equal initialization and fixed budgets. The optical kernel is
+checked against the unchanged Gaussian loop and a central finite difference. A
+one-step, twelve-episode reduced physical fit verifies finite, changed weights
+and complete histories. These are software checks, not saved physical smoke
+outcomes, trained study models or evidence of held-out improvement.
+
+Additional failures cover held-out cases blocked before backend access, malformed shapes,
+coerced identities, nonfinite early outputs, gradient/mean overflow, failed
+optimizer state/parameters, final scoring, and unexpected backend errors.
 
 ## Engineering review and tests
 

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add fixed-budget learned fitting with common initialization, per-episode
+  open-loop normalization and equal gradient averaging before each Adam update.
+  Retain training checkpoints and numerical failures; verify optimizer arithmetic
+  and optical gradients on separate correctness inputs. Full study execution and
+  durable stage integration remain pending.
+
 - Add measured pilot reconstruction, independent episode predictor fitting and
   paired fault-aware raw scoring around the unchanged simulator. Prepare a
   separately seeded physical component smoke with explicit untrained-network limits.

@@ -174,5 +174,33 @@ Both generated reports rebuild byte-for-byte with all 53 protected files unchang
 All 48 raw NPZ files, actual configuration, machine/source records and untrained
 network weights are saved. The smaller model, first-candidate-only trials and
 untrained learned-controller weights limit this to component wiring evidence.
-Learned fitting, actual study provenance and ledger-backed stage commands are still
-pending. No reserved-cohort outcomes or new timing measurements were generated.
+Actual study provenance and ledger-backed stage commands are still pending; the
+learned fitting increment is recorded below. No reserved-cohort outcomes or new
+timing measurements were generated.
+
+## Fixed-budget learned fitting
+
+`controller_training.fit_learned_controller` now checks complete training inputs,
+starts every candidate from the same declared initialization, normalizes each
+post-burn episode by its own clean open-loop variance, and averages all episode
+gradients at one parameter state before each Adam update. It retains every
+executed episode's losses/gradients and all parameter checkpoints, including
+partial numerical failures. Failed fits return no usable model; final scoring
+uses the actual parameters after the last update.
+
+The local correctness command `CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q`
+passes **175 tests**, including **27 new fitting checks**. Independent NumPy Adam
+arithmetic verifies all twenty updates on analytic inputs. All six candidate paths
+have the same initialization and budget. A reduced optical gradient agrees with
+a central finite difference; a one-step twelve-episode optical fit has finite,
+changed weights and complete histories. Failure tests cover missing/foreign data,
+invalid normalization, nonfinite initialization/outputs/gradients/updates/final
+scoring, and unexpected backend errors.
+
+These are correctness checks using separate 61001/62001/63001 cohorts and
+initialization 64001. No reserved study cohort was simulated, no new scientific
+smoke or performance outcome was acquired, and no timing measurements were made.
+Original source, frozen protocol/plan and retained evidence are unchanged. The
+full adapter still needs real provenance, durable training/trial recording and
+separate stage commands, followed by a distinct end-to-end physical smoke before
+the full controller study.

@@ -9,9 +9,10 @@ now prepared. The [execution ledger](docs/controller_study_execution.md) impleme
 complete validation checks, immutable records and the frozen-selection barrier.
 Numerical helpers now supply measured training telemetry, predictor fits and
 paired physical scoring. Their separate [component smoke](results/controller_physics_smoke_v1/README.md)
-passes all predeclared gates with reproducible raw evidence. Next connect learned
-fitting, real provenance and stage commands to the ledger before a full runner
-smoke or any reserved outcomes.
+passes all predeclared gates with reproducible raw evidence. Learned fitting now
+implements complete-episode gradient averaging and fixed Adam budgets with retained
+checkpoints and numerical failures. Next connect these helpers, real provenance
+and stage commands to the ledger before a full runner smoke or reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.
