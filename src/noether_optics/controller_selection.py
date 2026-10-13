@@ -329,48 +329,65 @@ class StudyLedger:
         with self._locked():
             return self._gate()[1]
 
-    def evaluate_chunk(self, execute, limit: int) -> dict:
-        """Call an adapter for at most limit new trials, saving each immediately.
+    def validate_chunk(self, execute, limit: int) -> dict:
+        """Audit and append a bounded validation chunk, retaining saved failures."""
+        self._check_limit(limit)
+        with self._locked():
+            if (self.root / "selection.json").exists():
+                raise ValueError("Selection is frozen")
+            training = self._training()
+            return self._execute_chunk(execute, limit, "validation", validation_cases(self.config),
+                                       training, "training_sha256", _digest(_bytes(training)))
 
-        The adapter returns a complete record or raises. Exceptions propagate and
-        do not become scientific failures automatically: the adapter must return
-        an explicit failed record for actual execution/nonfinite failures. Existing
-        failed records are retained, never retried. No timing is collected here.
+    def evaluate_chunk(self, execute, limit: int) -> dict:
+        """Run lazy callbacks only after frozen selection and all evidence recheck.
+
+        Unexpected exceptions propagate. Adapters explicitly record scientific
+        failures, and all existing outcomes are retained and skipped on resume.
         """
-        if type(limit) is not int or limit < 1:
-            raise ValueError("Chunk limit must be a positive integer")
+        self._check_limit(limit)
         with self._locked():
             selection, cases = self._gate()
-            seal = _digest(_bytes(selection))
-            training = self._training()
-            expected = {_case_id(case): case for case in cases}
-            completed = set()
-            # Audit all previous records before invoking any new backend work.
-            for path in sorted((self.root / "evaluation").glob("*.json")):
-                saved = _read(path)
-                if set(saved) != {"selection_sha256", "record"} or saved["selection_sha256"] != seal:
-                    raise ValueError("Evaluation selection binding changed")
-                record = saved["record"]
-                if path.stem not in expected or _case_id(record["case"]) != path.stem:
-                    raise ValueError("Unexpected evaluation identity")
-                self._check_record(record, training)
-                completed.add(path.stem)
-            written = 0
-            for key, case in expected.items():
-                if key in completed:
-                    continue
-                # Pass detached inputs: a backend cannot mutate the expected identities.
-                record = execute(json.loads(_bytes(case)), json.loads(_bytes(training)))
-                if _case_id(record["case"]) != key:
-                    raise ValueError("Backend returned a different evaluation identity")
-                if (_bytes(_read(self.root / "training.json")) != _bytes(training)
-                        or _bytes(_read(self.root / "manifest.json")) != _bytes(self.manifest)):
-                    raise ValueError("Backend changed frozen inputs")
-                self._check_training(training)
-                self._check_record(record, training)
-                _publish(self.root / "evaluation" / f"{key}.json", {"selection_sha256": seal, "record": record})
-                written += 1
-                if written == limit:
-                    break
-            return {"new_records": written, "total_records": len(completed) + written,
-                    "planned_records": len(cases), "complete": len(completed) + written == len(cases)}
+            return self._execute_chunk(execute, limit, "evaluation", cases, self._training(),
+                                       "selection_sha256", _digest(_bytes(selection)))
+
+    @staticmethod
+    def _check_limit(limit):
+        if type(limit) is not int or limit < 1:
+            raise ValueError("Chunk limit must be a positive integer")
+
+    def _execute_chunk(self, execute, limit, stage, cases, training, binding, seal):
+        # Called only while the stage's public entry point holds the process lock.
+        expected = {_case_id(case): case for case in cases}
+        completed = set()
+        for path in sorted((self.root / stage).glob("*.json")):
+            saved = _read(path)
+            if set(saved) != {binding, "record"} or saved[binding] != seal:
+                raise ValueError(f"{stage.title()} {binding.split('_')[0]} binding changed")
+            record = saved["record"]
+            if path.stem not in expected or _case_id(record["case"]) != path.stem:
+                raise ValueError(f"Unexpected {stage} identity")
+            self._check_record(record, training)
+            completed.add(path.stem)
+        written = 0
+        for key, case in expected.items():
+            if key in completed:
+                continue
+            record = execute(json.loads(_bytes(case)), json.loads(_bytes(training)))
+            if _case_id(record["case"]) != key:
+                raise ValueError(f"Backend returned a different {stage} identity")
+            if (_bytes(_read(self.root / "training.json")) != _bytes(training)
+                    or _bytes(_read(self.root / "manifest.json")) != _bytes(self.manifest)):
+                raise ValueError("Backend changed frozen inputs")
+            if stage == "evaluation" and _digest(_bytes(_read(self.root / "selection.json"))) != seal:
+                raise ValueError("Backend changed frozen selection")
+            if stage == "validation" and (self.root / "selection.json").exists():
+                raise ValueError("Selection became frozen during validation")
+            self._check_training(training)
+            self._check_record(record, training)
+            _publish(self.root / stage / f"{key}.json", {binding: seal, "record": record})
+            written += 1
+            if written == limit:
+                break
+        return {"new_records": written, "total_records": len(completed) + written,
+                "planned_records": len(cases), "complete": len(completed) + written == len(cases)}

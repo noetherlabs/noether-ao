@@ -12,9 +12,10 @@ paired physical scoring. Their separate [component smoke](results/controller_phy
 passes all predeclared gates with reproducible raw evidence. Learned fitting now
 implements complete-episode gradient averaging and fixed Adam budgets with retained
 checkpoints and numerical failures. Fresh source/runtime capture and exclusive
-raw-array storage now bind evidence to the ledger. Next connect numerical helpers
-to durable training/trial records and separate stage commands before a full runner
-smoke or reserved outcomes.
+raw-array storage now bind evidence to the ledger. Durable validation/evaluation
+trial adapters now save raw outputs and paired references through resumable ledger
+chunks. Next connect pilot/model orchestration, mid-fit records and stage commands
+before a full runner smoke or reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.

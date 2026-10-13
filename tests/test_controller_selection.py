@@ -387,3 +387,97 @@ def test_json_boolean_is_not_an_integer_in_frozen_evidence(ledger, damage):
     with pytest.raises(ValueError, match="changed"):
         ledger.evaluate_chunk(backend, 1)
     backend.assert_not_called()
+
+
+def test_validation_chunks_skip_saved_success_and_failure(ledger):
+    ref = ledger.artifact("evidence/synthetic.bin")
+    seen = []
+    def execute(case, training):
+        seen.append(case)
+        return failure(case) if len(seen) == 2 else outcome(case, ref)
+    first = ledger.validate_chunk(execute, 3)
+    assert first["new_records"] == first["total_records"] == 3
+    assert first["planned_records"] == len(validation_cases(ledger.config))
+    second = ledger.validate_chunk(execute, 1)
+    assert second["total_records"] == 4 and len(seen) == 4
+    assert len({selection_module._case_id(case) for case in seen}) == 4
+    saved = [json.loads(p.read_text())["record"] for p in (ledger.root / "validation").glob("*.json")]
+    assert sum(row["status"] == "failed" for row in saved) == 1
+
+
+def test_validation_interruption_preserves_published_records(ledger):
+    ref = ledger.artifact("evidence/synthetic.bin")
+    calls = []
+    def interrupted(case, training):
+        calls.append(case)
+        if len(calls) == 2: raise RuntimeError("interrupted callback")
+        return outcome(case, ref)
+    with pytest.raises(RuntimeError, match="interrupted callback"):
+        ledger.validate_chunk(interrupted, 3)
+    assert len(list((ledger.root / "validation").glob("*.json"))) == 1
+    seen = []
+    ledger.validate_chunk(lambda case, training: (seen.append(case), outcome(case, ref))[1], 1)
+    assert seen == [calls[1]]
+
+
+def test_validation_audits_old_evidence_before_new_callback(ledger):
+    ref = ledger.artifact("evidence/synthetic.bin")
+    ledger.validate_chunk(lambda case, training: outcome(case, ref), 1)
+    path = next((ledger.root / "validation").glob("*.json"))
+    saved = json.loads(path.read_text())
+    saved["training_sha256"] = "0" * 64
+    path.write_text(json.dumps(saved))
+    callback = Mock()
+    with pytest.raises(ValueError, match="binding changed"):
+        ledger.validate_chunk(callback, 1)
+    callback.assert_not_called()
+
+
+def test_validation_callback_cannot_change_identity_or_frozen_inputs(ledger):
+    ref = ledger.artifact("evidence/synthetic.bin")
+    def wrong(case, training):
+        case["seed"] += 1
+        return outcome(case, ref)
+    with pytest.raises(ValueError, match="different validation identity"):
+        ledger.validate_chunk(wrong, 1)
+    assert not list((ledger.root / "validation").glob("*.json"))
+    def freeze(case, training):
+        (ledger.root / "selection.json").write_text("{}")
+        return outcome(case, ref)
+    with pytest.raises(ValueError, match="became frozen"):
+        ledger.validate_chunk(freeze, 1)
+    assert not list((ledger.root / "validation").glob("*.json"))
+
+
+def test_validation_requires_training_and_stops_after_selection(tmp_path, config, ledger):
+    callback = Mock()
+    empty = StudyLedger.create(tmp_path / "empty", config, PROVENANCE)
+    with pytest.raises(FileNotFoundError): empty.validate_chunk(callback, 1)
+    complete_validation(ledger)
+    assert ledger.validate_chunk(callback, 1)["complete"]
+    ledger.freeze_selection()
+    with pytest.raises(ValueError, match="frozen"): ledger.validate_chunk(callback, 1)
+    callback.assert_not_called()
+
+
+@pytest.mark.parametrize("limit", [0, -1, True, 1.5])
+def test_validation_chunk_rejects_bad_limit_before_callback(ledger, limit):
+    callback = Mock()
+    with pytest.raises(ValueError, match="positive integer"):
+        ledger.validate_chunk(callback, limit)
+    callback.assert_not_called()
+
+
+def test_evaluation_callback_cannot_change_frozen_selection(ledger):
+    complete_validation(ledger)
+    ledger.freeze_selection()
+    ref = ledger.artifact("evidence/synthetic.bin")
+    def changed(case, training):
+        path = ledger.root / "selection.json"
+        selection = json.loads(path.read_text())
+        selection["result"]["pairwise_family"] += 1
+        path.write_text(json.dumps(selection))
+        return outcome(case, ref)
+    with pytest.raises(ValueError, match="changed frozen selection"):
+        ledger.evaluate_chunk(changed, 1)
+    assert not list((ledger.root / "evaluation").glob("*.json"))

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Connect validation/evaluation to lazy physical trial adapters that retain raw
+  observations, paired fault references and metric windows. Add audited validation
+  chunks that resume without replaying saved success/failure records. Require
+  frozen model/provenance evidence before physics and preserve interrupted files.
+
 - Bind study creation/resumption to freshly captured source/runtime evidence and
   pinned inputs. Verify source bytes against committed Git objects, including
   hidden edits. Add exclusive, deterministic numeric artifact publication with

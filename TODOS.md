@@ -15,8 +15,8 @@ evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
 normalized equal-episode gradients, fixed Adam budgets and failure records. Next
-connect the adapter and separate stage commands: durable pilot, training and trial
-recording through the ledger. Fresh source/runtime capture and exclusive numeric
+connect pilot/model orchestration and separate stage commands. Durable validation
+and evaluation trial adapters now record full raw outputs through ledger chunks. Fresh source/runtime capture and exclusive numeric
 artifact storage are implemented; bind their returned provenance references with
 the training evidence. Add durable mid-fit recording/resumption before long fits.
 The separate component smoke has passed. The adapter must enter evaluation through
@@ -84,7 +84,17 @@ Canonical source/runtime evidence hashes match the ledger bindings. Numeric NPZ
 files preserve shapes, dtypes and nonfinite failures, permit exact retries and
 reject changed replacements. Tests cover interrupted writes, competing writers,
 path aliases and changed evidence. No scientific cohort is acquired by this layer.
-The full runner and durable per-stage records remain in P1.
+The full runner and durable training-stage records remain in P1.
+
+## Completed — Durable validation and evaluation trials
+
+Validation chunks now audit old records and skip saved successes/failures under the
+same lock/publication rules as evaluation. A lazy physics adapter loads models and
+constructs arrays only within admitted callbacks. It saves shared atmospheres,
+fault-matched open loops, full outputs and both metric windows before publishing
+each record. Model/provenance/schema checks and per-trial disk refusal precede new
+physics. Correctness tests use reduced separate cohorts and synthetic frozen
+models; no reserved study or full-runner smoke result is claimed.
 
 ## P2 — Optical-gain drift observability
 

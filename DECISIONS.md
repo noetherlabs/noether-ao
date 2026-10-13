@@ -362,3 +362,36 @@ both flags and for a hash-matching archive that contains an object/pickle array.
 The final local suite passes 214 tests (39 new) without scientific acquisition.
 Runtime evidence also records zlib's version for deterministic archive retries.
 The generic runtime inventory does not claim to hash every installed binary.
+
+## Durable validation and evaluation trials (2026-10-13)
+
+Connect the existing numerical helpers and exclusive evidence writer to bounded
+ledger chunks. Add validation resumption with the same audit/skip/publication rules
+as evaluation; factor their common locked execution path to avoid divergent stage
+behavior. Construct the physics adapter lazily: no calibration, models or atmosphere
+arrays before the ledger admits a callback. Failed training creates explicit failed
+validation records without running physics. Unexpected implementation or I/O errors
+stop the chunk and preserve previously published records and raw files.
+
+Use one immutable parameters.npz per ready fitted model: predictive coefficients,
+or learned parameter_0 through parameter_3. Other model artifacts retain histories.
+Save shared atmosphere arrays by stage/wind/root, shared paired references by full
+condition including physical fault, full controller streams and both metric windows.
+Bind all raw/metadata references into each trial. Partial raw files are retried only
+byte-identically; no replacement or dropped failure is allowed. Check free disk
+before new physics; full-run sizing remains required before reserved acquisition.
+
+Use gstack small-change planning, two-pass review and direct-main shipping under
+the autonomous one-engineer instruction. Test small physical paths on separate
+cohorts with explicitly synthetic frozen models. This is trial-stage integration,
+not a complete runner or new controller result. Training orchestration, durable
+mid-fit handling, CLI/resource reporting and a distinct full-runner smoke remain.
+
+The focused ledger/adapter suite passed 68 tests, then the full suite passed 240
+with additional learned-model loading/schema checks. A final focused regression
+passed for selection mutation during an evaluation callback; its guard prevents
+publishing a trial against a changed selection. The increment has 27 new checks
+in total. No physical gate or model formula changed, no reserved cohort ran, and
+no timing was acquired. The adapter requires the provenance references returned
+by the study opener in the training binding, rather than trusting supplied base
+settings or artifact names alone. Missing stage orchestration remains explicit.

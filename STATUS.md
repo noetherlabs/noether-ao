@@ -227,3 +227,30 @@ cohort, physical experiment, training sweep or timing was run, and all baseline
 source/evidence and frozen study inputs remain unchanged. The next task is to
 connect durable pilot/model/trial records and separate stage commands, including
 mid-fit interruption handling, then verify a distinct end-to-end physical smoke.
+
+
+## Durable validation and evaluation trials
+
+Validation now runs through audited, resumable ledger chunks. Existing successes
+and failures are checked and skipped, and each new record is published immediately.
+The shared chunk implementation preserves the frozen evaluation gate and rechecks
+selection after a callback. A lazy adapter connects exact-noise controller kernels
+to immutable atmosphere/open-loop/raw-output files and both metric windows.
+It requires bound provenance and valid frozen parameter files before numerical
+work; failed training yields an explicit failed record without running physics.
+
+The full local correctness command `CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q`
+passed **240 tests**, including **26 new stage/adapter checks**. A subsequent focused
+regression check also passed for selection mutation during an evaluation callback;
+it confirms that no evaluation record is published. Checks include raw metric
+reconstruction, shared references across candidates, learned weights loaded from
+saved files, fault-matched zero-DM agreement, nonfinite retention, interrupted raw
+publication, malformed models, evidence drift and disk refusal.
+
+Physical wiring checks use reduced 81001/82001/83001 cohorts and synthetic frozen
+model fixtures. They are not study training, scientific validation results or a
+full-runner smoke artifact. No reserved study data or timings were acquired.
+The original simulator, frozen protocol/plan and saved evidence are unchanged.
+Next connect durable pilot/model orchestration and mid-fit checkpoints, add separate
+stage commands and resource reporting, then run a distinct full-runner smoke before
+the reserved comparison. Full-stream retention also requires full-run disk sizing.

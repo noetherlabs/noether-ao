@@ -6,8 +6,9 @@ ledger is implemented. Numerical helpers now connect the unchanged simulator to
 measured pilot telemetry, per-episode predictor fits and paired raw-array scoring.
 A learned fitting helper now implements fixed-budget, equal-episode gradient
 averaging. Source/runtime capture and immutable numeric artifact storage now
-connect to the ledger. The full stage runner and ledger-backed physical smoke
-remain pending before any reserved cohort is used. The frozen YAML,
+connect to the ledger. Durable validation/evaluation callbacks now execute bounded
+trial chunks. Training orchestration, complete stage commands and ledger-backed
+physical smoke remain pending before any reserved cohort is used. The frozen YAML,
 plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
@@ -18,7 +19,7 @@ plan and original M0–M7 evidence are unchanged.
            |
     bind_training(all predictor + learned candidates, evidence)
            |
-    record_validation(exact case, outcome, raw + paired open-loop references)
+    validate_chunk(lazy adapter, limit) -> record exact case + raw/paired references
            |          incomplete / duplicate / changed binding -> reject
            v
     freeze_selection(all declared cases, all rejected candidates retained)
@@ -150,7 +151,7 @@ optical-gain drift changes sensing only. Raw metrics preserve a full-output fini
 flag when large streams are omitted, so a finite post-burn average cannot hide
 a nonfinite early frame. Nonfinite reported metrics become JSON nulls with a
 failed finite flag. The ledger remains responsible for reference identity and
-artifact integrity; the stage runner still has to connect both layers.
+artifact integrity; the durable trial adapter now connects both layers.
 
 The [component smoke configuration](../configs/controller_physics_smoke.yaml)
 predeclares smaller 16-pixel/eight-mode, 24-frame checks on separate 51001/52001/
@@ -182,6 +183,65 @@ simulator, future-phase causality, command delay, same-disturbance zero-DM
 agreement, independent episode fits, strict raw shape/finite checks, reserved-seed
 rejection and CI refusal. This is component wiring verification; the eventual
 complete stage runner still needs its own independent smoke cohort.
+
+## Durable validation/evaluation trial adapters
+
+`StudyLedger.validate_chunk` now applies the same locked audit, callback and
+publication path as `evaluate_chunk`. Before doing new work, it checks the training
+binding and every existing validation record, including failures. It skips saved
+records, enforces a positive integer limit and rejects work after selection is
+frozen. Both stages pass detached case/training dictionaries, recheck immutable
+inputs after callbacks, and publish each result immediately. Exceptions stop the
+chunk; earlier records remain. Evaluation also checks that its selection file did
+not change during a callback.
+
+`controller_trials.validate_trials(ledger, base, limit)` and `evaluate_trials`
+construct a lazy adapter and enter those ledger methods. Construction copies only
+the base mapping. Calibration, frozen model loading and atmosphere generation
+occur inside the admitted callback, after the relevant gate. Callers must first
+open the run with fresh provenance. Training evidence must bind the four captured
+source/runtime/study/base JSON files, whose hashes/configuration are checked again
+before numerical work. The adapter does not generate training data or fit models.
+
+Ready predictive/learned models need exactly one `parameters.npz` reference among
+their immutable model artifacts. Predictive files contain only `coefficients`
+with shape `(modes, 2)`; learned files contain `parameter_0` through `parameter_3`
+with the fixed width-eight shapes. Values must be finite. Other model artifacts
+can retain histories. Failed training yields an explicit failed trial record,
+including its diagnostic and retained artifacts, before calibration or atmosphere
+access. No substitute/default model is used.
+
+    admitted case -> frozen provenance -> disk/model checks -> lazy calibration
+        -> shared atmosphere by stage/wind/root
+        -> shared zero-DM reference by full condition, including fault
+        -> exact Poisson/read-noise loop, no fallback
+        -> full raw output + post-burn/fault metrics -> ledger record
+
+Shared atmospheric and reference arrays each have an immutable identity sidecar
+and verified raw-file hash. Candidates in the same condition reuse the same open
+reference; photon/candidate changes reuse the same wind/root atmosphere. Each
+record references full controller outputs, both shared inputs and their metadata,
+plus execution configuration and both metric windows. Vibration affects both the
+controlled and reference truth. Nonfinite outputs remain completed acquisitions
+with retained raw failures and a false finite flag/null metrics as appropriate;
+selection rejects them. Unexpected implementation or storage exceptions propagate.
+
+If interruption leaves raw data before its metadata or ledger record, an identical
+retry can complete publication; changed data cannot replace it. Resumption audits
+old atmosphere/model/output references before any new callback. Calibrations and
+compiled kernels are reused within one chunk. A conservative per-trial free-space
+floor is checked before physics, but this does not guarantee space for the entire
+study. The adapter currently retains full streams. Full-run disk sizing and
+resource-cost reporting must be completed before reserved-cohort acquisition.
+
+Tests cover both ledger transitions and reduced physical paths on independent
+81001/82001/83001 cohorts with initialization 84001. Frozen model arrays and some
+prior records are explicitly synthetic fixtures; they are not trained study models
+or scientific validation outcomes. Physical checks include fault-matched zero-DM
+agreement, full raw metric reconstruction, shared references, nonfinite retention,
+raw-before-metadata interruption and loading learned parameters from saved files.
+No stage CLI, complete training orchestrator, timing measurement, end-to-end smoke
+artifact or reserved-study result is supplied by this bounded increment.
 
 ## Source/runtime capture and immutable numeric evidence
 
@@ -240,8 +300,8 @@ cohorts. They cover hidden Git edits, source/runtime drift, pinned-base mismatch
 partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
-acquisition. Stage commands, per-fit checkpoints and trial/model bindings still
-need to connect it to the numerical helpers and undergo full-runner smoke checks.
+acquisition. Trial bindings now use these writers. Stage commands, per-fit checkpoints and
+model orchestration still need integration and full-runner smoke checks.
 
 ## Learned fitting and its evidence contract
 
@@ -304,7 +364,7 @@ Additional failures cover held-out cases blocked before backend access, malforme
 coerced identities, nonfinite early outputs, gradient/mean overflow, failed
 optimizer state/parameters, final scoring, and unexpected backend errors.
 
-## Engineering review and tests
+## Original ledger engineering review and tests
 
 The bounded change reuses `controller_protocol` for candidate enumeration and all
 predeclared constraints. It adds one ledger class and pure selection code, leaving
