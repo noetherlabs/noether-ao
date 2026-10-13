@@ -15,9 +15,12 @@ evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
 normalized equal-episode gradients, fixed Adam budgets and failure records. Next
-connect the adapter and separate stage commands: actual provenance capture and
-durable pilot, training and trial recording through the ledger. The separate
-component smoke has passed. The adapter must enter evaluation through the ledger's lazy callback, after the gate.
+connect the adapter and separate stage commands: durable pilot, training and trial
+recording through the ledger. Fresh source/runtime capture and exclusive numeric
+artifact storage are implemented; bind their returned provenance references with
+the training evidence. Add durable mid-fit recording/resumption before long fits.
+The separate component smoke has passed. The adapter must enter evaluation through
+the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
 Commit the complete runner before the full study. Ledger fixtures are not physical
 smoke evidence or study outcomes.
@@ -71,6 +74,17 @@ Numerical failures retain partial evidence and return no usable model. Correctne
 tests use analytic objectives and a reduced optical case on separate seeds; they
 are not full study training or held-out performance results. Durable integration
 and the full runner smoke remain in P1.
+
+## Completed — Source/runtime binding and immutable raw storage
+
+The study opener captures the actual checkout, pinned study/base and fresh runtime
+on create/resume. Source bytes must match their committed Git objects, including
+files hidden from ordinary status, and untracked execution files are rejected.
+Canonical source/runtime evidence hashes match the ledger bindings. Numeric NPZ
+files preserve shapes, dtypes and nonfinite failures, permit exact retries and
+reject changed replacements. Tests cover interrupted writes, competing writers,
+path aliases and changed evidence. No scientific cohort is acquired by this layer.
+The full runner and durable per-stage records remain in P1.
 
 ## P2 — Optical-gain drift observability
 

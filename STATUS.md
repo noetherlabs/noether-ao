@@ -204,3 +204,26 @@ Original source, frozen protocol/plan and retained evidence are unchanged. The
 full adapter still needs real provenance, durable training/trial recording and
 separate stage commands, followed by a distinct end-to-end physical smoke before
 the full controller study.
+
+
+## Study provenance and raw evidence storage
+
+`controller_evidence` now captures the actual source commit and execution-file
+hashes, checks study/base pins, records the fresh runtime, and creates or resumes
+an identically bound ledger. It rejects dirty/untracked execution inputs and
+compares actual source bytes with committed Git objects even when ordinary Git
+status hides changes. Source/runtime/configuration evidence is published as
+immutable metadata and returned for the future training binding.
+
+Raw numeric NPZ publication preserves shapes, dtypes and nonfinite failures. Exact
+retries leave the existing file intact; changed replacements fail. Verified loads
+reject hash drift and pickle. Tests cover interrupted initialization/publication,
+competing writers, path/symlink aliases and disk refusal. The full local correctness
+command `CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q` passes **214 tests**,
+including **39 new evidence-storage checks**.
+
+These checks use temporary Git repositories and synthetic arrays. No reserved
+cohort, physical experiment, training sweep or timing was run, and all baseline
+source/evidence and frozen study inputs remain unchanged. The next task is to
+connect durable pilot/model/trial records and separate stage commands, including
+mid-fit interruption handling, then verify a distinct end-to-end physical smoke.

@@ -5,8 +5,9 @@ not a controller result or a finished scientific runner. The selection and recor
 ledger is implemented. Numerical helpers now connect the unchanged simulator to
 measured pilot telemetry, per-episode predictor fits and paired raw-array scoring.
 A learned fitting helper now implements fixed-budget, equal-episode gradient
-averaging. The full stage runner, study provenance capture and ledger-backed
-physical smoke remain pending before any reserved cohort is used. The frozen YAML,
+averaging. Source/runtime capture and immutable numeric artifact storage now
+connect to the ledger. The full stage runner and ledger-backed physical smoke
+remain pending before any reserved cohort is used. The frozen YAML,
 plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
@@ -92,8 +93,10 @@ not inspect numerical arrays, derive metrics, verify model shapes, generate
 atmospheres or certify that a controller used only permitted measurements. The
 adapter must enforce those semantics and retain enough raw evidence to audit them:
 
-- Build actual source/runtime inventories, check the pinned base configuration,
-  require a clean source checkout, and check free disk before a scientific run.
+- Open the run with `controller_evidence.open_study_run` to capture fresh
+  source/runtime inventories, verify pinned inputs and require a clean checkout.
+  Pass an adequate disk budget and retain the returned provenance references in
+  the training binding. Check remaining space during large stages too.
 - Save shared atmospheres, exact pilot observations and measured pseudo-open-loop
   estimates. Fit separate sequences, never bridge seeds or use phase truth as
   predictor telemetry. Preserve parameter arrays and training histories.
@@ -179,6 +182,66 @@ simulator, future-phase causality, command delay, same-disturbance zero-DM
 agreement, independent episode fits, strict raw shape/finite checks, reserved-seed
 rejection and CI refusal. This is component wiring verification; the eventual
 complete stage runner still needs its own independent smoke cohort.
+
+## Source/runtime capture and immutable numeric evidence
+
+`controller_evidence.open_study_run` creates or reopens a ledger using the actual
+loaded package's checkout. It captures the exact commit, all tracked execution
+inputs under `src/`, `scripts/` and `configs/`, plus `pyproject.toml` and `uv.lock`.
+Tracked edits, untracked/ignored execution files and source symlinks are rejected.
+Standard `__pycache__` files and `.DS_Store` are excluded. Each source file's actual
+bytes must also match its committed Git blob, because assume-unchanged and
+skip-worktree flags can conceal edits from ordinary status. A second source
+inventory after runtime capture rejects intervening changes. Large result trees
+are excluded from execution hashes and retain their own evidence inventories.
+
+The study and its SHA256-pinned base must both be tracked execution inputs.
+Runtime evidence uses the existing machine/package/device fingerprint plus
+selected effective JAX settings, relevant numerical environment flags and the
+zlib runtime version. JAX x64 is required. It records installed versions/options,
+not hashes of every installed binary. Source/runtime bindings are timestamp-free,
+canonical JSON with full SHA256 hashes; they are deterministic within the same
+checkout/runtime. This is a process-entry check, not continuous source monitoring.
+
+    source + pinned study/base + runtime -> fresh bindings -> ledger create/resume
+        -> immutable source/runtime/study/base JSON -> shared evidence references
+    numeric arrays -> deterministic NPZ -> flush -> exclusive publication
+        -> checked artifact reference -> future training/trial record
+
+The opener returns `(ledger, base, references)`. The future runner must include
+those references alongside pilot/training evidence when it binds training. It
+checks a positive free-space budget (default 512 MiB for initialization); full
+stages must budget their actual expected output size. Resumption requires the
+same exact source commit, input configuration and runtime, including after an
+artifact-only commit. Use the pinned source checkout. Missing provenance files
+from an interrupted initialization can be republished from identical bindings;
+changed files are never overwritten. A partial root without a manifest is retained
+for inspection rather than silently deleted or treated as a complete run.
+
+`save_arrays` writes a numeric NPZ archive with sorted entry names, fixed ZIP
+timestamps and compression method, preserving scalar shape, dtype, complex values
+and raw NaN/Inf failure evidence. It excludes object/string arrays and pickle.
+`save_metadata` reuses the ledger's strict JSON publisher; nonfinite JSON is
+rejected. Both publish exclusively after flushing. Identical retries preserve the
+existing file, while changed values, keys, shapes, dtypes or metadata fail.
+Publication accepts only canonical paths beneath `evidence/`, rejects symlink
+aliases, and never takes a second ledger lock inside an evaluation callback.
+`load_arrays` verifies the saved artifact hash before decoding without pickle.
+
+Caught write/publication errors leave no completed artifact and preserve existing
+files. Pending files left by an interrupted process are not automatically consumed
+or removed. Concurrent identical publications converge on one file; differing
+writers get one winner and an explicit replacement error. Hash checks and exclusive
+publication guard cooperating processes and accidental drift; they are not an
+access-control boundary against a hostile writer able to replace the entire run.
+
+Tests use temporary Git repositories and synthetic arrays with separate metadata
+cohorts. They cover hidden Git edits, source/runtime drift, pinned-base mismatch,
+partial initialization, disk refusal, exact retries, numeric failure fidelity,
+write/link interruptions, concurrent writers, symlink/path rejection and pickle
+rejection. This layer performs no simulation, training, timing or reserved-cohort
+acquisition. Stage commands, per-fit checkpoints and trial/model bindings still
+need to connect it to the numerical helpers and undergo full-runner smoke checks.
 
 ## Learned fitting and its evidence contract
 

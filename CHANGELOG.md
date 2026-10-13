@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Bind study creation/resumption to freshly captured source/runtime evidence and
+  pinned inputs. Verify source bytes against committed Git objects, including
+  hidden edits. Add exclusive, deterministic numeric artifact publication with
+  exact retries, retained nonfinite values and verified pickle-free loading.
+
 - Add fixed-budget learned fitting with common initialization, per-episode
   open-loop normalization and equal gradient averaging before each Adam update.
   Retain training checkpoints and numerical failures; verify optimizer arithmetic

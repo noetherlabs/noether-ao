@@ -330,3 +330,35 @@ existing ledger already accepts ready/failed model statuses; the future adapter
 must publish the returned arrays and bind their references, not pass the in-memory
 record directly as ledger metadata. Original simulator, protocol and evidence
 remain untouched. No reserved cohort or timing acquisition occurred.
+
+## Study evidence storage and provenance (2026-10-13)
+
+Before connecting the numerical helpers to stage commands, implement fresh source
+and runtime capture plus immutable raw-array storage. Reuse the existing machine
+fingerprint, pinned-study loader and StudyLedger; keep the baseline artifact and
+simulation helpers unchanged. Bind the exact commit and canonical inventories on
+create/resume. Inventory tracked execution inputs under src/, scripts/ and configs/
+plus pyproject.toml and uv.lock, and reject dirty or untracked execution inputs,
+including ignored Python/config files. Exclude the large historical result tree
+from execution hashes; preserve its existing provenance separately.
+
+Use deterministic numeric NPZ entries, flush before exclusive publication, and
+allow only byte-identical retries. Preserve NaN/Inf in raw arrays while rejecting
+objects/pickle and nonfinite JSON metadata. Raw publication must work inside the
+ledger's locked evaluation callback without acquiring a second lock. Evidence
+references become part of the future training/trial bindings; fresh inventory
+capture is required at every process entry, not a claim of continuous monitoring.
+
+Apply the same autonomous gstack planning, two-pass review and direct-main shipping
+workflow. Test with temporary repositories and synthetic arrays, including failed
+publication and concurrent writers. Do not generate reserved cohort arrays or new
+scientific outcomes. Stage commands and a distinct full-runner smoke remain next.
+
+The initial 36 storage checks passed. Review identified that ordinary Git status
+can conceal modified execution files marked assume-unchanged or skip-worktree;
+source capture now verifies every actual file against its committed Git blob as
+well as retaining an independent SHA256 inventory. Added regression checks for
+both flags and for a hash-matching archive that contains an object/pickle array.
+The final local suite passes 214 tests (39 new) without scientific acquisition.
+Runtime evidence also records zlib's version for deterministic archive retries.
+The generic runtime inventory does not claim to hash every installed binary.

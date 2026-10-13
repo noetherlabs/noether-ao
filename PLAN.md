@@ -11,8 +11,10 @@ Numerical helpers now supply measured training telemetry, predictor fits and
 paired physical scoring. Their separate [component smoke](results/controller_physics_smoke_v1/README.md)
 passes all predeclared gates with reproducible raw evidence. Learned fitting now
 implements complete-episode gradient averaging and fixed Adam budgets with retained
-checkpoints and numerical failures. Next connect these helpers, real provenance
-and stage commands to the ledger before a full runner smoke or reserved outcomes.
+checkpoints and numerical failures. Fresh source/runtime capture and exclusive
+raw-array storage now bind evidence to the ledger. Next connect numerical helpers
+to durable training/trial records and separate stage commands before a full runner
+smoke or reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.
