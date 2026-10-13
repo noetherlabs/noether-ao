@@ -15,14 +15,16 @@ evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
 normalized equal-episode gradients, fixed Adam budgets and failure records. Next
-connect pilot/model orchestration and separate stage commands. Durable validation
+connect training coordination, aggregate binding and separate stage commands. Durable validation
 and evaluation trial adapters now record full raw outputs through ledger chunks.
 Fresh source/runtime capture and exclusive numeric artifact storage are implemented;
 bind their returned provenance references with the training evidence. The learned
 fit journal now preserves episode losses/gradients, replays saved episodes through
 the unchanged optimizer and returns terminal model/history references. Integrate
-those references with durable pilots/predictor fits and the aggregate training
-binding. Complete resource reporting and full-run disk sizing before acquisition.
+those references with the now-implemented durable pilot/predictor records in the
+aggregate training binding. Coordinate complete pilot acquisition, every predictor
+and learned candidate, and one final immutable training bundle before validation.
+Complete resource reporting and full-run disk sizing before acquisition.
 The separate component smoke has passed. The adapter must enter evaluation through
 the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
@@ -110,6 +112,17 @@ diagnostics are retained and unexpected exceptions propagate. Correctness checks
 compare interrupted and uninterrupted fits and exercise a reduced optical resume
 on separate seeds. Aggregate training orchestration and a full-runner smoke remain
 in P1; this is not reserved training or a new controller-performance result.
+
+## Completed — Durable pilot and predictor records
+
+Pilot acquisition audits prior records, skips saved successes/failures and appends
+bounded exact-noise integrator episodes under the ledger lock. It saves calibration,
+shared phases, full observations/commands and measured telemetry. Predictor fitting
+requires the complete cohort, audits telemetry against the saved measurements and
+fits each burned-in episode separately. Terminal models retain coefficients and
+histories, or raw numerical failures without usable parameters. These records can
+join the aggregate training bundle; the complete coordinator and full-runner smoke
+remain P1 work. No reserved scientific cohort was acquired.
 
 ## P2 — Optical-gain drift observability
 

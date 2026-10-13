@@ -28,6 +28,14 @@ FULL_OUTPUT_KEYS = frozenset(("variance", "strehl", "saturated", "score", "alarm
                               "measurement", "prediction"))
 
 
+class NumericalTrainingFailure(ValueError):
+    """Known numerical failure with retained arrays, distinct from bad inputs."""
+
+    def __init__(self, message, evidence):
+        super().__init__(message)
+        self.evidence = evidence
+
+
 def _identity(value) -> str:
     return json.dumps(value, sort_keys=True, allow_nan=False)
 
@@ -88,7 +96,7 @@ def measured_telemetry(outputs: dict, cal: dict) -> np.ndarray:
     result = applied.astype(np.float64, copy=True)
     result[:, :recon.shape[0]] += (measured - reference) @ recon.T
     if not np.isfinite(result).all():
-        raise ValueError("Nonfinite reconstructed pilot telemetry")
+        raise NumericalTrainingFailure("Nonfinite reconstructed pilot telemetry", {"telemetry": result})
     return result
 
 
@@ -118,12 +126,24 @@ def fit_measured_predictor(study: dict, candidate: dict, episodes: list[dict], m
     if len(found) != len(expected):
         raise ValueError("Incomplete training cohort")
     parameters = candidate["parameters"]
-    coefficients = np.stack([predict_fit(found[_identity(case)][study["training"]["burn_in"]:],
-                                        parameters["horizon"], parameters["ridge"]) for case in expected])
+    completed = []
+    for case in expected:
+        try:
+            coefficient = predict_fit(found[_identity(case)][study["training"]["burn_in"]:],
+                                      parameters["horizon"], parameters["ridge"])
+        except np.linalg.LinAlgError as error:
+            raise NumericalTrainingFailure("Predictor linear solve failed: " + str(error), {
+                "cases": expected, "episode_coefficients": np.asarray(completed).reshape(-1, modes, 2),
+                "coefficients": None, "failed_case": case}) from error
+        if np.shape(coefficient) != (modes, 2):
+            raise ValueError("Invalid predictor coefficient shape")
+        completed.append(coefficient)
+    coefficients = np.stack(completed)
     mean = coefficients.mean(axis=0)
+    result = {"cases": expected, "episode_coefficients": coefficients, "coefficients": mean}
     if not np.isfinite(coefficients).all() or not np.isfinite(mean).all():
-        raise ValueError("Nonfinite predictor coefficients")
-    return {"cases": expected, "episode_coefficients": coefficients, "coefficients": mean}
+        raise NumericalTrainingFailure("Nonfinite predictor coefficients", result)
+    return result
 
 
 def controller_kernel(cfg: dict, cal: dict, controller: str, fault: str = "none",

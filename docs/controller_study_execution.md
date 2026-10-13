@@ -8,7 +8,8 @@ A learned fitting helper now implements fixed-budget, equal-episode gradient
 averaging. Source/runtime capture and immutable numeric artifact storage now
 connect to the ledger. Durable validation/evaluation callbacks now execute bounded
 trial chunks, and a learned-fit journal now resumes interrupted fits from saved
-episode losses/gradients. Training orchestration, complete stage commands and
+episode losses/gradients. Pilot acquisition and predictor fitting now publish
+durable training records. Aggregate training coordination, complete stage commands and
 ledger-backed physical smoke remain pending before any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
@@ -99,9 +100,9 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   source/runtime inventories, verify pinned inputs and require a clean checkout.
   Pass an adequate disk budget and retain the returned provenance references in
   the training binding. Check remaining space during large stages too.
-- Save shared atmospheres, exact pilot observations and measured pseudo-open-loop
-  estimates. Fit separate sequences, never bridge seeds or use phase truth as
-  predictor telemetry. Preserve parameter arrays and training histories.
+- Use the durable pilot/predictor adapter to save shared atmospheres, exact pilot
+  observations, measured pseudo-open-loop estimates and model histories. Coordinate
+  its bounded acquisition and all declared predictor fits before aggregate binding.
 - Call the durable learned-fit adapter for all six declared candidates and bind
   its returned model/history/evidence references alongside pilot/predictor records
   to the ledger. Freeze the complete training bundle before validation.
@@ -366,6 +367,71 @@ outcomes, trained study models or evidence of held-out improvement.
 Additional failures cover held-out cases blocked before backend access, malformed shapes,
 coerced identities, nonfinite early outputs, gradient/mean overflow, failed
 optimizer state/parameters, final scoring, and unexpected backend errors.
+
+## Durable pilot and predictor records
+
+`controller_pilots.acquire_pilots(ledger, base, shared_evidence, limit)` acquires a
+positive integer number of new training pilot episodes, at most. Open the ledger
+with fresh provenance first and pass its four source/runtime/study/base references.
+The adapter checks the open training stage, publishes an immutable pilot journal,
+and audits every prior record before constructing numerical inputs. It skips both
+ready and failed saved outcomes. Returned counts distinguish newly acquired records,
+total records, failed records and whether the declared cohort is complete.
+
+    provenance + open training -> audit prior pilot identities/artifact hashes
+        -> disk floor -> lazy calibration -> shared wind/root atmosphere
+        -> clean exact-Poisson/read-noise integrator at declared pilot gain/leak
+        -> full outputs -> measured reconstruction -> ready/failed pilot record
+    complete pilot cohort -> declared predictor candidate
+        -> audit telemetry from saved observations/applied commands/calibration
+        -> separate burned-in episode fits -> equally averaged coefficients
+        -> terminal ready/failed model and evidence references
+
+Calibration and compiled kernels are reused within a chunk. Numeric calibration,
+shared phase arrays, full raw outputs and reconstructed telemetry are published
+before each pilot record. Atmosphere paths match the learned-fit journal and are
+shared across photon regimes; their identity metadata binds the pilot journal.
+The numerical kernel is the existing integrator with clean training settings,
+physical command delay, exact noise and no fallback. The saved simulator estimate
+is retained for auditing, never used as predictor training telemetry.
+
+Nonfinite phases, full outputs or reconstructed telemetry create failed pilot
+records with retained raw values. A malformed schema or invalid calibration stops
+the chunk for inspection. Unexpected implementation and storage errors propagate,
+with best-effort interruption diagnostics; earlier complete records remain. If raw
+publication precedes an interrupted record write, retry must reproduce its bytes.
+The per-episode free-space floor precedes numerical construction; it does not
+establish that the entire study will fit on disk.
+
+`controller_pilots.fit_predictor_record(ledger, base, candidate, shared_evidence)`
+requires all declared pilot records before fitting. If any pilot failed, it returns
+a terminal failed model with the failed cases and complete evidence references,
+without fitting a partial cohort. Otherwise it reloads observations, applied
+commands and calibration one episode at a time, verifies the saved telemetry
+against measured reconstruction, and uses the existing per-episode fitting helper.
+
+Known numerical reconstruction/fit failures use `NumericalTrainingFailure`, a
+`ValueError` subclass carrying the failed arrays. Nonfinite coefficients or their
+mean remain in raw history. A failed linear solve retains completed coefficients
+and the failed case. Unexpected exceptions are not converted into scientific
+outcomes. A ready model has one final `parameters.npz` containing `coefficients`;
+a failed model has history/diagnostics but no usable parameter file. Both return
+`{model, evidence}` for the later aggregate training binding. Terminal records
+recheck their inputs and artifacts on resume without fitting again.
+
+Each public operation holds the ledger lock. Frozen training/selection or existing
+validation records block both entry points. Stage, provenance and artifact bindings
+are rechecked before publication. These adapters do not schedule learned candidates,
+freeze the aggregate training bundle, expose stage commands, or collect resource
+timings. Those responsibilities and a full-runner smoke remain outstanding.
+
+Tests use separate 101001/102001/103001 cohorts and initialization 104001. They
+exercise chunk recovery, complete-cohort admission, measured-only fitting,
+shared atmosphere storage with learned fitting, drift rejection, disk refusal,
+lock exclusion and retained numerical failures. Reduced physical pilots check
+measurement reconstruction and command delay; all declared predictor candidates
+produce finite coefficients on that correctness fixture. These checks are not
+reserved training, a scientific comparison or a saved full-runner smoke.
 
 ## Durable learned-fit journal
 

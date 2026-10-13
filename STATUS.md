@@ -302,3 +302,21 @@ Documentation checks verified 40 local links/anchors, syntax for six shell block
 the live experiment CLI choices and eight generated report sections against saved
 data. The generated C1–C4 headlines remain byte-identical. No source, dependency,
 protocol or raw result changed; this update acquired no new scientific evidence.
+
+## Durable pilot and predictor records
+
+Pilot acquisition now publishes audited, resumable episode records with calibration,
+shared atmosphere files, complete raw outputs and reconstructed measured telemetry.
+Each predictor fits the complete declared cohort, retains per-episode coefficients,
+and returns a terminal model/evidence record. Failed pilots or numerical fits
+remain terminal failures; interruptions preserve prior files and diagnostics.
+Learned fits reuse the same atmosphere files without replacing their bytes.
+
+The full local correctness suite passed **318 tests** in 311.91 seconds, including
+**38 new pilot/predictor checks**. Tests cover interrupted publication, exact resume,
+finite and nonfinite fits, shared learned-fit inputs, integrity/frozen-stage guards,
+disk refusal, and all six predictors on a reduced physical pilot cohort. Separate
+101001/102001/103001 cohorts and initialization 104001 keep these correctness checks
+apart from reserved scientific data. No new timings or reserved outcomes were
+acquired. Training coordination, aggregate binding, stage commands, resource/disk
+reporting and a distinct full-runner smoke remain pending.

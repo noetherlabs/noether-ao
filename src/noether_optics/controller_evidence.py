@@ -8,6 +8,7 @@ Hashes detect accidental drift, not a hostile writer with access to the run.
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import hashlib
 import os
 from pathlib import Path
@@ -17,6 +18,7 @@ import subprocess
 import tempfile
 import zipfile
 import zlib
+from uuid import uuid4
 
 import numpy as np
 
@@ -266,3 +268,22 @@ def check_provenance_binding(ledger, base, references):
     if (_bytes(_read(ledger.root / (prefix + "study.json"))) != _bytes(ledger.config)
             or _bytes(_read(ledger.root / (prefix + "base.json"))) != _bytes(base)):
         raise ValueError("Study configuration differs from frozen evidence")
+
+
+def check_training_open(ledger):
+    """Require unchanged run metadata and an unfrozen training stage, under lock."""
+    if _bytes(_read(ledger.root / "manifest.json")) != _bytes(ledger.manifest):
+        raise ValueError("Run manifest changed")
+    if ((ledger.root / "training.json").exists() or (ledger.root / "selection.json").exists()
+            or any((ledger.root / "validation").glob("*.json"))):
+        raise ValueError("Training is frozen; fitting or acquisition cannot resume")
+
+
+def record_interruption(ledger, prefix, journal, error):
+    """Best-effort diagnostic; never mask the original exception on storage error."""
+    try:
+        save_metadata(ledger, prefix + f"/interruptions/{uuid4().hex}.json", {
+            "error_type": type(error).__name__, "message": str(error),
+            "utc": datetime.now(timezone.utc).isoformat(), "journal": journal})
+    except Exception:
+        pass

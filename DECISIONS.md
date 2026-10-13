@@ -451,3 +451,31 @@ in memory from saved data without writing artifacts. The README headline block
 is unchanged from the prior commit. Full scientific or numerical reruns are not
 needed for this prose-only change; the regular remote correctness workflow still
 runs after publication.
+
+## Durable pilot and predictor records (2026-10-14)
+
+Implement bounded pilot acquisition and terminal predictor records as the next P1
+training stage. Reuse the existing exact-noise integrator, measured reconstruction,
+per-episode predictor fits and exclusive evidence publisher. Audit saved outcomes
+before new physics, retain full pilot streams and calibration, and share atmosphere
+paths with learned fitting. Require the complete declared pilot cohort before any
+predictor fit; a failed pilot makes its shared training data unusable for every
+predictor. Record these failures rather than dropping episodes or changing seeds.
+
+Expose known numerical reconstruction/fit failures through a typed exception that
+retains their arrays, including partial coefficients on a failed linear solve.
+Unexpected implementation or I/O errors propagate with best-effort diagnostics.
+One ledger lock covers each public operation, with frozen-training/provenance
+checks before work and before publication. The per-episode disk floor is not a
+full-run capacity guarantee. The complete orchestrator, aggregate training freeze,
+stage commands, resource costs and full-runner smoke remain P1 work; no reserved
+cohort is acquired by this implementation increment. Use separate correctness
+cohorts and the autonomous gstack planning/review/direct-main shipping workflow.
+
+Validation: all 318 local correctness tests passed in 311.91 seconds; the 38 new
+pilot/predictor tests also passed separately. The two-pass pre-landing review found
+no additional blocking issues. Tests exercise actual reduced optical pilots and all
+six predictors, interruption and drift rejection, numerical-failure retention and
+shared atmosphere integration with the learned journal. They do not establish a
+controller-performance result. Baseline raw evidence, simulator formulas and frozen
+study configuration/plan are unchanged.

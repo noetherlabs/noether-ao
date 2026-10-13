@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Acquire training pilots in audited, resumable chunks and fit predictors from
+  complete saved measured cohorts. Retain calibration, shared phases, full pilot
+  outputs, per-episode coefficients and numerical failures. Verify evidence before
+  reuse and preserve interrupted work without making failed models eligible.
+
 - Save learned episode losses/gradients with immutable input and parameter bindings.
   Resume interrupted fits by replaying cached gradients through the existing Adam
   loop. Retain terminal failures and interruption diagnostics; verify matching

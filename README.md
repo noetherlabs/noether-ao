@@ -42,6 +42,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Numerical experiments | Latency, physical gates, model fidelity, controller mixtures and fault response | [latency](src/noether_optics/latency.py), [experiments](src/noether_optics/experiments/) |
 | Study physics | Measured pilot telemetry, predictor fitting, exact-noise trials and fault-matched open-loop references | [controller_physics](src/noether_optics/controller_physics.py) |
 | Learned fitting | Common initialization, normalized episode losses and fixed-budget Adam updates | [controller_training](src/noether_optics/controller_training.py) |
+| Pilot data and predictors | Bounded pilot acquisition, measured telemetry audits and terminal predictor records | [controller_pilots](src/noether_optics/controller_pilots.py) |
 | Evidence and recovery | Source/runtime bindings, immutable numeric artifacts, resumable fits and trial records | [evidence](src/noether_optics/controller_evidence.py), [fit journal](src/noether_optics/controller_training_journal.py), [trial adapters](src/noether_optics/controller_trials.py) |
 | Selection | Complete validation, eligibility checks and frozen models before held-out evaluation | [study ledger](src/noether_optics/controller_selection.py) |
 
@@ -98,10 +99,11 @@ are frozen inputs. Reserved study outcomes have not yet been acquired.
 | --- | --- |
 | Protocol and selection | Implemented: equal candidate budgets, complete validation, eligibility gates, deterministic selection and no refit after selection |
 | Numerical training | Implemented: measured pilot reconstruction, separate episode predictor fits and normalized learned fitting from common initialization |
+| Pilot and predictor records | Implemented: resumable pilot chunks, complete-cohort fitting, retained raw numerical failures and terminal coefficient/history records |
 | Provenance and storage | Implemented: fresh source/runtime capture, pinned inputs, immutable numeric artifacts and verified loading |
 | Interrupted learned fits | Implemented: saved episode losses/gradients replay through Adam; completed evaluations are reused and numerical failures remain terminal |
 | Validation/evaluation trials | Implemented: bounded ledger chunks, shared atmospheres, fault-matched references, full raw outputs and retained failed outcomes |
-| Complete study runner | Pending: pilot/model orchestration, aggregate training binding, stage commands, resource reporting and full-run disk sizing |
+| Complete study runner | Pending: training coordination, aggregate training binding, stage commands, resource reporting and full-run disk sizing |
 | Scientific comparison | Pending: a distinct full-runner smoke, then acquisition on reserved cohorts and the predeclared analysis |
 
 The [execution contract](docs/controller_study_execution.md) describes the boundary

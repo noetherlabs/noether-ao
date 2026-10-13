@@ -5,13 +5,11 @@ Callers supply the verified run, calibration and complete training atmosphere se
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from uuid import uuid4
-
 import jax
 import numpy as np
 
-from .controller_evidence import check_provenance_binding, load_arrays, save_arrays, save_metadata
+from .controller_evidence import (check_provenance_binding, check_training_open,
+                                  load_arrays, record_interruption, save_arrays, save_metadata)
 from .controller_physics import _identity
 from .controller_selection import _bytes, _case_id, _digest, _read
 from .controller_training import _training_inputs, fit_learned_controller
@@ -25,7 +23,7 @@ def fit_learned_record(ledger, base, candidate, cal, episodes, shared_evidence):
     the ledger with freshly captured provenance before entering this function.
     """
     with ledger._locked():
-        _check_training_open(ledger)
+        check_training_open(ledger)
         check_provenance_binding(ledger, base, shared_evidence)
         ledger._verify_artifacts(shared_evidence)
         cases, _, denominators, found = _training_inputs(base, ledger.config, candidate, cal, episodes)
@@ -54,7 +52,7 @@ def fit_learned_record(ledger, base, candidate, cal, episodes, shared_evidence):
             result = fit_learned_controller(base, ledger.config, candidate, cal,
                 [{"case": case, "phases": found[_identity(case)]} for case in cases],
                 episode_evaluator=cache)
-            _check_training_open(ledger)
+            check_training_open(ledger)
             check_provenance_binding(ledger, base, shared_evidence)
             if (_digest(_bytes(ledger.manifest)) != binding["manifest_sha256"]
                     or _bytes(result["candidate"]) != _bytes(binding["candidate"])):
@@ -70,24 +68,8 @@ def fit_learned_record(ledger, base, candidate, cal, episodes, shared_evidence):
             save_metadata(ledger, prefix + "/complete.json", {"journal": journal, "result": terminal})
             return terminal
         except BaseException as error:
-            # This is an interruption diagnostic, never a scientific failed fit.
-            # If disk I/O itself is failing, keep the original error and all prior
-            # evidence rather than masking it with a secondary logging failure.
-            try:
-                save_metadata(ledger, prefix + f"/interruptions/{uuid4().hex}.json", {
-                    "error_type": type(error).__name__, "message": str(error),
-                    "utc": datetime.now(timezone.utc).isoformat(), "journal": journal})
-            except Exception:
-                pass
+            record_interruption(ledger, prefix, journal, error)
             raise
-
-
-def _check_training_open(ledger):
-    if _bytes(_read(ledger.root / "manifest.json")) != _bytes(ledger.manifest):
-        raise ValueError("Run manifest changed")
-    if ((ledger.root / "training.json").exists() or (ledger.root / "selection.json").exists()
-            or any((ledger.root / "validation").glob("*.json"))):
-        raise ValueError("Training is frozen; learned fitting cannot resume or refit")
 
 
 def _verify_result(ledger, result):

@@ -16,7 +16,9 @@ raw-array storage now bind evidence to the ledger. Durable validation/evaluation
 trial adapters now save raw outputs and paired references through resumable ledger
 chunks. Learned fits now journal each episode's loss/gradient and replay saved
 episodes through Adam after interruption; terminal successes and failures are
-retained. Next connect pilot/model orchestration and stage commands, complete
+retained. Pilot acquisition now runs in audited chunks and predictor fits return
+terminal coefficient/history records from complete measured cohorts. Next connect
+training coordination, aggregate binding and stage commands, complete
 resource/disk sizing, and verify a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
