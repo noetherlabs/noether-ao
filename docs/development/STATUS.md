@@ -377,8 +377,9 @@ the bound-stage no-execution path. They use the existing separate correctness se
 not the reserved study cohorts. The complete local correctness suite passes **326
 tests** in 362.72 seconds, including **8 new coordinator checks**. No performance
 timing or scientific outcome was acquired. The bounded training command is recorded
-below. Validation/selection/evaluation commands, whole-run resource/disk sizing and
-a distinct physical runner smoke remain before the reserved controller study.
+below. Validation and selection commands are also recorded below; the evaluation
+command, whole-run resource/disk sizing and a distinct physical runner smoke remain
+before the reserved controller study.
 
 ## Bounded training command
 
@@ -394,8 +395,8 @@ Seven command-boundary checks replace both the opener and coordinator; they conf
 path conversion, creation/resume state, integer limits, JSON output and zero access
 after invalid input. The complete local correctness suite passes **333 tests** in
 291.82 seconds. No study directory, physical array, reserved seed or timing was
-created. The validation command is recorded below; selection/evaluation commands,
-resource sizing and the runner smoke remain.
+created. The validation and selection commands are recorded below; the evaluation
+command, resource sizing and the runner smoke remain.
 
 ## Bounded validation command
 
@@ -410,5 +411,23 @@ The command has no creation path. Missing or nonpositive limits and training-onl
 `--create` fail during argument admission before run access. Twelve focused CLI
 checks replace the opener and validation entry point. The complete local correctness
 suite passes **338 tests** in **98.56 seconds**. No study directory, physical array,
-reserved seed, controller result or timing sample was created. Selection/evaluation
-commands, full-run resource sizing and a separately seeded runner smoke remain.
+reserved seed, controller result or timing sample was created. The selection command
+is recorded below; the evaluation command, full-run resource sizing and a separately
+seeded runner smoke remain.
+
+## Bounded selection command
+
+The CLI now exposes `study-select` as a resume-only subcommand. It opens the bound
+run through fresh source/runtime capture and delegates directly to
+`StudyLedger.freeze_selection`. That transaction audits complete validation,
+training and artifact bindings, applies the frozen eligibility/tie rules, and
+exclusively publishes the selected and withheld controller set. Exact re-entry is
+idempotent. One sorted JSON object reports the complete selection and its hashes.
+
+The command has no creation, chunk or numerical callback path. `--create`, `--limit`
+and model-stage flags fail during argument admission before run access. Four new
+selection checks bring the focused CLI file to **16 passing tests**. The complete
+local correctness suite passes **342 tests** in **94.85 seconds**. No study directory,
+physical array, reserved seed, controller result or timing sample was created. The
+evaluation command, full-run resource sizing and a separately seeded runner smoke
+remain.

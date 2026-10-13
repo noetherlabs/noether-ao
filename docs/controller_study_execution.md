@@ -12,9 +12,10 @@ episode losses/gradients. Pilot acquisition and predictor fitting now publish
 durable training records. A bounded coordinator now verifies every terminal fitted
 candidate and publishes the complete aggregate training binding. Its bounded
 `study-train` command is implemented. A bounded `study-validate` command now enters
-the existing lazy trial adapter through the ledger gate. Selection/evaluation
-commands, full-run resource reporting and ledger-backed physical smoke remain
-pending before any reserved cohort is used.
+the existing lazy trial adapter through the ledger gate. A resume-only `study-select`
+command audits and freezes the deterministic validation verdict. The evaluation
+command, full-run resource reporting and ledger-backed physical smoke remain pending
+before any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
@@ -114,9 +115,9 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
   intervals. References alone do not establish these physical properties.
-- Use the implemented training and validation commands, then expose separate
-  selection and evaluation commands. Pass a lazy evaluation callback to
-  `evaluate_chunk`; never generate evaluation arrays or preload its models before
+- Use the implemented training, validation and selection commands, then expose the
+  evaluation command. Pass a lazy evaluation callback to `evaluate_chunk`; never
+  generate evaluation arrays or preload its models before
   the gate. Write raw artifacts atomically and exclusively before publishing their
   ledger records.
   Preserve interrupted raw files and resume identical inputs; never silently
@@ -309,8 +310,8 @@ partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
 acquisition. Trial bindings and the learned-fit journal now use these writers.
-Selection/evaluation commands, full-run resource reporting and full-runner smoke
-checks remain.
+The evaluation command, full-run resource reporting and full-runner smoke checks
+remain.
 
 ## Learned fitting and its evidence contract
 
@@ -534,8 +535,8 @@ retained predictor failures, terminal-artifact drift, invalid limits, coordinato
 lock exclusion and the no-execution bound-stage path. These are software checks;
 they do not acquire reserved outcomes, timings or a controller-performance result.
 The eight new coordinator checks bring the complete local suite to 326 passing
-tests. Selection/evaluation commands, full-run resource sizing and a separate
-physical runner smoke remain.
+tests. The evaluation command, full-run resource sizing and a separate physical
+runner smoke remain.
 
 ## Bounded training command
 
@@ -590,6 +591,32 @@ before the run opener is called. Twelve focused command-boundary checks and the
 complete **338-test** local correctness suite pass in **98.56 seconds**. The tests
 replace the opener and trial entry point; no study directory, physical array,
 reserved cohort, controller outcome or timing sample is created.
+
+## Bounded selection command
+
+After every declared validation identity has a retained outcome, selection freezes
+through a separate command:
+
+```sh
+.venv/bin/noether-optics study-select \
+  --config configs/controller_study_v1.yaml \
+  --out runs/controller-study-v1
+```
+
+The command resumes the provenance-bound run and calls
+`StudyLedger.freeze_selection`. The ledger rechecks the training bundle, every
+validation identity, referenced artifact hashes, paired open-loop consistency and
+all eligibility gates before exclusively publishing `selection.json`. It preserves
+the predeclared tie order, retains rejected candidates and records `null` for any
+withheld controller. An identical retry returns the same selection without replacing
+its bytes.
+
+There is no creation, chunk or numerical callback option. Cross-stage flags fail
+during argument admission before the run opener is called. The command imports no
+optical backend and prints the complete provenance-bound selection as one sorted JSON
+object. Sixteen focused command-boundary checks and the complete **342-test** local
+correctness suite pass in **94.85 seconds**. No study directory, physical array,
+reserved cohort, controller outcome or timing sample is created by these checks.
 
 ## Original ledger engineering review and tests
 

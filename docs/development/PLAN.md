@@ -25,8 +25,9 @@ coordinator now schedules every fitted candidate and freezes the aggregate train
 bundle only after all terminal evidence verifies. A provenance-bound `study-train`
 command exposes positive pilot/model chunks and JSON progress. A separate
 `study-validate` command now admits positive chunks through the existing lazy ledger
-gate. Next add selection/evaluation commands, complete resource/disk sizing, and
-verify a full runner smoke before reserved outcomes.
+gate. A resume-only `study-select` command audits and freezes the complete validation
+verdict. Next add the evaluation command, complete resource/disk sizing, and verify
+a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Each meaningful increment also updates README.md when its technical description,

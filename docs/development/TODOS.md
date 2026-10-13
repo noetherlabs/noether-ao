@@ -33,9 +33,9 @@ and paired raw-array scoring. Learned fitting now implements common initializati
 normalized equal-episode gradients, fixed Adam budgets and failure records. Bounded
 training coordination, the complete aggregate binding and its `study-train` command
 are implemented. A resume-only `study-validate` command now advances positive chunks
-through the lazy ledger gate. Next add separate selection/evaluation commands. Durable
-validation and evaluation trial adapters record full raw outputs through ledger
-chunks.
+through the lazy ledger gate. A resume-only `study-select` command now audits and
+freezes complete validation. Next add the evaluation command. Durable validation and
+evaluation trial adapters record full raw outputs through ledger chunks.
 Fresh source/runtime capture and exclusive numeric artifact storage are implemented;
 bind their returned provenance references with the training evidence. The learned
 fit journal now preserves episode losses/gradients, replays saved episodes through
@@ -108,7 +108,7 @@ Canonical source/runtime evidence hashes match the ledger bindings. Numeric NPZ
 files preserve shapes, dtypes and nonfinite failures, permit exact retries and
 reject changed replacements. Tests cover interrupted writes, competing writers,
 path aliases and changed evidence. No scientific cohort is acquired by this layer.
-Selection/evaluation commands, resource sizing and the full-runner smoke remain in P1.
+The evaluation command, resource sizing and the full-runner smoke remain in P1.
 
 ## Completed — Durable validation and evaluation trials
 
@@ -129,7 +129,7 @@ model/history references, including ineligible numerical failures. Interruption
 diagnostics are retained and unexpected exceptions propagate. Correctness checks
 compare interrupted and uninterrupted fits and exercise a reduced optical resume
 on separate seeds. Aggregate training orchestration is now completed below; stage
-selection/evaluation commands and a full-runner smoke remain in P1. This
+evaluation command and a full-runner smoke remain in P1. This
 is not reserved training or a new controller-performance result.
 
 ## Completed — Durable pilot and predictor records
@@ -140,8 +140,8 @@ shared phases, full observations/commands and measured telemetry. Predictor fitt
 requires the complete cohort, audits telemetry against the saved measurements and
 fits each burned-in episode separately. Terminal models retain coefficients and
 histories, or raw numerical failures without usable parameters. These records join
-the aggregate training bundle through the completed coordinator. Selection/evaluation
-commands, the resource report and full-runner smoke remain P1 work. No reserved
+the aggregate training bundle through the completed coordinator. The evaluation
+command, resource report and full-runner smoke remain P1 work. No reserved
 scientific cohort was acquired.
 
 ## Completed — Training coordination and aggregate binding
@@ -171,8 +171,8 @@ JSON progress record and cannot accept the legacy latency `--resume` flag.
 Command-boundary checks replace the opener and numerical coordinator, proving that
 parsed paths, creation state and chunk limits cross the boundary exactly and that
 invalid or legacy-only option combinations cause no run access. This is runner
-wiring, not reserved acquisition. The validation command is recorded below;
-selection/evaluation commands, resource sizing and the physical full-runner smoke
+wiring, not reserved acquisition. The validation and selection commands are recorded
+below; the evaluation command, resource sizing and the physical full-runner smoke
 remain P1.
 
 ## Completed — Bounded validation command
@@ -186,8 +186,23 @@ generate phases. One sorted JSON object reports durable progress.
 Command-boundary checks replace both the opener and validation entry point, proving
 exact path/limit forwarding and zero run access after missing, nonpositive or
 training-only options. The complete suite passes 338 tests. This wiring acquires no
-reserved cohort, physical array, result or timing. Selection/evaluation commands,
-resource sizing and the separately seeded full-runner smoke remain P1 work.
+reserved cohort, physical array, result or timing. The selection command is recorded
+below; the evaluation command, resource sizing and the separately seeded full-runner
+smoke remain P1 work.
+
+## Completed — Bounded selection command
+
+`noether-optics study-select` resumes a provenance-bound study and calls the ledger's
+existing atomic selection barrier. Complete validation and every bound artifact are
+rechecked before the deterministic chosen/withheld controller set is published.
+There is no physics callback, chunk size or creation mode, and exact re-entry is
+idempotent. One sorted JSON object reports the selection and binding hashes.
+
+Four command-boundary checks prove exact opener/freeze dispatch and zero run access
+for creation, validation-limit or model-limit options. The complete suite passes
+342 tests. This wiring acquires no reserved cohort, physical array, result or timing.
+The evaluation command, resource sizing and the separately seeded full-runner smoke
+remain P1 work.
 
 ## P2 — Optical-gain drift observability
 

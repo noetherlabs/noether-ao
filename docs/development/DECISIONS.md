@@ -581,5 +581,26 @@ path, selection side effect, evaluation access, resource override or timing capt
 Validation: twelve focused CLI checks pass, followed by all 338 local correctness
 tests in 98.56 seconds. The tests replace run opening and validation execution; no
 reserved evidence, physical output or controller-performance result is acquired.
-Selection/evaluation commands, full-run sizing and the independent runner smoke
+The selection command is recorded below; the evaluation command, full-run sizing
+and the independent runner smoke remain preconditions for the reserved study.
+
+## Bounded selection CLI (2026-10-14)
+
+Expose the existing immutable selection transaction as `noether-optics study-select`.
+The command can only resume a provenance-bound run and delegates directly to
+`StudyLedger.freeze_selection`. It accepts no `--create` or chunk limit because
+selection is a single deterministic barrier: every declared validation record must
+already exist and pass integrity checks before `selection.json` can be published.
+
+Keep candidate eligibility, rejection reasons, withholding and exact-tie ordering
+inside the ledger's pretested pure selection path. The CLI must not load optical
+physics, manufacture missing outcomes, alter validation, or release evaluation
+identities. An identical retry remains an exact idempotent publication. Print the
+full selection and binding hashes as sorted JSON for inspectable orchestration.
+
+Validation: four new selection checks bring the focused CLI file to 16 passing tests,
+followed by all 342 local correctness tests in 94.85 seconds. Invalid cross-stage
+options are rejected before the mocked opener, and the valid path freezes the mocked
+ledger exactly once. No reserved evidence, numerical output or controller result is
+acquired. The evaluation command, full-run sizing and the independent runner smoke
 remain preconditions for the reserved study.

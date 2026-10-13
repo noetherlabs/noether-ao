@@ -77,6 +77,33 @@ def test_study_validate_rejects_missing_invalid_or_creation_options_before_open(
         cli.main()
 
 
+def test_study_select_freezes_bound_selection_and_prints_json(monkeypatch, capsys):
+    summary = {"manifest_sha256": "a" * 64, "result": {"selected": {"learned": None}}}
+    frozen = Mock(return_value=summary)
+    ledger = SimpleNamespace(freeze_selection=frozen)
+    opened = Mock(return_value=(ledger, {"fixture": "base"}, [{"fixture": "evidence"}]))
+    monkeypatch.setattr(evidence, "open_study_run", opened)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "study-select", "--config", "study.yaml", "--out", "run"])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("study.yaml"))
+    frozen.assert_called_once_with()
+    assert json.loads(capsys.readouterr().out) == summary
+
+
+@pytest.mark.parametrize("extra", [
+    ["--create"], ["--limit", "1"], ["--model-limit", "1"]])
+def test_study_select_rejects_other_stage_options_before_open(monkeypatch, extra):
+    monkeypatch.setattr(evidence, "open_study_run",
+                        lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"))
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "study-select", "--config", "study.yaml", "--out", "run", *extra])
+    with pytest.raises(SystemExit):
+        cli.main()
+
+
 def test_existing_experiment_rejects_study_flags_and_preserves_dispatch(monkeypatch):
     monkeypatch.setattr("sys.argv", [
         "noether-optics", "validate", "--config", "missing.yaml", "--out", "run", "--create"])

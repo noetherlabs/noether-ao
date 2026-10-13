@@ -40,6 +40,9 @@ def main() -> None:
     validation.add_argument("--out", required=True)
     validation.add_argument("--limit", type=_positive_integer, required=True,
                             help="Maximum new validation records")
+    selection = commands.add_parser("study-select")
+    selection.add_argument("--config", required=True)
+    selection.add_argument("--out", required=True)
     args = parser.parse_args()
     if args.experiment == "study-train":
         from .controller_evidence import open_study_run
@@ -55,6 +58,12 @@ def main() -> None:
         from .controller_trials import validate_trials
         ledger, base, _ = open_study_run(Path(args.out), Path(args.config))
         result = validate_trials(ledger, base, args.limit)
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "study-select":
+        from .controller_evidence import open_study_run
+        ledger, _, _ = open_study_run(Path(args.out), Path(args.config))
+        result = ledger.freeze_selection()
         print(json.dumps(result, sort_keys=True))
         return
     from .artifacts import load_config
