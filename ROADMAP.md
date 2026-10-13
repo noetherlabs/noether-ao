@@ -8,8 +8,8 @@ acceptance evidence. It is not implied by a successful simulation.
 ## 1. Complete the reproducible controller comparison
 
 **In progress.** The optical plant, training components, durable evidence storage,
-selection barrier, trial adapters, training coordination and bounded training
-command are implemented. The remaining work adds validation/selection/evaluation
+selection barrier, trial adapters, training coordination, and bounded training and
+validation commands are implemented. The remaining work adds selection/evaluation
 commands, establishes a full-run resource/disk budget, and verifies the complete
 runner on separate smoke seeds.
 

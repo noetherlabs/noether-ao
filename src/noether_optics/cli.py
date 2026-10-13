@@ -35,6 +35,11 @@ def main() -> None:
                           help="Maximum new pilot records")
     training.add_argument("--model-limit", type=_positive_integer, required=True,
                           help="Maximum new terminal model records")
+    validation = commands.add_parser("study-validate")
+    validation.add_argument("--config", required=True)
+    validation.add_argument("--out", required=True)
+    validation.add_argument("--limit", type=_positive_integer, required=True,
+                            help="Maximum new validation records")
     args = parser.parse_args()
     if args.experiment == "study-train":
         from .controller_evidence import open_study_run
@@ -43,6 +48,13 @@ def main() -> None:
             Path(args.out), Path(args.config), create=args.create)
         result = run_training_chunk(
             ledger, base, evidence, pilot_limit=args.pilot_limit, model_limit=args.model_limit)
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "study-validate":
+        from .controller_evidence import open_study_run
+        from .controller_trials import validate_trials
+        ledger, base, _ = open_study_run(Path(args.out), Path(args.config))
+        result = validate_trials(ledger, base, args.limit)
         print(json.dumps(result, sort_keys=True))
         return
     from .artifacts import load_config

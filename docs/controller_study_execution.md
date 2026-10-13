@@ -11,9 +11,10 @@ trial chunks, and a learned-fit journal now resumes interrupted fits from saved
 episode losses/gradients. Pilot acquisition and predictor fitting now publish
 durable training records. A bounded coordinator now verifies every terminal fitted
 candidate and publishes the complete aggregate training binding. Its bounded
-`study-train` command is implemented. Validation/selection/evaluation commands,
-full-run resource reporting and ledger-backed physical smoke remain pending before
-any reserved cohort is used.
+`study-train` command is implemented. A bounded `study-validate` command now enters
+the existing lazy trial adapter through the ledger gate. Selection/evaluation
+commands, full-run resource reporting and ledger-backed physical smoke remain
+pending before any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
@@ -113,10 +114,11 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
   intervals. References alone do not establish these physical properties.
-- Use the implemented training command, then expose separate validation/selection
-  and evaluation commands. Pass a lazy evaluation callback to `evaluate_chunk`;
-  never generate evaluation arrays or preload its models before the gate. Write
-  raw artifacts atomically and exclusively before publishing their ledger records.
+- Use the implemented training and validation commands, then expose separate
+  selection and evaluation commands. Pass a lazy evaluation callback to
+  `evaluate_chunk`; never generate evaluation arrays or preload its models before
+  the gate. Write raw artifacts atomically and exclusively before publishing their
+  ledger records.
   Preserve interrupted raw files and resume identical inputs; never silently
   overwrite or discard them.
 - Distinguish an interrupted adapter from a scientifically failed trial. Return
@@ -307,7 +309,8 @@ partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
 acquisition. Trial bindings and the learned-fit journal now use these writers.
-Later-stage commands, full-run resource reporting and full-runner smoke checks remain.
+Selection/evaluation commands, full-run resource reporting and full-runner smoke
+checks remain.
 
 ## Learned fitting and its evidence contract
 
@@ -531,8 +534,8 @@ retained predictor failures, terminal-artifact drift, invalid limits, coordinato
 lock exclusion and the no-execution bound-stage path. These are software checks;
 they do not acquire reserved outcomes, timings or a controller-performance result.
 The eight new coordinator checks bring the complete local suite to 326 passing
-tests. Later-stage commands, full-run resource sizing and a separate physical runner
-smoke remain.
+tests. Selection/evaluation commands, full-run resource sizing and a separate
+physical runner smoke remain.
 
 ## Bounded training command
 
@@ -562,6 +565,31 @@ clean-source, pinned-input, x64 runtime and minimum free-space checks remain the
 only creation/resumption path. It has no validation or evaluation access and
 collects no timing. Seven command-boundary checks and the complete **333-test**
 local correctness suite pass without creating a study run.
+
+## Bounded validation command
+
+After training has frozen the complete aggregate bundle, validation advances through
+its own command:
+
+```sh
+.venv/bin/noether-optics study-validate \
+  --config configs/controller_study_v1.yaml \
+  --out runs/controller-study-v1 \
+  --limit 1
+```
+
+This interface resumes an existing provenance-bound run; it deliberately has no
+`--create` option. The positive limit bounds newly committed validation records.
+The command passes a lazy `_TrialExecutor` to `StudyLedger.validate_chunk`, so
+training completeness, binding integrity and selection state are checked before
+calibration, model or phase construction. It prints the ledger summary as one
+sorted JSON object.
+
+Missing or nonpositive limits and training-only flags fail during argument admission
+before the run opener is called. Twelve focused command-boundary checks and the
+complete **338-test** local correctness suite pass in **98.56 seconds**. The tests
+replace the opener and trial entry point; no study directory, physical array,
+reserved cohort, controller outcome or timing sample is created.
 
 ## Original ledger engineering review and tests
 

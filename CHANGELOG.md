@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add a provenance-bound `study-validate` command with an explicit positive chunk
+  limit, lazy ledger-gated physics and deterministic JSON progress. Validation can
+  only resume an existing run and cannot create one or bypass complete training.
+
 - Add a provenance-bound `study-train` command with explicit positive pilot/model
   chunk limits, first-run creation and JSON progress output. Reject incomplete or
   stage-inapplicable options before opening a run.

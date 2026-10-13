@@ -44,11 +44,10 @@ gradient, controller or hardware-loop timings. The optical loop has a simulated
 millisecond timestep; that does not establish millisecond wall-clock execution.
 
 These entry points reproduce the v0 experiment designs. The [predeclared controller
-study](controller_study_v1.md) has a committed bounded training command, documented
-in its [execution contract](controller_study_execution.md). Do not execute the
-reserved configuration until full-run resource sizing and the separately seeded
-runner smoke are complete. Validation, selection and evaluation commands remain
-pending.
+study](controller_study_v1.md) has committed bounded training and validation commands,
+documented in its [execution contract](controller_study_execution.md). Do not execute
+the reserved configuration until full-run resource sizing and the separately seeded
+runner smoke are complete. Selection and evaluation commands remain pending.
 
 ## Local Dragrace contribution
 

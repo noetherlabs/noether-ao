@@ -9,6 +9,7 @@ import pytest
 from noether_optics import artifacts, cli, config
 from noether_optics import controller_evidence as evidence
 from noether_optics import controller_training_stage as training_stage
+from noether_optics import controller_trials as trials
 from noether_optics.experiments import runners
 
 
@@ -41,6 +42,37 @@ def test_study_train_rejects_missing_or_invalid_limits_before_open(monkeypatch, 
                         lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"))
     monkeypatch.setattr(
         "sys.argv", ["noether-optics", "study-train", "--config", "study.yaml", "--out", "run", *extra])
+    with pytest.raises(SystemExit):
+        cli.main()
+
+
+def test_study_validate_dispatches_bound_chunk_and_prints_json(monkeypatch, capsys):
+    ledger, base = SimpleNamespace(), {"fixture": "base"}
+    summary = {"complete": False, "new_records": 4,
+               "total_records": 4, "planned_records": 600}
+    opened = Mock(return_value=(ledger, base, [{"fixture": "evidence"}]))
+    validated = Mock(return_value=summary)
+    monkeypatch.setattr(evidence, "open_study_run", opened)
+    monkeypatch.setattr(trials, "validate_trials", validated)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "study-validate", "--config", "study.yaml",
+        "--out", "run", "--limit", "4"])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("study.yaml"))
+    validated.assert_called_once_with(ledger, base, 4)
+    assert json.loads(capsys.readouterr().out) == summary
+
+
+@pytest.mark.parametrize("extra", [
+    [], ["--limit", "0"], ["--limit", "-1"], ["--limit", "1", "--create"]])
+def test_study_validate_rejects_missing_invalid_or_creation_options_before_open(
+        monkeypatch, extra):
+    monkeypatch.setattr(evidence, "open_study_run",
+                        lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"))
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "study-validate", "--config", "study.yaml", "--out", "run", *extra])
     with pytest.raises(SystemExit):
         cli.main()
 

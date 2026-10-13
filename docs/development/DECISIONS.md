@@ -563,3 +563,23 @@ smoke are committed and verified.
 Validation: seven focused CLI tests pass, followed by all 333 local correctness
 tests in 291.82 seconds. No study opener or numerical backend runs in the new tests,
 and no reserved evidence or performance timing is acquired.
+
+## Bounded validation CLI (2026-10-14)
+
+Expose validation as a dedicated `noether-optics study-validate` subcommand that
+can only resume an existing bound run. Require one positive `--limit` during argument
+admission, open through `open_study_run`, and delegate to `validate_trials`. Emit the
+ledger summary as sorted JSON for deterministic orchestration. Do not add `--create`:
+the training command owns first-run creation and must freeze training before the
+ledger admits validation.
+
+Preserve lazy execution by passing the existing `_TrialExecutor` only through
+`StudyLedger.validate_chunk`. This keeps training, provenance and selection checks
+ahead of calibration, model and phase construction. The CLI adds no alternate trial
+path, selection side effect, evaluation access, resource override or timing capture.
+
+Validation: twelve focused CLI checks pass, followed by all 338 local correctness
+tests in 98.56 seconds. The tests replace run opening and validation execution; no
+reserved evidence, physical output or controller-performance result is acquired.
+Selection/evaluation commands, full-run sizing and the independent runner smoke
+remain preconditions for the reserved study.

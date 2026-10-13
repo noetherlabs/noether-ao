@@ -394,4 +394,21 @@ Seven command-boundary checks replace both the opener and coordinator; they conf
 path conversion, creation/resume state, integer limits, JSON output and zero access
 after invalid input. The complete local correctness suite passes **333 tests** in
 291.82 seconds. No study directory, physical array, reserved seed or timing was
-created. Later-stage commands, resource sizing and the runner smoke remain.
+created. The validation command is recorded below; selection/evaluation commands,
+resource sizing and the runner smoke remain.
+
+## Bounded validation command
+
+The CLI now exposes `study-validate` as a separate resume-only subcommand. It opens
+the existing run through fresh source/runtime capture, forwards one explicit positive
+record limit to `controller_trials.validate_trials`, and prints one sorted JSON
+progress object. The underlying trial executor remains lazy: the ledger checks the
+complete training binding and rejects a frozen selection before any calibration,
+model or phase construction.
+
+The command has no creation path. Missing or nonpositive limits and training-only
+`--create` fail during argument admission before run access. Twelve focused CLI
+checks replace the opener and validation entry point. The complete local correctness
+suite passes **338 tests** in **98.56 seconds**. No study directory, physical array,
+reserved seed, controller result or timing sample was created. Selection/evaluation
+commands, full-run resource sizing and a separately seeded runner smoke remain.

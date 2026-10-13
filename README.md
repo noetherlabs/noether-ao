@@ -111,17 +111,18 @@ Independent validation adds:
 | Durable pilot acquisition and predictor fitting | Implemented; complete measured cohorts, saved coefficients and failed outcomes |
 | Learned fitting and interrupted-run recovery | Implemented; common initialization, fixed Adam budget and saved episode gradients |
 | Training coordination and aggregate freeze | Implemented; bounded `study-train` command, terminal-failure retention and all-model evidence binding |
+| Validation command | Implemented; positive provenance-bound `study-validate` chunks; physics starts only after ledger checks |
 | Study selection and trial execution | Implemented; immutable evidence, frozen selection and bounded validation/evaluation chunks |
-| Complete new controller comparison | Pending; validation/selection/evaluation commands, resource sizing, full-runner smoke and reserved-cohort execution |
+| Complete new controller comparison | Pending; selection/evaluation commands, resource sizing, full-runner smoke and reserved-cohort execution |
 | Instrument deployment | Planned; no hardware or on-sky result |
 
 The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,
 separate stochastic cohorts and simultaneous paired uncertainty. Reserved outcomes
 have not been acquired. The [execution contract](docs/controller_study_execution.md)
-tracks component boundaries and the committed training-stage command. The reserved
-study remains procedurally blocked until resource sizing and the separate full-runner
-smoke are complete. The [roadmap](ROADMAP.md) defines the next deliverables and
-deployment gates. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
+tracks component boundaries and the committed training and validation commands. The
+reserved study remains procedurally blocked until resource sizing and the separate
+full-runner smoke are complete. The [roadmap](ROADMAP.md) defines the next
+deliverables and deployment gates. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
 runs without acquiring benchmark timings.
 
 ## Repository layout
