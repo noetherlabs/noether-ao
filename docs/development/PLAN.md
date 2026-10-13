@@ -1,14 +1,17 @@
 # Plan
 
+Reader entry points: [README](../../README.md), [documentation](../README.md) and
+[deployment roadmap](../../ROADMAP.md).
+
 Current position: M0–M7 complete. All required available-platform gates passed; negative claim results retained.
 
 Independent ideal-pyramid validation passed under its predeclared
-[protocol](docs/pyramid_validation.md). The fair controller-validation
-[protocol](docs/controller_study_v1.md), frozen inputs and seed/search checks are
-now prepared. The [execution ledger](docs/controller_study_execution.md) implements
+[protocol](../pyramid_validation.md). The fair controller-validation
+[protocol](../controller_study_v1.md), frozen inputs and seed/search checks are
+now prepared. The [execution ledger](../controller_study_execution.md) implements
 complete validation checks, immutable records and the frozen-selection barrier.
 Numerical helpers now supply measured training telemetry, predictor fits and
-paired physical scoring. Their separate [component smoke](results/controller_physics_smoke_v1/README.md)
+paired physical scoring. Their separate [component smoke](../../results/controller_physics_smoke_v1/README.md)
 passes all predeclared gates with reproducible raw evidence. Learned fitting now
 implements complete-episode gradient averaging and fixed Adam budgets with retained
 checkpoints and numerical failures. Fresh source/runtime capture and exclusive

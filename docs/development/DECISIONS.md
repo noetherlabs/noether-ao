@@ -479,3 +479,35 @@ six predictors, interruption and drift rejection, numerical-failure retention an
 shared atmosphere integration with the learned journal. They do not establish a
 controller-performance result. Baseline raw evidence, simulator formulas and frozen
 study configuration/plan are unchanged.
+
+
+## Reader-facing repository structure (2026-10-14)
+
+The owner requested a professional research/product repository with local agent
+instructions removed from the visible source tree. Untrack AGENTS.md while
+retaining an ignored local copy for autonomous work; do not rewrite historical
+commits. Move the four development logs to docs/development and unsent upstream
+drafts to contributions/drafts. Keep scientific artifacts and their original
+provenance unchanged, and update current report paths and relative links.
+
+The local checkout name noether-optics is not a nested directory in the remote.
+Retain the Python package, distribution and CLI names for compatibility with pinned
+environments and old commands; a fresh clone is already named noether-ao. Avoid a
+cosmetic rename that invalidates virtual-environment paths or historical examples.
+
+Reorganize README into a concise technical entry point, with detailed architecture
+and reproduction guides and a deployment roadmap containing explicit evidence
+gates. The owner's references to research institutions and venture success are
+quality goals, not credentials or outcomes to claim. Stars, customers and deployed
+performance are not invented. Private visibility remains unchanged and no license
+is selected on the owner's behalf; public-release preparation is documented.
+
+
+Validation: all 33 baseline reports/tables reconstructed with protected raw inputs
+unchanged; generated C1–C4 headlines remain byte-identical. Verified 129 local
+links, syntax of 13 shell blocks, eight generated sections and live CLI choices.
+The README physical-validation example completed with all seven gates passing on
+the existing reduced configuration. Check records are retained under
+results/verification/repository-layout-20261014. The review corrected relative links
+and the guide's working-directory wording after relocation; no blocking findings
+remain. Queue a license/history/package audit before any public-release decision.

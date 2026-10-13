@@ -16,8 +16,8 @@ passed every size's existing accuracy gate. PROPER installed but returned
 unsupported because it has no matching matrix-DFT path. Timings are from this
 session on a workstation, outside CI; maxima are observations, not bounds.
 
-Selected results follow. [All sizes and raw-result locations](../results/m2/table.md)
-are retained with [the original report](../results/m2/report.txt).
+Selected results follow. [All sizes and raw-result locations](../../results/m2/table.md)
+are retained with [the original report](../../results/m2/report.txt).
 
 <!-- BEGIN DRAGRACE -->
 
@@ -46,7 +46,7 @@ No GPU was exposed. CPU affinity cannot be enforced on this OS. NumPy and SciPy
 build metadata identify Accelerate, while threadpoolctl cannot inspect its thread
 pool; actual CPU/wall ratios and upstream nonselectable-axis warnings remain in
 the raw results. The upstream machine ID is `sha256:d4ec86edc24f9711`; the extended
-runtime fingerprint is `95faefff5c4ffe15` in [machine.json](../results/m2/machine.json).
+runtime fingerprint is `95faefff5c4ffe15` in [machine.json](../../results/m2/machine.json).
 
 These are idiomatic library API costs on this configuration. The NumPy baseline
 is a kernel reference. They do not measure a full AO loop or compare FFT and MFT

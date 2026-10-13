@@ -1,8 +1,7 @@
 # Milestone commit history
 
-Main contains the complete work. The owner's latest instruction is commits only:
-future improvements are validated, committed and pushed directly to main without
-opening PRs. Original measured commit hashes remain reachable for reproduction.
+Main retains the original measured commits so each published experiment can be
+reconstructed from its source, configuration and saved evidence.
 
 | Stage | Scope | Preserved commit |
 | --- | --- | --- |
@@ -17,11 +16,8 @@ opening PRs. Original measured commit hashes remain reachable for reproduction.
 | M7 | Fresh-checkout reproduction evidence | e11be4c |
 
 See the [commit history](https://github.com/noetherlabs/noether-ao/commits/main).
-The setup commits add portable instructions, correctness-only CI and the autonomous
-work queue. Historical validation records do not imply GitHub Actions ran on each
+Subsequent commits add portable instructions, correctness-only CI and new study
+components. Historical validation records do not imply GitHub Actions ran on each
 earlier commit. Timing data came from local isolated runs; CI never remeasures it.
 
-Eight milestone PRs were initially opened under the earlier delivery instruction.
-Their creation record is retained in `results/publication/pr-series.json`; the
-owner subsequently requested closing them and publishing commits only. No upstream
-Dragrace PR or personal message was sent.
+Integration records are retained in the [development history](development/STATUS.md).

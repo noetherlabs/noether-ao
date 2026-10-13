@@ -1,0 +1,17 @@
+{
+  "command": ".venv/bin/noether-optics validate --config configs/reproduction_smoke.yaml --out runs/first-validation",
+  "exit_code": 0,
+  "gates": {
+    "hcipy_psf": true,
+    "fitting_d": true,
+    "fitting_r0": true,
+    "linear_delay": true,
+    "linear_stable": true,
+    "pyramid_delay": true,
+    "pyramid_stable": true
+  },
+  "all_gates_pass": true,
+  "configuration_sha256": "410aeee992a924821318051510dad8dc784e66517c4ac7cf2dbd570801314a3b",
+  "numerical_source_commit": "c090ce51525d530e391e0e53d369bff4f6138dbb",
+  "scope": "Functional README example only; source matches the recorded commit; documentation changes were uncommitted. Raw outputs remain in the ignored local runs/first-validation directory. Not a scientific comparison or reserved cohort."
+}

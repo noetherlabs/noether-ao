@@ -3,3 +3,12 @@ __pycache__/
 .pytest_cache/
 *.egg-info/
 .DS_Store
+
+# Local agent workspace; not part of the distributed research software.
+AGENTS.md
+AGENTS.override.md
+.codex/
+.gstack/
+
+# Local experimental runs; published evidence lives under results/.
+runs/

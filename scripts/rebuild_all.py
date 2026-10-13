@@ -35,7 +35,7 @@ def main() -> None:
     p.add_argument('--report',type=Path,required=True)
     args=p.parse_args()
     files=[path for n in range(1,7) for path in (Path('results')/f'm{n}').glob('*') if path.suffix in ('.csv','.md')]
-    files += [Path(p) for p in ('README.md','docs/results.md','outbox/summary_for_louis.md','outbox/dragrace_pr.md')]
+    files += [Path(p) for p in ('README.md','docs/results.md','contributions/drafts/summary_for_louis.md','contributions/drafts/dragrace_pr.md')]
     before={str(p):p.read_text() for p in files}
     protected=[p for n in range(1,7) for p in (Path('results')/f'm{n}').rglob('*') if p.is_file() and (p.name in ('config.json','machine.json','provenance.json','index.json') or p.suffix=='.npz' or '/raw/' in p.as_posix()) and p.name!='roc.npz']
     hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in protected}

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Reorganize the project entry point around installation, architecture, measured
+  results and deployment gates. Move development logs and upstream drafts into
+  documentation/contribution directories, preserve report reconstruction, and
+  exclude local agent instructions from tracked source.
+
 - Acquire training pilots in audited, resumable chunks and fit predictors from
   complete saved measured cohorts. Retain calibration, shared phases, full pilot
   outputs, per-episode coefficients and numerical failures. Verify evidence before

@@ -1,9 +1,9 @@
-# Final status
+# Development status
 
 All required available-platform gates passed. Negative scientific findings remain
 negative. The owner subsequently authorized publication to the private
 `noetherlabs/noether-ao` repository, then requested commits only on main. Upstream
-Dragrace drafts and correspondence remain unsent. See [milestone history](docs/history.md)
+Dragrace drafts and correspondence remain unsent. See [milestone history](../history.md)
 and [next work](TODOS.md).
 
 | Milestone | Gate | Evidence and reason |
@@ -38,12 +38,12 @@ The nominal pyramid predictor reduces mean WFE by 26.372725760970482 percent.
 This is a new configured result, not exact replication of an unspecified earlier
 setup. It does not generalize to every noise/fault condition in M6.
 
-See [the claim report](docs/results.md) for numbers, plots and caveats, and
-[the README](README.md) for installation and reproduction commands.
+See [the claim report](../results.md) for numbers, plots and caveats, and
+[the README](../../README.md) for installation and reproduction commands.
 
 ## Reproduction evidence
 
-[Fresh-checkout verification](results/verification/fresh-checkout/verification.json)
+[Fresh-checkout verification](../../results/verification/fresh-checkout/verification.json)
 records every command, configuration, fingerprint and gate. The fresh suites have
 26 Noether passes and 140 Dragrace passes, with two platform skips. Noether's two
 fresh-import warnings are upstream zodiax docstring escape deprecations.
@@ -62,9 +62,9 @@ driver/artifact code and numerical dependencies are recoverable.
 
 ## Drafts needing human review
 
-- [Dragrace issue](outbox/dragrace_issue.md)
-- [Dragrace PR description](outbox/dragrace_pr.md)
-- [Summary and three questions for Louis](outbox/summary_for_louis.md)
+- [Dragrace issue](../../contributions/drafts/dragrace_issue.md)
+- [Dragrace PR description](../../contributions/drafts/dragrace_pr.md)
+- [Summary and three questions for Louis](../../contributions/drafts/summary_for_louis.md)
 
 ## Three largest correctness risks
 
@@ -92,7 +92,7 @@ commits to main, creates no PRs, and reports meaningful progress or changed bloc
 
 ## Independent ideal-pyramid validation
 
-The [saved comparison](results/pyramid_validation_v1/report.md) passes all
+The [saved comparison](../../results/pyramid_validation_v1/report.md) passes all
 predeclared gates: 36 pixel cases, 30 derivative cases and 24 deliberate-error
 controls on grids 32/64/96 with one or three wavelengths. Maximum intensity
 relative L2 error is 1.6942335379634155e-14; maximum derivative relative L2 error
@@ -103,7 +103,7 @@ above the required 1e-4 rejection threshold.
 The independent implementation uses HCIPy matrix Fourier integrals, physical
 surface phase and pixel powers. No alignment, scale or output normalization was
 fitted. Native HCIPy default centering/filter/parity differences are explicit in
-[the protocol](docs/pyramid_validation.md). This is a finite-grid ideal-model
+[the protocol](../pyramid_validation.md). This is a finite-grid ideal-model
 validation, not an instrument or safety result.
 
 The clean-source run points to commit `56ed79f`; its frozen configuration matches
@@ -114,10 +114,10 @@ unchanged.
 
 ## Fair controller-comparison protocol
 
-The [new protocol](docs/controller_study_v1.md) is predeclared with a hash-pinned
+The [new protocol](../controller_study_v1.md) is predeclared with a hash-pinned
 base configuration, fresh training/validation/evaluation seeds, meaningful equal
 candidate budgets, frozen selection and simultaneous paired intervals. Its
-[generated plan](plans/controller_study_v1.json) is explicitly unexecuted: all
+[generated plan](../../plans/controller_study_v1.json) is explicitly unexecuted: all
 trial counts are planned budgets, not observed results.
 
 Validation rejects direct/derived seed collisions, legacy reuse, uint32 overflow,
@@ -130,7 +130,7 @@ reproduces byte-for-byte, and its existing-file guard preserves a frozen output.
 
 ## Controller-study execution safeguards
 
-The [study ledger](docs/controller_study_execution.md) now implements deterministic
+The [study ledger](../controller_study_execution.md) now implements deterministic
 selection, complete validation-identity checks, model and open-loop bindings,
 immutable records and a gate that verifies frozen evidence before any evaluation
 callback runs. Recorded failures are retained and skipped on resume; interrupted
@@ -162,7 +162,7 @@ tests**. Separate tests cover measured-only inputs, independent fitting windows,
 causality, noise-path equivalence, zero-DM fault pairing, malformed/raw nonfinite
 data, reserved-stream exclusion and CI refusal.
 
-The [component smoke](results/controller_physics_smoke_v1/README.md) passes all nine
+The [component smoke](../../results/controller_physics_smoke_v1/README.md) passes all nine
 predeclared gates from clean source `dc16e2f`. It retains 12 pilot episodes, six
 predictor fits, 15 controller/fault trials and three zero-DM checks. Maximum pilot
 reconstruction error is 9.43689570931383e-16; maximum zero-DM variance/Strehl error
@@ -320,3 +320,35 @@ disk refusal, and all six predictors on a reduced physical pilot cohort. Separat
 apart from reserved scientific data. No new timings or reserved outcomes were
 acquired. Training coordination, aggregate binding, stage commands, resource/disk
 reporting and a distinct full-runner smoke remain pending.
+
+
+## Reader-facing repository structure
+
+The README now leads with the project purpose, quickstart, system diagram,
+measured evidence and implementation state. Architecture and reproduction detail
+have dedicated guides; ROADMAP.md defines controller-study, mismatch-detection,
+instrument-interface and operational-evidence milestones. It states that public
+release and licensing remain pending rather than presenting a private repository
+as open source.
+
+AGENTS.md is untracked and ignored locally. Development logs now live under
+`docs/development`; unsubmitted upstream drafts live under `contributions/drafts`.
+Current links and report-generator paths follow those moves. The Python package,
+CLI and local checkout keep their compatible names. The remote contains no extra
+noether-optics wrapper folder. The existing hourly automation now reads the new
+paths and keeps agent/scheduler instructions out of tracked source.
+
+The prior implementation increment passed all 318 local tests. This presentation
+increment rebuilt all 33 baseline reports/tables with protected raw evidence
+unchanged; the [rebuild report](../../results/verification/repository-layout-20261014/rebuild.json)
+is retained. Local documentation links, shell-block syntax, generated headlines
+and the live CLI choices were checked. Numerical source, frozen protocols,
+dependency pins and baseline outcomes are unchanged by this reorganization.
+
+
+The documented first physical-validation command completed successfully, with all
+seven saved physical gates passing. This is the reduced functional configuration,
+not a new scientific comparison; its check record is saved alongside the rebuild
+report. Final documentation checks cover 129 local links, 13 shell blocks and eight
+generated sections. The release-readiness audit is now the next bounded preparatory
+task; no visibility or licensing change occurred.

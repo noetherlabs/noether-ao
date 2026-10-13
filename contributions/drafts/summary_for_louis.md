@@ -23,7 +23,7 @@ vibration made WFE worse. Clean false alarms occurred in
 20% of the short held-out runs. Missing/late-output
 fallback helped, but those faults are synthetic availability flags. No general
 safety guarantee follows. Full numbers, raw data, plots and reproduction commands
-are linked from [the results report](../docs/results.md).
+are linked from [the results report](../../docs/results.md).
 
 Three questions:
 

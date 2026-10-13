@@ -96,7 +96,7 @@ def main() -> None:
     section('docs/results.md','FAULTS',text)
     dragrace=list(csv.DictReader(Path('results/m2/table.csv').open()))
     selected=[r for r in dragrace if r['status']=='ok' and int(r['n']) in (128,256)]
-    section('outbox/dragrace_pr.md','DRAGRACE',markdown(['Adapter','Pupil grid','Median ms','p99 ms','Observed max ms'],[[r['adapter'],int(r['n']),float(r['median_ms']),float(r['p99_ms']),float(r['max_ms'])] for r in selected]))
+    section('contributions/drafts/dragrace_pr.md','DRAGRACE',markdown(['Adapter','Pupil grid','Median ms','p99 ms','Observed max ms'],[[r['adapter'],int(r['n']),float(r['median_ms']),float(r['p99_ms']),float(r['max_ms'])] for r in selected]))
     pyramid=next(r for r in physics if r['sensor']=='pyramid')
     summary=f'''# Simulation results and questions for Louis
 
@@ -123,7 +123,7 @@ vibration made WFE worse. Clean false alarms occurred in
 {100*clean['run_false_alarm_rate']:.6g}% of the short held-out runs. Missing/late-output
 fallback helped, but those faults are synthetic availability flags. No general
 safety guarantee follows. Full numbers, raw data, plots and reproduction commands
-are linked from [the results report](../docs/results.md).
+are linked from [the results report](../../docs/results.md).
 
 Three questions:
 
@@ -139,7 +139,7 @@ bandpass, DM basis, pyramid geometry/modulation, detector noise/flux, delays, an
 turbulence profile? A configuration that others may redistribute would let this
 repository test a relevant case without implying access to private instrument data.
 '''
-    Path('outbox/summary_for_louis.md').write_text(summary)
+    Path('contributions/drafts/summary_for_louis.md').write_text(summary)
 
 
 if __name__=='__main__': main()

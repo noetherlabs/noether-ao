@@ -5,11 +5,27 @@ new CI failures and actionable owner feedback before the research tasks below.
 Complete one bounded task per autonomous run. Do not create speculative busywork
 if all actionable tasks are done or require new evidence unavailable locally.
 
+## P1 — Public-release preparation
+
+Before changing visibility or selecting a license, inventory project-owned files,
+the retained upstream patch, direct dependencies and their license/notice terms.
+Review complete Git history and distributable artifacts for secrets or private
+information; report findings without exposing sensitive values. Verify package
+contents and a fresh install/example using the documented environment. Preserve
+all measured source identities and keep this work separate from the scientific
+protocol. The owner has requested professional open-source preparation; the
+repository is still private and no project license has been chosen.
+
+Acceptance: a concrete release-readiness record, remaining owner decisions clearly
+identified, and documentation matching the actual distributable package. Do not
+invent security contacts, adoption, credentials, hardware results or a release.
+This preparatory review is actionable without buying compute or publishing data.
+
 ## P1 — Execute the predeclared controller study
 
-The [protocol](docs/controller_study_v1.md), [inputs](configs/controller_study_v1.yaml)
-and [unexecuted plan](plans/controller_study_v1.json) are predeclared. The
-[execution ledger and selection barrier](docs/controller_study_execution.md) now
+The [protocol](../controller_study_v1.md), [inputs](../../configs/controller_study_v1.yaml)
+and [unexecuted plan](../../plans/controller_study_v1.json) are predeclared. The
+[execution ledger and selection barrier](../controller_study_execution.md) now
 check complete trial identities, training bindings, immutable evidence and resumed
 evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
@@ -64,7 +80,7 @@ The actual scientific adapter and reserved-cohort runs remain pending above.
 Configuration overrides preserve physical delay; pilot fitting uses complete,
 separate measured episodes; paired open-loop scoring includes vibration. Kernels
 use exact Poisson/read noise and no fallback. The local suite passes 148 tests.
-The [predeclared component smoke](results/controller_physics_smoke_v1/README.md)
+The [predeclared component smoke](../../results/controller_physics_smoke_v1/README.md)
 passes all nine gates: 12 pilots, six predictor fits and 15 controller/fault paths.
 Both reports rebuild exactly with 53 protected files unchanged. It uses a smaller
 model, fresh seeds and an explicitly untrained network; the full stage-runner and
@@ -136,10 +152,10 @@ does not establish a safe fallback or a general safety guarantee.
 
 ## Completed — Independent ideal-pyramid validation
 
-The [predeclared protocol](docs/pyramid_validation.md) passed on grids 32/64/96:
+The [predeclared protocol](../pyramid_validation.md) passed on grids 32/64/96:
 36 intensity cases, 30 derivative cases and 24 deliberate-error controls. The
 reference uses HCIPy matrix integrals and a physical thin surface. See the
-[saved report](results/pyramid_validation_v1/report.md), raw arrays and provenance.
+[saved report](../../results/pyramid_validation_v1/report.md), raw arrays and provenance.
 All nine generated report files reproduce byte-for-byte; protected raw inputs
 are unchanged. The core suite has 42 passing tests.
 
