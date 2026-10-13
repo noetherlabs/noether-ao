@@ -1,16 +1,60 @@
 # noether-ao
 
-Config-driven experiments for civil-astronomy adaptive optics: synchronized dLux
-propagation timings, a differentiable delayed AO simulation, empirical fault
-detection, and fixed or learned blends of classical and forward-model commands.
-This is a reproducible prototype. It is not a deployed observatory controller.
+**Differentiable adaptive optics for model-based control and runtime assurance.**
 
-Repository: [noetherlabs/noether-ao](https://github.com/noetherlabs/noether-ao).
-The Python package and command remain `noether-optics` / `noether_optics` so the
-recorded v0 environments and reproduction commands keep their original names.
-See [the milestone history](docs/history.md) and [next work](TODOS.md).
+`noether-ao` is Noether Labs' research software for testing how an optical forward
+model can support control and fault detection in an autonomous observatory. It
+combines dLux/JAX propagation, a delayed adaptive-optics (AO) simulation, controller
+comparisons and experiments that retain the evidence behind each conclusion.
 
-## Results
+The objective is a controller whose predictions, commands and failures can be
+examined and reproduced. The current implementation is a simulation and benchmark
+framework; observatory deployment remains a research objective.
+
+[Results](#measured-evidence) · [Quickstart](#quickstart) ·
+[Architecture](#system-architecture) · [Controller study](#current-controller-study) ·
+[Reproduction](#reproduce-the-published-tables) · [Research queue](TODOS.md)
+
+## Research question
+
+When does a differentiable optical model earn its place inside a feedback loop?
+The answer depends on more than propagation speed. A useful model must extract
+information from noisy wavefront-sensor (WFS) observations, account for delayed
+commands, improve correction within compute constraints, and expose mismatches
+without making recovery worse.
+
+This repository makes those questions testable: synchronized latency distributions,
+paired controller trials, independent optical checks and fault-injection experiments.
+For runtime assurance, detecting a mismatch is only part of the question: the
+resulting control action must also help. The fault studies therefore report both
+detection and paired fallback performance, including harmful recovery decisions.
+
+## System architecture
+
+The simulated plant combines frozen-flow turbulence, a modal deformable mirror,
+an ideal unmodulated pyramid sensor, photon/read noise and a delayed command queue.
+Controllers include a classical integrator, a temporal predictor, forward-model
+estimation, and fixed or learned mixtures of forward and inverse commands.
+
+| Layer | Responsibility | Implementation |
+| --- | --- | --- |
+| Optical plant | Propagation, atmosphere, sensor response and delayed closed-loop dynamics | [optics](src/noether_optics/optics.py), [atmosphere](src/noether_optics/atmosphere.py), [simulation](src/noether_optics/simulation.py) |
+| Numerical experiments | Latency, physical gates, model fidelity, controller mixtures and fault response | [latency](src/noether_optics/latency.py), [experiments](src/noether_optics/experiments/) |
+| Study physics | Measured pilot telemetry, predictor fitting, exact-noise trials and fault-matched open-loop references | [controller_physics](src/noether_optics/controller_physics.py) |
+| Learned fitting | Common initialization, normalized episode losses and fixed-budget Adam updates | [controller_training](src/noether_optics/controller_training.py) |
+| Evidence and recovery | Source/runtime bindings, immutable numeric artifacts, resumable fits and trial records | [evidence](src/noether_optics/controller_evidence.py), [fit journal](src/noether_optics/controller_training_journal.py), [trial adapters](src/noether_optics/controller_trials.py) |
+| Selection | Complete validation, eligibility checks and frozen models before held-out evaluation | [study ledger](src/noether_optics/controller_selection.py) |
+
+The distinction between software correctness, physical agreement and scientific
+performance is part of the design. A passing test checks an implementation contract.
+A physical gate checks a declared model property. A controller claim requires
+retained trials and an explicit comparison with uncertainty.
+
+## Measured evidence
+
+The completed v0 experiments address propagation latency (C1), model fidelity
+under photon noise (C2), learned controller mixtures (C3), and fault detection with
+fallback (C4). The following table is generated from the preserved baseline runs.
 
 <!-- BEGIN HEADLINES -->
 
@@ -23,49 +67,82 @@ See [the milestone history](docs/history.md) and [next work](TODOS.md).
 
 <!-- END HEADLINES -->
 
-See [the result report](docs/results.md), [physical acceptance gates](docs/acceptance.md),
-[research and source notes](docs/research_notes.md), and [milestone status](STATUS.md).
-Every result directory contains its configuration, raw data, source commit/hashes,
-machine fingerprint, tables and plots. Quantities in configuration files are inputs.
-Measurements in reports are calculated from saved runs.
+The [result report](docs/results.md) contains the experiment definitions, paired
+intervals, raw-data links and limits for each verdict. [Physical acceptance gates](docs/acceptance.md)
+were declared before acquisition. Configuration values and planned trial counts
+are inputs; reported measurements come from saved runs with source and machine
+provenance. Negative findings remain part of the release.
 
-The subsequent [independent pyramid check](results/pyramid_validation_v1/report.md)
-passes 36 intensity comparisons, 30 derivative comparisons and 24 deliberate-error
-checks against an HCIPy matrix-integral reference. Its [predeclared protocol](docs/pyramid_validation.md)
-matches the existing finite-grid ideal sensor conventions; it does not claim real
-instrument validation or alter the original C1–C4 verdicts.
+Subsequent validation adds two separate kinds of evidence:
 
-The next [controller-comparison protocol](docs/controller_study_v1.md) fixes fresh
-cohorts and equal candidate-search budgets before any new outcomes are generated.
-Its [plan](plans/controller_study_v1.json) is a specification, not a result.
-The [execution ledger](docs/controller_study_execution.md) now checks complete
-validation records and freezes selection before evaluation callbacks can run.
-Numerical helpers now supply measured pilot telemetry and fault-matched scoring.
-Separate [component smoke checks](docs/controller_study_execution.md#numerical-helpers-and-component-smoke)
-exercise those paths; the full stage runner and study outcomes remain pending.
-The [saved component smoke](results/controller_physics_smoke_v1/README.md) passes
-all nine gates, with byte-identical rebuilt reports and protected raw evidence.
+- **Independent ideal-pyramid agreement.** The [saved comparison](results/pyramid_validation_v1/report.md)
+  passes 36 intensity cases, 30 derivative cases and 24 deliberate-error controls
+  against an HCIPy matrix-integral reference. The [protocol](docs/pyramid_validation.md)
+  covers matched finite-grid sensor conventions, rather than an instrument model.
+- **Controller component wiring.** The [saved smoke run](results/controller_physics_smoke_v1/README.md)
+  passes all nine declared gates; reports rebuild byte-for-byte with protected raw
+  evidence unchanged. It uses a reduced plant and an untrained network, so it
+  establishes component behavior without establishing learned-control performance.
 
-## Install
+## Current controller study
 
-Use Python 3.11 and uv. Clone the private repository with an authorized GitHub
-account, then install from its root:
+The next comparison addresses limitations of the baseline: fixed classical gains,
+ideal predictor training telemetry and a small held-out cohort. Its
+[predeclared protocol](docs/controller_study_v1.md) gives each controller six
+meaningful candidates, separates training/validation/evaluation streams, uses
+measured predictor telemetry and specifies simultaneous paired intervals. The
+[configuration](configs/controller_study_v1.yaml) and [trial plan](plans/controller_study_v1.json)
+are frozen inputs. Reserved study outcomes have not yet been acquired.
+
+| Component | Current state |
+| --- | --- |
+| Protocol and selection | Implemented: equal candidate budgets, complete validation, eligibility gates, deterministic selection and no refit after selection |
+| Numerical training | Implemented: measured pilot reconstruction, separate episode predictor fits and normalized learned fitting from common initialization |
+| Provenance and storage | Implemented: fresh source/runtime capture, pinned inputs, immutable numeric artifacts and verified loading |
+| Interrupted learned fits | Implemented: saved episode losses/gradients replay through Adam; completed evaluations are reused and numerical failures remain terminal |
+| Validation/evaluation trials | Implemented: bounded ledger chunks, shared atmospheres, fault-matched references, full raw outputs and retained failed outcomes |
+| Complete study runner | Pending: pilot/model orchestration, aggregate training binding, stage commands, resource reporting and full-run disk sizing |
+| Scientific comparison | Pending: a distinct full-runner smoke, then acquisition on reserved cohorts and the predeclared analysis |
+
+The [execution contract](docs/controller_study_execution.md) describes the boundary
+between these components. Validation must finish before selection is frozen;
+held-out evaluation is admitted only after the source, configuration, models and
+prior evidence pass integrity checks. Interrupted work must preserve earlier
+records. A failed candidate cannot be replaced with a favorable restart.
+
+See [STATUS.md](STATUS.md) for recorded checks and [TODOS.md](TODOS.md) for the
+next bounded research tasks. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
+runs software checks without acquiring benchmark timings.
+
+## Quickstart
+
+Use Python 3.11 and uv. Repository access currently requires an authorized GitHub
+account. From a fresh clone:
 
 ```sh
 git clone https://github.com/noetherlabs/noether-ao.git
 cd noether-ao
-uv sync --frozen --extra dragrace --python 3.11
-.venv/bin/python -m pytest -q
+uv sync --frozen --python 3.11
+CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q
 ```
 
-The lock includes exact transitive versions and source commits. The optional
-`dragrace` extra installs the other propagation libraries used in the contribution.
-Omit that extra only if you do not need the cross-library benchmark. The saved
-runs used the CPU backend on an Apple M1; no JAX GPU device was available.
-On macOS, single-core affinity is explicitly skipped because the required API is
-unavailable. Environment thread flags are not treated as enforced affinity.
+The lock pins dependency versions and Git sources. Install the optional
+cross-library benchmark dependencies when reproducing the Dragrace contribution:
 
-## Run experiments
+```sh
+uv sync --frozen --extra dragrace --python 3.11
+```
+
+The repository is named `noether-ao`; the package and command retain
+`noether_optics` / `noether-optics` for compatibility with recorded environments.
+Set `JAX_ENABLE_X64=1` before importing JAX when using the numerical modules
+directly; the experiment CLI sets it itself.
+
+Saved timing runs used an Apple M1 CPU. GPU execution and enforced single-core
+affinity were unavailable on that host and are recorded as skipped. Thread
+environment flags are not treated as enforced affinity.
+
+## Run baseline experiments
 
 Run these from this directory. Each output directory must be new. The full
 configuration is [simulation.yaml](configs/simulation.yaml); seeds, noise,
@@ -90,9 +167,8 @@ to `runs/m1`. These are single FFT propagation costs, not whole pyramid sensor,
 gradient, controller or hardware-loop timings. The optical loop has a simulated
 millisecond timestep; that does not establish millisecond wall-clock execution.
 
-The simulation core is importable from `noether_optics.atmosphere`,
-`noether_optics.optics` and `noether_optics.simulation`. Set `JAX_ENABLE_X64=1`
-before importing JAX when calling these modules directly; the CLI sets it itself.
+These entry points reproduce the v0 experiment designs. The predeclared controller
+study above still requires its own complete stage commands.
 
 ## Local Dragrace contribution
 
@@ -154,17 +230,29 @@ record unchanged raw inputs and numerical agreement of the full physical rerun.
 ## Limits
 
 - The plant is a small unobstructed pupil, modal DM, ideal unmodulated pyramid and
-  finite periodic frozen-flow atmosphere. HCIPy independently checks the open-loop
-  PSF; it does not validate the whole sensor or instrument.
-- Control results use short runs and a small held-out seed set. The predictor has
-  ideal training telemetry. Classical gains are fixed, not exhaustively tuned.
-  Learned weights use Gaussian training noise and Poisson evaluation noise.
+  finite periodic frozen-flow atmosphere. Independent checks cover sampled PSFs
+  and the matched finite-grid pyramid response. Focal-support convergence and
+  instrument validation remain outside that evidence.
+- Baseline control results use short runs and a small held-out seed set. The
+  baseline predictor uses ideal training telemetry and classical gains are fixed.
+  The new study addresses these comparison limits; its outcomes remain pending.
+- Learned weights use Gaussian pathwise training noise and exact Poisson/read
+  noise at evaluation. This mismatch and the finite training budget remain limits.
 - The detector has no proven safe set or recovery guarantee. Fault coverage and
   useful fallback in some cases do not establish safety in general.
 - CPU latency distributions include desktop scheduling effects. No GPU, on-sky,
   hardware acquisition or hard real-time result is claimed.
 
-The [decision log](DECISIONS.md) records modeling assumptions and interruptions.
-Publication to this private repository is authorized. External correspondence and
-the upstream Dragrace submission remain unsent. [Contributor instructions](CONTRIBUTING.md)
-describe the checks and evidence required for subsequent commits.
+## Development and evidence policy
+
+Developed by Noether Labs for civil-astronomy research. Contributions should make
+an experiment easier to reproduce, a comparison more informative, or a failure
+easier to diagnose. New experiments use new output directories; baseline data,
+source identities and negative findings stay intact. Changes to capabilities,
+commands, evidence or limitations update this README in the same increment.
+
+[CONTRIBUTING.md](CONTRIBUTING.md) defines the validation and delivery workflow.
+The [decision log](DECISIONS.md) records assumptions and interruptions;
+[research notes](docs/research_notes.md) document sources and experimental design.
+The [plan](PLAN.md), [milestone history](docs/history.md) and
+[changelog](CHANGELOG.md) distinguish completed work from the research ahead.

@@ -5,6 +5,16 @@ TODOS.md before choosing the next bounded task. Use available gstack skills for
 matching planning, review and shipping workflows. Record assumptions and continue
 without routine confirmation questions.
 
+Keep README.md current with every meaningful increment. Update its architecture,
+capabilities, commands, evidence, limitations and study status when those facts
+change; read it alongside the progress documents before choosing work. Write with
+the precision of a research software paper and the clarity of a founder explaining
+the product thesis. Tie claims to code or retained evidence, distinguish completed
+results from planned work, and avoid promotional superlatives or unsupported
+credentials, affiliations, adoption and performance claims. Preserve the generated
+HEADLINES block and its report-rebuild contract. A docs-only rewrite does not
+authorize new scientific claims, repository visibility changes or licensing.
+
 The owner's latest instruction is commits only, with no PRs, to the private
 `noetherlabs/noether-ao` repository. Work from complete main, keep commits focused
 and reviewable, run relevant checks, and push directly to main. Skip PR creation

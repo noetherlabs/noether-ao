@@ -287,3 +287,18 @@ full-runner smoke. No timing measurements were acquired. The original simulator,
 frozen study inputs/plan and baseline evidence are unchanged. Next integrate
 durable pilots/predictor fits and aggregate training bindings, add stage commands
 and resource/disk reporting, then verify the complete runner on fresh smoke seeds.
+
+## Maintained technical README
+
+The README now introduces the research question and product objective, maps the
+implemented architecture to source, separates baseline findings from later
+validation, and records the current controller-study components and remaining
+runner work. It includes the learned-fit journal and durable trial adapters,
+corrects the stale ideal-pyramid validation limit, and retains reproduction paths.
+README upkeep is now required by repository instructions and the existing active
+hourly automation.
+
+Documentation checks verified 40 local links/anchors, syntax for six shell blocks,
+the live experiment CLI choices and eight generated report sections against saved
+data. The generated C1–C4 headlines remain byte-identical. No source, dependency,
+protocol or raw result changed; this update acquired no new scientific evidence.

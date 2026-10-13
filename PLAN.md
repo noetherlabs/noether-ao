@@ -20,6 +20,8 @@ retained. Next connect pilot/model orchestration and stage commands, complete
 resource/disk sizing, and verify a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
+Each meaningful increment also updates README.md when its technical description,
+reproduction instructions, evidence or current study status changes.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.
 
 | Milestone | Required gate | State |

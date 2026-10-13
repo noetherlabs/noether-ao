@@ -427,3 +427,27 @@ tests for mutation during fitting. No numerical gate, baseline plant or reserved
 study input changed. A raw file without its identity metadata is not a committed
 episode; resumption recomputes it and must reproduce its bytes. Interruption
 logging is best effort if storage itself fails or the process is terminated.
+
+## README as the maintained technical entry point (2026-10-14)
+
+The owner requested a more rigorous research/founder voice and continuing README
+updates. Interpret the Leiden/PhD/YC references as an editorial standard: technical
+depth, a clear product thesis, evidence, reproducibility and restrained confidence.
+They are not authorization to invent qualifications, institutional relationships,
+funding, adoption, performance, an open-source license or public availability.
+
+Restructure the README around the research question, implemented architecture,
+preserved results, current study status and runnable entry points. Correct the
+stale sensor-validation limit to include the completed independent ideal-pyramid
+comparison. Keep the generated C1–C4 block byte-identical and retain reproduction
+commands. Add README upkeep to repository instructions and the existing hourly
+automation; update factual changes in the same increment rather than accumulating
+another documentation backlog. This is documentation work, with no numerical or
+scientific protocol change and no new acquisition.
+
+The documentation check validated 40 local links/anchors and six shell blocks,
+confirmed the live CLI choices, and reproduced all eight generated report sections
+in memory from saved data without writing artifacts. The README headline block
+is unchanged from the prior commit. Full scientific or numerical reruns are not
+needed for this prose-only change; the regular remote correctness workflow still
+runs after publication.

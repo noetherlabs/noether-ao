@@ -32,10 +32,17 @@ timings concurrently with other compute work. Regenerate affected tables from ra
 data and retain the comparison report. Never tune on an evaluation cohort already
 used to make a claim.
 
-Update PLAN.md, STATUS.md, DECISIONS.md and TODOS.md when the work changes their
-facts. Citation URLs must be opened and checked before use. Private correspondence
+Update README.md alongside PLAN.md, STATUS.md, DECISIONS.md and TODOS.md when the
+work changes their facts. The README is the technical entry point: explain the
+research question, implemented system, measured evidence and practical path to
+reproduction. Keep current capabilities and remaining work explicit. Preserve its
+generated HEADLINES block; check that report generation leaves it reproducible.
+Verify local links and documented commands for documentation changes. Use precise,
+restrained language, with claims tied to code or retained runs.
+
+Citation URLs must be opened and checked before use. Private correspondence
 must never enter Git. Dragrace submission drafts remain in outbox until separately
-authorized; a PR here does not confer upstream or institutional approval.
+authorized; local review does not confer upstream or institutional approval.
 
 ## Review and integration
 
