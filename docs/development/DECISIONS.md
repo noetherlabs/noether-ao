@@ -511,3 +511,32 @@ the existing reduced configuration. Check records are retained under
 results/verification/repository-layout-20261014. The review corrected relative links
 and the guide's working-directory wording after relocation; no blocking findings
 remain. Queue a license/history/package audit before any public-release decision.
+
+## Training coordination and aggregate freeze (2026-10-14)
+
+Add one bounded coordinator rather than duplicating numerical training logic. It
+must use the durable pilot, predictor and learned-fit entry points, preserve the
+predeclared candidate order, count only new terminal model records against a chunk,
+and leave `training.json` absent until all six predictors and all six learned
+candidates have immutable success or failure records. Aggregate evidence includes
+the terminal records and is deduplicated and sorted before the ledger freeze.
+
+Use a separate nonblocking stage lock because each delegated public operation owns
+the existing ledger lock for its complete transaction. This serializes coordinators
+without weakening or nesting candidate locks. A bound-stage retry verifies the
+frozen aggregate and performs no numerical work. Completed learned candidates use
+persisted manifest/candidate/provenance/calibration/episode bindings and artifact
+hashes; they do not recompute open-loop normalization merely to confirm completion.
+
+Restore learned-fit callables by rebuilding the pinned calibration once when a
+missing learned candidate is reached. Require exact shape, dtype and value agreement
+for every stored numeric calibration member before fitting, and load phases only
+from the audited pilot cohort. Common-input corruption remains an interruption for
+inspection; candidate numerical failures remain terminal and eligible for aggregate
+binding. This increment does not add stage commands, resource timings, reserved
+cohort execution or a controller claim.
+
+Validation: the focused pilot/journal/coordinator suite passes 85 checks, and the
+complete local correctness suite passes 326 tests in 362.72 seconds. Eight new
+coordinator checks cover the bounded barrier and its negative paths. No reserved
+seed, benchmark timing or controller outcome was generated.

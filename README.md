@@ -110,8 +110,9 @@ Independent validation adds:
 | Baseline experiments and report reconstruction | Implemented; retained runs and independent physical checks |
 | Durable pilot acquisition and predictor fitting | Implemented; complete measured cohorts, saved coefficients and failed outcomes |
 | Learned fitting and interrupted-run recovery | Implemented; common initialization, fixed Adam budget and saved episode gradients |
+| Training coordination and aggregate freeze | Implemented; bounded deterministic scheduling, terminal-failure retention and all-model evidence binding |
 | Study selection and trial execution | Implemented; immutable evidence, frozen selection and bounded validation/evaluation chunks |
-| Complete new controller comparison | Pending; training coordination, stage commands, resource sizing and full-runner smoke |
+| Complete new controller comparison | Pending; stage commands, resource sizing, full-runner smoke and reserved-cohort execution |
 | Instrument deployment | Planned; no hardware or on-sky result |
 
 The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,

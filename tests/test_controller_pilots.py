@@ -10,6 +10,8 @@ import pytest
 from noether_optics import atmosphere, simulation
 from noether_optics import controller_physics as physics
 from noether_optics import controller_pilots as pilots
+from noether_optics import controller_training as training
+from noether_optics import controller_training_stage as training_stage
 from noether_optics.artifacts import load_config
 from noether_optics.controller_evidence import load_arrays, save_metadata
 from noether_optics.controller_protocol import load_study, study_plan
@@ -367,7 +369,6 @@ def test_recomputed_calibration_must_match_before_more_pilot_execution(prepared,
 
 
 def test_learned_journal_reuses_pilot_atmosphere_files(prepared, monkeypatch):
-    from noether_optics import controller_training as training
     from noether_optics.controller_training_journal import fit_learned_record
     synthetic_backend(monkeypatch)
     acquire(prepared)
@@ -403,3 +404,114 @@ def test_reduced_physical_pilots_and_all_predictor_candidates(prepared):
             assert result["model"]["status"] == "ready"
             coeff = load_arrays(prepared.ledger, result["model"]["artifacts"][0])["coefficients"]
             assert coeff.shape == (4, 2) and np.isfinite(coeff).all()
+
+
+def analytic_learning(monkeypatch):
+    calls = []
+    def build(*unused):
+        def execute(params, *values):
+            calls.append(values[1])
+            return ((np.asarray(1.), np.asarray(True)),
+                    tuple(np.full_like(np.asarray(parameter), .01) for parameter in params))
+        return execute
+    monkeypatch.setattr(training, "_episode_kernel", build)
+    return calls
+
+
+def train(p, pilot_limit=20, model_limit=20):
+    return training_stage.run_training_chunk(
+        p.ledger, p.base, p.refs, pilot_limit=pilot_limit, model_limit=model_limit)
+
+
+def test_training_coordinator_chunks_models_and_binds_once(prepared, monkeypatch):
+    synthetic_backend(monkeypatch)
+    learning_calls = analytic_learning(monkeypatch)
+    first = train(prepared, pilot_limit=5, model_limit=2)
+    assert first == {
+        "new_pilot_records": 5, "pilot_records": 5, "planned_pilot_records": 12,
+        "failed_pilot_records": 0, "new_model_records": 0,
+        "terminal_model_records": 0, "planned_model_records": 12,
+        "failed_model_records": 0, "complete": False, "training_bound": False}
+    assert not (prepared.ledger.root / "training.json").exists()
+
+    second = train(prepared, pilot_limit=20, model_limit=2)
+    assert second["new_pilot_records"] == 7
+    assert second["new_model_records"] == second["terminal_model_records"] == 2
+    assert not (prepared.ledger.root / "training.json").exists()
+    expected = [candidate for candidate in study_plan(prepared.ledger.config)["candidates"]
+                if candidate["controller"] in ("predictive", "learned")]
+    assert [candidate["id"] for candidate in expected[:2]] == ["predictive-00", "predictive-01"]
+    assert all((prepared.ledger.root / f"evidence/training/{candidate['id']}/complete.json").exists()
+               for candidate in expected[:2])
+
+    result = second
+    while not result["complete"]:
+        result = train(prepared, model_limit=3)
+    assert result["training_bound"] and result["terminal_model_records"] == 12
+    assert len(learning_calls) == 6 * 2 * 12
+    bundle = prepared.ledger._training()
+    assert set(bundle["models"]) == {candidate["id"] for candidate in expected}
+    assert all(model["status"] == "ready" for model in bundle["models"].values())
+    paths = [ref["path"] for ref in bundle["evidence"]]
+    assert paths == sorted(set(paths))
+    assert all(f"evidence/training/{candidate['id']}/complete.json" in paths for candidate in expected)
+    assert not list((prepared.ledger.root / "validation").glob("*.json"))
+    assert not list((prepared.ledger.root / "evaluation").glob("*.json"))
+
+    before = {path: path.read_bytes() for path in prepared.ledger.root.rglob("*") if path.is_file()}
+    forbidden = Mock(side_effect=AssertionError("Bound training cannot execute numerical work"))
+    for name in ("acquire_pilots", "fit_predictor_record", "load_learned_inputs",
+                 "fit_learned_record", "load_learned_record"):
+        monkeypatch.setattr(training_stage, name, forbidden)
+    resumed = train(prepared, pilot_limit=1, model_limit=1)
+    assert resumed["complete"] and resumed["new_pilot_records"] == resumed["new_model_records"] == 0
+    forbidden.assert_not_called()
+    assert before == {path: path.read_bytes() for path in prepared.ledger.root.rglob("*") if path.is_file()}
+
+
+def test_training_coordinator_binds_predictor_failures_without_retry(prepared, monkeypatch):
+    synthetic_backend(monkeypatch, failure="outputs")
+    analytic_learning(monkeypatch)
+    with np.errstate(invalid="ignore"):
+        result = train(prepared)
+    assert result["complete"] and result["failed_pilot_records"] == 12
+    assert result["failed_model_records"] == 6
+    bundle = prepared.ledger._training()
+    assert all(bundle["models"][f"predictive-{index:02d}"]["status"] == "failed"
+               for index in range(6))
+    assert all(bundle["models"][f"learned-{index:02d}"]["status"] == "ready"
+               for index in range(6))
+
+
+def test_training_coordinator_rejects_changed_terminal_before_binding(prepared, monkeypatch):
+    synthetic_backend(monkeypatch)
+    analytic_learning(monkeypatch)
+    result = train(prepared, model_limit=1)
+    assert result["terminal_model_records"] == 1 and not result["complete"]
+    complete = _read(prepared.ledger.root / "evidence/training/predictive-00/complete.json")
+    parameter = complete["result"]["model"]["artifacts"][0]
+    (prepared.ledger.root / parameter["path"]).write_bytes(b"changed")
+    with pytest.raises(ValueError, match="Artifact hash"):
+        train(prepared, model_limit=1)
+    assert not (prepared.ledger.root / "training.json").exists()
+    assert not (prepared.ledger.root / "evidence/training/predictive-01/complete.json").exists()
+
+
+def test_training_coordinator_refuses_competing_worker_before_backend(prepared, monkeypatch):
+    forbidden = forbid_backend(monkeypatch)
+    with training_stage._coordinator_lock(prepared.ledger):
+        with pytest.raises(BlockingIOError):
+            train(prepared, pilot_limit=1, model_limit=1)
+    forbidden.assert_not_called()
+    assert not (prepared.ledger.root / "evidence/training").exists()
+
+
+@pytest.mark.parametrize("pilot_limit,model_limit", [(0, 1), (1, 0), (True, 1), (1, 1.5)])
+def test_training_coordinator_rejects_invalid_limits_before_evidence(
+        prepared, monkeypatch, pilot_limit, model_limit):
+    forbidden = forbid_backend(monkeypatch)
+    with pytest.raises(ValueError, match="positive integer"):
+        train(prepared, pilot_limit=pilot_limit, model_limit=model_limit)
+    forbidden.assert_not_called()
+    assert not (prepared.ledger.root / "evidence/training").exists()
+    assert not (prepared.ledger.root / ".training-stage.lock").exists()

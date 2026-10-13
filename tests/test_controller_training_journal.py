@@ -120,6 +120,7 @@ def test_terminal_resume_skips_backend_and_optimizer_and_preserves_bytes(prepare
     before = {path: path.read_bytes() for path in prepared.ledger.root.rglob("*") if path.is_file()}
     forbidden = forbid_backend(monkeypatch)
     monkeypatch.setattr(training.optax, "adam", forbidden)
+    monkeypatch.setattr(training, "paired_open_loop", forbidden)
     prepared.episodes.reverse()
     assert fit(prepared) == saved
     assert before == {path: path.read_bytes() for path in prepared.ledger.root.rglob("*") if path.is_file()}

@@ -30,17 +30,17 @@ check complete trial identities, training bindings, immutable evidence and resum
 evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
-normalized equal-episode gradients, fixed Adam budgets and failure records. Next
-connect training coordination, aggregate binding and separate stage commands. Durable validation
-and evaluation trial adapters now record full raw outputs through ledger chunks.
+normalized equal-episode gradients, fixed Adam budgets and failure records. Bounded
+training coordination and the complete aggregate binding are implemented. Next add
+separate stage commands. Durable validation and evaluation trial adapters now record
+full raw outputs through ledger chunks.
 Fresh source/runtime capture and exclusive numeric artifact storage are implemented;
 bind their returned provenance references with the training evidence. The learned
 fit journal now preserves episode losses/gradients, replays saved episodes through
-the unchanged optimizer and returns terminal model/history references. Integrate
-those references with the now-implemented durable pilot/predictor records in the
-aggregate training binding. Coordinate complete pilot acquisition, every predictor
-and learned candidate, and one final immutable training bundle before validation.
-Complete resource reporting and full-run disk sizing before acquisition.
+the unchanged optimizer and returns terminal model/history references. The training
+coordinator integrates those references with durable pilot/predictor records and
+freezes one immutable bundle after every fitted candidate terminates. Complete
+resource reporting and full-run disk sizing before reserved-cohort acquisition.
 The separate component smoke has passed. The adapter must enter evaluation through
 the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
@@ -106,7 +106,7 @@ Canonical source/runtime evidence hashes match the ledger bindings. Numeric NPZ
 files preserve shapes, dtypes and nonfinite failures, permit exact retries and
 reject changed replacements. Tests cover interrupted writes, competing writers,
 path aliases and changed evidence. No scientific cohort is acquired by this layer.
-The full runner and durable training-stage records remain in P1.
+Stage commands, resource sizing and the full-runner smoke remain in P1.
 
 ## Completed — Durable validation and evaluation trials
 
@@ -126,8 +126,9 @@ cached gradients, running only missing episodes. Terminal fits return immutable
 model/history references, including ineligible numerical failures. Interruption
 diagnostics are retained and unexpected exceptions propagate. Correctness checks
 compare interrupted and uninterrupted fits and exercise a reduced optical resume
-on separate seeds. Aggregate training orchestration and a full-runner smoke remain
-in P1; this is not reserved training or a new controller-performance result.
+on separate seeds. Aggregate training orchestration is now completed below; stage
+commands and a full-runner smoke remain in P1. This is not reserved training or a
+new controller-performance result.
 
 ## Completed — Durable pilot and predictor records
 
@@ -136,9 +137,26 @@ bounded exact-noise integrator episodes under the ledger lock. It saves calibrat
 shared phases, full observations/commands and measured telemetry. Predictor fitting
 requires the complete cohort, audits telemetry against the saved measurements and
 fits each burned-in episode separately. Terminal models retain coefficients and
-histories, or raw numerical failures without usable parameters. These records can
-join the aggregate training bundle; the complete coordinator and full-runner smoke
-remain P1 work. No reserved scientific cohort was acquired.
+histories, or raw numerical failures without usable parameters. These records join
+the aggregate training bundle through the completed coordinator. The stage commands,
+resource report and full-runner smoke remain P1 work. No reserved scientific cohort
+was acquired.
+
+## Completed — Training coordination and aggregate binding
+
+The bounded coordinator acquires only the requested number of missing pilots, then
+processes predictive and learned candidates in the predeclared order. Existing
+terminal successes and failures are reverified and skipped. A separate stage lock
+prevents competing coordinators while candidate operations retain their ledger-lock
+checks. Only a complete twelve-model collection can publish `training.json`; the
+bundle contains deduplicated, sorted evidence plus every terminal record.
+
+Completed learned records now verify their persisted manifest, candidate, provenance,
+calibration, episode identities and artifact hashes without recomputing open-loop
+normalization or constructing an optimizer. Correctness checks cover bounded resume,
+aggregate publication, retained predictor failures, evidence tampering, invalid
+limits and competing workers on separate 101001/102001/103001 fixtures. Stage commands,
+full-run resource sizing and the end-to-end physical smoke remain P1.
 
 ## P2 — Optical-gain drift observability
 

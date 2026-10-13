@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Coordinate bounded pilot acquisition and every declared predictor/learned fit in
+  deterministic order. Verify terminal records without repeating completed numerical
+  work, serialize competing coordinators, and publish one aggregate training bundle
+  only after all twelve fitted candidates have immutable evidence.
+
 - Reorganize the project entry point around installation, architecture, measured
   results and deployment gates. Move development logs and upstream drafts into
   documentation/contribution directories, preserve report reconstruction, and

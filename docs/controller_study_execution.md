@@ -9,13 +9,17 @@ averaging. Source/runtime capture and immutable numeric artifact storage now
 connect to the ledger. Durable validation/evaluation callbacks now execute bounded
 trial chunks, and a learned-fit journal now resumes interrupted fits from saved
 episode losses/gradients. Pilot acquisition and predictor fitting now publish
-durable training records. Aggregate training coordination, complete stage commands and
-ledger-backed physical smoke remain pending before any reserved cohort is used.
+durable training records. A bounded coordinator now verifies every terminal fitted
+candidate and publishes the complete aggregate training binding. Stage commands,
+full-run resource reporting and ledger-backed physical smoke remain pending before
+any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
 
     create(config, fresh provenance)
+           |
+    run_training_chunk(pilot_limit, model_limit)
            |
     save pilot/history/parameter artifacts in evidence/
            |
@@ -100,12 +104,10 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   source/runtime inventories, verify pinned inputs and require a clean checkout.
   Pass an adequate disk budget and retain the returned provenance references in
   the training binding. Check remaining space during large stages too.
-- Use the durable pilot/predictor adapter to save shared atmospheres, exact pilot
-  observations, measured pseudo-open-loop estimates and model histories. Coordinate
-  its bounded acquisition and all declared predictor fits before aggregate binding.
-- Call the durable learned-fit adapter for all six declared candidates and bind
-  its returned model/history/evidence references alongside pilot/predictor records
-  to the ledger. Freeze the complete training bundle before validation.
+- Use `controller_training_stage.run_training_chunk` to advance bounded pilot and
+  candidate work. It coordinates the durable pilot/predictor and learned-fit adapters,
+  and freezes the complete training bundle before validation. Supply positive pilot
+  and model limits; resume with freshly captured source/runtime evidence.
 - Derive summaries from retained per-frame arrays and full-output finite flags.
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
@@ -303,8 +305,7 @@ partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
 acquisition. Trial bindings and the learned-fit journal now use these writers.
-Stage commands and model orchestration still need integration and full-runner
-smoke checks.
+Stage commands, full-run resource reporting and full-runner smoke checks remain.
 
 ## Learned fitting and its evidence contract
 
@@ -352,8 +353,9 @@ being mislabeled scientific failures. The numerical helper does not write files;
 its optional episode-evaluator hook lets the journal below persist/replay exact
 results while the helper retains ownership of every optimizer update. In-memory
 records can contain nonfinite arrays on failure, so the journal preserves them as
-raw arrays with strict JSON metadata/diagnostics, not JSON NaN. The aggregate
-training binding still needs model/history references for every candidate.
+raw arrays with strict JSON metadata/diagnostics, not JSON NaN. The training
+coordinator binds model/history references for every candidate only after the
+complete terminal collection verifies.
 
 Correctness tests use independent 61001/62001/63001 cohorts and initialization
 64001, with reduced arrays. An analytic multi-episode objective is checked against
@@ -460,9 +462,10 @@ Resumption rebuilds the original initialization and Adam state by replaying save
 gradients in order through the same numerical loop. Every saved step's parameter
 file must match the reconstructed parameters before its gradients are used.
 Cached episodes do not construct or execute an optical gradient kernel. A completed
-terminal record checks all bound evidence and returns without rebuilding Adam.
-Input checking still recomputes the clean open-loop normalization. Source, runtime,
-configuration, calibration, phases or saved-artifact drift refuses resumption.
+terminal record checks its manifest, candidate, provenance, calibration, episode
+identities and all bound artifact hashes without rebuilding Adam or recomputing
+clean open-loop normalization. Source, runtime, configuration or saved-artifact
+drift refuses resumption.
 
 An evaluation is committed only when its raw file and identity metadata both
 exist. A crash between them requires recomputation and accepts only byte-identical
@@ -493,6 +496,40 @@ the lock across callbacks, and recover interrupted publication. A reduced optica
 fit resumes after an Adam update with finite, changed weights and a complete
 journal. These are software checks, not a full-runner smoke, study training or
 evidence of held-out improvement.
+
+## Training coordinator and aggregate binding
+
+`controller_training_stage.run_training_chunk(ledger, base, shared_evidence,
+pilot_limit=..., model_limit=...)` is the training-stage barrier. Both limits must
+be positive integers and bound only newly committed work. The function first
+advances the shared pilot cohort; no candidate fitting begins until all declared
+pilot records exist. It then visits the six predictive and six learned candidates
+in predeclared order, verifies existing terminal successes or failures, and executes
+at most the requested number of missing model records.
+
+Learned inputs are loaded from the pilot atmosphere files. The pinned calibration
+is rebuilt once per chunk only when a learned fit is missing, and every numeric
+member must exactly match the saved pilot calibration before fitting. Completed
+learned records take a hash-only terminal path, avoiding optical normalization and
+optimizer setup on routine resume. Predictor failures remain failed models; they
+are never dropped or retried to make the bundle complete.
+
+A coordinator-specific nonblocking lock serializes complete training-stage calls
+without nesting the ledger lock used by pilot and candidate operations. Once all
+twelve fitted candidates have terminal records, the coordinator deduplicates and
+sorts their evidence, includes every terminal record, and calls `bind_training`
+exactly once. `training.json` remains absent after partial chunks or integrity
+failure. Re-entry after a successful freeze verifies the aggregate bundle and
+performs no calibration, simulation, fitting or optimizer construction.
+
+Correctness fixtures use the separate 101001/102001/103001 cohorts. They exercise
+bounded pilot/model resume, deterministic first candidates, all-model aggregation,
+retained predictor failures, terminal-artifact drift, invalid limits, coordinator
+lock exclusion and the no-execution bound-stage path. These are software checks;
+they do not acquire reserved outcomes, timings or a controller-performance result.
+The eight new coordinator checks bring the complete local suite to 326 passing
+tests. Stage commands, full-run resource sizing and a separate physical runner
+smoke remain.
 
 ## Original ledger engineering review and tests
 

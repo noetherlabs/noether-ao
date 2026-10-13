@@ -20,8 +20,9 @@ trial adapters now save raw outputs and paired references through resumable ledg
 chunks. Learned fits now journal each episode's loss/gradient and replay saved
 episodes through Adam after interruption; terminal successes and failures are
 retained. Pilot acquisition now runs in audited chunks and predictor fits return
-terminal coefficient/history records from complete measured cohorts. Next connect
-training coordination, aggregate binding and stage commands, complete
+terminal coefficient/history records from complete measured cohorts. A bounded
+coordinator now schedules every fitted candidate and freezes the aggregate training
+bundle only after all terminal evidence verifies. Next add stage commands, complete
 resource/disk sizing, and verify a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.

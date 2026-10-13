@@ -112,6 +112,49 @@ def acquire_pilots(ledger, base, shared_evidence, limit):
                 "failed_records": sum(row["status"] == "failed" for row in records.values())}
 
 
+def load_learned_inputs(ledger, base, shared_evidence):
+    """Load the complete saved phase cohort with its verified callable calibration.
+
+    Calibration is rebuilt only to restore the callables that cannot be stored in
+    NPZ. Every numeric member must exactly match the pilot calibration before the
+    returned values can enter learned fitting. This function performs no fitting
+    and generates no atmosphere or detector-noise samples.
+    """
+    from .simulation import calibration
+
+    base, shared_evidence = deepcopy(base), deepcopy(shared_evidence)
+    with ledger._locked():
+        _admit(ledger, base, shared_evidence)
+        journal = _journal(ledger, shared_evidence)
+        records = _audit_pilots(ledger, base, journal)
+        cases = training_cases(ledger.config)
+        if len(records) != len(cases):
+            raise ValueError("Incomplete pilot cohort; learned fitting is blocked")
+
+        cal = calibration(base)
+        numeric = {key: np.asarray(value) for key, value in cal.items() if not callable(value)}
+        saved = load_arrays(ledger, records[_case_id(cases[0])]["calibration"])
+        if set(saved) != set(numeric) or any(
+                saved[key].dtype != value.dtype or saved[key].shape != value.shape
+                or not np.array_equal(saved[key], value) for key, value in numeric.items()):
+            raise ValueError("Rebuilt calibration differs from saved pilot calibration")
+        if not all(np.isfinite(value).all() for value in numeric.values()):
+            raise ValueError("Nonfinite saved pilot calibration")
+
+        episodes = []
+        shape = (ledger.config["training"]["frames"], base["n"], base["n"])
+        for case in cases:
+            row = records[_case_id(case)]
+            arrays = load_arrays(ledger, row["phase"])
+            if set(arrays) != {"phase"}:
+                raise ValueError("Invalid training atmosphere schema")
+            phases = arrays["phase"]
+            if phases.shape != shape or not np.issubdtype(phases.dtype, np.floating):
+                raise ValueError("Invalid training atmosphere shape or dtype")
+            episodes.append({"case": deepcopy(case), "phases": phases})
+        return cal, episodes
+
+
 class _PilotExecutor:
     def __init__(self, ledger, base, journal):
         self.ledger, self.base, self.journal = ledger, base, journal

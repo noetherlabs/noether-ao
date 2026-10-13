@@ -251,9 +251,10 @@ Physical wiring checks use reduced 81001/82001/83001 cohorts and synthetic froze
 model fixtures. They are not study training, scientific validation results or a
 full-runner smoke artifact. No reserved study data or timings were acquired.
 The original simulator, frozen protocol/plan and saved evidence are unchanged.
-Next connect durable pilot/model orchestration and mid-fit checkpoints, add separate
-stage commands and resource reporting, then run a distinct full-runner smoke before
-the reserved comparison. Full-stream retention also requires full-run disk sizing.
+The durable pilot, model and training coordination components are recorded below.
+Separate stage commands and resource reporting remain, followed by a distinct
+full-runner smoke before the reserved comparison. Full-stream retention also requires
+full-run disk sizing.
 
 ## Durable learned-fit journal
 
@@ -284,9 +285,9 @@ lock exclusion and interrupted raw/terminal publication.
 Checks use separate 91001/92001/93001 cohorts and initialization 94001. They are
 software correctness evidence, not reserved training, scientific comparison or a
 full-runner smoke. No timing measurements were acquired. The original simulator,
-frozen study inputs/plan and baseline evidence are unchanged. Next integrate
-durable pilots/predictor fits and aggregate training bindings, add stage commands
-and resource/disk reporting, then verify the complete runner on fresh smoke seeds.
+frozen study inputs/plan and baseline evidence are unchanged. Durable pilots,
+predictor fits and aggregate training bindings are now recorded below. Stage commands,
+resource/disk reporting and complete-runner verification remain.
 
 ## Maintained technical README
 
@@ -318,8 +319,8 @@ finite and nonfinite fits, shared learned-fit inputs, integrity/frozen-stage gua
 disk refusal, and all six predictors on a reduced physical pilot cohort. Separate
 101001/102001/103001 cohorts and initialization 104001 keep these correctness checks
 apart from reserved scientific data. No new timings or reserved outcomes were
-acquired. Training coordination, aggregate binding, stage commands, resource/disk
-reporting and a distinct full-runner smoke remain pending.
+acquired. Training coordination and aggregate binding are now recorded below;
+stage commands, resource/disk reporting and a distinct full-runner smoke remain.
 
 
 ## Reader-facing repository structure
@@ -352,3 +353,29 @@ not a new scientific comparison; its check record is saved alongside the rebuild
 report. Final documentation checks cover 129 local links, 13 shell blocks and eight
 generated sections. The release-readiness audit is now the next bounded preparatory
 task; no visibility or licensing change occurred.
+
+## Training coordination and aggregate binding
+
+`controller_training_stage.run_training_chunk` now advances the open training stage
+under separate pilot and model limits. It waits for the full pilot cohort, processes
+all predictive and learned candidates in their predeclared order, rechecks terminal
+successes and failures on resume, and publishes `training.json` only after all twelve
+fitted candidates have immutable model/evidence records. The aggregate evidence is
+deduplicated and sorted and includes each terminal record.
+
+A separate nonblocking coordinator lock prevents two workers from claiming the same
+chunk while pilot and model operations keep their existing ledger locks. Learned
+inputs come from the saved pilot atmospheres; a rebuilt callable calibration must
+match every persisted numeric member exactly. Completed learned fits now use a
+hash-only verification path, so routine resumption does not rerun optical open-loop
+normalization or construct an optimizer. Bound-stage re-entry performs no numerical
+work. Predictor failures remain explicit failed models in the aggregate bundle.
+
+Focused correctness checks pass for chunked end-to-end aggregation, retained failed
+pilots/predictors, changed terminal artifacts, invalid limits, competing workers and
+the bound-stage no-execution path. They use the existing separate correctness seeds,
+not the reserved study cohorts. The complete local correctness suite passes **326
+tests** in 362.72 seconds, including **8 new coordinator checks**. No performance
+timing or scientific outcome was acquired. Stage commands, whole-run resource/disk
+sizing and a distinct physical runner smoke remain before the reserved controller
+study.
