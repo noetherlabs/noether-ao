@@ -376,6 +376,22 @@ pilots/predictors, changed terminal artifacts, invalid limits, competing workers
 the bound-stage no-execution path. They use the existing separate correctness seeds,
 not the reserved study cohorts. The complete local correctness suite passes **326
 tests** in 362.72 seconds, including **8 new coordinator checks**. No performance
-timing or scientific outcome was acquired. Stage commands, whole-run resource/disk
-sizing and a distinct physical runner smoke remain before the reserved controller
-study.
+timing or scientific outcome was acquired. The bounded training command is recorded
+below. Validation/selection/evaluation commands, whole-run resource/disk sizing and
+a distinct physical runner smoke remain before the reserved controller study.
+
+## Bounded training command
+
+The CLI now exposes `study-train` as its own argparse subcommand. It opens or resumes
+the ledger through fresh source/runtime capture, then delegates exactly one positive
+pilot/model chunk to `run_training_chunk`. `--create` is first-call only; a resume
+omits it and must reproduce the bound inputs. One sorted JSON object reports committed
+progress. The command never reaches validation, selection or evaluation.
+
+Dedicated subparsers keep training-only options out of the legacy experiment help
+and reject invalid limits or cross-command flags before configuration/run access.
+Seven command-boundary checks replace both the opener and coordinator; they confirm
+path conversion, creation/resume state, integer limits, JSON output and zero access
+after invalid input. The complete local correctness suite passes **333 tests** in
+291.82 seconds. No study directory, physical array, reserved seed or timing was
+created. Later-stage commands, resource sizing and the runner smoke remain.

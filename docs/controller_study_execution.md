@@ -10,7 +10,8 @@ connect to the ledger. Durable validation/evaluation callbacks now execute bound
 trial chunks, and a learned-fit journal now resumes interrupted fits from saved
 episode losses/gradients. Pilot acquisition and predictor fitting now publish
 durable training records. A bounded coordinator now verifies every terminal fitted
-candidate and publishes the complete aggregate training binding. Stage commands,
+candidate and publishes the complete aggregate training binding. Its bounded
+`study-train` command is implemented. Validation/selection/evaluation commands,
 full-run resource reporting and ledger-backed physical smoke remain pending before
 any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
@@ -112,11 +113,12 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
   intervals. References alone do not establish these physical properties.
-- Expose separate training, validation/selection and evaluation commands. Pass a
-  lazy evaluation callback to `evaluate_chunk`; never generate evaluation arrays
-  or preload its models before the gate. Write raw artifacts atomically and
-  exclusively before publishing their ledger records. Preserve interrupted raw
-  files and resume identical inputs; never silently overwrite or discard them.
+- Use the implemented training command, then expose separate validation/selection
+  and evaluation commands. Pass a lazy evaluation callback to `evaluate_chunk`;
+  never generate evaluation arrays or preload its models before the gate. Write
+  raw artifacts atomically and exclusively before publishing their ledger records.
+  Preserve interrupted raw files and resume identical inputs; never silently
+  overwrite or discard them.
 - Distinguish an interrupted adapter from a scientifically failed trial. Return
   explicit failed records for actual execution failures; retain diagnostics.
   Unexpected implementation exceptions stop the chunk for review.
@@ -305,7 +307,7 @@ partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
 acquisition. Trial bindings and the learned-fit journal now use these writers.
-Stage commands, full-run resource reporting and full-runner smoke checks remain.
+Later-stage commands, full-run resource reporting and full-runner smoke checks remain.
 
 ## Learned fitting and its evidence contract
 
@@ -425,7 +427,8 @@ Each public operation holds the ledger lock. Frozen training/selection or existi
 validation records block both entry points. Stage, provenance and artifact bindings
 are rechecked before publication. These adapters do not schedule learned candidates,
 freeze the aggregate training bundle, expose stage commands, or collect resource
-timings. Those responsibilities and a full-runner smoke remain outstanding.
+timings. The coordinator and training command now own the first three responsibilities;
+later-stage commands, resource reporting and a full-runner smoke remain outstanding.
 
 Tests use separate 101001/102001/103001 cohorts and initialization 104001. They
 exercise chunk recovery, complete-cohort admission, measured-only fitting,
@@ -528,8 +531,37 @@ retained predictor failures, terminal-artifact drift, invalid limits, coordinato
 lock exclusion and the no-execution bound-stage path. These are software checks;
 they do not acquire reserved outcomes, timings or a controller-performance result.
 The eight new coordinator checks bring the complete local suite to 326 passing
-tests. Stage commands, full-run resource sizing and a separate physical runner
+tests. Later-stage commands, full-run resource sizing and a separate physical runner
 smoke remain.
+
+## Bounded training command
+
+The installed CLI exposes the coordinator without adding an alternate execution
+path:
+
+```sh
+.venv/bin/noether-optics study-train \
+  --config configs/controller_study_v1.yaml \
+  --out runs/controller-study-v1 \
+  --create \
+  --pilot-limit 1 \
+  --model-limit 1
+```
+
+The example documents interface syntax; the reserved configuration must not be run
+until full-run resource sizing and the separately seeded physical runner smoke pass.
+For the first invocation, `--create` requires a new run directory. Later invocations
+omit `--create`; fresh source/runtime capture must still match the run exactly. Both
+chunk limits are positive integers and bound newly committed records. The command
+prints the coordinator summary as one sorted JSON object.
+
+Invalid or missing limits, latency's `--resume`, and study-only options on legacy
+experiments fail during argument admission before configuration or run access.
+The command opens the study through `controller_evidence.open_study_run`, so its
+clean-source, pinned-input, x64 runtime and minimum free-space checks remain the
+only creation/resumption path. It has no validation or evaluation access and
+collects no timing. Seven command-boundary checks and the complete **333-test**
+local correctness suite pass without creating a study run.
 
 ## Original ledger engineering review and tests
 

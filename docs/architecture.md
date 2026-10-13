@@ -12,7 +12,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Study physics | Measured pilot telemetry, predictor fitting, exact-noise trials and fault-matched open-loop references | [controller_physics](../src/noether_optics/controller_physics.py) |
 | Learned fitting | Common initialization, normalized episode losses and fixed-budget Adam updates | [controller_training](../src/noether_optics/controller_training.py) |
 | Pilot data and predictors | Bounded pilot acquisition, measured telemetry audits and terminal predictor records | [controller_pilots](../src/noether_optics/controller_pilots.py) |
-| Training barrier | Deterministic candidate scheduling and complete aggregate model/evidence freeze | [training stage](../src/noether_optics/controller_training_stage.py) |
+| Training barrier | `study-train` dispatch, deterministic candidate scheduling and complete aggregate model/evidence freeze | [CLI](../src/noether_optics/cli.py), [training stage](../src/noether_optics/controller_training_stage.py) |
 | Evidence and recovery | Source/runtime bindings, immutable numeric artifacts, resumable fits and trial records | [evidence](../src/noether_optics/controller_evidence.py), [fit journal](../src/noether_optics/controller_training_journal.py), [trial adapters](../src/noether_optics/controller_trials.py) |
 | Selection | Complete validation, eligibility checks and frozen models before held-out evaluation | [study ledger](../src/noether_optics/controller_selection.py) |
 

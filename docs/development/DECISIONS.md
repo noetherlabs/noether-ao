@@ -540,3 +540,26 @@ Validation: the focused pilot/journal/coordinator suite passes 85 checks, and th
 complete local correctness suite passes 326 tests in 362.72 seconds. Eight new
 coordinator checks cover the bounded barrier and its negative paths. No reserved
 seed, benchmark timing or controller outcome was generated.
+
+## Bounded training CLI (2026-10-14)
+
+Expose the settled coordinator as `noether-optics study-train`, not as another
+numerical implementation. Route creation/resumption only through `open_study_run`
+and require explicit positive pilot and model limits before opening it. `--create`
+selects a new directory; omission means an exact-bound resume. Emit the coordinator's
+summary as sorted JSON so shell automation does not need to inspect internal files.
+
+Use argparse subcommands rather than global conditional flags. This preserves the
+existing command form while keeping `--create`, `--pilot-limit` and `--model-limit`
+out of legacy experiments. Invalid limits and cross-command options must fail at
+argument admission, before configuration loading, source capture or filesystem
+mutation. Do not expose a free-space override: the opener's existing minimum remains
+in force, while full-run sizing is still a separate pre-acquisition requirement.
+
+The command is implementation wiring only. Do not execute the reserved study until
+later-stage commands, resource/disk reporting and the separately seeded full-runner
+smoke are committed and verified.
+
+Validation: seven focused CLI tests pass, followed by all 333 local correctness
+tests in 291.82 seconds. No study opener or numerical backend runs in the new tests,
+and no reserved evidence or performance timing is acquired.

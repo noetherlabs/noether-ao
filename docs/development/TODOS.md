@@ -31,9 +31,10 @@ evaluation chunks. Numerical helpers now provide measured pseudo-open-loop pilot
 telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
 normalized equal-episode gradients, fixed Adam budgets and failure records. Bounded
-training coordination and the complete aggregate binding are implemented. Next add
-separate stage commands. Durable validation and evaluation trial adapters now record
-full raw outputs through ledger chunks.
+training coordination, the complete aggregate binding and its `study-train` command
+are implemented. Next add separate validation/selection/evaluation commands. Durable
+validation and evaluation trial adapters now record full raw outputs through ledger
+chunks.
 Fresh source/runtime capture and exclusive numeric artifact storage are implemented;
 bind their returned provenance references with the training evidence. The learned
 fit journal now preserves episode losses/gradients, replays saved episodes through
@@ -106,7 +107,7 @@ Canonical source/runtime evidence hashes match the ledger bindings. Numeric NPZ
 files preserve shapes, dtypes and nonfinite failures, permit exact retries and
 reject changed replacements. Tests cover interrupted writes, competing writers,
 path aliases and changed evidence. No scientific cohort is acquired by this layer.
-Stage commands, resource sizing and the full-runner smoke remain in P1.
+Later-stage commands, resource sizing and the full-runner smoke remain in P1.
 
 ## Completed — Durable validation and evaluation trials
 
@@ -127,8 +128,8 @@ model/history references, including ineligible numerical failures. Interruption
 diagnostics are retained and unexpected exceptions propagate. Correctness checks
 compare interrupted and uninterrupted fits and exercise a reduced optical resume
 on separate seeds. Aggregate training orchestration is now completed below; stage
-commands and a full-runner smoke remain in P1. This is not reserved training or a
-new controller-performance result.
+validation/selection/evaluation commands and a full-runner smoke remain in P1. This
+is not reserved training or a new controller-performance result.
 
 ## Completed — Durable pilot and predictor records
 
@@ -138,9 +139,9 @@ shared phases, full observations/commands and measured telemetry. Predictor fitt
 requires the complete cohort, audits telemetry against the saved measurements and
 fits each burned-in episode separately. Terminal models retain coefficients and
 histories, or raw numerical failures without usable parameters. These records join
-the aggregate training bundle through the completed coordinator. The stage commands,
-resource report and full-runner smoke remain P1 work. No reserved scientific cohort
-was acquired.
+the aggregate training bundle through the completed coordinator. Later-stage commands,
+the resource report and full-runner smoke remain P1 work. No reserved scientific
+cohort was acquired.
 
 ## Completed — Training coordination and aggregate binding
 
@@ -155,8 +156,22 @@ Completed learned records now verify their persisted manifest, candidate, proven
 calibration, episode identities and artifact hashes without recomputing open-loop
 normalization or constructing an optimizer. Correctness checks cover bounded resume,
 aggregate publication, retained predictor failures, evidence tampering, invalid
-limits and competing workers on separate 101001/102001/103001 fixtures. Stage commands,
-full-run resource sizing and the end-to-end physical smoke remain P1.
+limits and competing workers on separate 101001/102001/103001 fixtures. Later-stage
+commands, full-run resource sizing and the end-to-end physical smoke remain P1.
+
+## Completed — Bounded training command
+
+`noether-optics study-train` creates or resumes a provenance-bound run and delegates
+one explicit pilot/model chunk to the training coordinator. Both limits must be
+positive before the run is opened. `--create` is required only for the first call;
+omitting it resumes the identically bound run. The command prints a deterministic
+JSON progress record and cannot accept the legacy latency `--resume` flag.
+
+Command-boundary checks replace the opener and numerical coordinator, proving that
+parsed paths, creation state and chunk limits cross the boundary exactly and that
+invalid or legacy-only option combinations cause no run access. This is runner
+wiring, not reserved acquisition. Validation/selection/evaluation commands, resource
+sizing and the physical full-runner smoke remain P1.
 
 ## P2 — Optical-gain drift observability
 

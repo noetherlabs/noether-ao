@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add a provenance-bound `study-train` command with explicit positive pilot/model
+  chunk limits, first-run creation and JSON progress output. Reject incomplete or
+  stage-inapplicable options before opening a run.
+
 - Coordinate bounded pilot acquisition and every declared predictor/learned fit in
   deterministic order. Verify terminal records without repeating completed numerical
   work, serialize competing coordinators, and publish one aggregate training bundle

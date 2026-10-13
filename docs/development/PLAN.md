@@ -22,8 +22,10 @@ episodes through Adam after interruption; terminal successes and failures are
 retained. Pilot acquisition now runs in audited chunks and predictor fits return
 terminal coefficient/history records from complete measured cohorts. A bounded
 coordinator now schedules every fitted candidate and freezes the aggregate training
-bundle only after all terminal evidence verifies. Next add stage commands, complete
-resource/disk sizing, and verify a full runner smoke before reserved outcomes.
+bundle only after all terminal evidence verifies. A provenance-bound `study-train`
+command exposes positive pilot/model chunks and JSON progress. Next add the separate
+validation/selection/evaluation commands, complete resource/disk sizing, and verify
+a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Each meaningful increment also updates README.md when its technical description,
