@@ -395,3 +395,35 @@ in total. No physical gate or model formula changed, no reserved cohort ran, and
 no timing was acquired. The adapter requires the provenance references returned
 by the study opener in the training binding, rather than trusting supplied base
 settings or artifact names alone. Missing stage orchestration remains explicit.
+
+## Durable learned-fit journal (2026-10-14)
+
+Persist each completed learned episode evaluation before advancing. Resume by
+feeding saved losses/gradients back through the existing fixed-budget fitting
+loop, rebuilding Adam's state from its original initialization. This avoids both
+repeating completed physical episodes and serializing executable optimizer state.
+The protocol's same-parameter episode averaging, noise path, learning rate and
+number of updates remain unchanged. Parameter/input identity checks must reject
+incompatible replay, including changed atmosphere bytes or calibration arrays.
+
+Store shared input phases, numerical calibration, step parameters, episode losses,
+full-output finite flags and gradients with exclusive publication. Terminal model
+and history references retain finite successes and nonfinite failures. Unexpected
+exceptions leave interruption diagnostics and propagate; recorded scientific
+failures are not retried. Hold the ledger lock throughout, and refuse refitting
+once training or selection is bound. Reuse the trial adapter's provenance checks.
+
+Use the autonomous gstack planning/review/shipping workflow. Verify analytic
+interrupted-versus-uninterrupted fitting and a reduced optical case on separate
+correctness seeds; do not generate reserved cohorts, timings or study outcomes.
+Pilot orchestration, aggregate training/CLI commands, resource reporting and the
+full-runner smoke remain separate work in P1.
+
+The journal suite passes 39 checks and the full local correctness suite passes
+280 tests. Interrupted analytic fits reproduce complete history/parameter bytes;
+a reduced optical fit resumes after one Adam update on fresh correctness seeds.
+Review added run/stage rechecks before terminal model publication, with regression
+tests for mutation during fitting. No numerical gate, baseline plant or reserved
+study input changed. A raw file without its identity metadata is not a committed
+episode; resumption recomputes it and must reproduce its bytes. Interruption
+logging is best effort if storage itself fails or the process is terminated.

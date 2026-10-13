@@ -46,7 +46,7 @@ def _finite(tree) -> bool:
 
 
 def fit_learned_controller(base: dict, study: dict, candidate: dict,
-                           cal: dict, episodes: list[dict]) -> dict:
+                           cal: dict, episodes: list[dict], *, episode_evaluator=None) -> dict:
     """Fit one declared learned candidate, with no early stopping or restarts.
 
     Each episode is exactly {case, phases}. Identities must cover the complete
@@ -58,8 +58,89 @@ def fit_learned_controller(base: dict, study: dict, candidate: dict,
     executed episode's loss and gradient, including partial nonfinite failures.
     Only status='ready' has non-null parameters. Unexpected exceptions propagate;
     the stage adapter must preserve interrupted evidence and manage resumption.
+    An optional episode_evaluator(step, case, parameters, phases, denominator,
+    compute) can journal/replay evaluations. It must return compute's exact result
+    and propagate errors. The numerical loop still owns every optimizer update.
     This function acquires no timings and writes no files.
     """
+    cases, configs, denominators, found = _training_inputs(base, study, candidate, cal, episodes)
+
+    params = initialize_weights(study["seeds"]["initialization"])
+    result = {"status": "failed", "error": None, "candidate": deepcopy(candidate),
+              "cases": cases, "open_variances": np.asarray(denominators),
+              "checkpoints": [_arrays(params)], "steps": [],
+              "final": None, "parameters": None}
+
+    def fail(message):
+        result["error"] = message
+        return result
+
+    if not _finite(params):
+        return fail("Nonfinite initialization")
+    optimizer = optax.adam(study["training"]["learned_learning_rate"])
+    state = optimizer.init(params)
+    # Kernels are reused across seeds in each regime, with one reverse-mode tape
+    # alive at a time. The complete cohort is never traced as one giant objective.
+    kernels = {}
+    config_by_regime = {(case["photons"], case["wind_scale"]): cfg for case, cfg in zip(cases, configs)}
+
+    def evaluate(parameters, step):
+        record = {"episode_losses": [], "episode_outputs_finite": [], "episode_gradients": []}
+        for case, denominator in zip(cases, denominators):
+            key = (case["photons"], case["wind_scale"])
+            phases = found[_identity(case)]
+            def compute():
+                if key not in kernels:
+                    kernels[key] = _episode_kernel(config_by_regime[key], cal)
+                return jax.block_until_ready(kernels[key](
+                    parameters, jnp.asarray(phases), case["seed"], denominator))
+            (loss, finite), gradient = (compute() if episode_evaluator is None else episode_evaluator(
+                step, deepcopy(case), parameters, phases, denominator, compute))
+            record["episode_losses"].append(float(loss))
+            record["episode_outputs_finite"].append(bool(finite))
+            record["episode_gradients"].append(_arrays(gradient))
+            if not bool(finite) or not _finite((loss, gradient)):
+                return record, False
+        return record, True
+
+    for step in range(study["training"]["learned_steps"]):
+        record, finite = evaluate(params, step)
+        record["step"] = step
+        result["steps"].append(record)
+        if not finite:
+            return fail(f"Nonfinite training episode at step {step}")
+        # Every derivative above was taken at the SAME parameters. Taking one
+        # optimizer update per episode would silently implement another protocol.
+        gradient = tuple(jnp.asarray(np.mean(np.stack(parts), axis=0))
+                         for parts in zip(*record["episode_gradients"]))
+        loss = float(np.mean(record["episode_losses"]))
+        norm = float(optax.tree.norm(gradient))
+        record.update(mean_loss=loss, mean_gradient=_arrays(gradient), gradient_norm=norm)
+        if not _finite((loss, gradient, norm)):
+            return fail(f"Nonfinite mean loss or gradient at step {step}")
+        updates, state = optimizer.update(gradient, state, params)
+        params = optax.apply_updates(params, updates)
+        result["checkpoints"].append(_arrays(params))
+        if not _finite((state, params)):
+            # Retain the failed parameter/state values without making the previous
+            # checkpoint an eligible candidate. The caller must bind a failure.
+            record["failed_optimizer_state"] = jax.tree.map(lambda x: np.array(x, copy=True), state)
+            return fail(f"Nonfinite optimizer state or parameters at step {step}")
+
+    # Score the actual final parameters, not the pre-update loss of the last step.
+    final, finite = evaluate(params, study["training"]["learned_steps"])
+    result["final"] = final
+    if not finite:
+        return fail("Nonfinite final training objective or gradient")
+    final["mean_loss"] = float(np.mean(final["episode_losses"]))
+    if not np.isfinite(final["mean_loss"]):
+        return fail("Nonfinite final mean loss")
+    result.update(status="ready", parameters=_arrays(params))
+    return result
+
+
+def _training_inputs(base, study, candidate, cal, episodes):
+    """Validate and prepare the complete cohort before journaling or fitting."""
     cases = training_cases(study)
     if (_identity(candidate) not in {_identity(row) for row in study_plan(study)["candidates"]}
             or candidate["controller"] != "learned"):
@@ -94,72 +175,4 @@ def fit_learned_controller(base: dict, study: dict, candidate: dict,
         configs.append(cfg)
         denominators.append(denominator)
 
-    params = initialize_weights(study["seeds"]["initialization"])
-    result = {"status": "failed", "error": None, "candidate": deepcopy(candidate),
-              "cases": cases, "open_variances": np.asarray(denominators),
-              "checkpoints": [_arrays(params)], "steps": [],
-              "final": None, "parameters": None}
-
-    def fail(message):
-        result["error"] = message
-        return result
-
-    if not _finite(params):
-        return fail("Nonfinite initialization")
-    optimizer = optax.adam(study["training"]["learned_learning_rate"])
-    state = optimizer.init(params)
-    # Kernels are reused across seeds in each regime, with one reverse-mode tape
-    # alive at a time. The complete cohort is never traced as one giant objective.
-    kernels = {}
-    for case, cfg in zip(cases, configs):
-        key = (case["photons"], case["wind_scale"])
-        if key not in kernels:
-            kernels[key] = _episode_kernel(cfg, cal)
-
-    def evaluate(parameters):
-        record = {"episode_losses": [], "episode_outputs_finite": [], "episode_gradients": []}
-        for case, denominator in zip(cases, denominators):
-            key = (case["photons"], case["wind_scale"])
-            (loss, finite), gradient = jax.block_until_ready(kernels[key](
-                parameters, jnp.asarray(found[_identity(case)]), case["seed"], denominator))
-            record["episode_losses"].append(float(loss))
-            record["episode_outputs_finite"].append(bool(finite))
-            record["episode_gradients"].append(_arrays(gradient))
-            if not bool(finite) or not _finite((loss, gradient)):
-                return record, False
-        return record, True
-
-    for step in range(study["training"]["learned_steps"]):
-        record, finite = evaluate(params)
-        record["step"] = step
-        result["steps"].append(record)
-        if not finite:
-            return fail(f"Nonfinite training episode at step {step}")
-        # Every derivative above was taken at the SAME parameters. Taking one
-        # optimizer update per episode would silently implement another protocol.
-        gradient = tuple(jnp.asarray(np.mean(np.stack(parts), axis=0))
-                         for parts in zip(*record["episode_gradients"]))
-        loss = float(np.mean(record["episode_losses"]))
-        norm = float(optax.tree.norm(gradient))
-        record.update(mean_loss=loss, mean_gradient=_arrays(gradient), gradient_norm=norm)
-        if not _finite((loss, gradient, norm)):
-            return fail(f"Nonfinite mean loss or gradient at step {step}")
-        updates, state = optimizer.update(gradient, state, params)
-        params = optax.apply_updates(params, updates)
-        result["checkpoints"].append(_arrays(params))
-        if not _finite((state, params)):
-            # Retain the failed parameter/state values without making the previous
-            # checkpoint an eligible candidate. The caller must bind a failure.
-            record["failed_optimizer_state"] = jax.tree.map(lambda x: np.array(x, copy=True), state)
-            return fail(f"Nonfinite optimizer state or parameters at step {step}")
-
-    # Score the actual final parameters, not the pre-update loss of the last step.
-    final, finite = evaluate(params)
-    result["final"] = final
-    if not finite:
-        return fail("Nonfinite final training objective or gradient")
-    final["mean_loss"] = float(np.mean(final["episode_losses"]))
-    if not np.isfinite(final["mean_loss"]):
-        return fail("Nonfinite final mean loss")
-    result.update(status="ready", parameters=_arrays(params))
-    return result
+    return cases, configs, denominators, found

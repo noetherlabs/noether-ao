@@ -16,9 +16,13 @@ telemetry, separate per-episode predictor fits, exact-noise controller kernels
 and paired raw-array scoring. Learned fitting now implements common initialization,
 normalized equal-episode gradients, fixed Adam budgets and failure records. Next
 connect pilot/model orchestration and separate stage commands. Durable validation
-and evaluation trial adapters now record full raw outputs through ledger chunks. Fresh source/runtime capture and exclusive numeric
-artifact storage are implemented; bind their returned provenance references with
-the training evidence. Add durable mid-fit recording/resumption before long fits.
+and evaluation trial adapters now record full raw outputs through ledger chunks.
+Fresh source/runtime capture and exclusive numeric artifact storage are implemented;
+bind their returned provenance references with the training evidence. The learned
+fit journal now preserves episode losses/gradients, replays saved episodes through
+the unchanged optimizer and returns terminal model/history references. Integrate
+those references with durable pilots/predictor fits and the aggregate training
+binding. Complete resource reporting and full-run disk sizing before acquisition.
 The separate component smoke has passed. The adapter must enter evaluation through
 the ledger's lazy callback, after the gate.
 Verify on separately labeled physical smoke seeds without using reserved cohorts.
@@ -95,6 +99,17 @@ fault-matched open loops, full outputs and both metric windows before publishing
 each record. Model/provenance/schema checks and per-trial disk refusal precede new
 physics. Correctness tests use reduced separate cohorts and synthetic frozen
 models; no reserved study or full-runner smoke result is claimed.
+
+## Completed — Durable learned-fit episode journal
+
+Each episode's loss, full-output finite flag and gradient is saved with its exact
+parameter/input identity. Resumption verifies the evidence and rebuilds Adam from
+cached gradients, running only missing episodes. Terminal fits return immutable
+model/history references, including ineligible numerical failures. Interruption
+diagnostics are retained and unexpected exceptions propagate. Correctness checks
+compare interrupted and uninterrupted fits and exercise a reduced optical resume
+on separate seeds. Aggregate training orchestration and a full-runner smoke remain
+in P1; this is not reserved training or a new controller-performance result.
 
 ## P2 — Optical-gain drift observability
 

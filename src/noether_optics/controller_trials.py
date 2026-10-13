@@ -10,7 +10,7 @@ from copy import deepcopy
 from pathlib import Path
 import shutil
 
-from .controller_evidence import load_arrays, save_arrays, save_metadata
+from .controller_evidence import load_arrays, save_arrays, save_metadata, check_provenance_binding
 from .controller_selection import _bytes, _case_id, _read
 
 
@@ -28,24 +28,6 @@ class _TrialExecutor:
         self.base = deepcopy(base)
         self.calibration = None
         self.kernels = {}
-
-    def _check_provenance(self, training):
-        required = {f"evidence/provenance/{name}.json" for name in ("source", "runtime", "study", "base")}
-        refs = {ref["path"]: ref for ref in training["evidence"]}
-        if not required.issubset(refs):
-            raise ValueError("Training must bind all source/runtime/study/base evidence")
-        for path in required:
-            self.ledger._verify_artifacts([refs[path]])
-        prefix = "evidence/provenance/"
-        if (refs[prefix + "source.json"]["sha256"] != self.ledger.provenance["source_sha256"]
-                or refs[prefix + "runtime.json"]["sha256"] != self.ledger.provenance["runtime_sha256"]):
-            raise ValueError("Stored provenance differs from the ledger binding")
-        source = _read(self.ledger.root / (prefix + "source.json"))
-        if source["commit"] != self.ledger.provenance["source_commit"]:
-            raise ValueError("Stored source commit differs from the ledger binding")
-        if (_bytes(_read(self.ledger.root / (prefix + "study.json"))) != _bytes(self.ledger.config)
-                or _bytes(_read(self.ledger.root / (prefix + "base.json"))) != _bytes(self.base)):
-            raise ValueError("Trial configuration differs from frozen evidence")
 
     def _shared(self, kind, identity, build):
         relative = f"evidence/{identity['stage']}/{kind}/{_case_id(identity)}"
@@ -65,7 +47,7 @@ class _TrialExecutor:
         return arrays, refs
 
     def __call__(self, case, training):
-        self._check_provenance(training)
+        check_provenance_binding(self.ledger, self.base, training["evidence"])
         candidate = case["candidate"]
         model = training["models"].get(candidate["id"])
         if model is not None and model["status"] == "failed":

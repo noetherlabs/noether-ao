@@ -22,7 +22,7 @@ import numpy as np
 
 from .artifacts import fingerprint, load_config
 from .controller_protocol import load_study
-from .controller_selection import StudyLedger, _bytes, _digest, _publish
+from .controller_selection import StudyLedger, _bytes, _digest, _publish, _read
 
 ROOT = Path(__file__).resolve().parents[2]
 EXECUTION_PATHS = ("src", "scripts", "configs", "pyproject.toml", "uv.lock")
@@ -246,3 +246,23 @@ def load_arrays(ledger: StudyLedger, reference: dict) -> dict:
         if len(archive.files) != len(set(archive.files)):
             raise ValueError("Duplicate array keys in evidence")
         return _numeric_arrays({key: archive[key] for key in archive.files})
+
+
+def check_provenance_binding(ledger, base, references):
+    """Check persisted provenance/configuration before admitted numerical work."""
+    required = {f"evidence/provenance/{name}.json" for name in ("source", "runtime", "study", "base")}
+    refs = {ref["path"]: ref for ref in references}
+    if not required.issubset(refs):
+        raise ValueError("Training must bind all source/runtime/study/base evidence")
+    for path in required:
+        ledger._verify_artifacts([refs[path]])
+    prefix = "evidence/provenance/"
+    if (refs[prefix + "source.json"]["sha256"] != ledger.provenance["source_sha256"]
+            or refs[prefix + "runtime.json"]["sha256"] != ledger.provenance["runtime_sha256"]):
+        raise ValueError("Stored provenance differs from the ledger binding")
+    source = _read(ledger.root / (prefix + "source.json"))
+    if source["commit"] != ledger.provenance["source_commit"]:
+        raise ValueError("Stored source commit differs from the ledger binding")
+    if (_bytes(_read(ledger.root / (prefix + "study.json"))) != _bytes(ledger.config)
+            or _bytes(_read(ledger.root / (prefix + "base.json"))) != _bytes(base)):
+        raise ValueError("Study configuration differs from frozen evidence")

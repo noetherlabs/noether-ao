@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Save learned episode losses/gradients with immutable input and parameter bindings.
+  Resume interrupted fits by replaying cached gradients through the existing Adam
+  loop. Retain terminal failures and interruption diagnostics; verify matching
+  resumed results, changed-input rejection and reduced optical recovery.
+
 - Connect validation/evaluation to lazy physical trial adapters that retain raw
   observations, paired fault references and metric windows. Add audited validation
   chunks that resume without replaying saved success/failure records. Require

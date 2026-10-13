@@ -14,8 +14,10 @@ implements complete-episode gradient averaging and fixed Adam budgets with retai
 checkpoints and numerical failures. Fresh source/runtime capture and exclusive
 raw-array storage now bind evidence to the ledger. Durable validation/evaluation
 trial adapters now save raw outputs and paired references through resumable ledger
-chunks. Next connect pilot/model orchestration, mid-fit records and stage commands
-before a full runner smoke or reserved outcomes.
+chunks. Learned fits now journal each episode's loss/gradient and replay saved
+episodes through Adam after interruption; terminal successes and failures are
+retained. Next connect pilot/model orchestration and stage commands, complete
+resource/disk sizing, and verify a full runner smoke before reserved outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Original M0–M7 evidence stays immutable; later experiments receive new run IDs.

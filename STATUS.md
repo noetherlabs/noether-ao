@@ -254,3 +254,36 @@ The original simulator, frozen protocol/plan and saved evidence are unchanged.
 Next connect durable pilot/model orchestration and mid-fit checkpoints, add separate
 stage commands and resource reporting, then run a distinct full-runner smoke before
 the reserved comparison. Full-stream retention also requires full-run disk sizing.
+
+## Durable learned-fit journal
+
+Learned fitting now saves each completed episode's loss, full-output finite flag
+and gradient with exact parameter/input bindings. After interruption, it verifies
+the saved evidence and replays gradients through the existing Adam loop to recover
+optimizer state, computing only missing episodes. Terminal successes and numerical
+failures retain model/history references; failed fits never expose usable final
+parameters or receive a retry. Unexpected exceptions retain earlier files and
+best-effort interruption diagnostics before propagating.
+
+One ledger lock spans each fit. Training/selection bindings or existing validation
+records prohibit fitting, and bindings are rechecked before final publication.
+Source/runtime/configuration evidence is required. Shared phases must agree across
+photon regimes and candidates; changed calibration, phase, parameter or episode
+bytes reject resumption. Raw-before-metadata interruptions permit only identical
+republication. The input adapter still relies on the caller to supply physically
+matching calibration and atmospheres from the pinned source.
+
+The full local command `CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q`
+passes **280 tests**, including **39 new journal checks**. Analytic interruptions
+within both optimizer steps and final scoring reproduce the uninterrupted fit's
+parameter/history bytes. A reduced optical fit resumes after its Adam update,
+retaining its earlier files and producing finite, changed weights. Tests also
+cover retained numerical/optimizer failures, frozen stages, input/evidence drift,
+lock exclusion and interrupted raw/terminal publication.
+
+Checks use separate 91001/92001/93001 cohorts and initialization 94001. They are
+software correctness evidence, not reserved training, scientific comparison or a
+full-runner smoke. No timing measurements were acquired. The original simulator,
+frozen study inputs/plan and baseline evidence are unchanged. Next integrate
+durable pilots/predictor fits and aggregate training bindings, add stage commands
+and resource/disk reporting, then verify the complete runner on fresh smoke seeds.

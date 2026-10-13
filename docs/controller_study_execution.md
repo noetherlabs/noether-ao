@@ -7,9 +7,10 @@ measured pilot telemetry, per-episode predictor fits and paired raw-array scorin
 A learned fitting helper now implements fixed-budget, equal-episode gradient
 averaging. Source/runtime capture and immutable numeric artifact storage now
 connect to the ledger. Durable validation/evaluation callbacks now execute bounded
-trial chunks. Training orchestration, complete stage commands and ledger-backed
-physical smoke remain pending before any reserved cohort is used. The frozen YAML,
-plan and original M0–M7 evidence are unchanged.
+trial chunks, and a learned-fit journal now resumes interrupted fits from saved
+episode losses/gradients. Training orchestration, complete stage commands and
+ledger-backed physical smoke remain pending before any reserved cohort is used.
+The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
 
@@ -101,9 +102,9 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
 - Save shared atmospheres, exact pilot observations and measured pseudo-open-loop
   estimates. Fit separate sequences, never bridge seeds or use phase truth as
   predictor telemetry. Preserve parameter arrays and training histories.
-- Call the learned fitting helper for all six declared candidates, persist every
-  returned history/checkpoint and numerical failure, and bind their immutable
-  artifacts to the ledger. Freeze training before validation.
+- Call the durable learned-fit adapter for all six declared candidates and bind
+  its returned model/history/evidence references alongside pilot/predictor records
+  to the ledger. Freeze the complete training bundle before validation.
 - Derive summaries from retained per-frame arrays and full-output finite flags.
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
@@ -300,8 +301,9 @@ cohorts. They cover hidden Git edits, source/runtime drift, pinned-base mismatch
 partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
-acquisition. Trial bindings now use these writers. Stage commands, per-fit checkpoints and
-model orchestration still need integration and full-runner smoke checks.
+acquisition. Trial bindings and the learned-fit journal now use these writers.
+Stage commands and model orchestration still need integration and full-runner
+smoke checks.
 
 ## Learned fitting and its evidence contract
 
@@ -345,11 +347,12 @@ retained with the failed update. A prior finite checkpoint is not a usable fallb
 model. Only a fully finite fit returns `status="ready"` and final parameters.
 
 Invalid inputs and unexpected implementation/backend exceptions raise instead of
-being mislabeled scientific failures. This numerical helper is not a durable
-checkpoint writer; the future stage runner must preserve raw evidence and manage
-interruption/resumption. In-memory records can contain nonfinite arrays on failure,
-so persist them as raw arrays with strict JSON metadata/diagnostics, not JSON NaN.
-The ledger still needs immutable model/history references for every candidate.
+being mislabeled scientific failures. The numerical helper does not write files;
+its optional episode-evaluator hook lets the journal below persist/replay exact
+results while the helper retains ownership of every optimizer update. In-memory
+records can contain nonfinite arrays on failure, so the journal preserves them as
+raw arrays with strict JSON metadata/diagnostics, not JSON NaN. The aggregate
+training binding still needs model/history references for every candidate.
 
 Correctness tests use independent 61001/62001/63001 cohorts and initialization
 64001, with reduced arrays. An analytic multi-episode objective is checked against
@@ -363,6 +366,67 @@ outcomes, trained study models or evidence of held-out improvement.
 Additional failures cover held-out cases blocked before backend access, malformed shapes,
 coerced identities, nonfinite early outputs, gradient/mean overflow, failed
 optimizer state/parameters, final scoring, and unexpected backend errors.
+
+## Durable learned-fit journal
+
+`controller_training_journal.fit_learned_record(ledger, base, candidate, calibration,
+episodes, shared_evidence)` runs or resumes one declared learned candidate. First
+open the ledger using fresh source/runtime capture. Supply the corresponding
+calibration and complete training phase arrays; the adapter verifies their shape,
+cohort and immutable bytes but does not independently establish their physical
+origin. Calibration callables come from the pinned source; their numerical arrays
+are saved. The shared evidence must include all four captured provenance files.
+
+    open training + verified inputs -> immutable candidate journal
+        -> step parameters + episode identity -> loss/finite flag/gradient files
+        -> existing equal-episode Adam update -> next step
+    interruption -> retain earlier files + best-effort diagnostic -> raise
+    resume -> verify/replay saved evaluations -> compute only missing episodes
+        -> ready parameters or terminal failure + raw history -> returned references
+
+Shared phase arrays are keyed by wind/root and must be identical across photon
+regimes and candidates. The journal binds those arrays, calibration, candidate,
+normalization and run manifest. Each evaluation binds that journal, step, case and
+exact parameter bytes. Raw loss/gradient files preserve nonfinite failures; strict
+JSON stores identity and hashes. No executable optimizer object is serialized.
+
+Resumption rebuilds the original initialization and Adam state by replaying saved
+gradients in order through the same numerical loop. Every saved step's parameter
+file must match the reconstructed parameters before its gradients are used.
+Cached episodes do not construct or execute an optical gradient kernel. A completed
+terminal record checks all bound evidence and returns without rebuilding Adam.
+Input checking still recomputes the clean open-loop normalization. Source, runtime,
+configuration, calibration, phases or saved-artifact drift refuses resumption.
+
+An evaluation is committed only when its raw file and identity metadata both
+exist. A crash between them requires recomputation and accepts only byte-identical
+raw output. A crash before terminal publication replays the episode journal and
+completes history/model publication without repeating committed optical work.
+Unexpected exceptions are re-raised and logged when storage permits; process
+termination may leave only the already-published files. Pending files are retained.
+
+The final history stores initial/updated parameters, open-loop denominators,
+step averages/norms and final loss. Failed optimizer state is retained as numeric
+leaves with a structural description. Per-episode losses, gradients and finite
+flags remain in their own journal records, including partial failed steps and
+final scoring. Ready models have exactly one final `parameters.npz`; failed models
+retain their history but expose no usable final parameters and are never retried.
+
+One process lock covers the entire fit. Training/selection binding or existing
+validation records prohibit fitting. Run/stage bindings are rechecked before final
+publication. The result is `{model, evidence}` for later aggregate binding; this
+function does not freeze an incomplete collection of candidates or start a later
+stage. It acquires no timings and supplies no CLI, full-run disk budget or resource
+report. Those remain runner responsibilities.
+
+Correctness tests use separate 91001/92001/93001 cohorts and initialization 94001.
+Analytic fits interrupted within each optimizer/scoring stage reproduce an
+uninterrupted fit's parameter/history bytes, while executing only missing episodes.
+Tests retain raw numerical failures, refuse evidence drift and frozen stages, hold
+the lock across callbacks, and recover interrupted publication. A reduced optical
+fit resumes after an Adam update with finite, changed weights and a complete
+journal. These are software checks, not a full-runner smoke, study training or
+evidence of held-out improvement.
 
 ## Original ledger engineering review and tests
 
