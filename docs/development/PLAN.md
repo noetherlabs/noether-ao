@@ -42,9 +42,11 @@ Original M0–M7 evidence stays immutable; later experiments receive new run IDs
 
 The unexecuted P2 optical-gain protocol now has a causal detector, complete-cohort
 threshold and validation barriers, and a protocol-bound ledger for deterministic
-training/validation record resumption. The next bounded work is the physical trial
-adapter with complete retention and static storage admission, followed by a distinct
-nonreserved smoke. No declared P2 seed is opened before those gates pass.
+training/validation record resumption. Its static storage gate now derives 2.341 GB of
+numeric payload and a conservative 10.191 GB free-space requirement; the current
+development target fails that gate. The next bounded work is the physical trial adapter
+with complete retention, followed by a distinct nonreserved smoke. No declared P2 seed
+is opened before those gates pass on an admitted filesystem.
 
 | Milestone | Required gate | State |
 |---|---|---|

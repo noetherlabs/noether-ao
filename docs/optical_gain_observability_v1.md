@@ -170,10 +170,29 @@ a saved success or failure. An interruption without a terminal record is retried
 published outcomes are never replaced. Threshold and release files close their stages
 permanently.
 
+The read-only storage preflight derives each NPZ member from this frozen contract. It
+budgets all 1,504 maximum trial archives, including measurement and prediction images
+for the first seed of each of 32 role/regime/condition cells. The numeric payload is
+2,341,413,792 bytes; a no-compression-credit archive envelope, metadata allowance,
+temporary-write headroom and operating reserve require 10,190,604,096 free bytes. The
+maximum assumes validation releases all 1,200 evaluation trials. A failed or withheld
+run can use less space but cannot weaken admission.
+
+```sh
+.venv/bin/noether-optics observability-resources \
+  --config configs/optical_gain_observability_v1.yaml \
+  --target runs/optical_gain_observability_v1
+```
+
+The command imports no JAX or simulator module, creates no target and exits 2 after
+printing its JSON report when capacity is insufficient. The first live check found
+7,994,904,576 bytes free and refused admission. This is a filesystem observation, not
+an execution cost or outcome.
+
 Before acquisition, the implementation must still add the physical trial callbacks,
-the complete retained-array and per-run metric path, a whole-run storage preflight and
-a separate nonreserved runner smoke. Unit tests and this plan are not execution
-evidence, and no P2 threshold, validation decision or outcome exists yet.
+the complete retained-array and per-run metric path and a separate nonreserved runner
+smoke. Unit tests and this plan are not execution evidence, and no P2 threshold,
+validation decision or outcome exists yet.
 
 ## Predeclared escalation
 

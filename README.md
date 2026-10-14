@@ -105,9 +105,21 @@ implemented. A one-way validation barrier also reconstructs every detector trace
 publishes release or withholding only after all 240 terminal identities are present.
 A protocol-bound ledger now records both stages in declared order, revalidates saved
 JSON and raw NPZ evidence on every resume, and retries only callbacks interrupted
-before terminal publication. These paths are tested on synthetic fixtures; physical
-acquisition, complete retention, storage admission and a separate runner smoke remain
-pending.
+before terminal publication. A read-only storage gate now sizes all 1,504 maximum
+trial archives directly from the frozen retention schema. These paths are tested on
+synthetic fixtures; physical acquisition, complete retention and a separate runner
+smoke remain pending.
+
+```sh
+.venv/bin/noether-optics observability-resources \
+  --config configs/optical_gain_observability_v1.yaml \
+  --target runs/optical_gain_observability_v1
+```
+
+The P2 envelope contains 2,341,413,792 bytes of numeric payload and requires
+10,190,604,096 free bytes after archive expansion, metadata, write headroom and
+operating reserve. It assumes the maximum evaluation cohort is released, gives no
+compression credit, creates no directory and opens no seed.
 
 Independent validation adds:
 
@@ -134,7 +146,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted protocol; detector, resumable stage ledger, immutable threshold freeze and validation-release barrier implemented; physical runner, complete retention and storage smoke pending |
+| Optical-gain observability | Frozen unexecuted protocol; detector, resumable stage ledger, immutable threshold/release gates and 10.191 GB storage preflight implemented; physical runner, complete retention and separate smoke pending |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

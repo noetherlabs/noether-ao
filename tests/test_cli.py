@@ -11,6 +11,7 @@ from noether_optics import controller_evidence as evidence
 from noether_optics import controller_resources as resources
 from noether_optics import controller_training_stage as training_stage
 from noether_optics import controller_trials as trials
+from noether_optics import observability_resources
 from noether_optics.experiments import runners
 
 
@@ -46,6 +47,35 @@ def test_study_resources_returns_two_after_printing_insufficient_report(monkeypa
         cli.main()
 
     assert error.value.code == 2
+    assert json.loads(capsys.readouterr().out) == report
+
+
+@pytest.mark.parametrize("admitted", [True, False])
+def test_observability_resources_reports_without_opening_a_run(
+    monkeypatch, capsys, admitted
+):
+    protocol, base = {"study_id": "fixture"}, {"fixture": "base"}
+    report = {"kind": "optical_gain_observability_resource_preflight",
+              "admitted": admitted}
+    loaded = Mock(return_value=(protocol, base))
+    checked = Mock(return_value=report)
+    monkeypatch.setattr(observability_resources, "load_resource_inputs", loaded)
+    monkeypatch.setattr(observability_resources, "resource_preflight", checked)
+    monkeypatch.setattr(evidence, "open_study_run",
+                        lambda *args, **kwargs: pytest.fail("resource preflight opened a run"))
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "observability-resources", "--config", "protocol.yaml",
+        "--target", "planned-run"])
+
+    if admitted:
+        cli.main()
+    else:
+        with pytest.raises(SystemExit) as error:
+            cli.main()
+        assert error.value.code == 2
+
+    loaded.assert_called_once_with(Path("protocol.yaml"))
+    checked.assert_called_once_with(protocol, base, Path("planned-run"))
     assert json.loads(capsys.readouterr().out) == report
 
 

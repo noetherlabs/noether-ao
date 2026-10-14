@@ -264,9 +264,15 @@ records exclusively, rechecks all saved bindings and artifacts before skipping t
 retains numerical failures and retries only interrupted callbacks with no terminal
 record. Threshold freeze and validation release remain separate one-way actions.
 
-Next, connect the physical trial callbacks, complete retention and storage admission.
-Prove that path with distinct nonreserved smoke seeds before opening any v1 cohort.
-Do not reuse controller-study smoke evidence as an observability runner check.
+Static storage admission is implemented. The outcome-free command derives 2.341 GB of
+numeric payload and a 10.191 GB free-space requirement from all declared array shapes,
+1,504 maximum trial archives and 32 full-WFS records, with zero compression credit.
+The current development target was refused at 7.995 GB free and was not created.
+
+Next, connect the physical trial callbacks and enforce the complete retained-array and
+per-run metric path. Prove that path with distinct nonreserved smoke seeds before
+opening any v1 cohort on an admitted filesystem. Do not reuse controller-study smoke
+evidence as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection

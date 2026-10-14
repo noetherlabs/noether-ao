@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add read-only storage admission for the frozen optical-gain protocol. Derive every
+  retained array shape, all 1,504 maximum trial archives and 32 full-WFS records
+  without importing JAX or opening a cohort. Reuse the conservative archive envelope,
+  give compression no credit and expose an `observability-resources` CLI refusal gate.
+
 - Add a protocol-bound optical-gain stage ledger. Advance training and validation in
   deterministic locked chunks, publish terminal successes and failures exclusively,
   revalidate canonical records and raw artifacts before resume skips, and retry only

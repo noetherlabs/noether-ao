@@ -14,22 +14,17 @@ import shutil
 import yaml
 
 from .controller_protocol import load_study, study_plan, validate_study
+from .resource_envelope import (
+    ARCHIVE_MEMBER_ALLOWANCE_BYTES,
+    ARCHIVE_PAYLOAD_FACTOR,
+    BOOL_BYTES,
+    FLOAT64_BYTES,
+    archive_category as _archive_category,
+    finalize_archive_budget,
+    positive_integer as _positive_integer,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
-MIB = 1024**2
-GIB = 1024**3
-FLOAT64_BYTES = 8
-BOOL_BYTES = 1
-
-# Every numeric archive is DEFLATE-compressed one member at a time.  Compression
-# is data-dependent, so the budget takes no compression credit.  Twice the raw
-# payload plus 4 KiB per member is a deliberately loose envelope for NPY headers,
-# DEFLATE expansion, ZIP64 records and directory entries.
-ARCHIVE_PAYLOAD_FACTOR = 2
-ARCHIVE_MEMBER_ALLOWANCE_BYTES = 4096
-METADATA_MINIMUM_BYTES = 512 * MIB
-WRITE_HEADROOM_MINIMUM_BYTES = 512 * MIB
-OPERATING_RESERVE_MINIMUM_BYTES = 4 * GIB
 
 
 def load_resource_inputs(path: Path, repository: Path | None = None) -> tuple[dict, dict]:
@@ -43,34 +38,6 @@ def load_resource_inputs(path: Path, repository: Path | None = None) -> tuple[di
     if not isinstance(base, dict):
         raise ValueError("Base simulation configuration must be a mapping")
     return study, base
-
-
-def _positive_integer(value, label: str) -> int:
-    if type(value) is not int or value < 1:
-        raise ValueError(f"{label} must be a positive integer")
-    return value
-
-
-def _round_up(value: int, quantum: int = MIB) -> int:
-    return ((value + quantum - 1) // quantum) * quantum
-
-
-def _archive_category(name: str, count: int, payload_per_archive: int,
-                      members_per_archive: int) -> dict:
-    count = _positive_integer(count, name + " archive count")
-    payload_per_archive = _positive_integer(payload_per_archive, name + " payload")
-    members_per_archive = _positive_integer(members_per_archive, name + " member count")
-    numeric = count * payload_per_archive
-    per_archive = (ARCHIVE_PAYLOAD_FACTOR * payload_per_archive
-                   + ARCHIVE_MEMBER_ALLOWANCE_BYTES * members_per_archive)
-    return {
-        "name": name,
-        "archives": count,
-        "members_per_archive": members_per_archive,
-        "numeric_payload_bytes": numeric,
-        "archive_envelope_bytes": count * per_archive,
-        "largest_archive_envelope_bytes": per_archive,
-    }
 
 
 def _full_output_bytes(frames: int, modes: int, detector_n: int) -> int:
@@ -178,18 +145,7 @@ def estimate_study_resources(study: dict, base: dict) -> dict:
         _archive_category("evaluation_trial_outputs", evaluation_trials,
                           _full_output_bytes(trial_frames, modes, detector_n), 12),
     ]
-    numeric = sum(row["numeric_payload_bytes"] for row in categories)
-    archives = sum(row["archive_envelope_bytes"] for row in categories)
-    largest = max(row["largest_archive_envelope_bytes"] for row in categories)
-    # JSON evidence contains repeated immutable references by design.  Reserve an
-    # additional one eighth of all archive envelopes, with a 512 MiB floor, for
-    # manifests, hashes, interruption diagnostics and filesystem allocation.
-    metadata = max(METADATA_MINIMUM_BYTES, _round_up((archives + 7) // 8))
-    retained = archives + metadata
-    write_headroom = max(WRITE_HEADROOM_MINIMUM_BYTES, _round_up(largest))
-    operating_reserve = max(OPERATING_RESERVE_MINIMUM_BYTES,
-                            _round_up((retained + 9) // 10))
-    required = retained + write_headroom + operating_reserve
+    budget = finalize_archive_budget(categories)
     return {
         "schema_version": 1,
         "kind": "controller_study_resource_budget",
@@ -203,17 +159,7 @@ def estimate_study_resources(study: dict, base: dict) -> dict:
             "maximum_evaluation_trials": evaluation_trials,
             "numeric_archives": sum(row["archives"] for row in categories),
         },
-        "budget": {
-            "numeric_payload_bytes": numeric,
-            "archive_envelope_bytes": archives,
-            "metadata_filesystem_envelope_bytes": metadata,
-            "retained_evidence_envelope_bytes": retained,
-            "largest_single_archive_envelope_bytes": largest,
-            "temporary_write_headroom_bytes": write_headroom,
-            "operating_reserve_bytes": operating_reserve,
-            "required_free_bytes": required,
-            "compression_credit_bytes": 0,
-        },
+        "budget": budget,
         "categories": categories,
         "assumptions": {
             "numeric_float_dtype": "float64",

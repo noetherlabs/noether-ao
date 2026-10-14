@@ -807,3 +807,27 @@ publish release or withholding only after all 240 terminal records exist; a nume
 failure remains evidence and yields withholding. Neither callback path exposes an
 evaluation identity. Physical acquisition, complete retention, storage admission and
 the distinct nonreserved smoke remain prerequisites to declared P2 execution.
+
+## Size the complete P2 retention contract before physics (2026-10-14)
+
+Derive storage only from the frozen protocol, its exact base-configuration hash and
+explicit array shapes. Treat score, detector statistics and frame identities, physical
+metrics, integrity flags and 100-mode command/applied streams as mandatory in every
+trial archive. Add 64 by 64 measurement and prediction images only for the first seed
+of every role/regime/condition cell, producing 32 full-WFS archives. Keep per-run WFE,
+Strehl and saturation scalars inside the metadata envelope.
+
+Size the worst case in which validation releases all 1,200 evaluation trials. Across
+64 training, 240 validation and 1,200 evaluation trials, the 1,504 archives contain
+2,341,413,792 bytes of numeric payload. Reuse the controller study's conservative
+envelope: twice raw payload plus 4 KiB per NPZ member, one-eighth metadata allowance,
+temporary-write headroom, at least 4 GiB operating reserve and zero compression credit.
+The resulting admission threshold is 10,190,604,096 free bytes. Failed or withheld
+trials may reduce use but never reduce the up-front requirement.
+
+Expose this as the read-only `observability-resources` command. It must import neither
+JAX nor the simulator, create no target and return exit status 2 after printing the
+report when space is insufficient. The first live check measured 7,994,904,576 bytes
+free, refused admission and left the intended target absent. This creates no timing,
+threshold, validation decision or P2 outcome. Physical retention and a distinct smoke
+remain required before declared acquisition.

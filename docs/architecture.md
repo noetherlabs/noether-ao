@@ -17,7 +17,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Validation barrier | `study-validate` dispatch, complete-training admission and positive bounded trial chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Selection | `study-select` dispatch, complete validation audit, eligibility checks and frozen models before held-out evaluation | [CLI](../src/noether_optics/cli.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Evaluation barrier | `study-evaluate` dispatch, frozen-selection admission and positive bounded held-out chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
-| Resource preflight | Static array-schema accounting, conservative archive envelope and read-only target-filesystem admission | [resource sizing](../src/noether_optics/controller_resources.py), [CLI](../src/noether_optics/cli.py) |
+| Resource preflight | Static array-schema accounting, shared conservative archive envelope and read-only target-filesystem admission | [controller sizing](../src/noether_optics/controller_resources.py), [observability sizing](../src/noether_optics/observability_resources.py), [envelope](../src/noether_optics/resource_envelope.py), [CLI](../src/noether_optics/cli.py) |
 | Optical-gain evidence gates | Protocol-bound stage resumption, causal detector, complete-cohort threshold freeze and one-way validation release | [stage ledger](../src/noether_optics/observability_run.py), [detector and calibration](../src/noether_optics/observability_detector.py), [validation release](../src/noether_optics/observability_validation.py), [frozen protocol](optical_gain_observability_v1.md) |
 
 The distinction between software correctness, physical agreement and scientific
@@ -27,10 +27,10 @@ retained trials and an explicit comparison with uncertainty.
 
 The storage preflight stays outside the numerical dependency graph:
 
-    frozen study + pinned base -> planned cases + saved-array schemas
-                                  -> retained evidence envelope
-                                  -> temporary headroom + reserve
-                                  -> target free-space admission
+    frozen plan/protocol + pinned base -> planned cases + saved-array schemas
+                                           -> retained evidence envelope
+                                           -> temporary headroom + reserve
+                                           -> target free-space admission
 
 It imports no simulator, generates no atmosphere or detector stream and assigns no
 benefit to data-dependent compression. Elapsed compilation, fitting and trial costs

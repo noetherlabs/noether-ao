@@ -52,7 +52,20 @@ def main() -> None:
     resources.add_argument("--config", required=True)
     resources.add_argument("--target", required=True,
                            help="Planned study directory; it is inspected but not created")
+    observability_resources = commands.add_parser("observability-resources")
+    observability_resources.add_argument("--config", required=True)
+    observability_resources.add_argument(
+        "--target", required=True,
+        help="Planned observability directory; it is inspected but not created")
     args = parser.parse_args()
+    if args.experiment == "observability-resources":
+        from .observability_resources import load_resource_inputs, resource_preflight
+        protocol, base = load_resource_inputs(Path(args.config))
+        result = resource_preflight(protocol, base, Path(args.target))
+        print(json.dumps(result, sort_keys=True))
+        if not result["admitted"]:
+            raise SystemExit(2)
+        return
     if args.experiment == "study-resources":
         from .controller_resources import load_resource_inputs, resource_preflight
         study, base = load_resource_inputs(Path(args.config))

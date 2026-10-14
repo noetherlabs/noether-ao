@@ -635,3 +635,26 @@ No simulator, declared seed, P2 threshold, validation decision, held-out outcome
 timing path or controller action was used. The next work is the physical trial adapter,
 complete retained arrays and per-run metrics, static storage admission and a distinct
 nonreserved runner smoke.
+
+## Optical-gain static storage admission
+
+The new `observability-resources` command loads only the frozen protocol and its
+SHA256-pinned base YAML. It derives explicit float64, int64 and boolean schemas for all
+13 mandatory per-trial arrays and the two 512 by 64 by 64 full-WFS image streams. The
+maximum released run contains 1,504 numeric archives; 32 include full measurement and
+prediction frames under the declared first-seed policy.
+
+The calculation yields 2,341,413,792 bytes of raw numeric payload, a 4,763,174,720-byte
+no-compression-credit archive envelope and a 5,358,765,888-byte retained-evidence envelope.
+After 536,870,912 bytes of temporary-write headroom and a 4,294,967,296-byte operating
+reserve, admission requires 10,190,604,096 free bytes. The shared envelope refactor
+preserves the controller study's existing 105,033,365,984-byte result exactly.
+
+The first real preflight found 7,994,904,576 bytes free, returned exit status 2 and did
+not create `runs/optical_gain_observability_v1`. The **57 focused resource and CLI
+checks pass in 19.70 seconds**, covering exact bytes and shapes, base drift, path
+containment, incompatible plant dimensions, simulator-free imports, filesystem
+ancestry, refusal and the unchanged controller budgets. The complete local correctness
+suite passes **481 tests in 266.07 seconds**. No simulator, seed, threshold, outcome or
+timing path was opened. The next work is the physical trial adapter, complete retention
+enforcement and a distinct nonreserved runner smoke.

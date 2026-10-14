@@ -34,9 +34,12 @@ freeze are implemented. The immutable validation barrier rechecks the frozen tra
 evidence and publishes either release or withholding from the complete validation
 identity set. A protocol-bound stage ledger now publishes immutable terminal records,
 skips only reverified evidence on resume and retries callbacks that never reached
-terminal publication. Next connect physical acquisition, complete retention and
-storage admission, then pass a separately seeded runner smoke before accessing a
-declared cohort.
+terminal publication. Static retention sizing now accounts for all 1,504 maximum
+trial archives: 2.341 GB of numeric payload requires a conservative 10.191 GB free
+with no compression credit. The current development volume failed the read-only gate
+at 7.995 GB free and no run was created. Next connect physical acquisition and complete
+retention, then pass a separately seeded runner smoke before accessing a declared
+cohort on an admitted filesystem.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report
