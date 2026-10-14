@@ -29,7 +29,9 @@ shows that the upper-tail score moves downward under the simplified gain fault. 
 [v1 observability protocol](docs/optical_gain_observability_v1.md) now freezes a
 training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
 cohorts and validation-only release gates. The plan is unexecuted: no fresh threshold
-or outcome exists. Next implement immutable calibration/release artifacts and pass a
+or outcome exists. The causal detector and raw-artifact-verified training threshold
+freeze are implemented. Next add the immutable validation-release barrier,
+deterministic runner recovery, complete retention and storage admission, then pass a
 separately seeded runner smoke before accessing a declared cohort.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired

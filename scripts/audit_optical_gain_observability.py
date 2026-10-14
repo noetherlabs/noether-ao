@@ -9,6 +9,8 @@ from typing import Any
 
 import numpy as np
 
+from noether_optics.observability_detector import causal_mean, maximum_true_run, persistent_alarm
+
 
 WINDOW_FRAMES = 4
 LOWER_QUANTILE = 0.005
@@ -29,47 +31,6 @@ def _within(root: Path, relative: str) -> Path:
     if root.resolve() not in path.parents:
         raise ValueError(f"Artifact escapes source directory: {relative}")
     return path
-
-
-def causal_mean(score: np.ndarray, burn_in: int, window: int) -> tuple[np.ndarray, np.ndarray]:
-    """Return frame identities and full causal windows after burn-in."""
-    values = np.asarray(score, dtype=float)
-    if values.ndim != 1 or not np.isfinite(values).all():
-        raise ValueError("Score must be a finite vector")
-    if not isinstance(burn_in, int) or not isinstance(window, int) or burn_in < 0 or window < 1:
-        raise ValueError("Burn-in and window must be nonnegative/positive integers")
-    if burn_in + window > len(values):
-        raise ValueError("Score is too short for a full post-burn-in window")
-    statistic = np.convolve(values[burn_in:], np.ones(window) / window, mode="valid")
-    frames = np.arange(burn_in + window - 1, len(values), dtype=int)
-    return frames, statistic
-
-
-def persistent_alarm(crossings: np.ndarray, persistence: int) -> np.ndarray:
-    """Mark each endpoint whose current crossing streak meets ``persistence``."""
-    values = np.asarray(crossings)
-    if values.ndim != 1 or values.dtype != np.dtype(bool):
-        raise ValueError("Crossings must be a boolean vector")
-    if not isinstance(persistence, int) or persistence < 1:
-        raise ValueError("Persistence must be a positive integer")
-    if persistence > len(values):
-        raise ValueError("Crossing vector is too short for the requested persistence")
-    counts = np.convolve(values.astype(np.int64), np.ones(persistence, dtype=np.int64), mode="full")
-    alarms = counts[: len(values)] == persistence
-    alarms[: persistence - 1] = False
-    return alarms
-
-
-def maximum_true_run(values: np.ndarray) -> int:
-    """Return the longest consecutive run in a boolean vector."""
-    flags = np.asarray(values)
-    if flags.ndim != 1 or flags.dtype != np.dtype(bool):
-        raise ValueError("Values must be a boolean vector")
-    maximum = current = 0
-    for flag in flags:
-        current = current + 1 if flag else 0
-        maximum = max(maximum, current)
-    return maximum
 
 
 def _score(path: Path, frames: int) -> np.ndarray:

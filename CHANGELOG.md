@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Implement the optical-gain detector's causal four-frame transform, strict
+  lower-tail comparison and eight-crossing persistence. Add an exclusive threshold
+  freeze that admits only the complete 64-record training-clean cohort, verifies
+  every score against its hash-bound raw NPZ, derives the protocol hash from the
+  checked source file and records source/runtime identities. Exercise the boundary
+  with synthetic data only; no P2 threshold or outcome is generated.
+
 - Freeze the optical-gain observability v1 protocol with hash-bound base physics,
   disjoint fresh streams, training-only lower-tail calibration, validation release
   gates, sealed held-out conditions, paired controller-error inference, a complete

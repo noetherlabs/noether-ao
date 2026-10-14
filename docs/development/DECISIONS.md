@@ -749,3 +749,20 @@ do not alter commands or test fallback. If v1 fails or is inadequate, the next r
 is a new modal-dither protocol with fresh cohorts and a dither-free paired science
 control. Independent focal-plane sensing remains a separate later contract; v1
 held-out outcomes may not choose between those branches.
+
+## Bind the v1 training threshold to raw evidence (2026-10-14)
+
+Use one shared causal detector kernel for both the legacy read-only audit and the v1
+runner. Perform the frozen mean in float64, preserve explicit statistic/alarm frame
+identities, compare strictly below the per-regime threshold and expose persistence
+only after all eight crossings exist.
+
+Publish a threshold only from the exact 64-record training-clean cohort. Verify the
+protocol from its source bytes and each supplied score from the SHA256-bound raw NPZ;
+record the normalized score digest, raw reference, source identity and runtime
+identity in deterministic case order. Any missing, foreign, duplicate, failed,
+nonfinite or mismatched record prevents publication. Use exclusive creation so an
+identical retry is harmless and a changed retry cannot replace the first freeze.
+
+Treat the threshold builder and its synthetic tests as implementation evidence only.
+They do not authorize cohort acquisition and do not create a P2 numerical threshold.

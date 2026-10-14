@@ -6,7 +6,8 @@ This is a frozen, unexecuted P2 protocol. The machine-readable
 [configuration](../configs/optical_gain_observability_v1.yaml) is bound to the base
 simulation by SHA256; the generated [plan](../plans/optical_gain_observability_v1.json)
 contains seed identities and budgets, with every outcome, threshold and release field
-set to false.
+set to false. The causal detector and training-calibration publisher are implemented;
+their tests use synthetic arrays and do not create a study threshold.
 
 The question is narrow: **can a training-calibrated lower-tail transform of the
 existing whitened residual score detect the simplified scalar optical-gain ramp under
@@ -144,9 +145,18 @@ metrics are retained separately. Measurement and prediction frames are retained 
 the first seed of every role/regime/condition cell. Failed numerical outcomes stay in
 the cohort. Storage planning receives no compression credit.
 
-Before acquisition, the implementation must add a separate runner smoke, immutable
-threshold and release artifacts, source/runtime bindings, deterministic resumption,
-and a whole-run storage preflight. Unit tests and this plan are not execution evidence.
+The implemented training boundary accepts only all 64 declared clean records. It
+normalizes arithmetic to float64, verifies each supplied score against the `score`
+array and SHA256 of its retained NPZ, derives the protocol SHA256 from the checked
+source file, records source/runtime bindings, and publishes `thresholds.json`
+exclusively. Failed, missing, duplicated, foreign, nonfinite, path-unsafe or
+artifact-mismatched inputs cannot publish a threshold; an identical retry is
+idempotent and a changed retry cannot replace the file.
+
+Before acquisition, the implementation must still add the immutable validation
+release artifact, deterministic runner resumption, complete retained-array path, a
+whole-run storage preflight and a separate nonreserved runner smoke. Unit tests and
+this plan are not execution evidence, and no P2 threshold or outcome exists yet.
 
 ## Predeclared escalation
 

@@ -565,3 +565,25 @@ increment. The next boundary is implementation plus a separate nonreserved runne
 smoke and storage preflight before any declared cohort is opened. The focused audit
 and protocol suite passes **34 tests**; the complete local correctness suite passes
 **404 tests in 89.44 seconds**.
+
+## Optical-gain detector and training threshold freeze
+
+The v1 causal kernel now computes the declared four-frame post-burn-in statistic,
+strict lower-tail crossings and eight-crossing persistence with explicit frame
+identities. The legacy M4 audit imports the same kernel and still reconstructs its
+committed JSON byte for byte.
+
+The threshold publisher enumerates the 64 declared training-clean cases, orders them
+independently of submission order and calibrates one NumPy `linear` 0.005 quantile per
+regime over 6,096 windows. Before exclusive publication it verifies the exact protocol
+file, all raw NPZ hashes and score arrays, and complete case identities, then records
+validated source/runtime identity fields. Synthetic negative checks cover incomplete,
+duplicate, foreign, failed, nonfinite, path-unsafe, hash-drifted, pickle-bearing and
+score-mismatched evidence, as well as idempotent and changed publication attempts.
+
+No simulator, declared seed, numerical threshold, validation decision, held-out
+outcome, timing path or controller action was used. The next implementation boundary
+is the validation-release barrier plus deterministic retention/resumption and storage
+admission before a distinct nonreserved runner smoke. The focused detector, protocol
+and audit suite passes **65 tests**; the complete local correctness suite passes
+**435 tests in 92.97 seconds**.

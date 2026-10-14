@@ -246,10 +246,16 @@ detected-only delay; paired clean/fault controller error; and no detector action
 fallback. It predeclares modal dither with paired science controls as the first v2
 escalation. No new threshold or outcome has been generated.
 
-Next, implement immutable calibration and validation-release artifacts, deterministic
-resumption, complete retention and storage admission. Prove that path with distinct
-nonreserved smoke seeds before opening any v1 cohort. Do not reuse controller-study
-smoke evidence as an observability runner check.
+The causal transform and immutable training threshold freeze are implemented. The
+freeze requires all 64 declared training-clean identities, verifies each score against
+its hash-bound raw NPZ, derives the protocol-file hash, binds source/runtime identities
+and refuses to replace an existing threshold. Its tests are synthetic and create no
+study result.
+
+Next, implement the validation-release artifact, deterministic runner resumption,
+complete retention and storage admission. Prove that path with distinct nonreserved
+smoke seeds before opening any v1 cohort. Do not reuse controller-study smoke evidence
+as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection
