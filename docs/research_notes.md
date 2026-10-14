@@ -32,7 +32,17 @@ this project. No published performance numbers are copied into our result tables
 - [Chambouleyron et al., pyramid optical gains](https://arxiv.org/html/2006.08294v1).
   Opened full HTML and abstract. Pyramid response changes with residual phase;
   calibrating only at a flat wavefront can bias the interaction matrix. Include
-  optical-gain drift and report nonlinear sensor limitations explicitly.
+  optical-gain drift and report nonlinear sensor limitations explicitly. The authors'
+  convolutional approach uses residual statistics inferred from AO telemetry; this
+  project has not implemented that estimator.
+- [Deo et al., modal optical-gain compensation](https://doi.org/10.1051/0004-6361/201935847).
+  Opened the primary A&A paper. Small, known DM dithers recover modal gains and update
+  the command matrix in simulation. A dither changes the controlled plant and needs a
+  paired science-impact measurement; it is a future candidate, not current evidence.
+- [Chambouleyron et al., focal-plane assisted PyWFS](https://arxiv.org/abs/2103.02297).
+  Opened the primary preprint abstract. An auxiliary focal-plane image supports
+  frame-by-frame optical-gain tracking. The present simulator has no independent
+  focal-plane path, so this cannot be claimed from existing telemetry.
 - [Sha et al., Simplex architecture overview](https://www.sei.cmu.edu/library/a-software-architecture-for-dependable-and-evolvable-industrial-computing-systems/).
   Opened primary technical-report page. Separate advanced control, a dependable
   controller, and decision logic. A discrepancy detector alone does not prove a

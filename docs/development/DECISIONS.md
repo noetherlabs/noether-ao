@@ -706,3 +706,24 @@ would invalidate recorded hashes. Do not rewrite private Git history merely beca
 former agent instructions and draft locations are historical. Implement explicit
 owner choices in a separate bounded change, repeat clean installation and audit checks,
 and change visibility only when directly authorized.
+
+## Reclassify legacy M4 evidence for P2 development (2026-10-14)
+
+Use the retained M4 fault cohort only to diagnose why the original detector missed
+the simplified optical-gain ramp and to select a candidate statistic. Preserve every
+original C4 result and hash, but permanently exclude those seeds from the new P2
+held-out claim. Post hoc success on M4 cannot validate the candidate.
+
+Screen the existing whitened residual in both directions before adding new physical
+machinery. The legacy upper-tail score decreases under the gain fault; therefore carry
+a four-frame lower-tail mean into protocol design as the first passive candidate. Its
+0.005 quantile is recalibrated only from fresh training data. Do not transfer the
+legacy numerical threshold into P2, and do not treat 5/5 old detections as an
+acceptance result.
+
+Keep fallback disabled while observability is measured. Report clean frame and run
+false alarms, pre-onset alarms, misses, detected-only delay and paired controller
+error before testing any intervention. A modal dither changes the plant, and an
+auxiliary focal-plane estimator changes the sensing contract. If either is to follow
+the passive candidate, freeze that branch and its science-impact control before
+opening new evaluation outcomes.

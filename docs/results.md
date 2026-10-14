@@ -214,6 +214,13 @@ Optical-gain drift was missed. Fallback under vibration increased residual error
 Pupil-shift fallback reduced error but did not restore nominal correction. These
 results do not establish a generally safe fallback or a recoverable safe set.
 
+A later read-only [observability audit](../results/optical_gain_observability_audit_v1/README.md)
+uses M4 only as development evidence for a new P2 study. It finds that the score falls
+under the simplified gain fault, so the original upper-tail test has the wrong
+direction for that case. An exploratory four-frame lower-tail candidate detects 5/5
+old gain runs but also alarms in 1/5 clean runs. These post hoc numbers do not revise
+the C4 verdict and are ineligible for a future held-out claim.
+
 ## Reproduction and largest correctness risks
 
 Follow the [README commands](../README.md). The preserved raw tables can be

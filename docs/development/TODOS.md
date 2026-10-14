@@ -231,6 +231,21 @@ M4 misses gain drift and produces harmful vibration fallback. After independent
 sensor validation, investigate a separately calibrated observable or detector on
 new training/validation cohorts. Freeze thresholds before new held-out fault runs.
 
+The [legacy M4 observability audit](../../results/optical_gain_observability_audit_v1/README.md)
+is complete. It preserves 48 input hashes and acquires no new simulation evidence.
+The original upper-tail detector found 0/5 gain-drift runs. A development-only
+four-frame lower-tail candidate found 5/5 with 6–10 frame delays, no pre-onset alarms
+in those runs, and one clean alarm run out of five. Passive response regression stayed
+near nominal in the one full-frame seed while residual variance rose by 2.99 times.
+The old cohort is now ineligible for P2 evaluation.
+
+Next, write and freeze the P2 protocol: new nonoverlapping seed streams; training-only
+calibration; a validation-only freeze; run-level and frame-level false-alarm gates;
+target-fault misses and detected-only delay; paired clean/fault controller error; and
+no fallback action during observability assessment. Predeclare any escalation from
+the passive lower-tail candidate to modal dither or an independent sensing channel;
+do not choose that branch after inspecting new held-out outcomes.
+
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection
 does not establish a safe fallback or a general safety guarantee.

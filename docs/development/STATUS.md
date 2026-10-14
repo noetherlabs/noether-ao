@@ -518,3 +518,27 @@ files contain local provenance paths; and standard wheel metadata does not repro
 the Git/URL dependency sources used by the locked environment. A monitored security
 route and human review of three unsent drafts also remain. No visibility, license,
 history, evidence file, reserved cohort or timing sample was changed.
+
+## Legacy optical-gain observability audit
+
+The first P2 increment reuses the protected M4 fault run as development evidence and
+does not call the simulator. A deterministic audit binds 48 source files by SHA256,
+rebuilds from commit `5fc820d`, and marks every M4 evaluation seed ineligible for a
+future P2 held-out claim. Two focused tests cover causal-window indexing, invalid
+arrays and byte-for-byte reconstruction of the committed JSON result. The complete
+local correctness suite passes **372 tests in 96.30 seconds**.
+
+The original 0.995 upper-tail detector found optical-gain drift in 0/5 runs. An
+exploratory causal four-frame mean, calibrated at the 0.005 lower quantile on the
+three original clean training seeds, found 5/5 old gain runs after 6–10 frames and
+had no pre-onset alarms in those runs. It still alarmed in 1/5 clean runs and 5/585
+clean windows. None of the 30 retained non-target fault runs crossed the lower
+threshold.
+
+The single seed with complete WFS frames also rejects a tempting passive estimator.
+Once the injected response multiplier reaches 0.35, a direct measured-versus-predicted
+response regression changes by only −1.83%, while paired residual variance rises by
+2.99 times. This is a one-seed identifiability warning, not a general result. No
+detector has been validated, no fallback was activated, and no new seed, timing or
+reserved evidence was acquired. The next step is a frozen P2 protocol with fresh
+training, validation and evaluation streams.

@@ -94,6 +94,12 @@ The [results report](docs/results.md) provides definitions, paired intervals, ra
 data and limits. The timing figures describe CPU propagation components on an
 Apple M1; they do not establish a full control-loop deadline.
 
+A read-only [optical-gain observability audit](results/optical_gain_observability_audit_v1/README.md)
+reclassifies the old M4 cohort as P2 development evidence. Its exploratory lower-tail
+candidate detects all five old gain-drift runs but still alarms in one of five clean
+runs. This selects a candidate for fresh predeclared cohorts; it is not detector
+validation or evidence for a recovery action.
+
 Independent validation adds:
 
 - **Ideal-pyramid agreement:** [36 intensity cases, 30 derivative cases and 24

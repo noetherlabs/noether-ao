@@ -23,9 +23,13 @@ are satisfied; the latter remains blocked on the current development volume.
 
 ## 2. Make mismatch detection useful for control
 
-**Queued.** The baseline misses optical-gain drift and shows harmful vibration
-fallback. Investigate observability and calibration on fresh training/validation
-cohorts; freeze thresholds before held-out fault trials.
+**In progress.** The baseline misses optical-gain drift and shows harmful vibration
+fallback. A read-only [legacy-evidence audit](results/optical_gain_observability_audit_v1/README.md)
+shows that the upper-tail score moves downward under the simplified gain fault. A
+four-frame lower-tail candidate detected all five old gain-drift runs, but one of five
+clean runs also alarmed. Those data are development-only and cannot validate P2.
+Predeclare fresh, disjoint training/validation/evaluation cohorts and run-level gates;
+freeze the detector before held-out fault trials.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and the
 paired wavefront effect of recovery. A detector result must include the consequence

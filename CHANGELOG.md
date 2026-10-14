@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add a hash-bound, read-only audit of the retained M4 fault evidence. Record that
+  the upper-tail score misses all five old optical-gain runs, screen a lower-tail
+  candidate without new simulation, and make the reused cohort explicitly ineligible
+  for future P2 evaluation.
+
 - Record a reproducible public-release audit covering complete-history credentials,
   retained numerical archives, direct dependency terms, wheel construction and
   package-source resolution. Preserve the private visibility and measured evidence
