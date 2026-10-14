@@ -1,0 +1,56 @@
+{
+  "record": {
+    "artifacts": [
+      {
+        "path": "evidence/evaluation/trials/4e6f4ab2b418a6e1bc47596b5d8ba84a40e7d09848d4713434d5554c913ddd4e.npz",
+        "sha256": "3fee2deaa5ab5605852fd27ce3b0e1db4af9b1c350eaf7933297851567c2e885"
+      },
+      {
+        "path": "evidence/evaluation/trials/4e6f4ab2b418a6e1bc47596b5d8ba84a40e7d09848d4713434d5554c913ddd4e.json",
+        "sha256": "673b5db22ef11a281f6e4a2405be83c97dacc57fba9ed4e433b27015e26cbe39"
+      },
+      {
+        "path": "evidence/evaluation/atmospheres/faf49ded0c577674c23ffed6c2f5fbc985f5cd84f7ff63ac2d18dacc59171fee.npz",
+        "sha256": "9f71b02065e3bd42e9237d080b9e4075cc037d9dd3ca9a9fc2a8e01acdf24eb8"
+      },
+      {
+        "path": "evidence/evaluation/atmospheres/faf49ded0c577674c23ffed6c2f5fbc985f5cd84f7ff63ac2d18dacc59171fee.json",
+        "sha256": "0b5fac650ca008d58188e7bf0bddedce3a91be58e7fd9ea91a144b9c04209e49"
+      },
+      {
+        "path": "evidence/evaluation/open_loop/0a9675f5be3c9583a29e6eb046135b7a7513ef208c133278458385b04911eb26.json",
+        "sha256": "5526765f873b9b03d7cbb9d3349541b2034cfc47e4fffc8576002071789226ff"
+      }
+    ],
+    "case": {
+      "candidate": {
+        "controller": "integrator",
+        "id": "integrator-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "detector_seed": 163001,
+      "fault": "none",
+      "photons": 1000000.0,
+      "seed": 63001,
+      "stage": "evaluation",
+      "wind_scale": 0.5
+    },
+    "error": null,
+    "metrics": {
+      "all_outputs_finite": true,
+      "open_wfe_nm": 126.68331260658657,
+      "saturation_fraction": 0.0,
+      "strehl": 0.4693694333009239,
+      "wfe_nm": 105.03592519641387
+    },
+    "open_loop": {
+      "path": "evidence/evaluation/open_loop/0a9675f5be3c9583a29e6eb046135b7a7513ef208c133278458385b04911eb26.npz",
+      "sha256": "0d7f885a8b93be4db727c6a53b5e231f17970e4f5fabf3f8a8b03b3d250f6d2e"
+    },
+    "status": "completed"
+  },
+  "selection_sha256": "7aee66282d8ccef5225735eecf4777d337a3a78f5ecd80cc0c77f0c120840dfd"
+}

@@ -1,0 +1,553 @@
+{
+  "evaluation": {
+    "arguments": [
+      "study-evaluate",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--out",
+      "results/controller_runner_smoke_v1/run",
+      "--limit",
+      "1"
+    ],
+    "result": {
+      "complete": false,
+      "new_records": 1,
+      "planned_records": 600,
+      "total_records": 1
+    }
+  },
+  "resources": {
+    "arguments": [
+      "study-resources",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--target",
+      "results/controller_runner_smoke_v1/run"
+    ],
+    "result": {
+      "admitted": true,
+      "assumptions": {
+        "archive_member_allowance_bytes": 4096,
+        "archive_payload_factor": 2,
+        "elapsed_costs_included": false,
+        "failed_or_withheld_candidates_reduce_storage": true,
+        "maximum_selected_controllers": 5,
+        "metadata_filesystem_fraction": "1/8",
+        "numeric_boolean_bytes": 1,
+        "numeric_float_dtype": "float64"
+      },
+      "budget": {
+        "archive_envelope_bytes": 51220624,
+        "compression_credit_bytes": 0,
+        "largest_single_archive_envelope_bytes": 105936,
+        "metadata_filesystem_envelope_bytes": 536870912,
+        "numeric_payload_bytes": 6740040,
+        "operating_reserve_bytes": 4294967296,
+        "required_free_bytes": 5419929744,
+        "retained_evidence_envelope_bytes": 588091536,
+        "temporary_write_headroom_bytes": 536870912
+      },
+      "categories": [
+        {
+          "archive_envelope_bytes": 56592,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 56592,
+          "members_per_archive": 9,
+          "name": "training_pilot_calibration",
+          "numeric_payload_bytes": 9864
+        },
+        {
+          "archive_envelope_bytes": 73728,
+          "archives": 6,
+          "largest_archive_envelope_bytes": 12288,
+          "members_per_archive": 1,
+          "name": "training_shared_atmospheres",
+          "numeric_payload_bytes": 24576
+        },
+        {
+          "archive_envelope_bytes": 810240,
+          "archives": 12,
+          "largest_archive_envelope_bytes": 67520,
+          "members_per_archive": 12,
+          "name": "training_pilot_outputs",
+          "numeric_payload_bytes": 110208
+        },
+        {
+          "archive_envelope_bytes": 55296,
+          "archives": 12,
+          "largest_archive_envelope_bytes": 4608,
+          "members_per_archive": 1,
+          "name": "training_measured_telemetry",
+          "numeric_payload_bytes": 3072
+        },
+        {
+          "archive_envelope_bytes": 9856,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 9856,
+          "members_per_archive": 2,
+          "name": "predictor_fit_histories",
+          "numeric_payload_bytes": 832
+        },
+        {
+          "archive_envelope_bytes": 4224,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 4224,
+          "members_per_archive": 1,
+          "name": "predictor_parameters",
+          "numeric_payload_bytes": 64
+        },
+        {
+          "archive_envelope_bytes": 56592,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 56592,
+          "members_per_archive": 9,
+          "name": "learned_calibrations",
+          "numeric_payload_bytes": 9864
+        },
+        {
+          "archive_envelope_bytes": 34080,
+          "archives": 2,
+          "largest_archive_envelope_bytes": 17040,
+          "members_per_archive": 4,
+          "name": "learned_step_parameters",
+          "numeric_payload_bytes": 656
+        },
+        {
+          "archive_envelope_bytes": 606000,
+          "archives": 24,
+          "largest_archive_envelope_bytes": 25250,
+          "members_per_archive": 6,
+          "name": "learned_episode_results",
+          "numeric_payload_bytes": 8088
+        },
+        {
+          "archive_envelope_bytes": 105936,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 105936,
+          "members_per_archive": 25,
+          "name": "learned_fit_histories",
+          "numeric_payload_bytes": 1768
+        },
+        {
+          "archive_envelope_bytes": 17040,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 17040,
+          "members_per_archive": 4,
+          "name": "learned_parameters",
+          "numeric_payload_bytes": 328
+        },
+        {
+          "archive_envelope_bytes": 122880,
+          "archives": 10,
+          "largest_archive_envelope_bytes": 12288,
+          "members_per_archive": 1,
+          "name": "validation_shared_atmospheres",
+          "numeric_payload_bytes": 40960
+        },
+        {
+          "archive_envelope_bytes": 251200,
+          "archives": 20,
+          "largest_archive_envelope_bytes": 12560,
+          "members_per_archive": 3,
+          "name": "validation_open_loops",
+          "numeric_payload_bytes": 2720
+        },
+        {
+          "archive_envelope_bytes": 6752000,
+          "archives": 100,
+          "largest_archive_envelope_bytes": 67520,
+          "members_per_archive": 12,
+          "name": "validation_trial_outputs",
+          "numeric_payload_bytes": 918400
+        },
+        {
+          "archive_envelope_bytes": 245760,
+          "archives": 20,
+          "largest_archive_envelope_bytes": 12288,
+          "members_per_archive": 1,
+          "name": "evaluation_shared_atmospheres",
+          "numeric_payload_bytes": 81920
+        },
+        {
+          "archive_envelope_bytes": 1507200,
+          "archives": 120,
+          "largest_archive_envelope_bytes": 12560,
+          "members_per_archive": 3,
+          "name": "evaluation_open_loops",
+          "numeric_payload_bytes": 16320
+        },
+        {
+          "archive_envelope_bytes": 40512000,
+          "archives": 600,
+          "largest_archive_envelope_bytes": 67520,
+          "members_per_archive": 12,
+          "name": "evaluation_trial_outputs",
+          "numeric_payload_bytes": 5510400
+        }
+      ],
+      "counts": {
+        "fitted_learned_candidates": 1,
+        "fitted_predictor_candidates": 1,
+        "maximum_evaluation_trials": 600,
+        "numeric_archives": 932,
+        "training_pilot_records": 12,
+        "validation_trials": 100
+      },
+      "filesystem": {
+        "checked_path": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/results",
+        "free_bytes": 5585424384
+      },
+      "kind": "controller_study_resource_preflight",
+      "outcomes_generated": false,
+      "schema_version": 1,
+      "status": "sufficient",
+      "study_id": "controller_runner_smoke_v1",
+      "target": "/Users/salma/.codex/.chatgpt-projects/g-p-6ac6bd3405d48191a9c7af28111a51b7/noether-optics/results/controller_runner_smoke_v1/run"
+    }
+  },
+  "seed_audit": {
+    "component_overlap": [],
+    "reserved_overlap": [],
+    "separate": true,
+    "smoke_streams": [
+      61001,
+      61002,
+      61003,
+      62001,
+      62002,
+      62003,
+      62004,
+      62005,
+      63001,
+      63002,
+      63003,
+      63004,
+      63005,
+      63006,
+      63007,
+      63008,
+      63009,
+      63010,
+      64001,
+      161001,
+      161002,
+      161003,
+      162001,
+      162002,
+      162003,
+      162004,
+      162005,
+      163001,
+      163002,
+      163003,
+      163004,
+      163005,
+      163006,
+      163007,
+      163008,
+      163009,
+      163010
+    ]
+  },
+  "selection": {
+    "arguments": [
+      "study-select",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--out",
+      "results/controller_runner_smoke_v1/run"
+    ],
+    "result": {
+      "manifest_sha256": "3ce0013701ff09b13645134322e9e49e15b122636d075f8cec71e51bcf6a9b47",
+      "result": {
+        "candidates": [
+          {
+            "candidate": {
+              "controller": "integrator",
+              "id": "integrator-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7481506340040904
+          },
+          {
+            "candidate": {
+              "controller": "predictive",
+              "id": "predictive-00",
+              "parameters": {
+                "horizon": 2,
+                "ridge": 0.01
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.6948656682560787
+          },
+          {
+            "candidate": {
+              "controller": "forward",
+              "id": "forward-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7320388618060171
+          },
+          {
+            "candidate": {
+              "controller": "fixed",
+              "id": "fixed-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7342169664746269
+          },
+          {
+            "candidate": {
+              "controller": "learned",
+              "id": "learned-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7386797041460216
+          }
+        ],
+        "completed_validation_trials": 100,
+        "failed_validation_records": 0,
+        "pairwise_family": 120,
+        "selected": {
+          "fixed": {
+            "controller": "fixed",
+            "id": "fixed-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "forward": {
+            "controller": "forward",
+            "id": "forward-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "integrator": {
+            "controller": "integrator",
+            "id": "integrator-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "learned": {
+            "controller": "learned",
+            "id": "learned-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "predictive": {
+            "controller": "predictive",
+            "id": "predictive-00",
+            "parameters": {
+              "horizon": 2,
+              "ridge": 0.01
+            }
+          }
+        },
+        "validation_records": 100
+      },
+      "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c",
+      "validation_sha256": "cd8e143f610f69cdabb783db283647cd3874e660422d7ed7809aa14b04b10aac"
+    }
+  },
+  "selection_recheck": {
+    "arguments": [
+      "study-select",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--out",
+      "results/controller_runner_smoke_v1/run"
+    ],
+    "result": {
+      "manifest_sha256": "3ce0013701ff09b13645134322e9e49e15b122636d075f8cec71e51bcf6a9b47",
+      "result": {
+        "candidates": [
+          {
+            "candidate": {
+              "controller": "integrator",
+              "id": "integrator-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7481506340040904
+          },
+          {
+            "candidate": {
+              "controller": "predictive",
+              "id": "predictive-00",
+              "parameters": {
+                "horizon": 2,
+                "ridge": 0.01
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.6948656682560787
+          },
+          {
+            "candidate": {
+              "controller": "forward",
+              "id": "forward-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7320388618060171
+          },
+          {
+            "candidate": {
+              "controller": "fixed",
+              "id": "fixed-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7342169664746269
+          },
+          {
+            "candidate": {
+              "controller": "learned",
+              "id": "learned-00",
+              "parameters": {
+                "gain": 0.3,
+                "leak": 0.999
+              }
+            },
+            "eligible": true,
+            "rejected_trials": [],
+            "score": 0.7386797041460216
+          }
+        ],
+        "completed_validation_trials": 100,
+        "failed_validation_records": 0,
+        "pairwise_family": 120,
+        "selected": {
+          "fixed": {
+            "controller": "fixed",
+            "id": "fixed-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "forward": {
+            "controller": "forward",
+            "id": "forward-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "integrator": {
+            "controller": "integrator",
+            "id": "integrator-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "learned": {
+            "controller": "learned",
+            "id": "learned-00",
+            "parameters": {
+              "gain": 0.3,
+              "leak": 0.999
+            }
+          },
+          "predictive": {
+            "controller": "predictive",
+            "id": "predictive-00",
+            "parameters": {
+              "horizon": 2,
+              "ridge": 0.01
+            }
+          }
+        },
+        "validation_records": 100
+      },
+      "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c",
+      "validation_sha256": "cd8e143f610f69cdabb783db283647cd3874e660422d7ed7809aa14b04b10aac"
+    }
+  },
+  "training": {
+    "arguments": [
+      "study-train",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--out",
+      "results/controller_runner_smoke_v1/run",
+      "--create",
+      "--pilot-limit",
+      "12",
+      "--model-limit",
+      "2"
+    ],
+    "result": {
+      "complete": true,
+      "failed_model_records": 0,
+      "failed_pilot_records": 0,
+      "new_model_records": 2,
+      "new_pilot_records": 12,
+      "pilot_records": 12,
+      "planned_model_records": 2,
+      "planned_pilot_records": 12,
+      "terminal_model_records": 2,
+      "training_bound": true
+    }
+  },
+  "validation": {
+    "arguments": [
+      "study-validate",
+      "--config",
+      "configs/controller_runner_smoke_v1.yaml",
+      "--out",
+      "results/controller_runner_smoke_v1/run",
+      "--limit",
+      "100"
+    ],
+    "result": {
+      "complete": true,
+      "new_records": 100,
+      "planned_records": 100,
+      "total_records": 100
+    }
+  }
+}

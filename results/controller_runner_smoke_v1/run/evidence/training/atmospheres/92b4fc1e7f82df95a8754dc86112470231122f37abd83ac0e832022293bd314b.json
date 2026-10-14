@@ -1,0 +1,14 @@
+{
+  "identity": {
+    "seed": 61001,
+    "wind_scale": 1.0
+  },
+  "journal": {
+    "path": "evidence/training/pilots/journal.json",
+    "sha256": "b116a61288eb3a7962057bd35d25ecf1dcd843ab843901ff8428aca93aa44bee"
+  },
+  "raw": {
+    "path": "evidence/training/atmospheres/92b4fc1e7f82df95a8754dc86112470231122f37abd83ac0e832022293bd314b.npz",
+    "sha256": "09dcd7a5d073ea6f0efde5d350c4ca8bc8169c49d685c6bfabac5f24e5b844a5"
+  }
+}

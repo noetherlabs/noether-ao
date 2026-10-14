@@ -4,7 +4,9 @@
 
 - Add a predeclared end-to-end controller runner smoke with distinct seed streams,
   reduced physical inputs, the production stage commands, protected evidence and a
-  reproducible gate report. It stops after one held-out record and records no timing.
+  reproducible gate report. Retain a passing run from committed source with 12 pilots,
+  two terminal fitted models, 100 validation records and one held-out record. The run
+  records no timing and does not support a controller-performance claim.
 
 - Add a read-only `study-resources` preflight that derives the complete controller
   study's retained numeric payload and conservative free-space requirement from the

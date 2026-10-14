@@ -46,13 +46,12 @@ freezes one immutable bundle after every fitted candidate terminates. Static
 whole-run disk sizing is complete: 42.167 GB of numeric payload yields a conservative
 105.033 GB free-space threshold with zero compression credit. The current development
 filesystem fails that gate; use a qualifying volume rather than reducing evidence.
-The separate component smoke has passed. A full-runner script and fixed reduced
-configuration now cover the real stage commands on distinct 61001/62001/63001 seed
-families. Commit that runner, then execute it locally and retain its protected
-evidence; it must enter evaluation through the ledger's lazy callback after complete
-training, validation and frozen selection.
-Commit the complete runner before the full study. Ledger fixtures are not physical
-smoke evidence or study outcomes.
+The separate component smoke and committed full-runner smoke have passed. The latter
+retains complete smoke training and validation, frozen selection and exactly one
+held-out record on distinct 61001/62001/63001 seed families. Its protected evidence
+exercises the real stage commands and lazy evaluation gate. Ledger fixtures remain
+separate from this physical smoke evidence. A qualifying full-study volume is now
+the remaining operational precondition for reserved acquisition.
 
 Then run the fixed candidate budgets in bounded resumable chunks. Include every
 predeclared regime, failed candidates, paired uncertainty and resource costs. Do

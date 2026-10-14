@@ -102,6 +102,9 @@ Independent validation adds:
 - **Controller component checks:** [nine declared gates](results/controller_physics_smoke_v1/README.md)
   pass on a reduced plant with retained raw outputs. The network is untrained in
   this smoke run; the result verifies component wiring.
+- **End-to-end execution smoke:** [nine runner gates](results/controller_runner_smoke_v1/README.md)
+  pass through the production training, validation, selection and evaluation
+  commands. The run stops after one held-out record and makes no performance claim.
 
 ## What works today
 
@@ -115,9 +118,9 @@ Independent validation adds:
 | Selection command | Implemented; resume-only `study-select` audits complete validation and freezes chosen or withheld controllers |
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
-| End-to-end runner smoke | Implemented with distinct reduced inputs; retained physical execution pending |
+| End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
-| Complete new controller comparison | Pending; full-runner smoke, adequate study storage, reserved-cohort execution and final report |
+| Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |
 
 The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,
@@ -138,9 +141,10 @@ evidence, and 105,033,365,984 required free bytes after temporary-write headroom
 operating reserve. Compression receives no credit. The command prints auditable JSON,
 creates no directory and returns status 2 when capacity is insufficient. The reserved
 study's `study-train --create` path enforces the same budget and has no bypass flag.
-The study remains blocked until the separate full-runner smoke passes and a target
-filesystem satisfies this preflight. The [roadmap](ROADMAP.md) defines the
-next deliverables and deployment gates. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
+The separate full-runner smoke has passed from committed source. The reserved study
+remains blocked until a target filesystem satisfies this preflight. The
+[roadmap](ROADMAP.md) defines the next deliverables and deployment gates.
+[Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
 runs without acquiring benchmark timings.
 
 ## Repository layout

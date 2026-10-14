@@ -11,13 +11,15 @@ acceptance evidence. It is not implied by a successful simulation.
 selection barrier, trial adapters, training coordination, bounded stage commands and
 whole-run storage preflight are implemented. The frozen plan retains 42.167 GB of
 logical numeric payload and requires a conservative 105.033 GB free-space envelope
-with no compression credit. The remaining pre-acquisition work verifies the complete
-runner on separate smoke seeds and provisions a filesystem that passes this gate.
+with no compression credit. The complete runner has passed nine gates on separate
+smoke seeds with protected evidence. The remaining pre-acquisition work is to
+provision a filesystem that passes the full-study capacity gate.
 
 Deliverable: one reproducible comparison under the [frozen study protocol](docs/controller_study_v1.md),
 with all eligible controllers, paired uncertainty, failed candidates and resource
 costs retained. A null or negative advantage remains a valid outcome. Acquisition
-on reserved cohorts starts only after the complete runner passes its separate smoke.
+on reserved cohorts starts only after both the completed smoke and the storage gate
+are satisfied; the latter remains blocked on the current development volume.
 
 ## 2. Make mismatch detection useful for control
 

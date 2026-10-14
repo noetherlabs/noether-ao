@@ -29,11 +29,11 @@ gate. A resume-only `study-select` command audits and freezes the complete valid
 verdict. `study-evaluate` now enters positive held-out chunks only through that frozen
 selection gate. A static whole-run preflight now derives 42.167 GB of numeric payload
 and a conservative 105.033 GB free-space requirement without accessing any cohort.
-The current development filesystem fails that capacity gate. Next verify the full
-runner with the committed 61001/62001/63001 smoke streams, then provision a qualifying
-target before reserved outcomes. The runner intentionally persists one held-out
-record after complete smoke training, validation and selection; it is an execution
-gate, not a comparison cohort.
+The committed full runner passed all nine gates on the distinct
+61001/62001/63001 smoke streams and retained one held-out record after complete
+training, validation and selection. It is an execution gate, not a comparison
+cohort. The current development filesystem still fails the full-study capacity
+gate; provision a qualifying target before any reserved outcome is acquired.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Each meaningful increment also updates README.md when its technical description,

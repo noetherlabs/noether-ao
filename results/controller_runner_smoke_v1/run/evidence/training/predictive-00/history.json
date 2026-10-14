@@ -1,0 +1,80 @@
+{
+  "candidate": {
+    "controller": "predictive",
+    "id": "predictive-00",
+    "parameters": {
+      "horizon": 2,
+      "ridge": 0.01
+    }
+  },
+  "cases": [
+    {
+      "photons": 1000000.0,
+      "seed": 61001,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61002,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61003,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61001,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61002,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61003,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61001,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61002,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61003,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61001,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61002,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61003,
+      "wind_scale": 1.0
+    }
+  ],
+  "error": null,
+  "failed_case": null,
+  "failed_pilots": [],
+  "raw": {
+    "path": "evidence/training/predictive-00/history.npz",
+    "sha256": "1ce4ad1e359c5d6062c67cd06679a06d85c068262bb358bc0176cf6ef456a17a"
+  },
+  "status": "ready"
+}

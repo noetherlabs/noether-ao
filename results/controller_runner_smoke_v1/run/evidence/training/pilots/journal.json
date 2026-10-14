@@ -1,0 +1,21 @@
+{
+  "manifest_sha256": "3ce0013701ff09b13645134322e9e49e15b122636d075f8cec71e51bcf6a9b47",
+  "shared_evidence": [
+    {
+      "path": "evidence/provenance/source.json",
+      "sha256": "ad058fdf4169cbdb322c46254fa544e759558174438374fada0a1b506eba7170"
+    },
+    {
+      "path": "evidence/provenance/runtime.json",
+      "sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719"
+    },
+    {
+      "path": "evidence/provenance/study.json",
+      "sha256": "706c4397274c821f70629944946e22c38961526b98e3931f3cd5676fecfd7e3c"
+    },
+    {
+      "path": "evidence/provenance/base.json",
+      "sha256": "fb70c2f5a0aa33157e8be5f55dbbb13ec442092db5e89b152b0d53e5c95e0e1a"
+    }
+  ]
+}

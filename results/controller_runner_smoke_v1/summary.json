@@ -1,0 +1,33 @@
+{
+  "all_pass": true,
+  "evaluation_records": 1,
+  "gates": {
+    "durable_stage_counts": true,
+    "held_out_evaluation_entered": true,
+    "nonreserved_seed_streams": true,
+    "resource_preflight_admitted": true,
+    "selection_frozen": true,
+    "selection_reentry_exact": true,
+    "source_provenance_bound": true,
+    "training_complete": true,
+    "validation_complete": true
+  },
+  "kind": "controller_runner_smoke",
+  "pilot_records": 12,
+  "planned_evaluation_records_for_selection": 600,
+  "protected_files": 488,
+  "schema_version": 1,
+  "scope": "End-to-end command and evidence smoke with one held-out trial; not a complete evaluation cohort, timing result or controller claim.",
+  "selected_controllers": [
+    "fixed",
+    "forward",
+    "integrator",
+    "learned",
+    "predictive"
+  ],
+  "source_commit": "37f6bfc6896741a0eea809f07d98113db4759d35",
+  "study_id": "controller_runner_smoke_v1",
+  "terminal_model_records": 2,
+  "validation_records": 100,
+  "withheld_controllers": []
+}

@@ -667,15 +667,15 @@ same JSON and status 2, then passes the required byte threshold to `open_study_r
 for a second immediate free-space check. No CLI flag bypasses creation admission.
 
 An implementation check found about 5.5 GB free and correctly returned exit status 2.
-No target directory, cohort, controller output or elapsed-time
-sample was created. Capacity is therefore a visible operational blocker rather than
-an invitation to reduce evidence. Run the same command on the intended volume before
-study creation; the separate end-to-end physical smoke must still pass first. Sixteen
-new resource/preflight checks cover the boundary, including a second hash check on
-the exact base bytes parsed by the estimator and enforced creation refusal. The
-complete correctness suite passes **363 tests in 92.05 seconds**.
+No target directory, cohort, controller output or elapsed-time sample was created.
+Capacity is therefore a visible operational blocker rather than an invitation to
+reduce evidence. Run the same command on the intended volume before study creation.
+The end-to-end physical smoke described below has since passed. Sixteen new
+resource/preflight checks cover the boundary, including a second hash check on the
+exact base bytes parsed by the estimator and enforced creation refusal. The complete
+correctness suite passed **363 tests in 92.05 seconds** at this stage.
 
-## Predeclared end-to-end runner smoke
+## End-to-end runner smoke
 
 The runner smoke uses [a dedicated study](../configs/controller_runner_smoke_v1.yaml)
 and [reduced base plant](../configs/controller_runner_smoke_base.yaml). It preserves
@@ -696,11 +696,18 @@ One evaluation record is intentional: the gate exercises held-out admission and
 durable publication without acquiring a statistical cohort. Selection may withhold
 controllers, but at least one must be eligible so physical evaluation actually runs.
 The report requires exact selection re-entry, source binding, protected hashes and
-complete upstream stages. It records no timings and cannot run under CI. The runner
-and its fixed inputs are committed before acquisition; retained execution remains
-pending. Seven pre-acquisition checks cover the fixed plan, stream isolation, CI
-refusal and protected-inventory drift. The complete local correctness suite passes
-**370 tests in 89.80 seconds** before the runner commit.
+complete upstream stages. It records no timings and cannot run under CI. Seven
+pre-acquisition checks cover the fixed plan, stream isolation, CI refusal and
+protected-inventory drift. The complete local correctness suite passed **370 tests
+in 89.80 seconds** before the runner commit.
+
+The [retained run](../results/controller_runner_smoke_v1/README.md) then passed all
+nine gates from source commit `37f6bfc6896741a0eea809f07d98113db4759d35`.
+It contains 12 pilot records, two terminal fitted models, 100 validation records,
+an exactly reproducible frozen selection and one held-out evaluation record across
+488 protected files. Rebuilding the summary and report reproduced their SHA256
+digests exactly. All five reduced candidates were eligible; that observation is a
+smoke outcome, not an estimate of comparative performance.
 
 ## Original ledger engineering review and tests
 

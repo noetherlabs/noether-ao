@@ -1,0 +1,14 @@
+{
+  "identity": {
+    "detector_seed": 162002,
+    "fault": "none",
+    "photons": 1000000.0,
+    "seed": 62002,
+    "stage": "validation",
+    "wind_scale": 0.5
+  },
+  "raw": {
+    "path": "evidence/validation/open_loop/2a52ac26b9f18124278b65aa638a991aea6c60a987c199b2bf531a9646482c15.npz",
+    "sha256": "529b84b44d8d8fd6e183eade1c12fce56947aed9b9645dd152bf6556f2c0a320"
+  }
+}

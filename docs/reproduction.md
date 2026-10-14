@@ -81,6 +81,9 @@ runs locally outside CI and records no elapsed time. The fixed 61001/62001/63001
 seed families and their detector streams are disjoint from both the reserved study
 and the earlier component smoke. This verifies orchestration and durable evidence;
 it does not complete an evaluation cohort or support a controller comparison.
+The committed reference execution is retained in
+[`results/controller_runner_smoke_v1`](../results/controller_runner_smoke_v1/README.md);
+its rebuild verifies 488 protected files and reproduces the derived report exactly.
 
 ## Local Dragrace contribution
 

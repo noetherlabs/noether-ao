@@ -465,10 +465,10 @@ suite passes **37 tests**; the complete local correctness suite passes **363 tes
 92.05 seconds**. A live read-only check against `runs/controller_study_v1`
 found about **5.5 GB free** and returned the specified status 2. It created no
 target, physical array, reserved outcome or timing sample. The disk-sizing design is
-complete; creation cannot bypass it, and current capacity plus the separately seeded
-full-runner smoke still block reserved acquisition.
+complete and creation cannot bypass it. The runner smoke below has since passed;
+full-study capacity remains the operational blocker for reserved acquisition.
 
-## Predeclared full-runner smoke
+## Passed full-runner smoke
 
 `controller_runner_smoke_v1.yaml` now fixes new training, validation, evaluation and
 initialization streams with no reserved-study or component-smoke overlap. Its reduced
@@ -483,6 +483,14 @@ selection and evaluation commands in fresh processes, rechecks selection exactly
 protects every retained run file and rebuilds a gate report from those bytes. CI and
 dirty-source runs are rejected. Seven new pre-acquisition checks cover the fixed plan,
 stream overlap, CI refusal and changed/missing/additional evidence. The complete local
-correctness suite passes 370 tests in 89.80 seconds. No physical smoke outcome,
-reserved seed, timing sample or controller claim has been acquired yet; execution
-follows the runner commit.
+correctness suite passed 370 tests in 89.80 seconds, and GitHub Correctness passed for
+the runner commit.
+
+The retained run then passed all nine gates from source commit `37f6bfc`. It saved
+12 pilot records, two terminal fitted models, all 100 validation records, an exactly
+repeatable frozen selection and one of 600 possible held-out records. All five reduced
+candidates were eligible and none of the training or validation records failed. The
+488-file protected inventory verifies on rebuild, while the derived summary and report
+reproduce byte for byte. No reserved seed or timing sample was acquired, and this
+single held-out record supports no controller comparison. The remaining reserved-study
+blocker is the unchanged 105.033 GB storage-admission threshold.

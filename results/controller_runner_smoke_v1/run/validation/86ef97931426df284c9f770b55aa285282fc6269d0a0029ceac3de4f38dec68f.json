@@ -1,0 +1,56 @@
+{
+  "record": {
+    "artifacts": [
+      {
+        "path": "evidence/validation/trials/86ef97931426df284c9f770b55aa285282fc6269d0a0029ceac3de4f38dec68f.npz",
+        "sha256": "9d9378b8ce766f5515a4148e74104e4d0cc3e62b34510ebf99465025d2e12e12"
+      },
+      {
+        "path": "evidence/validation/trials/86ef97931426df284c9f770b55aa285282fc6269d0a0029ceac3de4f38dec68f.json",
+        "sha256": "3b2e644666bba456c2157c6c3923b1e68d6796a3bdcda2c8b42ee2be0d1de95f"
+      },
+      {
+        "path": "evidence/validation/atmospheres/00b60e40282dc675735971123cb50646217198f63f92181a45847385f1a30625.npz",
+        "sha256": "e409807d618fd0fb2cb856cf3a3b2388177d1556b59a0ab5175373932daffe30"
+      },
+      {
+        "path": "evidence/validation/atmospheres/00b60e40282dc675735971123cb50646217198f63f92181a45847385f1a30625.json",
+        "sha256": "8c017c32283668e3ab3291625289feedf00019c53c153508cf5dca2836e322c3"
+      },
+      {
+        "path": "evidence/validation/open_loop/ae3f2afe861fc8ac18b070a87f49c2745a0db900241c88787499af2a0729b15f.json",
+        "sha256": "a51ad4d6c3dfb86c4fb783000b79879fefdb6dd9b7a8f6d447a327f500cc233e"
+      }
+    ],
+    "case": {
+      "candidate": {
+        "controller": "fixed",
+        "id": "fixed-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "detector_seed": 162004,
+      "fault": "none",
+      "photons": 2000000.0,
+      "seed": 62004,
+      "stage": "validation",
+      "wind_scale": 1.0
+    },
+    "error": null,
+    "metrics": {
+      "all_outputs_finite": true,
+      "open_wfe_nm": 118.15189825094586,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6051325556624604,
+      "wfe_nm": 84.90083299943116
+    },
+    "open_loop": {
+      "path": "evidence/validation/open_loop/ae3f2afe861fc8ac18b070a87f49c2745a0db900241c88787499af2a0729b15f.npz",
+      "sha256": "851f3169deaca959644a87d8fdaf542bd838719035ce7db906f7b08410a47774"
+    },
+    "status": "completed"
+  },
+  "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c"
+}

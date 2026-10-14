@@ -1,0 +1,135 @@
+{
+  "atmosphere": [
+    {
+      "path": "evidence/validation/atmospheres/00b60e40282dc675735971123cb50646217198f63f92181a45847385f1a30625.npz",
+      "sha256": "e409807d618fd0fb2cb856cf3a3b2388177d1556b59a0ab5175373932daffe30"
+    },
+    {
+      "path": "evidence/validation/atmospheres/00b60e40282dc675735971123cb50646217198f63f92181a45847385f1a30625.json",
+      "sha256": "8c017c32283668e3ab3291625289feedf00019c53c153508cf5dca2836e322c3"
+    }
+  ],
+  "case": {
+    "candidate": {
+      "controller": "fixed",
+      "id": "fixed-00",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.999
+      }
+    },
+    "detector_seed": 162004,
+    "fault": "none",
+    "photons": 1000000.0,
+    "seed": 62004,
+    "stage": "validation",
+    "wind_scale": 1.0
+  },
+  "config": {
+    "burn_in": 2,
+    "command_clip_rad": 5.0,
+    "delay_frames": 2,
+    "detector_n": 8,
+    "diameter_m": 1.0,
+    "dt_s": 0.001,
+    "estimate_clip_rad": 3.0,
+    "faults": {
+      "drift_frames": 4,
+      "end": 8,
+      "model_phase_scale": 1.6,
+      "onset": 4,
+      "optical_gain": 0.35,
+      "shift_pixels": 1,
+      "stuck_radius_d": 0.08,
+      "vibration_hz": 40.0,
+      "vibration_rad": 0.7
+    },
+    "forward_ridge": 1e-05,
+    "forward_step": 0.5,
+    "forward_steps": 3,
+    "frames": 8,
+    "gain": 0.3,
+    "layers": [
+      {
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ],
+        "weight": 0.6
+      },
+      {
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ],
+        "weight": 0.4
+      }
+    ],
+    "leak": 0.999,
+    "modes": 4,
+    "n": 8,
+    "photons": 1000000.0,
+    "predictor_ridge": 0.01,
+    "r0_m": 0.4,
+    "read_noise_e": 0.3,
+    "reconstructor_ridge": 1e-06,
+    "screen_factor": 2,
+    "seeds": [
+      62001,
+      62002,
+      62003,
+      62004,
+      62005
+    ],
+    "sensor": "pyramid",
+    "training_seeds": [
+      61001,
+      61002,
+      61003
+    ],
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "wind_scale": 1.0
+  },
+  "fault_window": {
+    "all_outputs_finite": true,
+    "open_wfe_nm": 115.52174372103737,
+    "saturation_fraction": 0.0,
+    "strehl": 0.6625089638806838,
+    "wfe_nm": 75.66211462656692
+  },
+  "fault_window_frames": [
+    4,
+    8
+  ],
+  "metrics": {
+    "all_outputs_finite": true,
+    "open_wfe_nm": 118.15189825094586,
+    "saturation_fraction": 0.0,
+    "strehl": 0.6050801171014027,
+    "wfe_nm": 84.90750492661924
+  },
+  "model": null,
+  "open_loop": [
+    {
+      "path": "evidence/validation/open_loop/552c4e69675b3ac819daf50fcb61d8aeaf2576237598bf9760dedb4cf47d47b1.npz",
+      "sha256": "851f3169deaca959644a87d8fdaf542bd838719035ce7db906f7b08410a47774"
+    },
+    {
+      "path": "evidence/validation/open_loop/552c4e69675b3ac819daf50fcb61d8aeaf2576237598bf9760dedb4cf47d47b1.json",
+      "sha256": "f74152069246c159b22334bc0d5eeb590eeb904cbee3de50a4606dbd0feb9eda"
+    }
+  ],
+  "post_burn_frames": [
+    2,
+    8
+  ],
+  "raw": {
+    "path": "evidence/validation/trials/d85b6a4426a60d2d78975459ebf3b9f53d8a684482e8fe32181c3c9be17e6de6.npz",
+    "sha256": "13d3b6320d5886283e7a153d77a5a07b330ca0eb536461ef1da9e4fabcc00b09"
+  }
+}

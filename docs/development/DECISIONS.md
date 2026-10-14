@@ -670,3 +670,19 @@ Protect the run and command results by SHA256 and rebuild a concise report. The 
 passes only with isolated streams, admitted storage, complete upstream stages, exact
 selection re-entry, a physical evaluation record, expected stage-file counts and
 matching source provenance. Commit the runner and inputs before acquiring evidence.
+
+## End-to-end runner-smoke execution (2026-10-14)
+
+Execute only after source commit `37f6bfc` passes remote correctness. The first
+read-only admission check refused at 5.142 GB free, below the fixed 5.420 GB smoke
+floor, and created no output. Clear only the regenerable UV package cache; do not
+change the protocol or evidence envelope. Re-run the same check and proceed after it
+reports 5.585 GB free and sufficient capacity.
+
+Retain the resulting `controller_runner_smoke_v1` evidence after all nine gates pass:
+12 pilots, two terminal fitted models, 100 validation records, frozen selection,
+exact selection re-entry and one held-out record. Protect 488 command/run files and
+require the derived report and summary to rebuild byte for byte. Record that all five
+reduced candidates were eligible, without interpreting their scores as comparative
+evidence. The run accessed no reserved stream, completed no evaluation cohort and
+recorded no timing. Full-study storage admission remains unchanged and unsatisfied.

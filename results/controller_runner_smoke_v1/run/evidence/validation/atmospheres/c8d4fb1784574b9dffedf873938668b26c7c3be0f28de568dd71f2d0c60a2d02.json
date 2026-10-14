@@ -1,0 +1,11 @@
+{
+  "identity": {
+    "seed": 62002,
+    "stage": "validation",
+    "wind_scale": 1.0
+  },
+  "raw": {
+    "path": "evidence/validation/atmospheres/c8d4fb1784574b9dffedf873938668b26c7c3be0f28de568dd71f2d0c60a2d02.npz",
+    "sha256": "f93042f02a86bd804c9132b55ef92e7be3c79c83c2c3853bb25ccc810dbb6bc1"
+  }
+}

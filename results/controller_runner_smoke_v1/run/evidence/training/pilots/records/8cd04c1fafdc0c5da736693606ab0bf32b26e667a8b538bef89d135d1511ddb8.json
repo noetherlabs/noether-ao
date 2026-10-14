@@ -1,0 +1,101 @@
+{
+  "calibration": {
+    "path": "evidence/training/pilots/calibration.npz",
+    "sha256": "1726ea0ab9abba50bf1a133053e1adc49ea4ee7041a3ebf2c964b3f2dced47a3"
+  },
+  "case": {
+    "photons": 2000000.0,
+    "seed": 61001,
+    "wind_scale": 0.5
+  },
+  "config": {
+    "burn_in": 2,
+    "command_clip_rad": 5.0,
+    "delay_frames": 2,
+    "detector_n": 8,
+    "diameter_m": 1.0,
+    "dt_s": 0.001,
+    "estimate_clip_rad": 3.0,
+    "faults": {
+      "drift_frames": 4,
+      "end": 8,
+      "model_phase_scale": 1.6,
+      "onset": 8,
+      "optical_gain": 0.35,
+      "shift_pixels": 1,
+      "stuck_radius_d": 0.08,
+      "vibration_hz": 40.0,
+      "vibration_rad": 0.7
+    },
+    "forward_ridge": 1e-05,
+    "forward_step": 0.5,
+    "forward_steps": 3,
+    "frames": 8,
+    "gain": 0.3,
+    "layers": [
+      {
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ],
+        "weight": 0.6
+      },
+      {
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ],
+        "weight": 0.4
+      }
+    ],
+    "leak": 0.999,
+    "modes": 4,
+    "n": 8,
+    "photons": 2000000.0,
+    "predictor_ridge": 0.01,
+    "r0_m": 0.4,
+    "read_noise_e": 0.3,
+    "reconstructor_ridge": 1e-06,
+    "screen_factor": 2,
+    "seeds": [
+      61001,
+      61002,
+      61003
+    ],
+    "sensor": "pyramid",
+    "training_seeds": [
+      61001,
+      61002,
+      61003
+    ],
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "wind_scale": 0.5
+  },
+  "error": null,
+  "journal": {
+    "path": "evidence/training/pilots/journal.json",
+    "sha256": "b116a61288eb3a7962057bd35d25ecf1dcd843ab843901ff8428aca93aa44bee"
+  },
+  "outputs": {
+    "path": "evidence/training/pilots/outputs/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.npz",
+    "sha256": "dbdec90f0e2a0e4257179d93d7f5420e6ff43f971884c9943f8409f631755d17"
+  },
+  "phase": {
+    "path": "evidence/training/atmospheres/2f86fe1857505557622062704cdfac5c54e20451fe96e7b865947a2916a114f2.npz",
+    "sha256": "fd417a5a2fe1627903196fae75749697923f10b059a8a05d1e28c0c3c1f69b18"
+  },
+  "phase_metadata": {
+    "path": "evidence/training/atmospheres/2f86fe1857505557622062704cdfac5c54e20451fe96e7b865947a2916a114f2.json",
+    "sha256": "ca16b4a76f5ccd3f057cd8ffbba3f1a8bb5bfedf90e50b964a676f5a7c0280c6"
+  },
+  "status": "ready",
+  "telemetry": {
+    "path": "evidence/training/pilots/telemetry/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.npz",
+    "sha256": "dbbaf6c6a88080291f36311f3563f516e4ac39f92c62029a1d78cb284179a100"
+  }
+}
