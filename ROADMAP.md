@@ -30,9 +30,11 @@ shows that the upper-tail score moves downward under the simplified gain fault. 
 training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
 cohorts and validation-only release gates. The plan is unexecuted: no fresh threshold
 or outcome exists. The causal detector and raw-artifact-verified training threshold
-freeze are implemented. Next add the immutable validation-release barrier,
-deterministic runner recovery, complete retention and storage admission, then pass a
-separately seeded runner smoke before accessing a declared cohort.
+freeze are implemented. The immutable validation barrier rechecks the frozen training
+evidence and publishes either release or withholding from the complete validation
+identity set. Next add deterministic runner recovery, complete retention and storage
+admission, then pass a separately seeded runner smoke before accessing a declared
+cohort.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

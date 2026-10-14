@@ -587,3 +587,26 @@ is the validation-release barrier plus deterministic retention/resumption and st
 admission before a distinct nonreserved runner smoke. The focused detector, protocol
 and audit suite passes **65 tests**; the complete local correctness suite passes
 **435 tests in 92.97 seconds**.
+
+## Optical-gain validation release barrier
+
+The v1 validation barrier now enumerates all 240 frozen validation identities and
+rebuilds `thresholds.json` from its 64 hash-bound training artifacts before reading a
+validation decision. Completed records must retain every gate-relevant frame array;
+their statistic frames, float64 means, crossings, alarm frames and persistence flags
+must reproduce exactly from the shared detector kernel.
+
+All clean false-alarm, severe-gain detection, pre-onset, boundary, delay, finite,
+fallback, availability and saturation criteria are applied independently to each of
+the four regimes. A terminal numerical failure remains in the record and produces an
+immutable withheld decision. A passing complete cohort publishes the same one-way
+artifact with evaluation released. Identical retries preserve bytes; changed retries
+cannot replace either decision.
+
+The 21 focused checks use synthetic arrays and cover every criterion, cohort pairing,
+onset-straddling streaks, terminal failure, raw and training hash drift, altered
+detector traces, idempotence and changed-decision refusal. No simulator, declared
+seed, P2 threshold, validation decision, held-out outcome, timing path or controller
+action was used. Deterministic runner resumption, complete retention, storage
+admission and a distinct nonreserved smoke remain next. The complete local
+correctness suite passes **456 tests in 96.01 seconds**.

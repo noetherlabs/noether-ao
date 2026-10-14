@@ -153,10 +153,18 @@ exclusively. Failed, missing, duplicated, foreign, nonfinite, path-unsafe or
 artifact-mismatched inputs cannot publish a threshold; an identical retry is
 idempotent and a changed retry cannot replace the file.
 
-Before acquisition, the implementation must still add the immutable validation
-release artifact, deterministic runner resumption, complete retained-array path, a
-whole-run storage preflight and a separate nonreserved runner smoke. Unit tests and
-this plan are not execution evidence, and no P2 threshold or outcome exists yet.
+The validation boundary first reconstructs that threshold file from all bound
+training artifacts. It then requires all 240 declared validation identities, verifies
+every completed raw NPZ and stored detector trace against the shared kernel, and
+applies every criterion above independently in each regime. Numerical failures remain
+in the immutable decision and force withholding. `validation_release.json` records
+either global release or withholding; identical retries are idempotent and no changed
+decision can replace it.
+
+Before acquisition, the implementation must still add deterministic runner
+resumption, the complete retained-array and per-run metric path, a whole-run storage
+preflight and a separate nonreserved runner smoke. Unit tests and this plan are not
+execution evidence, and no P2 threshold, validation decision or outcome exists yet.
 
 ## Predeclared escalation
 

@@ -101,8 +101,10 @@ lower-tail score with eight-window persistence, then the frozen
 validation and sealed evaluation streams. No P2 threshold or outcome has been
 generated; the candidate is not validated and cannot act on the controller.
 The shared detector kernel and raw-artifact-verified training threshold freeze are
-implemented and tested on synthetic fixtures; validation release and physical runner
-smoke remain pending.
+implemented. A one-way validation barrier also reconstructs every detector trace and
+publishes release or withholding only after all 240 terminal identities are present.
+These paths are tested on synthetic fixtures; the physical runner smoke remains
+pending.
 
 Independent validation adds:
 
@@ -129,7 +131,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted protocol; causal detector and immutable training threshold freeze implemented; release gate and runner smoke pending |
+| Optical-gain observability | Frozen unexecuted protocol; detector, immutable threshold freeze and validation-release barrier implemented; runner, retention and storage smoke pending |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

@@ -252,10 +252,15 @@ its hash-bound raw NPZ, derives the protocol-file hash, binds source/runtime ide
 and refuses to replace an existing threshold. Its tests are synthetic and create no
 study result.
 
-Next, implement the validation-release artifact, deterministic runner resumption,
-complete retention and storage admission. Prove that path with distinct nonreserved
-smoke seeds before opening any v1 cohort. Do not reuse controller-study smoke evidence
-as an observability runner check.
+The one-way validation barrier is also implemented. It rederives the threshold file
+from retained training artifacts, requires all 240 validation identities, verifies
+stored detector traces, retains terminal failures, applies every gate per regime and
+publishes release or withholding without replacement. Its tests are synthetic and
+open no declared seed.
+
+Next, implement deterministic runner resumption, complete retention and storage
+admission. Prove that path with distinct nonreserved smoke seeds before opening any v1
+cohort. Do not reuse controller-study smoke evidence as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection

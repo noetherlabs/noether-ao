@@ -141,13 +141,15 @@ def _case_id(case: dict[str, Any]) -> str:
     return _digest(_bytes(case))
 
 
-def _artifact(reference: Any) -> dict[str, str]:
+def _artifact(reference: Any, role: str = "training") -> dict[str, str]:
+    if role not in {"training", "validation"}:
+        raise ValueError("Unsupported observability artifact role")
     if not isinstance(reference, dict) or set(reference) != {"path", "sha256"}:
-        raise ValueError("Training record requires one raw artifact reference")
+        raise ValueError(f"{role.title()} record requires one raw artifact reference")
     path, digest = reference["path"], reference["sha256"]
     if (
         not isinstance(path, str)
-        or not path.startswith("evidence/training/")
+        or not path.startswith(f"evidence/{role}/")
         or Path(path).is_absolute()
         or Path(path).as_posix() != path
         or ".." in Path(path).parts
@@ -155,7 +157,7 @@ def _artifact(reference: Any) -> dict[str, str]:
         or not isinstance(digest, str)
         or not re.fullmatch(r"[0-9a-f]{64}", digest)
     ):
-        raise ValueError("Training artifact must be a canonical hashed NPZ reference")
+        raise ValueError(f"{role.title()} artifact must be a canonical hashed NPZ reference")
     return {"path": path, "sha256": digest}
 
 
@@ -175,31 +177,67 @@ def _file_digest(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _artifact_score(root: Path, reference: Any) -> np.ndarray:
-    """Verify one immutable raw artifact and read its score without pickle."""
-    artifact = _artifact(reference)
+def _artifact_arrays(
+    root: Path, reference: Any, role: str = "training"
+) -> tuple[dict[str, str], dict[str, np.ndarray]]:
+    """Verify one immutable raw artifact and decode numeric arrays without pickle."""
+    artifact = _artifact(reference, role)
     path = root / artifact["path"]
     for current in (path, *path.parents):
         if current == root:
             break
         if current.is_symlink():
-            raise ValueError("Training artifact path cannot contain a symlink")
+            raise ValueError(f"{role.title()} artifact path cannot contain a symlink")
     if not path.is_file() or not path.resolve().is_relative_to(
-        root / "evidence" / "training"
+        root / "evidence" / role
     ):
-        raise ValueError("Training artifact is missing or outside evidence/training")
+        raise ValueError(f"{role.title()} artifact is missing or outside evidence/{role}")
     if _file_digest(path) != artifact["sha256"]:
-        raise ValueError("Training artifact hash changed")
+        raise ValueError(f"{role.title()} artifact hash changed")
     try:
         with np.load(path, allow_pickle=False) as archive:
-            if len(archive.files) != len(set(archive.files)) or "score" not in archive.files:
-                raise ValueError("Training artifact must contain one unambiguous score array")
-            score = np.array(archive["score"], copy=True)
+            if not archive.files or len(archive.files) != len(set(archive.files)):
+                raise ValueError(f"{role.title()} artifact has ambiguous array keys")
+            arrays = {}
+            for key in archive.files:
+                array = np.array(archive[key], copy=True)
+                if array.dtype.kind not in "biufc":
+                    raise ValueError(f"{role.title()} artifact arrays must be numeric")
+                arrays[key] = array
     except (OSError, TypeError, ValueError, EOFError, zipfile.BadZipFile) as error:
-        raise ValueError("Training artifact is not a valid pickle-free NPZ") from error
+        raise ValueError(f"{role.title()} artifact is not a valid pickle-free NPZ") from error
     if _file_digest(path) != artifact["sha256"]:
-        raise ValueError("Training artifact changed while it was read")
-    return score
+        raise ValueError(f"{role.title()} artifact changed while it was read")
+    return artifact, arrays
+
+
+def _artifact_score(root: Path, reference: Any) -> np.ndarray:
+    """Verify one training artifact and return its unambiguous score array."""
+    _, arrays = _artifact_arrays(root, reference)
+    if "score" not in arrays:
+        raise ValueError("Training artifact must contain a score array")
+    return arrays["score"]
+
+
+def _load_protocol_binding(
+    protocol_path: Path, repository: Path | None = None
+) -> tuple[dict[str, Any], str, Path, Path]:
+    """Load one in-repository protocol while proving its source bytes stayed fixed."""
+    repository = Path(repository or ROOT).resolve()
+    path = Path(protocol_path)
+    path = path if path.is_absolute() else repository / path
+    if not path.is_file() or not path.resolve().is_relative_to(repository):
+        raise ValueError("Protocol must be a regular file inside the source repository")
+    for current in (path, *path.parents):
+        if current == repository:
+            break
+        if current.is_symlink():
+            raise ValueError("Protocol path cannot contain a symlink")
+    protocol_sha256 = _file_digest(path)
+    config = load_protocol(path, repository)
+    if _file_digest(path) != protocol_sha256:
+        raise ValueError("Protocol changed while it was loaded")
+    return config, protocol_sha256, path, repository
 
 
 def _build_threshold_bundle(
@@ -354,20 +392,9 @@ def freeze_thresholds(
     if not requested_root.is_dir() or requested_root.is_symlink():
         raise ValueError("Threshold root must be an existing non-symlink directory")
     root = requested_root.resolve()
-    repository = Path(repository or ROOT).resolve()
-    path = Path(protocol_path)
-    path = path if path.is_absolute() else repository / path
-    if not path.is_file() or not path.resolve().is_relative_to(repository):
-        raise ValueError("Protocol must be a regular file inside the source repository")
-    for current in (path, *path.parents):
-        if current == repository:
-            break
-        if current.is_symlink():
-            raise ValueError("Protocol path cannot contain a symlink")
-    protocol_sha256 = _file_digest(path)
-    config = load_protocol(path, repository)
-    if _file_digest(path) != protocol_sha256:
-        raise ValueError("Protocol changed while it was loaded")
+    config, protocol_sha256, path, _ = _load_protocol_binding(
+        protocol_path, repository
+    )
     if not isinstance(records, list):
         raise ValueError("Training records must be a list")
     verified = []

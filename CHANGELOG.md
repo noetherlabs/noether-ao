@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a one-way optical-gain validation-release barrier. Rebuild the frozen
+  thresholds from all 64 training artifacts, verify the complete 240-record
+  validation identity set and every retained detector trace, apply all per-regime
+  gates, and publish either release or withholding without replacement. Retain
+  terminal failures as negative decisions and use synthetic fixtures only.
+
 - Implement the optical-gain detector's causal four-frame transform, strict
   lower-tail comparison and eight-crossing persistence. Add an exclusive threshold
   freeze that admits only the complete 64-record training-clean cohort, verifies

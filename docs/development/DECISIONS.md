@@ -766,3 +766,22 @@ identical retry is harmless and a changed retry cannot replace the first freeze.
 
 Treat the threshold builder and its synthetic tests as implementation evidence only.
 They do not authorize cohort acquisition and do not create a P2 numerical threshold.
+
+## Make validation release a one-way evidence decision (2026-10-14)
+
+Release evaluation only from the exact 240 validation identities after reconstructing
+the frozen thresholds from their 64 retained training artifacts. Recompute every
+completed detector trace from the raw score and reject altered frame identities,
+statistics, crossings or alarms. Apply the frozen clean, gain, delay and integrity
+criteria independently in all four regimes; one failed criterion withholds the whole
+evaluation cohort.
+
+Treat numerical failure as a terminal validation outcome. Keep its identity and error
+in the decision, count the run as missed or incomplete where applicable, and publish a
+withheld result. An invalid completed artifact is an evidence error and cannot publish
+a decision. Publish `validation_release.json` exclusively so a matching retry is
+idempotent and a later favorable record cannot replace an earlier negative decision.
+
+This barrier does not acquire validation or expose evaluation identities. Runner
+resumption, full retention, storage admission and separately seeded smoke evidence
+remain required before any declared P2 cohort is opened.
