@@ -649,3 +649,24 @@ Print the report even on refusal and return status 2 when free bytes are below t
 second disk check. Do not expose a bypass flag. The current
 development volume is insufficient, so reserved execution remains blocked while
 the separate physical runner smoke proceeds on nonreserved seeds.
+
+## End-to-end runner-smoke boundary (2026-10-14)
+
+Use a new tracked smoke study rather than weakening the reserved protocol or treating
+ledger fixtures as physical evidence. Keep the existing minimum cohort rules, but
+reduce spatial dimensions, frames and candidate count. Assign distinct 61001, 62001,
+63001 and 64001 seed families and explicitly exclude both reserved-study and previous
+component-smoke streams, including derived detector keys.
+
+Run the production command sequence in separate processes from clean committed
+source. Complete all 12 training pilots, both fitted models and 100 validation trials
+before freezing selection. Require at least one eligible controller, then retain one
+held-out evaluation record. One record exercises the final lazy gate and immutable
+publication without pretending to be a complete evaluation cohort. Do not time the
+run, require favorable rankings or alter `controller_study_v1` after observing smoke
+outcomes.
+
+Protect the run and command results by SHA256 and rebuild a concise report. The gate
+passes only with isolated streams, admitted storage, complete upstream stages, exact
+selection re-entry, a physical evaluation record, expected stage-file counts and
+matching source provenance. Commit the runner and inputs before acquiring evidence.

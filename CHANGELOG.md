@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add a predeclared end-to-end controller runner smoke with distinct seed streams,
+  reduced physical inputs, the production stage commands, protected evidence and a
+  reproducible gate report. It stops after one held-out record and records no timing.
+
 - Add a read-only `study-resources` preflight that derives the complete controller
   study's retained numeric payload and conservative free-space requirement from the
   frozen plan and array schemas. Report every category as JSON, credit no compression,

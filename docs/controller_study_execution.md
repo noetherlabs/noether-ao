@@ -675,6 +675,33 @@ new resource/preflight checks cover the boundary, including a second hash check 
 the exact base bytes parsed by the estimator and enforced creation refusal. The
 complete correctness suite passes **363 tests in 92.05 seconds**.
 
+## Predeclared end-to-end runner smoke
+
+The runner smoke uses [a dedicated study](../configs/controller_runner_smoke_v1.yaml)
+and [reduced base plant](../configs/controller_runner_smoke_base.yaml). It preserves
+the production ledger and command contracts while reducing the plant to an 8-pixel
+pupil, four modes, an 8-pixel detector, eight frames and one candidate per controller.
+Its training, validation, evaluation, detector and initialization streams are
+disjoint from reserved-study and component-smoke streams.
+
+    clean committed source
+      -> storage preflight
+      -> complete training (12 pilots, 2 fitted models)
+      -> complete validation (100 physical trials)
+      -> immutable selection
+      -> one held-out physical evaluation record
+      -> protected inventory + reproducible gate report
+
+One evaluation record is intentional: the gate exercises held-out admission and
+durable publication without acquiring a statistical cohort. Selection may withhold
+controllers, but at least one must be eligible so physical evaluation actually runs.
+The report requires exact selection re-entry, source binding, protected hashes and
+complete upstream stages. It records no timings and cannot run under CI. The runner
+and its fixed inputs are committed before acquisition; retained execution remains
+pending. Seven pre-acquisition checks cover the fixed plan, stream isolation, CI
+refusal and protected-inventory drift. The complete local correctness suite passes
+**370 tests in 89.80 seconds** before the runner commit.
+
 ## Original ledger engineering review and tests
 
 The bounded change reuses `controller_protocol` for candidate enumeration and all

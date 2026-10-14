@@ -115,6 +115,7 @@ Independent validation adds:
 | Selection command | Implemented; resume-only `study-select` audits complete validation and freezes chosen or withheld controllers |
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
+| End-to-end runner smoke | Implemented with distinct reduced inputs; retained physical execution pending |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; full-runner smoke, adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

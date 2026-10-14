@@ -30,8 +30,10 @@ verdict. `study-evaluate` now enters positive held-out chunks only through that 
 selection gate. A static whole-run preflight now derives 42.167 GB of numeric payload
 and a conservative 105.033 GB free-space requirement without accessing any cohort.
 The current development filesystem fails that capacity gate. Next verify the full
-runner on separate smoke seeds and provision a qualifying target before reserved
-outcomes.
+runner with the committed 61001/62001/63001 smoke streams, then provision a qualifying
+target before reserved outcomes. The runner intentionally persists one held-out
+record after complete smoke training, validation and selection; it is an execution
+gate, not a comparison cohort.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Each meaningful increment also updates README.md when its technical description,

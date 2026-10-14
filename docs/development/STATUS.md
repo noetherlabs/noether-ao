@@ -467,3 +467,22 @@ found about **5.5 GB free** and returned the specified status 2. It created no
 target, physical array, reserved outcome or timing sample. The disk-sizing design is
 complete; creation cannot bypass it, and current capacity plus the separately seeded
 full-runner smoke still block reserved acquisition.
+
+## Predeclared full-runner smoke
+
+`controller_runner_smoke_v1.yaml` now fixes new training, validation, evaluation and
+initialization streams with no reserved-study or component-smoke overlap. Its reduced
+plant uses N=8, four modes, an 8-pixel detector and eight frames. Five controllers
+receive one candidate each; the unchanged plan still requires 12 pilots and 100
+validation trials before selection. The smoke stops after one held-out evaluation
+record, so it tests the complete command/evidence path without acquiring a comparison
+cohort.
+
+`run_controller_study_smoke.py` invokes the actual resource, training, validation,
+selection and evaluation commands in fresh processes, rechecks selection exactly,
+protects every retained run file and rebuilds a gate report from those bytes. CI and
+dirty-source runs are rejected. Seven new pre-acquisition checks cover the fixed plan,
+stream overlap, CI refusal and changed/missing/additional evidence. The complete local
+correctness suite passes 370 tests in 89.80 seconds. No physical smoke outcome,
+reserved seed, timing sample or controller claim has been acquired yet; execution
+follows the runner commit.

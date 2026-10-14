@@ -63,6 +63,25 @@ bytes after conservative archive, metadata, temporary-write and operating envelo
 It credits no NPZ compression and exits 2 when the target filesystem is too small.
 This is storage planning, not a timing result or permission to use reserved cohorts.
 
+## Run the end-to-end controller smoke
+
+From a clean committed checkout, run the complete command sequence on the reduced,
+nonreserved smoke configuration:
+
+```sh
+.venv/bin/python scripts/run_controller_study_smoke.py \
+  --out results/controller_runner_smoke_v1
+.venv/bin/python scripts/run_controller_study_smoke.py \
+  --rebuild results/controller_runner_smoke_v1
+```
+
+The runner completes all training and validation records, freezes selection, then
+persists exactly one held-out evaluation record through the real stage commands. It
+runs locally outside CI and records no elapsed time. The fixed 61001/62001/63001
+seed families and their detector streams are disjoint from both the reserved study
+and the earlier component smoke. This verifies orchestration and durable evidence;
+it does not complete an evaluation cohort or support a controller comparison.
+
 ## Local Dragrace contribution
 
 The separate local branch adds one AO MFT scan and appends p99 and observed
