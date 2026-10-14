@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Complete the sealed optical-gain evaluation lifecycle. Require an immutable favorable
+  validation release before enumerating held-out identities, resume terminal successes
+  and failures without replay, bind every record to the manifest/threshold/release
+  chain, and publish one complete-cohort descriptive report with exact binomial and
+  Bonferroni-adjusted paired WFE intervals. Keep failed denominators and incomplete
+  physical pairs explicit; apply no second outcome gate and open no declared cohort.
+
 - Add bounded physical observability stage commands and a strict reduced runner with
   streams disjoint from every prior experiment and frozen P2 v1 input. Retain two
   training and four validation trials from committed source, exact threshold/decision

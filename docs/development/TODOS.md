@@ -278,14 +278,22 @@ immutable while threshold-derived traces are added as separate artifacts at free
 
 The strict reduced runner has passed all 14 implementation gates from clean committed
 source with protected, byte-reproducible evidence and no evaluation access. Its
-unfavorable detector outcome is retained and cannot tune v1. Next implement the
-sealed, release-gated evaluation ledger and final reporting path without opening a
-cohort. Keep v1 sealed until that path is reviewed and its separate 10.191 GB storage
-gate passes.
+unfavorable detector outcome is retained and cannot tune v1.
 
-Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
-detected-only delay, and paired controller error all reported. Useful detection
-does not establish a safe fallback or a general safety guarantee.
+The sealed evaluation and final-report lifecycle is implemented. Evaluation requires
+a previously published favorable validation release, reconstructs the complete
+threshold and validation chain before exposing identities, and binds every terminal
+record to those immutable hashes. The complete cohort can publish one descriptive
+report with exact run intervals, descriptive frame fractions, paired Bonferroni WFE
+intervals, explicit failure denominators and no second gate. Synthetic smoke fixtures
+cover resumption, interruption, retained failures, evidence drift and report
+idempotence without opening a declared cohort.
+
+Next keep v1 sealed until a target passes the independent 10.191 GB storage gate.
+After admission, execute bounded stages from clean committed source and preserve any
+negative threshold, validation or evaluation result. Clean-run and frame false alarms,
+pre-onset alarms, misses, detected-only delay and paired controller error must all be
+reported. Useful detection does not establish safe fallback or a general safety claim.
 
 ## Completed — Independent ideal-pyramid validation
 

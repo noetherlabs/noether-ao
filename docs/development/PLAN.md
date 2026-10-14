@@ -42,13 +42,16 @@ Original M0–M7 evidence stays immutable; later experiments receive new run IDs
 
 The unexecuted P2 optical-gain protocol now has a causal detector, complete-cohort
 threshold and validation barriers, and a protocol-bound ledger for deterministic
-training/validation record resumption. Its physical adapter now applies the frozen
+training, validation and release-gated evaluation resumption. Its physical adapter
+applies the frozen
 forward-controller and fault mapping, retains every declared array and post-burn-in
 metric, and preserves threshold-dependent training traces without rewriting raw
 acquisitions. The static storage gate derives 2.341 GB of numeric payload and a
 conservative 10.191 GB free-space requirement; the current development target fails
-that gate. The next bounded work is a distinct nonreserved end-to-end smoke on an
-admitted filesystem. No declared P2 seed is opened before that gate passes.
+that gate. The complete cohort can publish one immutable descriptive report with the
+frozen exact-binomial and paired-error methods, explicit failed-run denominators and no
+second acceptance gate. The next scientific action is acquisition on a filesystem that
+passes the preflight. No declared P2 seed is opened before that gate passes.
 
 | Milestone | Required gate | State |
 |---|---|---|
@@ -79,9 +82,9 @@ After three distinct unsuccessful attempts, record failure and proceed.
 The reduced observability runner now has complete protected evidence from committed
 source and byte-exact report reconstruction. It used only nonreserved
 710001/720001/730001 families, acquired no evaluation trial and retained withholding
-after an unfavorable detector outcome. The remaining software boundary is the sealed,
-release-gated evaluation ledger plus final statistical report reconstruction. Build
-that without opening a cohort; v1 stays blocked by its independent 10.191 GB gate.
+after an unfavorable detector outcome. The sealed evaluation ledger and final
+statistical report reconstruction are implemented with synthetic evidence only. V1
+stays blocked by its independent 10.191 GB gate.
 
 Tests: independent Fourier/HCIPy agreement; sensor energy and derivative checks;
 screen spectral scaling; delay FIFO impulse; controller stability; causal detector;

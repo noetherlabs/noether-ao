@@ -181,6 +181,36 @@ record and artifact bytes without repeatedly decoding earlier large arrays. An
 interruption without a terminal record is retried; published outcomes are never
 replaced. Threshold and release files close their stages permanently.
 
+The evaluation boundary additionally requires a pre-existing regular
+`validation_release.json`. Before it enumerates an evaluation identity or invokes the
+physical callback, it rebuilds `thresholds.json`, revalidates all validation records,
+reconstructs the release decision and requires `evaluation_released: true`. Each
+terminal evaluation record binds the manifest, threshold and release SHA256 values.
+Resumption rechecks every saved raw archive and metadata object; a completed record or
+retained numerical failure is never replayed. The public command is resume-only:
+
+```sh
+.venv/bin/noether-optics observability-evaluate \
+  --config configs/optical_gain_observability_v1.yaml \
+  --out runs/optical_gain_observability_v1 \
+  --limit 1
+```
+
+Only a complete 1,200-record cohort can publish `evaluation_report.json` through
+`observability-report`. The report contains the ordered normalized record index and
+its digest, source/runtime/protocol/threshold/release bindings, per-condition integrity
+totals and every terminal failure. Run proportions use the declared two-sided exact
+Clopper–Pearson interval. Frame fractions remain descriptive. Paired WFE intervals use
+Student-t critical values at `1 - 0.05 / 16 = 0.996875` confidence; Strehl deltas and
+saturation are descriptive. The physical pair interval is exactly `[256, 512)`.
+
+Terminal failures stay in the planned target denominator and therefore count as
+misses. For clean and nuisance conditions, a failed run is unclassified and is never
+counted as quiet; proportions disclose the completed-run denominator. A physical pair
+with either member failed is listed with both statuses and errors, excluded from the
+paired interval and never imputed or replaced. Report publication is exclusive and
+idempotent, closes further acquisition, and records `second_pass_gate: false`.
+
 The read-only storage preflight derives each NPZ member from this frozen contract. It
 budgets 1,504 maximum trials as 1,568 numeric archives: one raw archive per trial plus
 64 threshold-derived training detector archives. Measurement and prediction images

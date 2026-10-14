@@ -80,6 +80,15 @@ def main() -> None:
         "observability-freeze-validation")
     observability_freeze_validation.add_argument("--config", required=True)
     observability_freeze_validation.add_argument("--out", required=True)
+    observability_evaluation = commands.add_parser("observability-evaluate")
+    observability_evaluation.add_argument("--config", required=True)
+    observability_evaluation.add_argument("--out", required=True)
+    observability_evaluation.add_argument(
+        "--limit", type=_positive_integer, required=True,
+        help="Maximum new evaluation records")
+    observability_report = commands.add_parser("observability-report")
+    observability_report.add_argument("--config", required=True)
+    observability_report.add_argument("--out", required=True)
     args = parser.parse_args()
     if args.experiment == "observability-resources":
         from .observability_resources import load_resource_inputs, resource_preflight
@@ -119,6 +128,18 @@ def main() -> None:
         from .observability_trials import open_observability_run
         ledger, _, _ = open_observability_run(Path(args.out), Path(args.config))
         result, artifact = ledger.freeze_validation()
+        print(json.dumps({"artifact": artifact, "result": result}, sort_keys=True))
+        return
+    if args.experiment == "observability-evaluate":
+        from .observability_trials import evaluate_trials, open_observability_run
+        ledger, base, _ = open_observability_run(Path(args.out), Path(args.config))
+        result = evaluate_trials(ledger, base, args.limit)
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "observability-report":
+        from .observability_trials import open_observability_run
+        ledger, _, _ = open_observability_run(Path(args.out), Path(args.config))
+        result, artifact = ledger.freeze_evaluation_report()
         print(json.dumps({"artifact": artifact, "result": result}, sort_keys=True))
         return
     if args.experiment == "study-resources":

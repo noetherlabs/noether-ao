@@ -589,14 +589,32 @@ def verify_validation_evidence(
     metadata: Any,
     threshold: float,
 ) -> tuple[dict[str, str], dict[str, np.ndarray], dict[str, str], dict[str, Any]]:
-    raw, arrays = _artifact_arrays(root, artifact, "validation")
+    return verify_complete_evidence(
+        root, config, base, case, artifact, metadata, threshold, "validation"
+    )
+
+
+def verify_complete_evidence(
+    root: Path,
+    config: dict[str, Any],
+    base: dict[str, Any],
+    case: dict[str, Any],
+    artifact: Any,
+    metadata: Any,
+    threshold: float,
+    role: str,
+) -> tuple[dict[str, str], dict[str, np.ndarray], dict[str, str], dict[str, Any]]:
+    """Verify one post-threshold validation or evaluation artifact."""
+    if role not in {"validation", "evaluation"} or case.get("role") != role:
+        raise ValueError("Completed evidence role differs from its case")
+    raw, arrays = _artifact_arrays(root, artifact, role)
     _verify_array_contract(config, base, case, arrays, complete=True, require_finite=True)
     trace = detector_trace(config, arrays["score"], threshold)
     for key in TRACE_ARRAYS:
         if not np.array_equal(arrays[key], trace[key]):
             raise ValueError(f"Stored {key} differs from the frozen detector")
     detail, saved = verify_trial_metadata(
-        root, config, base, case, raw, arrays, metadata, "validation"
+        root, config, base, case, raw, arrays, metadata, role
     )
     return raw, arrays, detail, saved
 
@@ -686,6 +704,12 @@ def validate_trials(ledger, base: dict[str, Any], limit: int) -> dict[str, Any]:
     return ledger.validate_chunk(_TrialExecutor(ledger, base), limit)
 
 
+def evaluate_trials(ledger, base: dict[str, Any], limit: int) -> dict[str, Any]:
+    """Advance physical evaluation only after immutable validation release."""
+    _require_storage_admission(ledger, base)
+    return ledger.evaluate_chunk(_TrialExecutor(ledger, base), limit)
+
+
 class _TrialExecutor:
     def __init__(self, ledger, base: dict[str, Any]):
         if _bytes(base) != _bytes(ledger.base):
@@ -701,7 +725,10 @@ class _TrialExecutor:
 
     def __call__(self, case: dict[str, Any], threshold: float | None = None) -> dict[str, Any]:
         role = case.get("role")
-        if (role == "training") != (threshold is None) or role not in {"training", "validation"}:
+        if (
+            (role == "training") != (threshold is None)
+            or role not in {"training", "validation", "evaluation"}
+        ):
             raise ValueError("Trial callback received an incompatible stage threshold")
         verify_observability_provenance(self.ledger, self.base)
         if shutil.disk_usage(self.ledger.root).free < self.per_trial_floor:

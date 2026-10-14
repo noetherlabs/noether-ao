@@ -916,3 +916,46 @@ saturated frames. Paired gain-minus-clean WFE deltas are 0.6758110717 and
 0.0076200481 nm; Strehl deltas are -0.0037580778 and -0.0000616811. These six reduced
 physical trials establish runner integrity only. They do not validate the detector,
 authorize v1, select an escalation or provide timing evidence.
+
+## Seal evaluation behind the reproduced release chain (2026-10-15)
+
+Require an already published `validation_release.json` before evaluation can enumerate
+any held-out identity or invoke a numerical callback. Under the run lock, reconstruct
+the thresholds from retained training evidence, revalidate the complete validation
+stage and reproduce the existing release byte for byte. A missing or withheld release
+stops before an evaluation directory is created. Bind each evaluation record to the
+run manifest, threshold and validation-release SHA256 values. Revalidate saved records
+and raw/metadata hashes on resume; skip both completed and terminally failed outcomes,
+while retrying only an interrupted callback with no terminal record.
+
+Do not reread the entire retained chain after every record. At chunk admission, perform
+the full semantic reconstruction and SHA256 verification, then capture device, inode,
+size, nanosecond modification time and nanosecond change time for every upstream and
+saved evaluation file. Recheck those filesystem identities after each callback and
+fully verify the new record before publication. Reconstruct all evidence again at the
+next chunk and before the final report. This preserves accidental-drift detection under
+the run lock without quadratic reads across 1,200 retained archives; it does not claim
+protection against an adversary with write access, consistent with the ledger threat
+model.
+
+Publish the final report only after all 1,200 declared identities have terminal
+records. Run proportions use two-sided 95% Clopper–Pearson intervals, with boundary
+cases computed from the exact beta quantiles. Do not assign binomial intervals to raw
+crossing or alarm-frame fractions because overlapping windows and atmospheric dynamics
+make frames temporally correlated. For each of 16 regime-by-nonclean cells, calculate
+`WFE_fault - WFE_clean` over `[fault_onset, fault_end)` and use a paired Student-t
+interval at confidence `1 - 0.05 / 16 = 0.996875`. Keep paired Strehl and saturation
+descriptive.
+
+Count a terminal target failure as a miss because its planned trial produced no
+qualifying detection. For clean and nuisance conditions, keep failures unclassified:
+they never count as quiet, and every reported proportion exposes the completed-run
+denominator. If either member of a physical pair failed, list the pair's identities,
+statuses and errors, then exclude it from the interval without imputation. Preserve
+full-run integrity totals separately from the fault-window controller-error metric.
+
+Publish `evaluation_report.json` exclusively and idempotently. It contains the ordered
+normalized record index, all upstream bindings, failure policy and derived statistics,
+sets `second_pass_gate` to false, and permanently closes acquisition. This implements
+the frozen descriptive protocol; it does not create a new acceptance rule. Validation
+uses only synthetic smoke fixtures and opens no declared P2 or retained smoke outcome.

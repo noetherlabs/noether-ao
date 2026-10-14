@@ -111,9 +111,16 @@ in its trial archive and can publish release or withholding only after all 240 t
 identities are present. Produced nonfinite streams remain attached to terminal failure
 records. A protocol-bound ledger resumes in declared order and retries only callbacks
 interrupted before terminal publication. Bounded training, threshold-freeze,
-validation and decision-freeze commands expose those same gates without a parallel
-execution path. A strict reduced runner protocol with wholly separate seed streams is
-committed for the nonreserved physical smoke. The retained
+validation, decision-freeze and release-gated evaluation commands expose those same
+gates without a parallel execution path. Evaluation identities remain inaccessible
+until a pre-existing validation release reproduces from its complete evidence chain.
+Every terminal evaluation record binds the run manifest, frozen threshold and release;
+only the complete declared cohort can publish the immutable descriptive report. That
+report reconstructs exact run-level binomial intervals, temporally correlated frame
+fractions without spurious intervals, and Bonferroni-adjusted paired fault-window WFE
+intervals. It does not apply a second acceptance gate. A strict reduced runner protocol
+with wholly separate seed streams is committed for the nonreserved physical smoke. The
+retained
 [runner result](results/optical_gain_observability_runner_smoke_v1/README.md) passes
 all 14 implementation gates from source commit `a997753`: two training records, an
 exactly reproducible threshold freeze, four paired validation records, an exactly
@@ -165,8 +172,8 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted v1 protocol; physical stage commands, complete retention and immutable gates implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
-| Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
+| Optical-gain observability | Frozen unexecuted v1 protocol; complete physical stage, release-gated evaluation and immutable reporting paths implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
+| Study ledger and trial execution | Implemented; immutable evidence, bounded validation/evaluation chunks and complete-cohort descriptive reports |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |
 

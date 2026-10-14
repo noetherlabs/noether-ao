@@ -743,3 +743,33 @@ deltas are 0.6758110717 and 0.0076200481 nm; the paired Strehl deltas are
 an intentionally retained negative smoke outcome, not detector validation or v1
 evidence. Next implement the sealed evaluation/report lifecycle without opening any
 declared cohort; full v1 storage remains blocked at 10,190,604,096 required bytes.
+
+## Sealed observability evaluation and reporting implemented
+
+The P2 ledger now refuses evaluation before a regular favorable validation release
+exists and reproduces from the complete threshold, training and validation evidence
+chain. Only then does it enumerate evaluation identities. Each terminal success or
+retained numerical failure is published exclusively with manifest, threshold and
+release hashes; resumption revalidates evidence, skips terminal rows and retries only
+interrupted callbacks. Physical entry still requires the full storage admission.
+Each chunk performs one complete hash/semantic audit, then detects callback-time drift
+from stable filesystem identities instead of rereading all prior archives after every
+record. The final report performs another complete semantic reconstruction.
+
+The complete declared cohort can freeze one `evaluation_report.json`. It preserves the
+ordered record index and failures; reports exact two-sided 95% Clopper–Pearson run
+intervals and descriptive frame fractions; and computes the 16 predeclared paired WFE
+cells with 99.6875% Bonferroni-adjusted Student-t intervals over the fault window.
+Failed target runs count as misses, clean/nuisance failures remain unclassified and
+incomplete physical pairs are listed without imputation. Strehl and saturation remain
+descriptive, and the report has no second pass/fail gate.
+
+Synthetic reduced fixtures exercise the ten-record evaluation layout without opening
+the retained smoke or any P2 v1 seed. The focused evaluation/CLI boundary passes 64
+tests, and the complete observability, audit, resource, runner and CLI boundary passes
+194 tests. The 540-test complete pinned CPU run passed, followed by three additional
+passing CLI parser cases; all **543 current tests** are covered by those runs. This is
+a software verification result, not experiment timing. No physical trial, timing,
+threshold, decision or evaluation outcome was generated. A fresh read-only check found
+3,705,163,776 bytes free against the 10,190,604,096-byte requirement, so v1 remains
+sealed.

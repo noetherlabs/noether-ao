@@ -142,7 +142,7 @@ def _case_id(case: dict[str, Any]) -> str:
 
 
 def _artifact(reference: Any, role: str = "training") -> dict[str, str]:
-    if role not in {"training", "validation"}:
+    if role not in {"training", "validation", "evaluation"}:
         raise ValueError("Unsupported observability artifact role")
     if not isinstance(reference, dict) or set(reference) != {"path", "sha256"}:
         raise ValueError(f"{role.title()} record requires one raw artifact reference")

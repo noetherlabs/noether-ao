@@ -194,7 +194,53 @@ def test_observability_validate_dispatches_bound_physical_chunk(monkeypatch, cap
     assert json.loads(capsys.readouterr().out) == summary
 
 
-@pytest.mark.parametrize("command", ["observability-train", "observability-validate"])
+def test_observability_evaluate_dispatches_released_physical_chunk(
+    monkeypatch, capsys
+):
+    ledger, base = SimpleNamespace(), {"fixture": "base"}
+    summary = {"complete": False, "new_records": 2, "total_records": 2}
+    opened = Mock(return_value=(ledger, base, [{"fixture": "evidence"}]))
+    evaluated = Mock(return_value=summary)
+    monkeypatch.setattr(observability_trials, "open_observability_run", opened)
+    monkeypatch.setattr(observability_trials, "evaluate_trials", evaluated)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "observability-evaluate", "--config", "protocol.yaml",
+        "--out", "run", "--limit", "2",
+    ])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("protocol.yaml"))
+    evaluated.assert_called_once_with(ledger, base, 2)
+    assert json.loads(capsys.readouterr().out) == summary
+
+
+def test_observability_report_freezes_exact_bound_report(monkeypatch, capsys):
+    result = {"study_id": "fixture", "status": "complete_descriptive"}
+    artifact = {"path": "evaluation_report.json", "sha256": "a" * 64}
+    frozen = Mock(return_value=(result, artifact))
+    ledger = SimpleNamespace(freeze_evaluation_report=frozen)
+    opened = Mock(return_value=(ledger, {"fixture": "base"}, []))
+    monkeypatch.setattr(observability_trials, "open_observability_run", opened)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "observability-report", "--config", "protocol.yaml",
+        "--out", "run",
+    ])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("protocol.yaml"))
+    frozen.assert_called_once_with()
+    assert json.loads(capsys.readouterr().out) == {
+        "artifact": artifact,
+        "result": result,
+    }
+
+
+@pytest.mark.parametrize(
+    "command",
+    ["observability-train", "observability-validate", "observability-evaluate"],
+)
 @pytest.mark.parametrize("limit", ["0", "-1"])
 def test_observability_chunks_reject_invalid_limit_before_open(
     monkeypatch, command, limit
@@ -208,6 +254,53 @@ def test_observability_chunks_reject_invalid_limit_before_open(
         "noether-optics", command, "--config", "protocol.yaml",
         "--out", "run", "--limit", limit,
     ])
+    with pytest.raises(SystemExit):
+        cli.main()
+
+
+@pytest.mark.parametrize(
+    "extra",
+    [[], ["--out", "run", "--limit", "1"], ["--out", "run", "--create"]],
+)
+def test_observability_report_rejects_missing_or_cross_stage_options_before_open(
+    monkeypatch, extra
+):
+    monkeypatch.setattr(
+        observability_trials,
+        "open_observability_run",
+        lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"),
+    )
+    monkeypatch.setattr(
+        "sys.argv",
+        ["noether-optics", "observability-report", "--config", "protocol.yaml", *extra],
+    )
+    with pytest.raises(SystemExit):
+        cli.main()
+
+
+@pytest.mark.parametrize(
+    "extra", [[], ["--limit", "1", "--create"], ["--limit", "1", "--target", "run"]]
+)
+def test_observability_evaluate_rejects_missing_or_cross_stage_options_before_open(
+    monkeypatch, extra
+):
+    monkeypatch.setattr(
+        observability_trials,
+        "open_observability_run",
+        lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"),
+    )
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "noether-optics",
+            "observability-evaluate",
+            "--config",
+            "protocol.yaml",
+            "--out",
+            "run",
+            *extra,
+        ],
+    )
     with pytest.raises(SystemExit):
         cli.main()
 
