@@ -32,9 +32,11 @@ cohorts and validation-only release gates. The plan is unexecuted: no fresh thre
 or outcome exists. The causal detector and raw-artifact-verified training threshold
 freeze are implemented. The immutable validation barrier rechecks the frozen training
 evidence and publishes either release or withholding from the complete validation
-identity set. Next add deterministic runner recovery, complete retention and storage
-admission, then pass a separately seeded runner smoke before accessing a declared
-cohort.
+identity set. A protocol-bound stage ledger now publishes immutable terminal records,
+skips only reverified evidence on resume and retries callbacks that never reached
+terminal publication. Next connect physical acquisition, complete retention and
+storage admission, then pass a separately seeded runner smoke before accessing a
+declared cohort.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

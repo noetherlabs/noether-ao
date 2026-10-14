@@ -6,8 +6,9 @@ This is a frozen, unexecuted P2 protocol. The machine-readable
 [configuration](../configs/optical_gain_observability_v1.yaml) is bound to the base
 simulation by SHA256; the generated [plan](../plans/optical_gain_observability_v1.json)
 contains seed identities and budgets, with every outcome, threshold and release field
-set to false. The causal detector and training-calibration publisher are implemented;
-their tests use synthetic arrays and do not create a study threshold.
+set to false. The causal detector, resumable training/validation record ledger,
+training-calibration publisher and validation-release barrier are implemented. Their
+tests use synthetic arrays and do not create a study threshold or decision.
 
 The question is narrow: **can a training-calibrated lower-tail transform of the
 existing whitened residual score detect the simplified scalar optical-gain ramp under
@@ -161,10 +162,18 @@ in the immutable decision and force withholding. `validation_release.json` recor
 either global release or withholding; identical retries are idempotent and no changed
 decision can replace it.
 
-Before acquisition, the implementation must still add deterministic runner
-resumption, the complete retained-array and per-run metric path, a whole-run storage
-preflight and a separate nonreserved runner smoke. Unit tests and this plan are not
-execution evidence, and no P2 threshold, validation decision or outcome exists yet.
+The stage ledger binds the full protocol and its SHA256 to source/runtime provenance,
+holds one nonblocking process lock across each callback and terminal publication, and
+schedules cases in declared order. On resume it revalidates canonical record JSON,
+manifest and threshold bindings, unique raw paths and artifact hashes before skipping
+a saved success or failure. An interruption without a terminal record is retried;
+published outcomes are never replaced. Threshold and release files close their stages
+permanently.
+
+Before acquisition, the implementation must still add the physical trial callbacks,
+the complete retained-array and per-run metric path, a whole-run storage preflight and
+a separate nonreserved runner smoke. Unit tests and this plan are not execution
+evidence, and no P2 threshold, validation decision or outcome exists yet.
 
 ## Predeclared escalation
 

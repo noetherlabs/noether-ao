@@ -610,3 +610,28 @@ seed, P2 threshold, validation decision, held-out outcome, timing path or contro
 action was used. Deterministic runner resumption, complete retention, storage
 admission and a distinct nonreserved smoke remain next. The complete local
 correctness suite passes **456 tests in 96.01 seconds**.
+
+## Optical-gain stage ledger and deterministic resumption
+
+The P2 record layer now creates a canonical manifest bound to the full frozen protocol,
+protocol-file hash and source/runtime provenance. Training and validation advance in
+declared case order under one nonblocking process lock. Each terminal success or
+numerical failure receives an exclusive canonical JSON record; a resumed process
+revalidates every saved binding, identity, unique raw path, NPZ hash and required array
+before it skips that callback. Interrupted callbacks with no terminal record are
+retried, while changed evidence, shared artifacts, path aliases and concurrent writers
+stop the stage.
+
+Threshold calibration remains an explicit action after all 64 training records and
+refuses any terminal training failure. Validation records bind the immutable threshold
+SHA256, and the existing release barrier remains an explicit action after all 240
+records. Synthetic coverage verifies manifest/provenance binding, deterministic resume,
+interruption retry, terminal-failure retention, idempotent freezes, late-write refusal,
+training and validation artifact drift, lock contention, invalid limits and symlinked
+record directories. The **12 ledger checks pass in 70.71 seconds**; the complete local
+correctness suite passes **468 tests in 425.16 seconds**.
+
+No simulator, declared seed, P2 threshold, validation decision, held-out outcome,
+timing path or controller action was used. The next work is the physical trial adapter,
+complete retained arrays and per-run metrics, static storage admission and a distinct
+nonreserved runner smoke.

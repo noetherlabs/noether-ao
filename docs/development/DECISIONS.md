@@ -785,3 +785,25 @@ idempotent and a later favorable record cannot replace an earlier negative decis
 This barrier does not acquire validation or expose evaluation identities. Runner
 resumption, full retention, storage admission and separately seeded smoke evidence
 remain required before any declared P2 cohort is opened.
+
+## Resume P2 stage records without replay (2026-10-14)
+
+Use one run manifest to bind the complete observability protocol, its source-file
+SHA256 and the supplied source/runtime provenance. Hold one nonblocking process lock
+across each numerical callback and terminal record publication. Enumerate training and
+validation cases only from the frozen protocol and write one canonical, exclusive JSON
+record per identity in that declared order.
+
+On every resume, audit all existing stage records before invoking a callback. A saved
+success or numerical failure is terminal and may be skipped only after its manifest,
+threshold where applicable, identity, raw path and artifact hash revalidate. An
+interruption with no terminal JSON is retried and any already-published raw artifact
+remains subject to exclusive byte identity. Reject symlinked record or artifact paths,
+shared raw paths and changed evidence rather than repairing or replacing them.
+
+Keep stage advancement separate from its freeze. Training may publish a threshold only
+after all 64 terminal records exist and all completed successfully. Validation may
+publish release or withholding only after all 240 terminal records exist; a numerical
+failure remains evidence and yields withholding. Neither callback path exposes an
+evaluation identity. Physical acquisition, complete retention, storage admission and
+the distinct nonreserved smoke remain prerequisites to declared P2 execution.

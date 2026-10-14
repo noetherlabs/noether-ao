@@ -256,15 +256,8 @@ def _validation_records(
     found: dict[str, dict[str, Any]] = {}
     artifact_paths: set[str] = set()
     for record in records:
-        if not isinstance(record, dict) or set(record) != {
-            "case",
-            "status",
-            "artifact",
-            "error",
-        }:
+        if not isinstance(record, dict) or not isinstance(record.get("case"), dict):
             raise ValueError("Invalid validation record schema")
-        if not isinstance(record["case"], dict):
-            raise ValueError("Invalid validation case schema")
         try:
             case_id = _case_id(record["case"])
         except (TypeError, ValueError) as error:
@@ -276,40 +269,61 @@ def _validation_records(
         ):
             raise ValueError("Foreign or duplicate validation identity")
         case = expected[case_id]
-        if record["status"] == "completed":
-            if record["error"] is not None:
-                raise ValueError("Completed validation record cannot contain an error")
-            row = _completed_record(
-                root,
-                config,
-                case,
-                record["artifact"],
-                thresholds[case["regime_id"]],
-            )
+        row = _normalize_validation_record(root, config, thresholds, record, case)
+        if row["artifact"] is not None:
             if row["artifact"]["path"] in artifact_paths:
                 raise ValueError("Validation records cannot share a raw artifact")
             artifact_paths.add(row["artifact"]["path"])
-        elif record["status"] == "failed":
-            if (
-                record["artifact"] is not None
-                or not isinstance(record["error"], str)
-                or not record["error"].strip()
-            ):
-                raise ValueError("Failed validation record requires an error and no artifact")
-            row = {
-                "id": case_id,
-                "case": case,
-                "status": "failed",
-                "artifact": None,
-                "metrics": None,
-                "error": record["error"],
-            }
-        else:
-            raise ValueError("Unknown validation record status")
         found[case_id] = row
     if len(found) != len(expected):
         raise ValueError("Release requires the complete declared validation cohort")
     return [found[_case_id(case)] for case in expected_cases]
+
+
+def _normalize_validation_record(
+    root: Path,
+    config: dict[str, Any],
+    thresholds: dict[str, float],
+    record: dict[str, Any],
+    expected_case: dict[str, Any],
+) -> dict[str, Any]:
+    """Validate one terminal record and derive its immutable release metrics."""
+    if not isinstance(record, dict) or set(record) != {
+        "case",
+        "status",
+        "artifact",
+        "error",
+    }:
+        raise ValueError("Invalid validation record schema")
+    if record["case"] != expected_case:
+        raise ValueError("Validation record identity changed")
+    case_id = _case_id(expected_case)
+    if record["status"] == "completed":
+        if record["error"] is not None:
+            raise ValueError("Completed validation record cannot contain an error")
+        return _completed_record(
+            root,
+            config,
+            expected_case,
+            record["artifact"],
+            thresholds[expected_case["regime_id"]],
+        )
+    if record["status"] == "failed":
+        if (
+            record["artifact"] is not None
+            or not isinstance(record["error"], str)
+            or not record["error"].strip()
+        ):
+            raise ValueError("Failed validation record requires an error and no artifact")
+        return {
+            "id": case_id,
+            "case": expected_case,
+            "status": "failed",
+            "artifact": None,
+            "metrics": None,
+            "error": record["error"],
+        }
+    raise ValueError("Unknown validation record status")
 
 
 def _ratio(numerator: int, denominator: int) -> float | None:

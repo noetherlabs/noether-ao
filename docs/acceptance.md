@@ -41,4 +41,6 @@ alarms, at least 29/30 gain detections, at most one miss, every detected delay a
 Failure is retained and evaluation is withheld. Passing is an engineering screen,
 not an instrument or safety qualification. The detector is observational and cannot
 support a recovery claim. The release calculation and exclusive artifact are
-implemented with synthetic tests; no declared P2 validation result exists.
+implemented with synthetic tests. A locked, protocol-bound ledger also preserves and
+revalidates terminal training/validation records across interrupted chunks. No
+declared P2 threshold or validation result exists.

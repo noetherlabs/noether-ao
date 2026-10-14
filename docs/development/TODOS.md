@@ -258,9 +258,15 @@ stored detector traces, retains terminal failures, applies every gate per regime
 publishes release or withholding without replacement. Its tests are synthetic and
 open no declared seed.
 
-Next, implement deterministic runner resumption, complete retention and storage
-admission. Prove that path with distinct nonreserved smoke seeds before opening any v1
-cohort. Do not reuse controller-study smoke evidence as an observability runner check.
+The protocol-bound stage ledger is implemented. It advances training and validation
+in deterministic positive chunks under one process lock, publishes canonical terminal
+records exclusively, rechecks all saved bindings and artifacts before skipping them,
+retains numerical failures and retries only interrupted callbacks with no terminal
+record. Threshold freeze and validation release remain separate one-way actions.
+
+Next, connect the physical trial callbacks, complete retention and storage admission.
+Prove that path with distinct nonreserved smoke seeds before opening any v1 cohort.
+Do not reuse controller-study smoke evidence as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection

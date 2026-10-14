@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a protocol-bound optical-gain stage ledger. Advance training and validation in
+  deterministic locked chunks, publish terminal successes and failures exclusively,
+  revalidate canonical records and raw artifacts before resume skips, and retry only
+  interrupted callbacks with no terminal record. Keep threshold freeze and validation
+  release as separate one-way actions; use synthetic fixtures only.
+
 - Add a one-way optical-gain validation-release barrier. Rebuild the frozen
   thresholds from all 64 training artifacts, verify the complete 240-record
   validation identity set and every retained detector trace, apply all per-regime

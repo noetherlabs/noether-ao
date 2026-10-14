@@ -18,7 +18,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Selection | `study-select` dispatch, complete validation audit, eligibility checks and frozen models before held-out evaluation | [CLI](../src/noether_optics/cli.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Evaluation barrier | `study-evaluate` dispatch, frozen-selection admission and positive bounded held-out chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Resource preflight | Static array-schema accounting, conservative archive envelope and read-only target-filesystem admission | [resource sizing](../src/noether_optics/controller_resources.py), [CLI](../src/noether_optics/cli.py) |
-| Optical-gain evidence gates | Causal detector, complete-cohort threshold freeze and one-way validation release | [detector and calibration](../src/noether_optics/observability_detector.py), [validation release](../src/noether_optics/observability_validation.py), [frozen protocol](optical_gain_observability_v1.md) |
+| Optical-gain evidence gates | Protocol-bound stage resumption, causal detector, complete-cohort threshold freeze and one-way validation release | [stage ledger](../src/noether_optics/observability_run.py), [detector and calibration](../src/noether_optics/observability_detector.py), [validation release](../src/noether_optics/observability_validation.py), [frozen protocol](optical_gain_observability_v1.md) |
 
 The distinction between software correctness, physical agreement and scientific
 performance is part of the design. A passing test checks an implementation contract.
