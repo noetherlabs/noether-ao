@@ -658,3 +658,46 @@ ancestry, refusal and the unchanged controller budgets. The complete local corre
 suite passes **481 tests in 266.07 seconds**. No simulator, seed, threshold, outcome or
 timing path was opened. The next work is the physical trial adapter, complete retention
 enforcement and a distinct nonreserved runner smoke.
+
+## Optical-gain physical adapter and complete retention
+
+The P2 training and validation callbacks now enter numerical construction only through
+the locked stage ledger. They apply the SHA256-pinned pyramid plant, exact-Poisson/read
+noise, fixed forward controller, disabled fallback and the declared clean, scalar-gain,
+vibration and misregistration mappings. Atmosphere roots drive the frozen `+100000`
+detector stream inside the unchanged simulator. The adapter normalizes all retained
+numeric streams to the declared float64, int64 and boolean shapes and keeps full 64 by
+64 measurement/prediction cubes only for the first seed in each role/regime/condition
+cell.
+
+Each completed trial binds a canonical metadata file containing post-burn-in WFE,
+Strehl and saturation recomputed from its raw frame arrays. Produced nonfinite or
+negative detector/variance streams become terminal numerical failures with their raw
+arrays and failure metadata retained; malformed identities, shapes, dtypes or hashes
+remain evidence errors. Training raw arrays are immutable before calibration. Once all
+64 records complete, the freeze derives each regime threshold, publishes a separate
+five-array detector trace per training record and binds raw, metadata and trace hashes
+in schema-2 `thresholds.json`. Validation already has that threshold and retains all 13
+frame arrays together.
+
+The split represents 1,504 trials with 1,568 numeric archives but duplicates no numeric
+member, so payload and admission remain exactly 2,341,413,792 and 10,190,604,096 bytes.
+Public physical chunks require current free space plus blocks already allocated by the
+same run to preserve that full envelope, then recheck per-trial write headroom inside
+the callback. Resume performs one semantic audit per chunk and byte/hash snapshots
+after callbacks, avoiding quadratic WFS decoding without weakening immutable-path
+checks.
+
+The **complete local correctness suite passes 498 tests**. Its wall time is withheld
+because other local test jobs were active; this was correctness verification, not a
+timing run. New checks cover all condition mappings, detector-seed routing, WFS
+selection/reshape, exact trace reconstruction, metric intervals, numerical-failure
+retention, metadata drift, lazy imports, callback wiring, storage refusal and persisted
+source/runtime bindings. They use synthetic arrays or a mocked physics boundary. No
+declared seed, simulator outcome, P2 threshold, validation decision or timing sample
+was opened. The remaining pre-acquisition boundary is a distinct nonreserved
+observability runner smoke on an admitted filesystem.
+
+After review replaced the remaining check-then-reread base-YAML paths with the exact
+byte-bound loader, the **155-test observability, audit, resource and CLI suite passes**.
+Its duration is likewise withheld because the host remained contended.

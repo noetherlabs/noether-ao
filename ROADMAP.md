@@ -35,11 +35,13 @@ evidence and publishes either release or withholding from the complete validatio
 identity set. A protocol-bound stage ledger now publishes immutable terminal records,
 skips only reverified evidence on resume and retries callbacks that never reached
 terminal publication. Static retention sizing now accounts for all 1,504 maximum
-trial archives: 2.341 GB of numeric payload requires a conservative 10.191 GB free
-with no compression credit. The current development volume failed the read-only gate
-at 7.995 GB free and no run was created. Next connect physical acquisition and complete
-retention, then pass a separately seeded runner smoke before accessing a declared
-cohort on an admitted filesystem.
+trials as 1,568 numeric archives: 2.341 GB of numeric payload requires a conservative
+10.191 GB free with no compression credit. Physical training and validation callbacks
+now apply the frozen controller/fault settings, retain complete typed arrays and bind
+post-burn-in metrics. Threshold-dependent training traces are added immutably during
+the calibration freeze. The current development volume failed the read-only gate at
+7.995 GB free and no run was created. Next pass a separately seeded runner smoke before
+accessing a declared cohort on an admitted filesystem.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

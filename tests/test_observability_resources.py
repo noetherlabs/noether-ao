@@ -34,12 +34,13 @@ def test_frozen_budget_is_deterministic_auditable_and_outcome_free(inputs) -> No
         "validation_trials": 240,
         "maximum_evaluation_trials": 1200,
         "full_wfs_trial_archives": 32,
-        "numeric_archives": 1504,
+        "numeric_archives": 1568,
     }
     categories = {row["name"]: row for row in first["categories"]}
     assert {name: row["archives"] for name, row in categories.items()} == {
         "training_standard_trial_outputs": 60,
         "training_full_wfs_trial_outputs": 4,
+        "training_threshold_detector_outputs": 64,
         "validation_standard_trial_outputs": 232,
         "validation_full_wfs_trial_outputs": 8,
         "evaluation_standard_trial_outputs": 1180,

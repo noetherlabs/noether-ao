@@ -2,8 +2,17 @@
 
 ## Unreleased
 
+- Add lazy physical training and validation adapters for the frozen optical-gain
+  protocol. Apply the declared forward controller and fault mapping, retain exact
+  frame arrays plus hash-bound post-burn-in metrics, and preserve produced numerical
+  failures. Publish threshold-dependent training detector traces separately during
+  calibration so raw pre-threshold evidence is never fabricated or replaced. Refuse
+  unadmitted storage before runtime capture and recheck retained source/runtime bindings
+  before every physical callback.
+
 - Add read-only storage admission for the frozen optical-gain protocol. Derive every
-  retained array shape, all 1,504 maximum trial archives and 32 full-WFS records
+  retained array shape, all 1,504 maximum trials, 1,568 numeric archives and 32
+  full-WFS records
   without importing JAX or opening a cohort. Reuse the conservative archive envelope,
   give compression no credit and expose an `observability-resources` CLI refusal gate.
 

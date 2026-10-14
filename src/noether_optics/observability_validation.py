@@ -23,8 +23,17 @@ from .observability_detector import (
     _load_protocol_binding,
     _score,
     detector_trace,
+    training_cases,
 )
 from .observability_protocol import protocol_plan, validate_protocol
+from .observability_resources import load_resource_inputs
+from .observability_trials import (
+    training_artifact_layout,
+    verify_failed_evidence,
+    verify_training_evidence,
+    verify_training_trace,
+    verify_validation_evidence,
+)
 
 
 def validation_cases(config: dict[str, Any]) -> list[dict[str, Any]]:
@@ -50,6 +59,7 @@ def validation_cases(config: dict[str, Any]) -> list[dict[str, Any]]:
 def _threshold_bundle(
     root: Path,
     config: dict[str, Any],
+    base: dict[str, Any],
     protocol_sha256: str,
     provenance: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, str], dict[str, float]]:
@@ -68,14 +78,24 @@ def _threshold_bundle(
     if data != _bytes(bundle):
         raise ValueError("Frozen threshold artifact is not canonical JSON")
 
+    schema = bundle.get("schema_version")
+    if schema not in {1, 2}:
+        raise ValueError("Unsupported frozen threshold schema")
+    manifest_path = root / "manifest.json"
+    if manifest_path.exists() and schema != 2:
+        raise ValueError("Protocol-bound runs require complete training retention")
+    base_keys = {"id", "case", "artifact", "score_sha256"}
+    row_keys = (
+        base_keys
+        if schema == 1
+        else base_keys | {"detector_artifact", "metadata"}
+    )
     records = []
+    saved_rows: dict[
+        str, tuple[dict[str, Any], np.ndarray, dict[str, str] | None]
+    ] = {}
     for row in bundle["training_records"]:
-        if not isinstance(row, dict) or set(row) != {
-            "id",
-            "case",
-            "artifact",
-            "score_sha256",
-        }:
+        if not isinstance(row, dict) or set(row) != row_keys:
             raise ValueError("Invalid frozen training-record binding")
         if not isinstance(row["case"], dict):
             raise ValueError("Invalid frozen training-record case")
@@ -85,12 +105,24 @@ def _threshold_bundle(
             raise ValueError("Invalid frozen training-record case") from error
         if row["id"] != case_id:
             raise ValueError("Frozen training-record identity changed")
-        artifact, arrays = _artifact_arrays(root, row["artifact"], "training")
+        if schema == 2:
+            artifact, arrays, metadata = verify_training_evidence(
+                root,
+                config,
+                base,
+                row["case"],
+                row["artifact"],
+                row["metadata"],
+            )
+        else:
+            artifact, arrays = _artifact_arrays(root, row["artifact"], "training")
+            metadata = None
         if "score" not in arrays:
             raise ValueError("Frozen training artifact is missing its score")
         score = _score(config, arrays["score"])
         if row["score_sha256"] != _array_digest(score):
             raise ValueError("Frozen training score changed")
+        saved_rows[case_id] = (row, score, metadata)
         records.append(
             {
                 "case": row["case"],
@@ -101,14 +133,36 @@ def _threshold_bundle(
             }
         )
     rebuilt = _build_threshold_bundle(config, protocol_sha256, provenance, records)
+    thresholds = {
+        row["regime"]["id"]: float(row["threshold"])
+        for row in rebuilt["thresholds"]
+    }
+    if schema == 2:
+        rebuilt_rows = {row["id"]: row for row in rebuilt["training_records"]}
+        for case in training_cases(config):
+            case_id = _case_id(case)
+            saved, score, metadata = saved_rows[case_id]
+            if metadata is None:
+                raise ValueError("Frozen training metadata is missing")
+            detector_artifact = verify_training_trace(
+                root,
+                config,
+                case,
+                score,
+                thresholds[case["regime_id"]],
+                saved["detector_artifact"],
+            )
+            rebuilt_rows[case_id]["detector_artifact"] = detector_artifact
+            rebuilt_rows[case_id]["metadata"] = metadata
+        rebuilt["schema_version"] = 2
+        rebuilt["training_artifact_layout"] = training_artifact_layout(config)
+        rebuilt["training_manifest_sha256"] = _digest(
+            _bytes(rebuilt["training_records"])
+        )
     if _bytes(bundle) != _bytes(rebuilt):
         raise ValueError("Frozen thresholds do not reproduce from their bound evidence")
     if _file_digest(path) != digest:
         raise ValueError("Frozen threshold artifact changed while it was audited")
-    thresholds = {
-        row["regime"]["id"]: float(row["threshold"])
-        for row in bundle["thresholds"]
-    }
     return bundle, {"path": path.name, "sha256": digest}, thresholds
 
 
@@ -164,60 +218,26 @@ def _target_metrics(
     }
 
 
-def _real_finite(array: np.ndarray, label: str) -> None:
-    if array.dtype.kind not in "biuf" or not np.isfinite(array).all():
-        raise ValueError(f"Completed validation {label} must be finite and real")
-
-
 def _completed_record(
     root: Path,
     config: dict[str, Any],
+    base: dict[str, Any],
     case: dict[str, Any],
     reference: Any,
+    metadata_reference: Any,
     threshold: float,
 ) -> dict[str, Any]:
-    artifact, arrays = _artifact_arrays(root, reference, "validation")
-    required = set(config["retention"]["all_trial_frame_arrays"])
-    if not required.issubset(arrays):
-        missing = sorted(required - set(arrays))
-        raise ValueError(f"Completed validation artifact is missing arrays: {missing}")
-    for key in required:
-        _real_finite(arrays[key], key)
-
-    frames = config["loop"]["frames"]
+    artifact, arrays, metadata, saved_metadata = verify_validation_evidence(
+        root,
+        config,
+        base,
+        case,
+        reference,
+        metadata_reference,
+        threshold,
+    )
     score = _score(config, arrays["score"])
     trace = detector_trace(config, score, threshold)
-    expected_trace = {
-        "statistic_frame_id": "integer",
-        "lower_statistic": "float64",
-        "raw_crossing": "boolean",
-        "alarm_frame_id": "integer",
-        "p2_alarm": "boolean",
-    }
-    for key, kind in expected_trace.items():
-        stored = arrays[key]
-        if kind == "integer" and stored.dtype.kind not in "iu":
-            raise ValueError(f"Stored {key} must use an integer dtype")
-        if kind == "float64" and stored.dtype != np.dtype(np.float64):
-            raise ValueError(f"Stored {key} must use float64")
-        if kind == "boolean" and stored.dtype != np.dtype(bool):
-            raise ValueError(f"Stored {key} must use a boolean dtype")
-        if not np.array_equal(stored, trace[key]):
-            raise ValueError(f"Stored {key} differs from the frozen detector")
-
-    for key in ("variance", "strehl", "saturated", "fallback", "unavailable"):
-        if arrays[key].shape != (frames,):
-            raise ValueError(f"Stored {key} must contain one value per frame")
-    for key in ("saturated", "fallback", "unavailable"):
-        if arrays[key].dtype != np.dtype(bool):
-            raise ValueError(f"Stored {key} must use a boolean dtype")
-    command, applied = arrays["command"], arrays["applied"]
-    if (
-        command.ndim < 2
-        or command.shape[0] != frames
-        or command.shape != applied.shape
-    ):
-        raise ValueError("Stored command and applied arrays must align by frame and shape")
 
     target = _target_metrics(config, trace)
     metrics = {
@@ -231,6 +251,7 @@ def _completed_record(
         "unavailable_frames": int(arrays["unavailable"].sum()),
         "saturated_frames": int(arrays["saturated"].sum()),
         "saturation_fraction": float(arrays["saturated"].mean()),
+        "retained_trial_metrics": saved_metadata["metrics"],
         **target,
     }
     return {
@@ -238,6 +259,7 @@ def _completed_record(
         "case": case,
         "status": "completed",
         "artifact": artifact,
+        "metadata": metadata,
         "metrics": metrics,
         "error": None,
     }
@@ -246,6 +268,7 @@ def _completed_record(
 def _validation_records(
     root: Path,
     config: dict[str, Any],
+    base: dict[str, Any],
     thresholds: dict[str, float],
     records: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
@@ -269,7 +292,9 @@ def _validation_records(
         ):
             raise ValueError("Foreign or duplicate validation identity")
         case = expected[case_id]
-        row = _normalize_validation_record(root, config, thresholds, record, case)
+        row = _normalize_validation_record(
+            root, config, base, thresholds, record, case
+        )
         if row["artifact"] is not None:
             if row["artifact"]["path"] in artifact_paths:
                 raise ValueError("Validation records cannot share a raw artifact")
@@ -283,6 +308,7 @@ def _validation_records(
 def _normalize_validation_record(
     root: Path,
     config: dict[str, Any],
+    base: dict[str, Any],
     thresholds: dict[str, float],
     record: dict[str, Any],
     expected_case: dict[str, Any],
@@ -292,6 +318,7 @@ def _normalize_validation_record(
         "case",
         "status",
         "artifact",
+        "metadata",
         "error",
     }:
         raise ValueError("Invalid validation record schema")
@@ -304,22 +331,35 @@ def _normalize_validation_record(
         return _completed_record(
             root,
             config,
+            base,
             expected_case,
             record["artifact"],
+            record["metadata"],
             thresholds[expected_case["regime_id"]],
         )
     if record["status"] == "failed":
-        if (
-            record["artifact"] is not None
-            or not isinstance(record["error"], str)
-            or not record["error"].strip()
-        ):
-            raise ValueError("Failed validation record requires an error and no artifact")
+        if not isinstance(record["error"], str) or not record["error"].strip():
+            raise ValueError("Failed validation record requires an error")
+        artifact, metadata = record["artifact"], record["metadata"]
+        if (artifact is None) != (metadata is None):
+            raise ValueError("Failed validation raw evidence and metadata must be paired")
+        if artifact is not None:
+            artifact, metadata = verify_failed_evidence(
+                root,
+                config,
+                base,
+                expected_case,
+                artifact,
+                metadata,
+                "validation",
+                record["error"],
+            )
         return {
             "id": case_id,
             "case": expected_case,
             "status": "failed",
-            "artifact": None,
+            "artifact": artifact,
+            "metadata": metadata,
             "metrics": None,
             "error": record["error"],
         }
@@ -558,13 +598,16 @@ def freeze_validation_release(
     if not requested_root.is_dir() or requested_root.is_symlink():
         raise ValueError("Validation root must be an existing non-symlink directory")
     root = requested_root.resolve()
-    config, protocol_sha256, protocol_file, _ = _load_protocol_binding(
+    config, protocol_sha256, protocol_file, resolved_repository = _load_protocol_binding(
         protocol_path, repository
     )
+    checked_config, base = load_resource_inputs(protocol_file, resolved_repository)
+    if _bytes(checked_config) != _bytes(config):
+        raise ValueError("Protocol changed while the pinned base was loaded")
     threshold_bundle, threshold_reference, thresholds = _threshold_bundle(
-        root, config, protocol_sha256, provenance
+        root, config, base, protocol_sha256, provenance
     )
-    normalized = _validation_records(root, config, thresholds, records)
+    normalized = _validation_records(root, config, base, thresholds, records)
     bundle = _build_validation_bundle(
         config, protocol_sha256, provenance, threshold_reference, normalized
     )
@@ -575,14 +618,17 @@ def freeze_validation_release(
     ):
         raise ValueError("Frozen threshold artifact changed before release publication")
     for row in threshold_bundle["training_records"]:
-        path = root / row["artifact"]["path"]
-        if _file_digest(path) != row["artifact"]["sha256"]:
-            raise ValueError("Training artifact changed before release publication")
+        for key in ("artifact", "detector_artifact", "metadata"):
+            if key in row:
+                path = root / row[key]["path"]
+                if _file_digest(path) != row[key]["sha256"]:
+                    raise ValueError("Training artifact changed before release publication")
     for row in normalized:
-        if row["artifact"] is not None:
-            path = root / row["artifact"]["path"]
-            if _file_digest(path) != row["artifact"]["sha256"]:
-                raise ValueError("Validation artifact changed before release publication")
+        for key in ("artifact", "metadata"):
+            if row.get(key) is not None:
+                path = root / row[key]["path"]
+                if _file_digest(path) != row[key]["sha256"]:
+                    raise ValueError("Validation artifact changed before release publication")
     if _file_digest(protocol_file) != protocol_sha256:
         raise ValueError("Protocol changed before validation release publication")
     return bundle, _publish_release(root, bundle)

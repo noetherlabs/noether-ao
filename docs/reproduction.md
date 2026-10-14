@@ -72,10 +72,10 @@ Check the frozen optical-gain observability retention envelope separately:
 ```
 
 This read-only command budgets 2,341,413,792 bytes of numeric arrays across the
-maximum 1,504 trials and requires 10,190,604,096 free bytes. It imports no JAX or
-simulator module, credits no compression, creates no target and exits 2 on refusal.
-Passing this gate still does not authorize a P2 cohort; the distinct runner smoke and
-physical retention path must pass first.
+maximum 1,504 trials and 1,568 numeric archives, then requires 10,190,604,096 free
+bytes. It imports no JAX or simulator module, credits no compression, creates no target
+and exits 2 on refusal. Passing this gate still does not authorize a P2 cohort; the
+distinct observability runner smoke must pass first.
 
 ## Run the end-to-end controller smoke
 

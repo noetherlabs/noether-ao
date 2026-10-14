@@ -100,15 +100,25 @@ lower-tail score with eight-window persistence, then the frozen
 [P2 protocol](docs/optical_gain_observability_v1.md) assigns fresh, disjoint training,
 validation and sealed evaluation streams. No P2 threshold or outcome has been
 generated; the candidate is not validated and cannot act on the controller.
-The shared detector kernel and raw-artifact-verified training threshold freeze are
-implemented. A one-way validation barrier also reconstructs every detector trace and
-publishes release or withholding only after all 240 terminal identities are present.
-A protocol-bound ledger now records both stages in declared order, revalidates saved
-JSON and raw NPZ evidence on every resume, and retries only callbacks interrupted
-before terminal publication. A read-only storage gate now sizes all 1,504 maximum
-trial archives directly from the frozen retention schema. These paths are tested on
-synthetic fixtures; physical acquisition, complete retention and a separate runner
-smoke remain pending.
+The shared detector kernel, physical trial adapter and raw-artifact-verified training
+threshold freeze are implemented. The adapter applies only the declared plant,
+controller, noise and fault settings, retains exact float64/boolean frame streams and
+writes post-burn-in WFE, Strehl and saturation metrics in hash-bound metadata. Because
+a training crossing cannot exist before its regime threshold, immutable training raw
+streams are acquired first and their detector traces are published as separate hashed
+artifacts during the one-way threshold freeze. Validation retains the complete trace
+in its trial archive and can publish release or withholding only after all 240 terminal
+identities are present. Produced nonfinite streams remain attached to terminal failure
+records. A protocol-bound ledger resumes in declared order and retries only callbacks
+interrupted before terminal publication. These paths are tested with synthetic arrays;
+a separate nonreserved physical runner smoke remains pending.
+
+The public physical callback entry points recheck the whole-study storage envelope
+before entering the ledger. Already allocated run blocks count toward the original
+admission capacity, while unrelated filesystem consumption can stop a later chunk.
+Run creation performs the read-only storage refusal before importing JAX, then binds
+clean committed source, runtime options, protocol and base configuration as retained
+provenance. Every admitted numerical callback rechecks those persisted bindings.
 
 ```sh
 .venv/bin/noether-optics observability-resources \
@@ -116,7 +126,8 @@ smoke remain pending.
   --target runs/optical_gain_observability_v1
 ```
 
-The P2 envelope contains 2,341,413,792 bytes of numeric payload and requires
+The 1,504-trial P2 envelope contains 1,568 numeric archives after separating the 64
+training detector traces. Its numeric payload remains 2,341,413,792 bytes and requires
 10,190,604,096 free bytes after archive expansion, metadata, write headroom and
 operating reserve. It assumes the maximum evaluation cohort is released, gives no
 compression credit, creates no directory and opens no seed.
@@ -146,7 +157,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted protocol; detector, resumable stage ledger, immutable threshold/release gates and 10.191 GB storage preflight implemented; physical runner, complete retention and separate smoke pending |
+| Optical-gain observability | Frozen unexecuted protocol; detector, physical training/validation adapter, complete retention, resumable ledger, immutable threshold/release gates and 10.191 GB storage preflight implemented; separate nonreserved smoke pending |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

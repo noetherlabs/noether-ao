@@ -8,9 +8,10 @@ from unittest.mock import Mock
 import numpy as np
 import pytest
 
-from noether_optics.controller_evidence import save_arrays
+from noether_optics.controller_evidence import save_arrays, save_metadata
 from noether_optics.observability_detector import _case_id, detector_trace
 from noether_optics.observability_run import ObservabilityLedger
+from noether_optics.observability_trials import retain_full_wfs, trial_metadata
 from noether_optics.observability_validation import validation_cases
 
 
@@ -38,19 +39,43 @@ def _training_backend(ledger: ObservabilityLedger, failed: set[str] | None = Non
                 "case": case,
                 "status": "failed",
                 "artifact": None,
+                "metadata": None,
                 "error": "synthetic terminal training failure",
             }
         regime = int(case["regime_id"].split("-")[-1])
         score = np.full(ledger.config["loop"]["frames"], 10.0 + regime)
+        frames, modes = ledger.config["loop"]["frames"], ledger.base["modes"]
+        arrays = {
+            "score": score.astype(np.float64),
+            "variance": np.ones(frames, dtype=np.float64),
+            "strehl": np.full(frames, 0.5, dtype=np.float64),
+            "saturated": np.zeros(frames, dtype=bool),
+            "fallback": np.zeros(frames, dtype=bool),
+            "unavailable": np.zeros(frames, dtype=bool),
+            "command": np.zeros((frames, modes), dtype=np.float64),
+            "applied": np.zeros((frames, modes), dtype=np.float64),
+        }
+        if retain_full_wfs(ledger.config, case):
+            shape = (frames, ledger.base["detector_n"], ledger.base["detector_n"])
+            arrays.update(
+                measurement=np.zeros(shape, dtype=np.float64),
+                prediction=np.zeros(shape, dtype=np.float64),
+            )
         reference = save_arrays(
             ledger,
             f"evidence/training/{case_id}.npz",
-            {"score": score},
+            arrays,
+        )
+        metadata = save_metadata(
+            ledger,
+            f"evidence/training/{case_id}.json",
+            trial_metadata(ledger.config, ledger.base, case, reference, arrays),
         )
         return {
             "case": case,
             "status": "completed",
             "artifact": reference,
+            "metadata": metadata,
             "error": None,
         }
 
@@ -67,6 +92,7 @@ def _validation_backend(ledger: ObservabilityLedger, failed: set[str] | None = N
                 "case": case,
                 "status": "failed",
                 "artifact": None,
+                "metadata": None,
                 "error": "synthetic terminal validation failure",
             }
         frames = ledger.config["loop"]["frames"]
@@ -75,25 +101,38 @@ def _validation_backend(ledger: ObservabilityLedger, failed: set[str] | None = N
         if case["condition"] == "gain_035":
             score[onset:] = threshold - 1.0
         trace = detector_trace(ledger.config, score, threshold)
+        arrays = {
+            "score": score,
+            **trace,
+            "variance": np.ones(frames, dtype=np.float64),
+            "strehl": np.full(frames, 0.5, dtype=np.float64),
+            "saturated": np.zeros(frames, dtype=bool),
+            "fallback": np.zeros(frames, dtype=bool),
+            "unavailable": np.zeros(frames, dtype=bool),
+            "command": np.zeros((frames, ledger.base["modes"]), dtype=np.float64),
+            "applied": np.zeros((frames, ledger.base["modes"]), dtype=np.float64),
+        }
+        if retain_full_wfs(ledger.config, case):
+            shape = (frames, ledger.base["detector_n"], ledger.base["detector_n"])
+            arrays.update(
+                measurement=np.zeros(shape, dtype=np.float64),
+                prediction=np.zeros(shape, dtype=np.float64),
+            )
         reference = save_arrays(
             ledger,
             f"evidence/validation/{case_id}.npz",
-            {
-                "score": score,
-                **trace,
-                "variance": np.ones(frames, dtype=np.float64),
-                "strehl": np.full(frames, 0.5, dtype=np.float64),
-                "saturated": np.zeros(frames, dtype=bool),
-                "fallback": np.zeros(frames, dtype=bool),
-                "unavailable": np.zeros(frames, dtype=bool),
-                "command": np.zeros((frames, 2), dtype=np.float64),
-                "applied": np.zeros((frames, 2), dtype=np.float64),
-            },
+            arrays,
+        )
+        metadata = save_metadata(
+            ledger,
+            f"evidence/validation/{case_id}.json",
+            trial_metadata(ledger.config, ledger.base, case, reference, arrays),
         )
         return {
             "case": case,
             "status": "completed",
             "artifact": reference,
+            "metadata": metadata,
             "error": None,
         }
 
@@ -224,7 +263,7 @@ def test_terminal_validation_failure_is_skipped_and_withholds(ledger) -> None:
     assert bundle["validation_records"][0]["status"] == "failed"
 
 
-@pytest.mark.parametrize("damage", ["binding", "artifact"])
+@pytest.mark.parametrize("damage", ["binding", "artifact", "metadata"])
 def test_changed_saved_training_evidence_blocks_resume(ledger, damage) -> None:
     ledger.train_chunk(_training_backend(ledger), 1)
     path = next((ledger.root / "training").glob("*.json"))
@@ -232,16 +271,19 @@ def test_changed_saved_training_evidence_blocks_resume(ledger, damage) -> None:
     if damage == "binding":
         saved["manifest_sha256"] = "0" * 64
         path.write_text(json.dumps(saved, sort_keys=True, indent=2) + "\n")
-    else:
+    elif damage == "artifact":
         artifact = ledger.root / saved["record"]["artifact"]["path"]
         artifact.write_bytes(artifact.read_bytes() + b"drift")
+    else:
+        metadata = ledger.root / saved["record"]["metadata"]["path"]
+        metadata.write_bytes(metadata.read_bytes() + b"drift")
     backend = Mock()
     with pytest.raises(ValueError):
         ledger.train_chunk(backend, 1)
     backend.assert_not_called()
 
 
-@pytest.mark.parametrize("damage", ["binding", "artifact"])
+@pytest.mark.parametrize("damage", ["binding", "artifact", "metadata"])
 def test_changed_saved_validation_evidence_blocks_resume(ledger, damage) -> None:
     _complete_training(ledger)
     ledger.validate_chunk(_validation_backend(ledger), 1)
@@ -250,13 +292,77 @@ def test_changed_saved_validation_evidence_blocks_resume(ledger, damage) -> None
     if damage == "binding":
         saved["threshold_sha256"] = "0" * 64
         path.write_text(json.dumps(saved, sort_keys=True, indent=2) + "\n")
-    else:
+    elif damage == "artifact":
         artifact = ledger.root / saved["record"]["artifact"]["path"]
         artifact.write_bytes(artifact.read_bytes() + b"drift")
+    else:
+        metadata = ledger.root / saved["record"]["metadata"]["path"]
+        metadata.write_bytes(metadata.read_bytes() + b"drift")
     backend = Mock()
     with pytest.raises(ValueError):
         ledger.validate_chunk(backend, 1)
     backend.assert_not_called()
+
+
+def test_retained_numerical_failure_is_terminal_and_keeps_raw_arrays(ledger) -> None:
+    error = "Nonfinite physical trial output"
+
+    def failed(case):
+        frames, modes = ledger.config["loop"]["frames"], ledger.base["modes"]
+        arrays = {
+            "score": np.full(frames, np.nan, dtype=np.float64),
+            "variance": np.ones(frames, dtype=np.float64),
+            "strehl": np.full(frames, 0.5, dtype=np.float64),
+            "saturated": np.zeros(frames, dtype=bool),
+            "fallback": np.zeros(frames, dtype=bool),
+            "unavailable": np.zeros(frames, dtype=bool),
+            "command": np.zeros((frames, modes), dtype=np.float64),
+            "applied": np.zeros((frames, modes), dtype=np.float64),
+        }
+        shape = (frames, ledger.base["detector_n"], ledger.base["detector_n"])
+        arrays.update(
+            measurement=np.zeros(shape, dtype=np.float64),
+            prediction=np.zeros(shape, dtype=np.float64),
+        )
+        case_id = _case_id(case)
+        raw = save_arrays(ledger, f"evidence/training/{case_id}.npz", arrays)
+        metadata = save_metadata(
+            ledger,
+            f"evidence/training/{case_id}.json",
+            trial_metadata(
+                ledger.config,
+                ledger.base,
+                case,
+                raw,
+                arrays,
+                status="failed",
+                error=error,
+            ),
+        )
+        return {
+            "case": case,
+            "status": "failed",
+            "artifact": raw,
+            "metadata": metadata,
+            "error": error,
+        }
+
+    assert ledger.train_chunk(failed, 1)["total_records"] == 1
+    saved = json.loads(next((ledger.root / "training").glob("*.json")).read_text())[
+        "record"
+    ]
+    assert saved["status"] == "failed"
+    assert saved["artifact"] is not None and saved["metadata"] is not None
+
+    resumed = []
+    backend = _training_backend(ledger)
+
+    def next_case(case):
+        resumed.append(case)
+        return backend(case)
+
+    ledger.train_chunk(next_case, 1)
+    assert resumed[0]["atmosphere_seed"] == ledger.config["seeds"]["training"][1]
 
 
 def test_record_directory_symlink_is_rejected_before_callback(ledger, tmp_path) -> None:

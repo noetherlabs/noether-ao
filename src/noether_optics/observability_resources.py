@@ -126,7 +126,18 @@ def estimate_observability_resources(
     validate_protocol(protocol)
     plan = protocol_plan(protocol)
     frame_arrays, full_wfs_arrays = _retained_schemas(protocol, base)
+    trace_names = {
+        "statistic_frame_id",
+        "lower_statistic",
+        "raw_crossing",
+        "alarm_frame_id",
+        "p2_alarm",
+    }
+    training_raw = [row for row in frame_arrays if row["name"] not in trace_names]
+    training_trace = [row for row in frame_arrays if row["name"] in trace_names]
     core_payload = sum(row["bytes_per_trial"] for row in frame_arrays)
+    training_raw_payload = sum(row["bytes_per_trial"] for row in training_raw)
+    training_trace_payload = sum(row["bytes_per_trial"] for row in training_trace)
     full_wfs_payload = sum(row["bytes_per_trial"] for row in full_wfs_arrays)
     regimes = len(plan["regimes"])
     role_trials = {
@@ -141,22 +152,33 @@ def estimate_observability_resources(
     for role, trials in role_trials.items():
         full = full_wfs_counts[role]
         standard = trials - full
+        payload = training_raw_payload if role == "training" else core_payload
+        members = len(training_raw) if role == "training" else len(frame_arrays)
         categories.extend(
             [
                 archive_category(
                     f"{role}_standard_trial_outputs",
                     standard,
-                    core_payload,
-                    len(frame_arrays),
+                    payload,
+                    members,
                 ),
                 archive_category(
                     f"{role}_full_wfs_trial_outputs",
                     full,
-                    core_payload + full_wfs_payload,
-                    len(frame_arrays) + len(full_wfs_arrays),
+                    payload + full_wfs_payload,
+                    members + len(full_wfs_arrays),
                 ),
             ]
         )
+        if role == "training":
+            categories.append(
+                archive_category(
+                    "training_threshold_detector_outputs",
+                    trials,
+                    training_trace_payload,
+                    len(training_trace),
+                )
+            )
     budget = finalize_archive_budget(categories)
     return {
         "schema_version": 1,
@@ -189,6 +211,7 @@ def estimate_observability_resources(
             "maximum_evaluation_release_assumed": True,
             "failed_or_withheld_trials_reduce_storage": True,
             "elapsed_costs_included": False,
+            "training_threshold_dependent_arrays_are_separate": True,
         },
         "outcomes_generated": False,
     }

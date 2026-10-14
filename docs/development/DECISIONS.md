@@ -831,3 +831,43 @@ report when space is insufficient. The first live check measured 7,994,904,576 b
 free, refused admission and left the intended target absent. This creates no timing,
 threshold, validation decision or P2 outcome. Physical retention and a distinct smoke
 remain required before declared acquisition.
+
+## Split pre-threshold training evidence from derived detector traces (2026-10-14)
+
+Do not fabricate training crossings before the regime threshold exists and do not
+replace a raw archive after calibration. A physical training callback retains the
+threshold-independent score, variance, Strehl, integrity flags and command streams,
+plus measurement/prediction images under the existing first-seed policy. It binds
+post-burn-in WFE, Strehl and saturation scalars in canonical metadata. Only after all
+64 clean records complete does the freeze derive each threshold and publish a separate
+five-array detector trace for every training record. Schema-2 `thresholds.json` binds
+the raw, metadata and detector hashes as one calibration chain. Validation, which
+already receives the frozen threshold, keeps all 13 frame arrays in one archive.
+
+Treat a produced nonfinite or negative physical stream as a terminal numerical
+failure with its raw archive and failure metadata retained. Treat a malformed identity,
+shape, dtype, callback contract or changed artifact as an execution/evidence error and
+do not publish a terminal outcome. Revalidate every saved record semantically when a
+chunk opens; while the process lock remains held, use byte/hash snapshots after each
+new callback so large earlier WFS arrays are not decoded quadratically.
+
+The split adds 64 numeric archives but duplicates no declared array. The maximum
+study is therefore 1,504 trials represented by 1,568 numeric archives. Numeric payload
+and the conservative admission result remain exactly 2,341,413,792 and
+10,190,604,096 bytes. A separate nonreserved physical smoke remains mandatory before
+any declared P2 seed is opened.
+
+Require that same whole-study capacity at every public physical chunk boundary. Count
+filesystem blocks already allocated under the immutable run together with current free
+space, so retained evidence does not consume its own admission credit while unrelated
+disk use can still stop acquisition. Keep a second per-trial headroom check immediately
+before numerical construction.
+
+For a new physical run, perform the static refusal before importing JAX or capturing
+runtime state. Once admitted, require a clean committed execution tree and retain
+canonical source, runtime, protocol and base JSON below `evidence/provenance/`. Bind
+their digests into the ledger manifest and recheck the stored content before every
+numerical callback. Keep the bare ledger constructor as a low-level synthetic-test
+boundary; the physical entry points require the provenance artifacts. Load the base
+YAML through the same hash-checking byte path during ledger construction, provenance
+capture and validation release so no check-then-reread window can substitute data.

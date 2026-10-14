@@ -8,6 +8,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from noether_optics.artifacts import load_config
+from noether_optics.controller_selection import _bytes
 from noether_optics.observability_detector import (
     _case_id,
     detector_trace,
@@ -15,6 +17,7 @@ from noether_optics.observability_detector import (
     training_cases,
 )
 from noether_optics.observability_protocol import load_protocol
+from noether_optics.observability_trials import retain_full_wfs, trial_metadata
 from noether_optics.observability_validation import (
     _regime_decision,
     _target_metrics,
@@ -42,7 +45,17 @@ def _save(
 ) -> dict[str, str]:
     path = root / relative
     path.parent.mkdir(parents=True, exist_ok=True)
-    np.savez(path, **arrays)
+    np.savez_compressed(path, **arrays)
+    return {
+        "path": relative.as_posix(),
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    }
+
+
+def _save_json(root: Path, relative: Path, value: dict) -> dict[str, str]:
+    path = root / relative
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(_bytes(value))
     return {
         "path": relative.as_posix(),
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
@@ -51,6 +64,7 @@ def _save(
 
 def _prepare(root: Path, protocol: dict) -> tuple[list[dict], dict[str, float]]:
     root.mkdir()
+    base = load_config(ROOT / protocol["base_config"])
     training = []
     for index, case in enumerate(training_cases(protocol)):
         regime = int(case["regime_id"].split("-")[-1])
@@ -88,15 +102,28 @@ def _prepare(root: Path, protocol: dict) -> tuple[list[dict], dict[str, float]]:
             "saturated": np.zeros(frames, dtype=bool),
             "fallback": np.zeros(frames, dtype=bool),
             "unavailable": np.zeros(frames, dtype=bool),
-            "command": np.zeros((frames, 2), dtype=np.float64),
-            "applied": np.zeros((frames, 2), dtype=np.float64),
+            "command": np.zeros((frames, base["modes"]), dtype=np.float64),
+            "applied": np.zeros((frames, base["modes"]), dtype=np.float64),
         }
+        if retain_full_wfs(protocol, case):
+            shape = (frames, base["detector_n"], base["detector_n"])
+            arrays.update(
+                measurement=np.zeros(shape, dtype=np.float64),
+                prediction=np.zeros(shape, dtype=np.float64),
+            )
         relative = Path(f"evidence/validation/trial-{index:03d}.npz")
+        artifact = _save(root, relative, arrays)
+        metadata = _save_json(
+            root,
+            relative.with_suffix(".json"),
+            trial_metadata(protocol, base, case, artifact, arrays),
+        )
         records.append(
             {
                 "case": case,
                 "status": "completed",
-                "artifact": _save(root, relative, arrays),
+                "artifact": artifact,
+                "metadata": metadata,
                 "error": None,
             }
         )
@@ -271,7 +298,9 @@ def test_complete_validation_publishes_one_idempotent_release(protocol, tmp_path
     )
 
     changed = deepcopy(records)
-    changed[0].update(status="failed", artifact=None, error="synthetic terminal failure")
+    changed[0].update(
+        status="failed", artifact=None, metadata=None, error="synthetic terminal failure"
+    )
     with pytest.raises(ValueError, match="replace existing evidence"):
         freeze_validation_release(root, CONFIG, PROVENANCE, changed)
     assert (root / "validation_release.json").read_bytes() == original
@@ -283,7 +312,9 @@ def test_terminal_validation_failure_is_retained_and_withholds_evaluation(
     root = tmp_path / "run"
     records, _ = _prepare(root, protocol)
     completed = deepcopy(records[0])
-    records[0].update(status="failed", artifact=None, error="synthetic numerical failure")
+    records[0].update(
+        status="failed", artifact=None, metadata=None, error="synthetic numerical failure"
+    )
     bundle, _ = freeze_validation_release(root, CONFIG, PROVENANCE, records)
     original = (root / "validation_release.json").read_bytes()
     assert bundle["evaluation_released"] is False
@@ -331,7 +362,7 @@ def test_release_rechecks_all_frozen_evidence(protocol, tmp_path, damage) -> Non
             with np.load(path, allow_pickle=False) as archive:
                 arrays = {key: np.array(archive[key], copy=True) for key in archive.files}
             arrays["p2_alarm"][0] = True
-            np.savez(path, **arrays)
+            np.savez_compressed(path, **arrays)
             records[0]["artifact"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     provenance = (
         dict(PROVENANCE, runtime_sha256="d" * 64)

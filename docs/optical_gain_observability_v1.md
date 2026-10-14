@@ -6,9 +6,10 @@ This is a frozen, unexecuted P2 protocol. The machine-readable
 [configuration](../configs/optical_gain_observability_v1.yaml) is bound to the base
 simulation by SHA256; the generated [plan](../plans/optical_gain_observability_v1.json)
 contains seed identities and budgets, with every outcome, threshold and release field
-set to false. The causal detector, resumable training/validation record ledger,
-training-calibration publisher and validation-release barrier are implemented. Their
-tests use synthetic arrays and do not create a study threshold or decision.
+set to false. The causal detector, physical training/validation adapter, complete
+retention checks, resumable record ledger, training-calibration publisher and
+validation-release barrier are implemented. Their tests use synthetic arrays and
+mocked physics boundaries and do not create a study threshold or decision.
 
 The question is narrow: **can a training-calibrated lower-tail transform of the
 existing whitened residual score detect the simplified scalar optical-gain ramp under
@@ -146,6 +147,16 @@ metrics are retained separately. Measurement and prediction frames are retained 
 the first seed of every role/regime/condition cell. Failed numerical outcomes stay in
 the cohort. Storage planning receives no compression credit.
 
+Training has one unavoidable ordering boundary: its regime threshold depends on all
+16 clean records, so crossing and persistence arrays cannot be truthfully written by
+an individual pre-threshold callback. Each training callback therefore publishes an
+immutable raw archive containing the eight threshold-independent streams plus its
+metric metadata. The one-way training freeze recalibrates the threshold, writes a
+second five-array detector archive for each record, verifies both hashes and binds
+both references into schema-2 `thresholds.json` before that file is published.
+Validation receives an already-frozen threshold and writes all 13 arrays in one raw
+archive. This split changes archive count, not the declared numeric payload.
+
 The implemented training boundary accepts only all 64 declared clean records. It
 normalizes arithmetic to float64, verifies each supplied score against the `score`
 array and SHA256 of its retained NPZ, derives the protocol SHA256 from the checked
@@ -164,15 +175,16 @@ decision can replace it.
 
 The stage ledger binds the full protocol and its SHA256 to source/runtime provenance,
 holds one nonblocking process lock across each callback and terminal publication, and
-schedules cases in declared order. On resume it revalidates canonical record JSON,
-manifest and threshold bindings, unique raw paths and artifact hashes before skipping
-a saved success or failure. An interruption without a terminal record is retried;
-published outcomes are never replaced. Threshold and release files close their stages
-permanently.
+schedules cases in declared order. At the start of a resumed chunk it revalidates the
+complete semantic contract; after each admitted callback it rechecks the immutable
+record and artifact bytes without repeatedly decoding earlier large arrays. An
+interruption without a terminal record is retried; published outcomes are never
+replaced. Threshold and release files close their stages permanently.
 
 The read-only storage preflight derives each NPZ member from this frozen contract. It
-budgets all 1,504 maximum trial archives, including measurement and prediction images
-for the first seed of each of 32 role/regime/condition cells. The numeric payload is
+budgets 1,504 maximum trials as 1,568 numeric archives: one raw archive per trial plus
+64 threshold-derived training detector archives. Measurement and prediction images
+are included for the first seed of each of 32 role/regime/condition cells. The numeric payload is
 2,341,413,792 bytes; a no-compression-credit archive envelope, metadata allowance,
 temporary-write headroom and operating reserve require 10,190,604,096 free bytes. The
 maximum assumes validation releases all 1,200 evaluation trials. A failed or withheld
@@ -189,10 +201,19 @@ printing its JSON report when capacity is insufficient. The first live check fou
 7,994,904,576 bytes free and refused admission. This is a filesystem observation, not
 an execution cost or outcome.
 
-Before acquisition, the implementation must still add the physical trial callbacks,
-the complete retained-array and per-run metric path and a separate nonreserved runner
-smoke. Unit tests and this plan are not execution evidence, and no P2 threshold,
+Before acquisition, the implementation must still pass a separate nonreserved runner
+smoke through the physical callbacks on a filesystem that passes storage admission.
+Unit tests and mocked callback checks are not execution evidence, and no P2 threshold,
 validation decision or outcome exists yet.
+
+The physical callback entry points enforce the full storage envelope before every
+chunk. The check adds current free bytes to filesystem blocks already allocated by
+the same immutable run, preserving the original admission budget as evidence grows
+while detecting unrelated consumption. Per-trial temporary headroom is checked again
+inside the admitted callback before JAX or the simulator constructs numerical work.
+New-run opening performs storage refusal first, then captures clean committed source,
+JAX/runtime options, the checked protocol and pinned base as four canonical provenance
+artifacts. Their hashes must reproduce the ledger binding before every physical trial.
 
 ## Predeclared escalation
 

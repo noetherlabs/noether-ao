@@ -12,16 +12,26 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .controller_evidence import save_arrays
 from .controller_selection import _bytes, _digest, _provenance, _publish, _read
 from .observability_detector import (
     _artifact_arrays,
+    _build_threshold_bundle,
     _case_id,
     _file_digest,
     _load_protocol_binding,
+    _publish_threshold_bundle,
     _score,
-    freeze_thresholds,
+    detector_trace,
     training_cases,
 )
+from .observability_trials import (
+    training_artifact_layout,
+    verify_failed_evidence,
+    verify_training_evidence,
+    verify_training_trace,
+)
+from .observability_resources import load_resource_inputs
 from .observability_validation import (
     _normalize_validation_record,
     _threshold_bundle,
@@ -53,6 +63,14 @@ class ObservabilityLedger:
         self.protocol_sha256 = protocol_sha256
         self.protocol_file = protocol_file
         self.repository = repository
+        checked_config, base = load_resource_inputs(
+            self.protocol_file, repository
+        )
+        if _bytes(checked_config) != _bytes(self.config):
+            raise ValueError("Protocol changed while the pinned base was loaded")
+        if not isinstance(base, dict):
+            raise ValueError("Pinned base configuration must be a mapping")
+        self.base = json.loads(_bytes(base))
         self.manifest = {
             "schema_version": 1,
             "kind": "optical_gain_observability_run",
@@ -150,6 +168,7 @@ class ObservabilityLedger:
             "case",
             "status",
             "artifact",
+            "metadata",
             "error",
         }:
             raise ValueError("Invalid training record schema")
@@ -158,31 +177,45 @@ class ObservabilityLedger:
         if record["status"] == "completed":
             if record["error"] is not None:
                 raise ValueError("Completed training record cannot contain an error")
-            artifact, arrays = _artifact_arrays(
-                self.root, record["artifact"], "training"
+            artifact, _, metadata = verify_training_evidence(
+                self.root,
+                self.config,
+                self.base,
+                expected_case,
+                record["artifact"],
+                record["metadata"],
             )
-            if "score" not in arrays:
-                raise ValueError("Completed training artifact is missing its score")
-            _score(self.config, arrays["score"])
             return {
                 "case": expected_case,
                 "status": "completed",
                 "artifact": artifact,
+                "metadata": metadata,
                 "error": None,
             }, artifact["path"]
         if record["status"] == "failed":
-            if (
-                record["artifact"] is not None
-                or not isinstance(record["error"], str)
-                or not record["error"].strip()
-            ):
-                raise ValueError("Failed training record requires an error and no artifact")
+            if not isinstance(record["error"], str) or not record["error"].strip():
+                raise ValueError("Failed training record requires an error")
+            artifact, metadata = record["artifact"], record["metadata"]
+            if (artifact is None) != (metadata is None):
+                raise ValueError("Failed training raw evidence and metadata must be paired")
+            if artifact is not None:
+                artifact, metadata = verify_failed_evidence(
+                    self.root,
+                    self.config,
+                    self.base,
+                    expected_case,
+                    artifact,
+                    metadata,
+                    "training",
+                    record["error"],
+                )
             return {
                 "case": expected_case,
                 "status": "failed",
-                "artifact": None,
+                "artifact": artifact,
+                "metadata": metadata,
                 "error": record["error"],
-            }, None
+            }, None if artifact is None else artifact["path"]
         raise ValueError("Unknown training record status")
 
     def _stage_directory(self, stage: str) -> Path:
@@ -228,6 +261,7 @@ class ObservabilityLedger:
                 normalized = _normalize_validation_record(
                     self.root,
                     self.config,
+                    self.base,
                     thresholds,
                     saved["record"],
                     expected[case_id],
@@ -258,6 +292,46 @@ class ObservabilityLedger:
             raise ValueError(f"{stage.title()} record must be a regular file")
         _publish(path, {**binding, "record": record})
 
+    def _check_saved_snapshot(
+        self,
+        stage: str,
+        binding: dict[str, str],
+        found: dict[str, dict[str, Any]],
+    ) -> None:
+        """Recheck immutable bytes after a callback without decoding old arrays."""
+        directory = self._stage_directory(stage)
+        paths = sorted(directory.glob("*.json"))
+        if {path.stem for path in paths} != set(found) or any(
+            path.is_symlink() for path in paths
+        ):
+            raise ValueError(f"{stage.title()} records changed during callback")
+        for path in paths:
+            record = found[path.stem]
+            if path.read_bytes() != _bytes({**binding, "record": record}):
+                raise ValueError(f"{stage.title()} record changed during callback")
+            for key in ("artifact", "metadata"):
+                reference = record.get(key)
+                if reference is not None and self.artifact(reference["path"]) != reference:
+                    raise ValueError(
+                        f"{stage.title()} artifact changed during callback"
+                    )
+
+    def _check_threshold_snapshot(
+        self, bundle: dict[str, Any], reference: dict[str, str]
+    ) -> None:
+        path = self.root / reference["path"]
+        if (
+            path.is_symlink()
+            or not path.is_file()
+            or _file_digest(path) != reference["sha256"]
+        ):
+            raise ValueError("Frozen threshold binding changed")
+        for row in bundle["training_records"]:
+            for key in ("artifact", "detector_artifact", "metadata"):
+                retained = row.get(key)
+                if retained is not None and self.artifact(retained["path"]) != retained:
+                    raise ValueError("Frozen training evidence changed during callback")
+
     def train_chunk(self, execute, limit: int) -> dict[str, Any]:
         """Append terminal training records in declared order without replay."""
         self._check_limit(limit)
@@ -282,7 +356,7 @@ class ObservabilityLedger:
                 self._check_manifest()
                 if (self.root / "thresholds.json").exists():
                     raise ValueError("Backend froze training during acquisition")
-                found, artifact_paths = self._saved("training", cases, binding)
+                self._check_saved_snapshot("training", binding, found)
                 normalized, artifact_path = self._training_record(record, case)
                 if artifact_path is not None and artifact_path in artifact_paths:
                     raise ValueError("Training records cannot share a raw artifact")
@@ -302,7 +376,7 @@ class ObservabilityLedger:
             }
 
     def freeze_training(self) -> tuple[dict[str, Any], dict[str, str]]:
-        """Freeze thresholds only after all terminal training records recheck."""
+        """Freeze thresholds and derived traces after all raw records recheck."""
         with self._locked():
             if (
                 (self.root / "validation_release.json").exists()
@@ -317,11 +391,14 @@ class ObservabilityLedger:
             if any(row["status"] == "failed" for row in found.values()):
                 raise ValueError("Threshold freeze cannot replace a failed training outcome")
             records = []
+            retained: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
             for case in cases:
-                row = found[_case_id(case)]
+                case_id = _case_id(case)
+                row = found[case_id]
                 artifact, arrays = _artifact_arrays(
                     self.root, row["artifact"], "training"
                 )
+                retained[case_id] = (arrays, row["metadata"])
                 records.append(
                     {
                         "case": case,
@@ -331,13 +408,44 @@ class ObservabilityLedger:
                         "error": None,
                     }
                 )
-            return freeze_thresholds(
-                self.root,
-                self.protocol_file,
-                self.provenance,
-                records,
-                self.repository,
+            bundle = _build_threshold_bundle(
+                self.config, self.protocol_sha256, self.provenance, records
             )
+            thresholds = {
+                row["regime"]["id"]: float(row["threshold"])
+                for row in bundle["thresholds"]
+            }
+            rows = {row["id"]: row for row in bundle["training_records"]}
+            for case in cases:
+                case_id = _case_id(case)
+                arrays, metadata = retained[case_id]
+                trace = detector_trace(
+                    self.config, arrays["score"], thresholds[case["regime_id"]]
+                )
+                detector_artifact = save_arrays(
+                    self,
+                    f"evidence/training/detectors/{case_id}.npz",
+                    trace,
+                )
+                rows[case_id]["detector_artifact"] = verify_training_trace(
+                    self.root,
+                    self.config,
+                    case,
+                    arrays["score"],
+                    thresholds[case["regime_id"]],
+                    detector_artifact,
+                )
+                rows[case_id]["metadata"] = metadata
+            bundle["schema_version"] = 2
+            bundle["training_artifact_layout"] = training_artifact_layout(
+                self.config
+            )
+            bundle["training_manifest_sha256"] = _digest(
+                _bytes(bundle["training_records"])
+            )
+            if _file_digest(self.protocol_file) != self.protocol_sha256:
+                raise ValueError("Protocol changed before threshold publication")
+            return bundle, _publish_threshold_bundle(self.root, bundle)
 
     def validate_chunk(self, execute, limit: int) -> dict[str, Any]:
         """Append terminal validation records against the frozen thresholds."""
@@ -345,8 +453,8 @@ class ObservabilityLedger:
         with self._locked():
             if (self.root / "validation_release.json").exists():
                 raise ValueError("Validation release is frozen")
-            _, threshold_reference, thresholds = _threshold_bundle(
-                self.root, self.config, self.protocol_sha256, self.provenance
+            threshold_bundle, threshold_reference, thresholds = _threshold_bundle(
+                self.root, self.config, self.base, self.protocol_sha256, self.provenance
             )
             cases = validation_cases(self.config)
             binding = {
@@ -368,16 +476,15 @@ class ObservabilityLedger:
                 self._check_manifest()
                 if (self.root / "validation_release.json").exists():
                     raise ValueError("Backend froze validation during acquisition")
-                _, current_reference, current_thresholds = _threshold_bundle(
-                    self.root, self.config, self.protocol_sha256, self.provenance
-                )
-                if current_reference != threshold_reference:
-                    raise ValueError("Frozen threshold binding changed")
-                found, artifact_paths = self._saved(
-                    "validation", cases, binding, current_thresholds
-                )
+                self._check_threshold_snapshot(threshold_bundle, threshold_reference)
+                self._check_saved_snapshot("validation", binding, found)
                 normalized = _normalize_validation_record(
-                    self.root, self.config, current_thresholds, record, case
+                    self.root,
+                    self.config,
+                    self.base,
+                    thresholds,
+                    record,
+                    case,
                 )
                 artifact_path = (
                     None
@@ -406,7 +513,7 @@ class ObservabilityLedger:
         """Publish the release decision from complete, reverified saved records."""
         with self._locked():
             _, threshold_reference, thresholds = _threshold_bundle(
-                self.root, self.config, self.protocol_sha256, self.provenance
+                self.root, self.config, self.base, self.protocol_sha256, self.provenance
             )
             cases = validation_cases(self.config)
             binding = {
