@@ -113,7 +113,13 @@ records. A protocol-bound ledger resumes in declared order and retries only call
 interrupted before terminal publication. Bounded training, threshold-freeze,
 validation and decision-freeze commands expose those same gates without a parallel
 execution path. A strict reduced runner protocol with wholly separate seed streams is
-committed for the remaining nonreserved physical smoke; no smoke outcome exists yet.
+committed for the nonreserved physical smoke. The retained
+[runner result](results/optical_gain_observability_runner_smoke_v1/README.md) passes
+all 14 implementation gates from source commit `a997753`: two training records, an
+exactly reproducible threshold freeze, four paired validation records, an exactly
+reproducible withheld decision and no evaluation record. The reduced outcome included
+one clean alarm and zero qualifying gain detections, so it is explicitly not detector
+validation. No P2 v1 threshold, decision or outcome has been generated.
 
 The public physical callback entry points recheck the whole-study storage envelope
 before entering the ledger. Already allocated run blocks count toward the original
@@ -159,7 +165,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted protocol; detector, physical stage commands, complete retention, immutable threshold/release gates and 10.191 GB preflight implemented; strict nonreserved runner smoke prepared but unexecuted |
+| Optical-gain observability | Frozen unexecuted v1 protocol; physical stage commands, complete retention and immutable gates implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

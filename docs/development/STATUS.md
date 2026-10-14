@@ -721,3 +721,25 @@ smoke seed, physical result, threshold, decision or timing was opened. Next comm
 verify this runner, then acquire it once the reduced storage gate is admitted. The
 complete local correctness suite passes **518 tests in 255.14 seconds**; this is test
 wall time, not an experiment timing measurement.
+
+## Observability runner smoke retained
+
+Remote Correctness passed source commit `a997753`. A first read-only check refused at
+2,387,918,848 free bytes and created no result. After clearing only regenerable package
+caches, the same 5,370,101,856-byte gate admitted at 5,519,986,688 free bytes. The
+runner then retained two training and four validation trials across 29 protected
+command/run files. All **14 implementation gates pass**, and rebuilding preserves the
+derived summary SHA256
+`b894543a1e681690f8f0dfafa83ee9f8b0535f4af768f92552499d4fd33d718d` and README
+SHA256 `6ff9b755e376c81203b6c18e604dd040d4d33674bbfcf3f4107fab084fdba045`
+exactly.
+
+The validation decision is **withheld**. One of two clean runs alarmed (8/34 raw
+crossings; 1/20 persistent alarm frames), neither gain-0.35 run qualified as detected,
+and one gain run contained a boundary-straddling alarm. Every output remained finite,
+with zero fallback, unavailable or saturated frames. Paired gain-minus-clean WFE
+deltas are 0.6758110717 and 0.0076200481 nm; the paired Strehl deltas are
+-0.0037580778 and -0.0000616811. No evaluation record or timing was acquired. This is
+an intentionally retained negative smoke outcome, not detector validation or v1
+evidence. Next implement the sealed evaluation/report lifecycle without opening any
+declared cohort; full v1 storage remains blocked at 10,190,604,096 required bytes.

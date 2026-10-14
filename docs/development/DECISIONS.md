@@ -893,3 +893,26 @@ alter or authorize the frozen `optical_gain_observability_v1` evaluation cohort.
 only from clean committed source, outside CI and without timing. The static reduced
 envelope requires 5,370,101,856 free bytes; admission remains a real gate even though
 the numeric payload is only 237,616 bytes.
+
+## Observability runner-smoke execution (2026-10-14)
+
+Execute from source commit `a997753` only after its local 518-test suite and remote
+Correctness workflow pass. The first read-only preflight refused at 2,387,918,848 free
+bytes and created no run. Remove only regenerable uv, npm, Homebrew and Bun caches;
+the unchanged gate then admits at 5,519,986,688 free bytes.
+
+Retain the complete two-record training cohort, one immutable threshold, four paired
+validation records and one immutable validation decision. All 14 implementation gates
+pass, including separate streams, storage admission, complete stage counts, exact
+threshold and decision re-entry, artifact hashes, source provenance, declared metrics
+and zero evaluation access. Protect 29 command/run files; both derived files reproduce
+byte for byte.
+
+Preserve the unfavorable smoke outcome without tuning: one of two clean runs alarmed
+with 8/34 raw crossings and 1/20 persistent alarm frames; neither gain-0.35 run earned
+a qualifying detection, one had a boundary-straddling alarm, and the decision is
+`evaluation_withheld`. All outputs are finite with zero fallback, unavailable or
+saturated frames. Paired gain-minus-clean WFE deltas are 0.6758110717 and
+0.0076200481 nm; Strehl deltas are -0.0037580778 and -0.0000616811. These six reduced
+physical trials establish runner integrity only. They do not validate the detector,
+authorize v1, select an escalation or provide timing evidence.

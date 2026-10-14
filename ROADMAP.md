@@ -41,9 +41,12 @@ now apply the frozen controller/fault settings, retain complete typed arrays and
 post-burn-in metrics. Threshold-dependent training traces are added immutably during
 the calibration freeze. The current development volume failed the read-only gate at
 7.995 GB free and no run was created. A strict reduced runner protocol and the four
-bounded physical stage commands are now prepared with separate nonreserved streams.
-Next execute and protect that smoke before accessing a declared cohort on an admitted
-filesystem.
+bounded physical stage commands use separate nonreserved streams. The retained smoke
+passes all 14 implementation gates from committed source, including exact freeze
+re-entry and zero evaluation access. Its reduced detector outcome was unfavorable and
+was retained as `evaluation_withheld`; it is not v1 evidence. Next implement the sealed
+evaluation/report lifecycle without opening a cohort, then keep declared v1 execution
+blocked until the separate 10.191 GB filesystem gate passes.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

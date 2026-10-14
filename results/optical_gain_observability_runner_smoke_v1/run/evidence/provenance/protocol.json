@@ -1,0 +1,286 @@
+{
+  "base_config": "configs/controller_runner_smoke_base.yaml",
+  "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+  "conditions": {
+    "evaluation": [
+      "clean",
+      "gain_035",
+      "gain_065",
+      "vibration",
+      "misregistration"
+    ],
+    "nuisance_conditions": [
+      "vibration",
+      "misregistration"
+    ],
+    "pair_same_seed_across_conditions": true,
+    "target_conditions": [
+      "gain_035",
+      "gain_065"
+    ],
+    "training": [
+      "clean"
+    ],
+    "validation": [
+      "clean",
+      "gain_035"
+    ]
+  },
+  "controller": {
+    "detector_output_affects_command": false,
+    "fallback": false,
+    "gain": 0.3,
+    "leak": 0.999,
+    "name": "forward",
+    "noise": "poisson_plus_read",
+    "refit": false
+  },
+  "detector": {
+    "calibration_source": "training_clean_only",
+    "comparison": "strict_less_than",
+    "freeze_before_validation": true,
+    "persistence_windows": 8,
+    "quantile_method": "linear",
+    "recalibration_after_validation": false,
+    "source_signal": "existing_whitened_residual_score",
+    "statistic": "causal_arithmetic_mean",
+    "tail": "lower",
+    "target_streak_must_begin_at_or_after_onset": true,
+    "threshold_scope": "per_regime",
+    "training_quantile": 0.005,
+    "upper_tail_union": false,
+    "window_frames": 4
+  },
+  "escalation": {
+    "independent_sensing_requires_separate_later_protocol": true,
+    "next_candidate": "modal_dither",
+    "next_protocol": "optical_gain_observability_v2",
+    "requires_dither_free_paired_science_control": true,
+    "requires_new_training_validation_evaluation_seeds": true,
+    "science_impact_metrics": [
+      "wfe_nm",
+      "strehl",
+      "command_rms"
+    ],
+    "trigger": "v1_validation_failure_or_inadequate_v1_evaluation",
+    "v1_held_out_outcomes_may_not_select_escalation": true
+  },
+  "evaluation": {
+    "descriptive_no_pass_claim": true,
+    "frame_interval_method": "none_temporally_correlated_descriptive_only",
+    "paired_error_family": "all_nonclean_conditions_by_regime",
+    "paired_error_familywise_alpha": 0.05,
+    "paired_error_interval": "fault_onset_to_fault_end",
+    "paired_error_method": "paired_student_t_bonferroni",
+    "primary_paired_error_metric": "wfe_nm",
+    "run_interval_confidence": 0.95,
+    "run_interval_method": "clopper_pearson_exact_two_sided",
+    "secondary_error_metrics": [
+      "strehl"
+    ],
+    "secondary_interval_method": "descriptive_only",
+    "state_before_validation": "sealed"
+  },
+  "faults": {
+    "gain_035": {
+      "kind": "optical_gain",
+      "terminal_response_multiplier": 0.35
+    },
+    "gain_065": {
+      "kind": "optical_gain",
+      "terminal_response_multiplier": 0.65
+    },
+    "misregistration": {
+      "kind": "misregistration",
+      "shift_pixels": 2
+    },
+    "vibration": {
+      "amplitude_rad": 0.7,
+      "frequency_hz": 40.0,
+      "kind": "vibration"
+    }
+  },
+  "loop": {
+    "burn_in": 4,
+    "fault_end": 24,
+    "fault_onset": 16,
+    "frames": 24,
+    "optical_gain_drift_frames": 4
+  },
+  "regimes": {
+    "common_random_numbers_across_regimes": true,
+    "photons": [
+      1000000.0
+    ],
+    "wind_scales": [
+      1.0
+    ]
+  },
+  "reporting": {
+    "clean": [
+      "alarm_runs",
+      "alarm_run_fraction",
+      "alarm_frames",
+      "alarm_frame_fraction",
+      "raw_crossing_fraction"
+    ],
+    "controller_error": [
+      "paired_wfe_nm_delta",
+      "paired_strehl_delta",
+      "saturation_fraction"
+    ],
+    "integrity": [
+      "finite_runs",
+      "fallback_frames",
+      "unavailable_frames",
+      "failed_runs"
+    ],
+    "nuisances": [
+      "alarm_runs_without_prior_alarm",
+      "quiet_runs",
+      "pre_onset_alarm_runs",
+      "boundary_straddling_alarm_runs",
+      "alarm_delay_frames"
+    ],
+    "targets": [
+      "detected_runs_without_prior_alarm",
+      "missed_runs",
+      "pre_onset_alarm_runs",
+      "boundary_straddling_alarm_runs",
+      "detected_only_delay_frames"
+    ]
+  },
+  "retention": {
+    "all_trial_frame_arrays": [
+      "score",
+      "statistic_frame_id",
+      "lower_statistic",
+      "raw_crossing",
+      "alarm_frame_id",
+      "p2_alarm",
+      "variance",
+      "strehl",
+      "saturated",
+      "fallback",
+      "unavailable",
+      "command",
+      "applied"
+    ],
+    "all_trial_metrics": [
+      "wfe_nm",
+      "strehl",
+      "saturation_fraction"
+    ],
+    "compression_credit": false,
+    "full_wfs_arrays": [
+      "measurement",
+      "prediction"
+    ],
+    "full_wfs_policy": "first_seed_per_role_regime_condition",
+    "retain_failed_runs": true
+  },
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": [
+      730001,
+      730002
+    ],
+    "excluded_prior_roots": [
+      11,
+      12,
+      13,
+      17,
+      101,
+      102,
+      103,
+      104,
+      105,
+      20261008,
+      21001,
+      21002,
+      21003,
+      22001,
+      22002,
+      22003,
+      22004,
+      22005,
+      23001,
+      23002,
+      23003,
+      23004,
+      23005,
+      23006,
+      23007,
+      23008,
+      23009,
+      23010,
+      24001,
+      51001,
+      51002,
+      51003,
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53007,
+      53008,
+      53009,
+      53010,
+      54001,
+      61001,
+      61002,
+      61003,
+      62001,
+      62002,
+      62003,
+      62004,
+      62005,
+      63001,
+      63002,
+      63003,
+      63004,
+      63005,
+      63006,
+      63007,
+      63008,
+      63009,
+      63010,
+      64001
+    ],
+    "noise_offset": 100000,
+    "training": [
+      710001,
+      710002
+    ],
+    "validation": [
+      720001,
+      720002
+    ]
+  },
+  "study_id": "optical_gain_observability_runner_smoke_v1",
+  "validation": {
+    "failure_action": "withhold_evaluation_and_retain_failure",
+    "integrity_interval": "full_run",
+    "max_clean_alarm_frame_fraction": 0.001,
+    "max_clean_alarm_runs": 0,
+    "max_clean_raw_crossing_fraction": 0.01,
+    "max_detection_delay_frames": 8,
+    "max_gain_missed_runs": 0,
+    "max_gain_pre_onset_alarm_runs": 0,
+    "max_saturation_fraction": 0.0,
+    "min_gain_detected_runs": 2,
+    "release_evaluation_only_if_all_regimes_pass": true,
+    "require_all_finite": true,
+    "require_no_fallback": true,
+    "require_no_unavailable": true,
+    "saturation_interval": "full_run",
+    "scope": "each_regime"
+  }
+}

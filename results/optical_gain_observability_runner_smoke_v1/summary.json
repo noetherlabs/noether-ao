@@ -1,0 +1,75 @@
+{
+  "all_pass": true,
+  "gates": {
+    "declared_metrics_reported": true,
+    "durable_stage_counts": true,
+    "evaluation_not_acquired": true,
+    "nonreserved_seed_streams": true,
+    "resource_preflight_admitted": true,
+    "source_provenance_bound": true,
+    "threshold_artifact_bound": true,
+    "threshold_frozen": true,
+    "threshold_reentry_exact": true,
+    "training_complete": true,
+    "validation_artifact_bound": true,
+    "validation_complete": true,
+    "validation_decision_frozen": true,
+    "validation_reentry_exact": true
+  },
+  "kind": "optical_gain_observability_runner_smoke",
+  "observed": {
+    "clean": {
+      "alarm_eligible_frames": 20,
+      "alarm_frame_fraction": 0.05,
+      "alarm_frames": 1,
+      "alarm_runs": 1,
+      "raw_crossing_fraction": 0.23529411764705882,
+      "raw_crossing_frames": 34,
+      "raw_crossings": 8
+    },
+    "gain_035": {
+      "boundary_straddling_alarm_runs": 1,
+      "detected_only_delay_frames": [],
+      "detected_runs": 0,
+      "missed_runs": 2,
+      "pre_onset_alarm_runs": 0
+    },
+    "integrity": {
+      "all_completed_outputs_finite": true,
+      "fallback_frames": 0,
+      "saturated_frames": 0,
+      "saturation_fraction": 0.0,
+      "unavailable_frames": 0
+    },
+    "paired_controller_error": [
+      {
+        "atmosphere_seed": 720001,
+        "clean_saturation_fraction": 0.0,
+        "detector_seed": 820001,
+        "gain_saturation_fraction": 0.0,
+        "regime_id": "regime-00",
+        "strehl_delta": -0.003758077840998353,
+        "wfe_nm_delta": 0.6758110716583161
+      },
+      {
+        "atmosphere_seed": 720002,
+        "clean_saturation_fraction": 0.0,
+        "detector_seed": 820002,
+        "gain_saturation_fraction": 0.0,
+        "regime_id": "regime-00",
+        "strehl_delta": -6.16811153697494e-05,
+        "wfe_nm_delta": 0.007620048069583163
+      }
+    ]
+  },
+  "protected_files": 29,
+  "schema_version": 1,
+  "scope": "Reduced nonreserved physical runner and evidence smoke; not a detector validation, evaluation release, timing result or safety claim.",
+  "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+  "study_id": "optical_gain_observability_runner_smoke_v1",
+  "threshold_sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a",
+  "training_records": 2,
+  "validation_decision_sha256": "7e67dafb026700263ec9e47e264dd2ce342e2daff321f45d4baea86e5a7e0443",
+  "validation_records": 4,
+  "validation_status": "evaluation_withheld"
+}

@@ -76,11 +76,12 @@ After three distinct unsuccessful attempts, record failure and proceed.
                                                             |
                                       noise-normalized residual -> latched fallback
 
-The remaining P2 pre-acquisition action is to execute the committed reduced
-observability runner protocol from clean source, preserve its complete protected
-evidence and prove byte-exact report reconstruction. It uses only nonreserved
-710001/720001/730001 families and acquires no evaluation trial. A favorable smoke
-detector outcome is not required and cannot authorize the v1 cohort.
+The reduced observability runner now has complete protected evidence from committed
+source and byte-exact report reconstruction. It used only nonreserved
+710001/720001/730001 families, acquired no evaluation trial and retained withholding
+after an unfavorable detector outcome. The remaining software boundary is the sealed,
+release-gated evaluation ledger plus final statistical report reconstruction. Build
+that without opening a cohort; v1 stays blocked by its independent 10.191 GB gate.
 
 Tests: independent Fourier/HCIPy agreement; sensor energy and derivative checks;
 screen spectral scaling; delay FIFO impulse; controller stability; causal detector;

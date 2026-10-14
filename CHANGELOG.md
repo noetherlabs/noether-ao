@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add bounded physical observability stage commands and a strict reduced runner with
+  streams disjoint from every prior experiment and frozen P2 v1 input. Retain two
+  training and four validation trials from committed source, exact threshold/decision
+  re-entry, complete metric reporting and 29 protected command/run files. All 14
+  implementation gates pass; the unfavorable smoke decision remains withheld and no
+  evaluation trial is acquired.
+
 - Add lazy physical training and validation adapters for the frozen optical-gain
   protocol. Apply the declared forward controller and fault mapping, retain exact
   frame arrays plus hash-bound post-burn-in metrics, and preserve produced numerical
