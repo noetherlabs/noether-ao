@@ -48,12 +48,33 @@ def main() -> None:
     evaluation.add_argument("--out", required=True)
     evaluation.add_argument("--limit", type=_positive_integer, required=True,
                             help="Maximum new evaluation records")
+    resources = commands.add_parser("study-resources")
+    resources.add_argument("--config", required=True)
+    resources.add_argument("--target", required=True,
+                           help="Planned study directory; it is inspected but not created")
     args = parser.parse_args()
+    if args.experiment == "study-resources":
+        from .controller_resources import load_resource_inputs, resource_preflight
+        study, base = load_resource_inputs(Path(args.config))
+        result = resource_preflight(study, base, Path(args.target))
+        print(json.dumps(result, sort_keys=True))
+        if not result["admitted"]:
+            raise SystemExit(2)
+        return
     if args.experiment == "study-train":
         from .controller_evidence import open_study_run
+        from .controller_resources import load_resource_inputs, resource_preflight
         from .controller_training_stage import run_training_chunk
+        open_options = {"create": args.create}
+        if args.create:
+            study, planned_base = load_resource_inputs(Path(args.config))
+            preflight = resource_preflight(study, planned_base, Path(args.out))
+            if not preflight["admitted"]:
+                print(json.dumps(preflight, sort_keys=True))
+                raise SystemExit(2)
+            open_options["min_free_bytes"] = preflight["budget"]["required_free_bytes"]
         ledger, base, evidence = open_study_run(
-            Path(args.out), Path(args.config), create=args.create)
+            Path(args.out), Path(args.config), **open_options)
         result = run_training_chunk(
             ledger, base, evidence, pilot_limit=args.pilot_limit, model_limit=args.model_limit)
         print(json.dumps(result, sort_keys=True))

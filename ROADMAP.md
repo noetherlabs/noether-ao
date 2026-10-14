@@ -8,10 +8,11 @@ acceptance evidence. It is not implied by a successful simulation.
 ## 1. Complete the reproducible controller comparison
 
 **In progress.** The optical plant, training components, durable evidence storage,
-selection barrier, trial adapters, training coordination, and bounded training,
-validation, selection and evaluation commands are implemented. The remaining work
-establishes a full-run resource/disk budget and verifies the complete runner on
-separate smoke seeds.
+selection barrier, trial adapters, training coordination, bounded stage commands and
+whole-run storage preflight are implemented. The frozen plan retains 42.167 GB of
+logical numeric payload and requires a conservative 105.033 GB free-space envelope
+with no compression credit. The remaining pre-acquisition work verifies the complete
+runner on separate smoke seeds and provisions a filesystem that passes this gate.
 
 Deliverable: one reproducible comparison under the [frozen study protocol](docs/controller_study_v1.md),
 with all eligible controllers, paired uncertainty, failed candidates and resource

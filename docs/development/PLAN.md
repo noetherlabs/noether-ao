@@ -27,8 +27,11 @@ command exposes positive pilot/model chunks and JSON progress. A separate
 `study-validate` command now admits positive chunks through the existing lazy ledger
 gate. A resume-only `study-select` command audits and freezes the complete validation
 verdict. `study-evaluate` now enters positive held-out chunks only through that frozen
-selection gate. Next complete resource/disk sizing and verify a full runner smoke
-before reserved outcomes.
+selection gate. A static whole-run preflight now derives 42.167 GB of numeric payload
+and a conservative 105.033 GB free-space requirement without accessing any cohort.
+The current development filesystem fails that capacity gate. Next verify the full
+runner on separate smoke seeds and provision a qualifying target before reserved
+outcomes.
 The full repository and passing correctness CI are already on main. Delivery
 remains commits only; the follow-up cadence is now hourly.
 Each meaningful increment also updates README.md when its technical description,

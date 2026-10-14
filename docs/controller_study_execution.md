@@ -15,8 +15,8 @@ candidate and publishes the complete aggregate training binding. Its bounded
 the existing lazy trial adapter through the ledger gate. A resume-only `study-select`
 command audits and freezes the deterministic validation verdict. A bounded
 `study-evaluate` command now enters the same lazy adapter through the frozen-selection
-gate. Full-run resource reporting and ledger-backed physical smoke remain pending
-before any reserved cohort is used.
+gate. Static whole-run storage reporting is now implemented; ledger-backed physical
+smoke and adequate target capacity remain pending before any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
 ## State and evidence contract
@@ -643,6 +643,37 @@ It prints one sorted JSON progress object. Twenty-one focused command-boundary c
 and the complete **347-test** local correctness suite pass in **90.79 seconds**. The
 tests replace the opener and evaluation entry point; no persistent study run, physical
 array, reserved cohort, controller outcome or timing sample is created.
+
+## Whole-run storage preflight
+
+`study-resources` loads the hash-pinned study and base configuration, enumerates the
+frozen case plan, and accounts for every numeric archive retained by successful
+training, validation and maximum evaluation. It performs no study creation and does
+not import JAX or construct physics:
+
+    frozen cases + array schemas -> 42,166,977,776 numeric bytes
+                                 -> 84,440,381,920 archive envelope
+                                 -> 94,996,396,512 retained envelope
+                                 -> 105,033,365,984 required free bytes
+
+The archive envelope uses twice each raw payload plus 4 KiB per NPZ member and gives
+compression zero credit. A further one-eighth envelope covers JSON references and
+filesystem allocation; the preflight then adds at least 512 MiB for an in-progress
+atomic write and at least 4 GiB of operating reserve. All five controllers are
+assumed selected, so a failed or withheld candidate can only reduce retained trial
+storage. The JSON report exposes each category and assumption. `study-train --create`
+runs this preflight before opening a ledger, refuses an insufficient target with the
+same JSON and status 2, then passes the required byte threshold to `open_study_run`
+for a second immediate free-space check. No CLI flag bypasses creation admission.
+
+An implementation check found about 5.5 GB free and correctly returned exit status 2.
+No target directory, cohort, controller output or elapsed-time
+sample was created. Capacity is therefore a visible operational blocker rather than
+an invitation to reduce evidence. Run the same command on the intended volume before
+study creation; the separate end-to-end physical smoke must still pass first. Sixteen
+new resource/preflight checks cover the boundary, including a second hash check on
+the exact base bytes parsed by the estimator and enforced creation refusal. The
+complete correctness suite passes **363 tests in 92.05 seconds**.
 
 ## Original ledger engineering review and tests
 

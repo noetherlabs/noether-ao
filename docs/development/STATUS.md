@@ -449,3 +449,21 @@ local correctness suite passes **347 tests** in **90.79 seconds**. No persistent
 study run, physical array, reserved seed, controller result or timing sample was
 created. The four stage commands are complete; full-run resource/disk sizing and a
 separately seeded end-to-end runner smoke remain before reserved acquisition.
+
+## Whole-run storage preflight
+
+The read-only `study-resources` command now turns the frozen case counts and retained
+array schemas into an auditable disk envelope. It counts 3,069 numeric archives and
+42,166,977,776 logical numeric bytes. With zero compression credit, per-member ZIP
+allowance, metadata/filesystem space, one pending-write allowance and an operating
+reserve, the admission threshold is 105,033,365,984 free bytes.
+
+Sixteen new resource and command-boundary checks cover exact frozen totals, schema
+drift, invalid plants, nearest-ancestor filesystem checks, equality admission,
+insufficient capacity, file targets and argument isolation. The focused resource/CLI
+suite passes **37 tests**; the complete local correctness suite passes **363 tests in
+92.05 seconds**. A live read-only check against `runs/controller_study_v1`
+found about **5.5 GB free** and returned the specified status 2. It created no
+target, physical array, reserved outcome or timing sample. The disk-sizing design is
+complete; creation cannot bypass it, and current capacity plus the separately seeded
+full-runner smoke still block reserved acquisition.

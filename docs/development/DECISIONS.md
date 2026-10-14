@@ -626,3 +626,26 @@ ledger, base configuration and chunk size once. No reserved evidence, numerical
 output or controller result is acquired. The four stage commands are now complete;
 full-run sizing and the independent runner smoke remain preconditions for the
 reserved study.
+
+## Static whole-run storage admission (2026-10-14)
+
+Size the complete frozen study from planned identities and persisted array schemas,
+without sampling compression, running the simulator or opening a ledger. Count the
+maximum storage path: every fitted model succeeds and all five controllers enter
+evaluation. Preserve full trial outputs as designed; do not reduce scientific
+evidence to fit the current workstation.
+
+Report logical numeric bytes separately from the conservative admission envelope.
+Assign zero credit to DEFLATE. For each NPZ, budget twice its numeric payload plus
+4 KiB per member; add one eighth for JSON references and filesystem allocation with
+a 512 MiB floor, one largest-artifact/512 MiB pending-write allowance, and a ten
+percent/4 GiB operating reserve. These are declared engineering envelopes, not
+measured compression ratios or compute costs.
+
+Expose the calculation as read-only `study-resources --config ... --target ...`.
+Print the report even on refusal and return status 2 when free bytes are below the
+105,033,365,984-byte frozen requirement. Enforce the same report in
+`study-train --create` and pass its threshold to the run opener for an immediate
+second disk check. Do not expose a bypass flag. The current
+development volume is insufficient, so reserved execution remains blocked while
+the separate physical runner smoke proceeds on nonreserved seeds.

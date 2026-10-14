@@ -65,6 +65,11 @@ expressive algorithms. Record synchronized compilation, fitting/training and tri
 elapsed costs separately, outside CI and without concurrent compute. These are
 study resource costs, not per-frame latency distributions or deadline guarantees.
 
+Before creating the run, execute the static storage preflight against its target
+filesystem. The frozen v1 schemas retain 42,166,977,776 logical numeric bytes and
+require a conservative 105,033,365,984 free bytes with zero compression credit.
+This derived bound is a storage gate; elapsed costs remain separately measured data.
+
 ## Training access
 
 Generate one common pilot integrator dataset with gain 0.3 and leak 0.999 on all

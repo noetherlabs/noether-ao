@@ -46,8 +46,22 @@ millisecond timestep; that does not establish millisecond wall-clock execution.
 These entry points reproduce the v0 experiment designs. The [predeclared controller
 study](controller_study_v1.md) has committed training, validation, selection and
 evaluation commands, documented in its [execution contract](controller_study_execution.md).
-Do not execute the reserved configuration until full-run resource sizing and the
-separately seeded runner smoke are complete.
+Do not execute the reserved configuration until the target passes the storage
+preflight and the separately seeded runner smoke is complete.
+
+Check the destination filesystem before creating a controller-study run:
+
+```sh
+.venv/bin/noether-optics study-resources \
+  --config configs/controller_study_v1.yaml \
+  --target runs/controller-study-v1
+```
+
+The command is read-only and prints one JSON report. For the frozen v1 plan it
+derives 42,166,977,776 bytes of numeric payload and requires 105,033,365,984 free
+bytes after conservative archive, metadata, temporary-write and operating envelopes.
+It credits no NPZ compression and exits 2 when the target filesystem is too small.
+This is storage planning, not a timing result or permission to use reserved cohorts.
 
 ## Local Dragrace contribution
 

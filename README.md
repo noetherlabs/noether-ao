@@ -114,16 +114,31 @@ Independent validation adds:
 | Validation command | Implemented; positive provenance-bound `study-validate` chunks; physics starts only after ledger checks |
 | Selection command | Implemented; resume-only `study-select` audits complete validation and freezes chosen or withheld controllers |
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
+| Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
-| Complete new controller comparison | Pending; resource/disk sizing, full-runner smoke, reserved-cohort execution and final report |
+| Complete new controller comparison | Pending; full-runner smoke, adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |
 
 The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,
 separate stochastic cohorts and simultaneous paired uncertainty. Reserved outcomes
 have not been acquired. The [execution contract](docs/controller_study_execution.md)
-tracks component boundaries and the complete four-stage command surface. The
-reserved study remains procedurally blocked until resource sizing and
-the separate full-runner smoke are complete. The [roadmap](ROADMAP.md) defines the
+tracks component boundaries and the complete four-stage command surface. A static
+preflight now derives the full evidence budget without importing JAX or accessing a
+cohort:
+
+```sh
+.venv/bin/noether-optics study-resources \
+  --config configs/controller_study_v1.yaml \
+  --target runs/controller-study-v1
+```
+
+It budgets 42,166,977,776 bytes of numeric payload, 94,996,396,512 bytes for retained
+evidence, and 105,033,365,984 required free bytes after temporary-write headroom and
+operating reserve. Compression receives no credit. The command prints auditable JSON,
+creates no directory and returns status 2 when capacity is insufficient. The reserved
+study's `study-train --create` path enforces the same budget and has no bypass flag.
+The study remains blocked until the separate full-runner smoke passes and a target
+filesystem satisfies this preflight. The [roadmap](ROADMAP.md) defines the
 next deliverables and deployment gates. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
 runs without acquiring benchmark timings.
 

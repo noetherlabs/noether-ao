@@ -42,11 +42,14 @@ bind their returned provenance references with the training evidence. The learne
 fit journal now preserves episode losses/gradients, replays saved episodes through
 the unchanged optimizer and returns terminal model/history references. The training
 coordinator integrates those references with durable pilot/predictor records and
-freezes one immutable bundle after every fitted candidate terminates. Complete
-resource reporting and full-run disk sizing before reserved-cohort acquisition.
+freezes one immutable bundle after every fitted candidate terminates. Static
+whole-run disk sizing is complete: 42.167 GB of numeric payload yields a conservative
+105.033 GB free-space threshold with zero compression credit. The current development
+filesystem fails that gate; use a qualifying volume rather than reducing evidence.
 The separate component smoke has passed. The adapter must enter evaluation through
 the ledger's lazy callback, after the gate.
-Verify on separately labeled physical smoke seeds without using reserved cohorts.
+Verify the complete stage sequence on separately labeled physical smoke seeds without
+using reserved cohorts.
 Commit the complete runner before the full study. Ledger fixtures are not physical
 smoke evidence or study outcomes.
 

@@ -10,7 +10,7 @@ Choose a route through the project:
 | Check predeclared physical criteria | [Acceptance gates](acceptance.md) |
 | Assess independent sensor validation | [Pyramid protocol](pyramid_validation.md) |
 | Understand the next controller comparison | [Study protocol](controller_study_v1.md) |
-| Work on durable execution and recovery | [Execution contract](controller_study_execution.md) |
+| Work on durable execution, resource admission and recovery | [Execution contract](controller_study_execution.md) |
 | Follow deployment and release milestones | [Roadmap](../ROADMAP.md) |
 | Make a change | [Contributing](../CONTRIBUTING.md) |
 

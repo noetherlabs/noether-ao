@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add a read-only `study-resources` preflight that derives the complete controller
+  study's retained numeric payload and conservative free-space requirement from the
+  frozen plan and array schemas. Report every category as JSON, credit no compression,
+  create no target, enforce the same gate on `study-train --create`, and return
+  status 2 on insufficient capacity.
+
 - Add a provenance-bound `study-evaluate` command with an explicit positive chunk
   limit, frozen-selection admission and lazy held-out physics. Resume reports are
   deterministic JSON and cannot bypass selection or create a study run.

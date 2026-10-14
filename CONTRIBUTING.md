@@ -38,6 +38,8 @@ performance. Report platform skips and failed checks explicitly.
 - Keep training, validation and evaluation cohorts disjoint; never tune on results
   already used for an evaluation claim.
 - Retain numerical failures, negative findings and all declared comparisons.
+- Run `study-resources` against the intended volume before a full controller study;
+  do not reduce retained evidence or assume compression to pass the capacity gate.
 - Distinguish simulated time from measured execution time. Collect timings outside
   CI, with no concurrent compute workload.
 - Rebuild affected reports from saved arrays and verify that protected inputs are

@@ -17,11 +17,23 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Validation barrier | `study-validate` dispatch, complete-training admission and positive bounded trial chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Selection | `study-select` dispatch, complete validation audit, eligibility checks and frozen models before held-out evaluation | [CLI](../src/noether_optics/cli.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Evaluation barrier | `study-evaluate` dispatch, frozen-selection admission and positive bounded held-out chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
+| Resource preflight | Static array-schema accounting, conservative archive envelope and read-only target-filesystem admission | [resource sizing](../src/noether_optics/controller_resources.py), [CLI](../src/noether_optics/cli.py) |
 
 The distinction between software correctness, physical agreement and scientific
 performance is part of the design. A passing test checks an implementation contract.
 A physical gate checks a declared model property. A controller claim requires
 retained trials and an explicit comparison with uncertainty.
+
+The storage preflight stays outside the numerical dependency graph:
+
+    frozen study + pinned base -> planned cases + saved-array schemas
+                                  -> retained evidence envelope
+                                  -> temporary headroom + reserve
+                                  -> target free-space admission
+
+It imports no simulator, generates no atmosphere or detector stream and assigns no
+benefit to data-dependent compression. Elapsed compilation, fitting and trial costs
+remain measurements for an isolated run; they are not inferred by this estimator.
 
 ## Model boundary
 
