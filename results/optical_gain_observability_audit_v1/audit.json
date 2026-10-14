@@ -145,7 +145,252 @@
         "detected_runs": 0,
         "detection_delay_frames": []
       }
-    ]
+    ],
+    "development_persistence_screen": {
+      "selection_status": "post_hoc_development_only",
+      "persistence_windows": 8,
+      "alarm_definition": "eight consecutive strict lower-threshold crossings; alarm frame is the streak endpoint; a fault detection requires every streak endpoint at or after onset",
+      "clean_evaluation": {
+        "runs": 5,
+        "alarm_runs": 0,
+        "eligible_alarm_frames": 550,
+        "alarm_frames": 0,
+        "alarm_frame_fraction": 0.0,
+        "maximum_consecutive_crossing_windows_by_seed": [
+          {
+            "seed": 101,
+            "windows": 0
+          },
+          {
+            "seed": 102,
+            "windows": 0
+          },
+          {
+            "seed": 103,
+            "windows": 0
+          },
+          {
+            "seed": 104,
+            "windows": 5
+          },
+          {
+            "seed": 105,
+            "windows": 0
+          }
+        ]
+      },
+      "fault_screen": [
+        {
+          "fault": "stuck_actuator",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "optical_gain",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 5,
+          "detection_delay_frames": [
+            17,
+            16,
+            15,
+            13,
+            15
+          ],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 70
+            },
+            {
+              "seed": 102,
+              "windows": 71
+            },
+            {
+              "seed": 103,
+              "windows": 68
+            },
+            {
+              "seed": 104,
+              "windows": 33
+            },
+            {
+              "seed": 105,
+              "windows": 48
+            }
+          ]
+        },
+        {
+          "fault": "misregistration",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "vibration",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "model_mismatch",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "late_twin",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "missing_twin",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        }
+      ]
+    }
   },
   "passive_response_scale": {
     "definition": "dot(prediction-reference, measurement-reference) / squared_norm(prediction-reference)",
@@ -211,6 +456,7 @@
   "interpretation": [
     "The original upper-tail detector missed optical-gain drift in every retained M4 run.",
     "In this legacy development screen, a four-frame lower-tail score detected all five optical-gain runs with no pre-onset alarm in those runs, while one of five clean runs alarmed.",
+    "Adding eight-window persistence post hoc removes that clean development alarm and retains all five gain detections with persistence-complete delays of 13 to 17 frames; this is candidate selection, not validation.",
     "The one seed with saved full WFS frames shows why passive scale regression is insufficient: its settled median stayed near one while the paired clean-to-gain residual variance increased substantially.",
     "These observations select a candidate for fresh predeclared training and validation; they do not validate a detector, recovery action, instrument behavior or safety claim."
   ],

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Freeze the optical-gain observability v1 protocol with hash-bound base physics,
+  disjoint fresh streams, training-only lower-tail calibration, validation release
+  gates, sealed held-out conditions, paired controller-error inference, a complete
+  retention contract and a predeclared modal-dither escalation. Generate an
+  outcome-free plan for 1,504 maximum trials and preserve the legacy persistence
+  screen as development evidence only.
+
 - Add a hash-bound, read-only audit of the retained M4 fault evidence. Record that
   the upper-tail score misses all five old optical-gain runs, screen a lower-tail
   candidate without new simulation, and make the reused cohort explicitly ineligible

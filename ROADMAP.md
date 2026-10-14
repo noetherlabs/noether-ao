@@ -25,15 +25,16 @@ are satisfied; the latter remains blocked on the current development volume.
 
 **In progress.** The baseline misses optical-gain drift and shows harmful vibration
 fallback. A read-only [legacy-evidence audit](results/optical_gain_observability_audit_v1/README.md)
-shows that the upper-tail score moves downward under the simplified gain fault. A
-four-frame lower-tail candidate detected all five old gain-drift runs, but one of five
-clean runs also alarmed. Those data are development-only and cannot validate P2.
-Predeclare fresh, disjoint training/validation/evaluation cohorts and run-level gates;
-freeze the detector before held-out fault trials.
+shows that the upper-tail score moves downward under the simplified gain fault. The
+[v1 observability protocol](docs/optical_gain_observability_v1.md) now freezes a
+training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
+cohorts and validation-only release gates. The plan is unexecuted: no fresh threshold
+or outcome exists. Next implement immutable calibration/release artifacts and pass a
+separately seeded runner smoke before accessing a declared cohort.
 
-Deliverable: a report of clean false alarms, missed faults, detection delay and the
-paired wavefront effect of recovery. A detector result must include the consequence
-of its control action. See the [research queue](docs/development/TODOS.md).
+Deliverable: a report of clean false alarms, missed faults, detection delay and paired
+fault-versus-clean controller error. Any later recovery experiment must also report
+the consequence of its control action. See the [research queue](docs/development/TODOS.md).
 
 ## 3. Qualify an instrument interface
 

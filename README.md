@@ -95,10 +95,11 @@ data and limits. The timing figures describe CPU propagation components on an
 Apple M1; they do not establish a full control-loop deadline.
 
 A read-only [optical-gain observability audit](results/optical_gain_observability_audit_v1/README.md)
-reclassifies the old M4 cohort as P2 development evidence. Its exploratory lower-tail
-candidate detects all five old gain-drift runs but still alarms in one of five clean
-runs. This selects a candidate for fresh predeclared cohorts; it is not detector
-validation or evidence for a recovery action.
+reclassifies the old M4 cohort as P2 development evidence. It selects a four-frame
+lower-tail score with eight-window persistence, then the frozen
+[P2 protocol](docs/optical_gain_observability_v1.md) assigns fresh, disjoint training,
+validation and sealed evaluation streams. No P2 threshold or outcome has been
+generated; the candidate is not validated and cannot act on the controller.
 
 Independent validation adds:
 
@@ -125,6 +126,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
+| Optical-gain observability protocol | Frozen, hash-bound and unexecuted; implementation and nonreserved runner smoke pending |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |

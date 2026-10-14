@@ -15,8 +15,8 @@ gain drift.
 
 A causal four-frame mean with a separately calibrated lower threshold is therefore a
 plausible candidate. Using the original three clean calibration seeds and a 0.005
-lower quantile, the exploratory threshold is **5.49682**. Applied to the old M4
-evaluation cohort, it gives:
+lower quantile, the exploratory threshold is **5.49682**. Applied directly to the old
+M4 evaluation cohort, it gives:
 
 | Check | Exploratory result |
 | --- | --- |
@@ -27,10 +27,17 @@ evaluation cohort, it gives:
 | Clean alarm windows | 5/585 (0.8547%) |
 | Other simulated faults crossing the lower threshold | 0/30 runs |
 
-These numbers select a candidate; they are not validation results. The window and
-tail were chosen after inspecting the old cohort. Both must be frozen before a new
-validation cohort, and the final threshold must be calibrated only from fresh P2
-training evidence.
+The five clean crossings were one consecutive excursion in seed 104. Requiring eight
+consecutive lower-threshold windows removes that old clean alarm and retains all five
+old gain detections; persistence completes 13, 15, 15, 16 and 17 frames after onset.
+The gain runs contain crossing streaks of at least 33 windows, whereas the longest
+clean streak is five windows.
+
+This persistence rule is also post hoc. These numbers select a candidate; they are
+not validation results. The lower tail, four-frame statistic and eight-window
+persistence were chosen after inspecting the old cohort. They must be frozen before
+a new validation cohort, and the numerical threshold must be calibrated only from
+fresh P2 training evidence.
 
 ## Why passive response regression is insufficient
 

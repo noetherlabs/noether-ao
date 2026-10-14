@@ -1,0 +1,502 @@
+{
+  "kind": "predeclared_plan",
+  "status": "not_executed",
+  "study_id": "optical_gain_observability_v1",
+  "regimes": [
+    {
+      "id": "regime-00",
+      "photons": 1000.0,
+      "wind_scale": 0.5
+    },
+    {
+      "id": "regime-01",
+      "photons": 1000.0,
+      "wind_scale": 2.0
+    },
+    {
+      "id": "regime-02",
+      "photons": 1000000.0,
+      "wind_scale": 0.5
+    },
+    {
+      "id": "regime-03",
+      "photons": 1000000.0,
+      "wind_scale": 2.0
+    }
+  ],
+  "conditions": {
+    "training": [
+      "clean"
+    ],
+    "validation": [
+      "clean",
+      "gain_035"
+    ],
+    "evaluation": [
+      "clean",
+      "gain_035",
+      "gain_065",
+      "vibration",
+      "misregistration"
+    ]
+  },
+  "condition_classes": {
+    "target": [
+      "gain_035",
+      "gain_065"
+    ],
+    "nuisance": [
+      "vibration",
+      "misregistration"
+    ]
+  },
+  "seed_streams": {
+    "training": [
+      {
+        "atmosphere": 310001,
+        "detector": 410001
+      },
+      {
+        "atmosphere": 310002,
+        "detector": 410002
+      },
+      {
+        "atmosphere": 310003,
+        "detector": 410003
+      },
+      {
+        "atmosphere": 310004,
+        "detector": 410004
+      },
+      {
+        "atmosphere": 310005,
+        "detector": 410005
+      },
+      {
+        "atmosphere": 310006,
+        "detector": 410006
+      },
+      {
+        "atmosphere": 310007,
+        "detector": 410007
+      },
+      {
+        "atmosphere": 310008,
+        "detector": 410008
+      },
+      {
+        "atmosphere": 310009,
+        "detector": 410009
+      },
+      {
+        "atmosphere": 310010,
+        "detector": 410010
+      },
+      {
+        "atmosphere": 310011,
+        "detector": 410011
+      },
+      {
+        "atmosphere": 310012,
+        "detector": 410012
+      },
+      {
+        "atmosphere": 310013,
+        "detector": 410013
+      },
+      {
+        "atmosphere": 310014,
+        "detector": 410014
+      },
+      {
+        "atmosphere": 310015,
+        "detector": 410015
+      },
+      {
+        "atmosphere": 310016,
+        "detector": 410016
+      }
+    ],
+    "validation": [
+      {
+        "atmosphere": 320001,
+        "detector": 420001
+      },
+      {
+        "atmosphere": 320002,
+        "detector": 420002
+      },
+      {
+        "atmosphere": 320003,
+        "detector": 420003
+      },
+      {
+        "atmosphere": 320004,
+        "detector": 420004
+      },
+      {
+        "atmosphere": 320005,
+        "detector": 420005
+      },
+      {
+        "atmosphere": 320006,
+        "detector": 420006
+      },
+      {
+        "atmosphere": 320007,
+        "detector": 420007
+      },
+      {
+        "atmosphere": 320008,
+        "detector": 420008
+      },
+      {
+        "atmosphere": 320009,
+        "detector": 420009
+      },
+      {
+        "atmosphere": 320010,
+        "detector": 420010
+      },
+      {
+        "atmosphere": 320011,
+        "detector": 420011
+      },
+      {
+        "atmosphere": 320012,
+        "detector": 420012
+      },
+      {
+        "atmosphere": 320013,
+        "detector": 420013
+      },
+      {
+        "atmosphere": 320014,
+        "detector": 420014
+      },
+      {
+        "atmosphere": 320015,
+        "detector": 420015
+      },
+      {
+        "atmosphere": 320016,
+        "detector": 420016
+      },
+      {
+        "atmosphere": 320017,
+        "detector": 420017
+      },
+      {
+        "atmosphere": 320018,
+        "detector": 420018
+      },
+      {
+        "atmosphere": 320019,
+        "detector": 420019
+      },
+      {
+        "atmosphere": 320020,
+        "detector": 420020
+      },
+      {
+        "atmosphere": 320021,
+        "detector": 420021
+      },
+      {
+        "atmosphere": 320022,
+        "detector": 420022
+      },
+      {
+        "atmosphere": 320023,
+        "detector": 420023
+      },
+      {
+        "atmosphere": 320024,
+        "detector": 420024
+      },
+      {
+        "atmosphere": 320025,
+        "detector": 420025
+      },
+      {
+        "atmosphere": 320026,
+        "detector": 420026
+      },
+      {
+        "atmosphere": 320027,
+        "detector": 420027
+      },
+      {
+        "atmosphere": 320028,
+        "detector": 420028
+      },
+      {
+        "atmosphere": 320029,
+        "detector": 420029
+      },
+      {
+        "atmosphere": 320030,
+        "detector": 420030
+      }
+    ],
+    "evaluation": [
+      {
+        "atmosphere": 330001,
+        "detector": 430001
+      },
+      {
+        "atmosphere": 330002,
+        "detector": 430002
+      },
+      {
+        "atmosphere": 330003,
+        "detector": 430003
+      },
+      {
+        "atmosphere": 330004,
+        "detector": 430004
+      },
+      {
+        "atmosphere": 330005,
+        "detector": 430005
+      },
+      {
+        "atmosphere": 330006,
+        "detector": 430006
+      },
+      {
+        "atmosphere": 330007,
+        "detector": 430007
+      },
+      {
+        "atmosphere": 330008,
+        "detector": 430008
+      },
+      {
+        "atmosphere": 330009,
+        "detector": 430009
+      },
+      {
+        "atmosphere": 330010,
+        "detector": 430010
+      },
+      {
+        "atmosphere": 330011,
+        "detector": 430011
+      },
+      {
+        "atmosphere": 330012,
+        "detector": 430012
+      },
+      {
+        "atmosphere": 330013,
+        "detector": 430013
+      },
+      {
+        "atmosphere": 330014,
+        "detector": 430014
+      },
+      {
+        "atmosphere": 330015,
+        "detector": 430015
+      },
+      {
+        "atmosphere": 330016,
+        "detector": 430016
+      },
+      {
+        "atmosphere": 330017,
+        "detector": 430017
+      },
+      {
+        "atmosphere": 330018,
+        "detector": 430018
+      },
+      {
+        "atmosphere": 330019,
+        "detector": 430019
+      },
+      {
+        "atmosphere": 330020,
+        "detector": 430020
+      },
+      {
+        "atmosphere": 330021,
+        "detector": 430021
+      },
+      {
+        "atmosphere": 330022,
+        "detector": 430022
+      },
+      {
+        "atmosphere": 330023,
+        "detector": 430023
+      },
+      {
+        "atmosphere": 330024,
+        "detector": 430024
+      },
+      {
+        "atmosphere": 330025,
+        "detector": 430025
+      },
+      {
+        "atmosphere": 330026,
+        "detector": 430026
+      },
+      {
+        "atmosphere": 330027,
+        "detector": 430027
+      },
+      {
+        "atmosphere": 330028,
+        "detector": 430028
+      },
+      {
+        "atmosphere": 330029,
+        "detector": 430029
+      },
+      {
+        "atmosphere": 330030,
+        "detector": 430030
+      },
+      {
+        "atmosphere": 330031,
+        "detector": 430031
+      },
+      {
+        "atmosphere": 330032,
+        "detector": 430032
+      },
+      {
+        "atmosphere": 330033,
+        "detector": 430033
+      },
+      {
+        "atmosphere": 330034,
+        "detector": 430034
+      },
+      {
+        "atmosphere": 330035,
+        "detector": 430035
+      },
+      {
+        "atmosphere": 330036,
+        "detector": 430036
+      },
+      {
+        "atmosphere": 330037,
+        "detector": 430037
+      },
+      {
+        "atmosphere": 330038,
+        "detector": 430038
+      },
+      {
+        "atmosphere": 330039,
+        "detector": 430039
+      },
+      {
+        "atmosphere": 330040,
+        "detector": 430040
+      },
+      {
+        "atmosphere": 330041,
+        "detector": 430041
+      },
+      {
+        "atmosphere": 330042,
+        "detector": 430042
+      },
+      {
+        "atmosphere": 330043,
+        "detector": 430043
+      },
+      {
+        "atmosphere": 330044,
+        "detector": 430044
+      },
+      {
+        "atmosphere": 330045,
+        "detector": 430045
+      },
+      {
+        "atmosphere": 330046,
+        "detector": 430046
+      },
+      {
+        "atmosphere": 330047,
+        "detector": 430047
+      },
+      {
+        "atmosphere": 330048,
+        "detector": 430048
+      },
+      {
+        "atmosphere": 330049,
+        "detector": 430049
+      },
+      {
+        "atmosphere": 330050,
+        "detector": 430050
+      },
+      {
+        "atmosphere": 330051,
+        "detector": 430051
+      },
+      {
+        "atmosphere": 330052,
+        "detector": 430052
+      },
+      {
+        "atmosphere": 330053,
+        "detector": 430053
+      },
+      {
+        "atmosphere": 330054,
+        "detector": 430054
+      },
+      {
+        "atmosphere": 330055,
+        "detector": 430055
+      },
+      {
+        "atmosphere": 330056,
+        "detector": 430056
+      },
+      {
+        "atmosphere": 330057,
+        "detector": 430057
+      },
+      {
+        "atmosphere": 330058,
+        "detector": 430058
+      },
+      {
+        "atmosphere": 330059,
+        "detector": 430059
+      },
+      {
+        "atmosphere": 330060,
+        "detector": 430060
+      }
+    ]
+  },
+  "planned_training_trials": 64,
+  "planned_validation_trials": 240,
+  "maximum_planned_evaluation_trials": 1200,
+  "maximum_planned_trials": 1504,
+  "planned_evaluation_fault_clean_pairs": 960,
+  "predeclared_paired_error_family": 16,
+  "simultaneous_interval_confidence": 0.996875,
+  "zero_clean_alarm_run_upper_bounds": {
+    "validation_one_sided_95": 0.09503385285530419,
+    "evaluation_one_sided_95": 0.04870291331009746
+  },
+  "thresholds_generated": false,
+  "outcomes_generated": false,
+  "validation_decision_generated": false,
+  "evaluation_released": false,
+  "protocol_sha256": "2b387e8108fb801e6594cbb4531e9e2951f3f245279382ed65e399ce88243221",
+  "base_config_sha256": "71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731"
+}

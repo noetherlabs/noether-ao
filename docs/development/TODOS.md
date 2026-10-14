@@ -239,12 +239,17 @@ in those runs, and one clean alarm run out of five. Passive response regression 
 near nominal in the one full-frame seed while residual variance rose by 2.99 times.
 The old cohort is now ineligible for P2 evaluation.
 
-Next, write and freeze the P2 protocol: new nonoverlapping seed streams; training-only
-calibration; a validation-only freeze; run-level and frame-level false-alarm gates;
-target-fault misses and detected-only delay; paired clean/fault controller error; and
-no fallback action during observability assessment. Predeclare any escalation from
-the passive lower-tail candidate to modal dither or an independent sensing channel;
-do not choose that branch after inspecting new held-out outcomes.
+The [P2 v1 protocol](../optical_gain_observability_v1.md) is frozen and unexecuted. It
+assigns new nonoverlapping seed streams; training-only, per-regime calibration; a
+validation-only release; run-, frame- and raw-crossing gates; target misses and
+detected-only delay; paired clean/fault controller error; and no detector action or
+fallback. It predeclares modal dither with paired science controls as the first v2
+escalation. No new threshold or outcome has been generated.
+
+Next, implement immutable calibration and validation-release artifacts, deterministic
+resumption, complete retention and storage admission. Prove that path with distinct
+nonreserved smoke seeds before opening any v1 cohort. Do not reuse controller-study
+smoke evidence as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection

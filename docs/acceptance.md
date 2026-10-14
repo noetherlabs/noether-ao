@@ -28,3 +28,16 @@ failed run pass. Diagnostic attempts must save their own outputs.
 - M7 reproduce: install from the lock in a fresh checkout, run all correctness tests,
   regenerate tables/plots from raw data, and run the documented experiment entry
   points. Exact timing equality is neither expected nor claimed across runs/hosts.
+
+## P2 optical-gain observability release gate
+
+The frozen [P2 protocol](optical_gain_observability_v1.md) calibrates one numerical
+threshold per regime from training-clean data, then makes it immutable. Evaluation
+remains sealed unless every regime has 0/30 clean alarm runs, clean raw crossing
+fraction at most 0.01, clean alarm-frame fraction at most 0.001, 0/30 gain pre-onset
+alarms, at least 29/30 gain detections, at most one miss, every detected delay at most
+32 frames, finite outputs, no fallback or unavailable frames, and zero saturation.
+
+Failure is retained and evaluation is withheld. Passing is an engineering screen,
+not an instrument or safety qualification. The detector is observational and cannot
+support a recovery claim.

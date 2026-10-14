@@ -727,3 +727,25 @@ error before testing any intervention. A modal dither changes the plant, and an
 auxiliary focal-plane estimator changes the sensing contract. If either is to follow
 the passive candidate, freeze that branch and its science-impact control before
 opening new evaluation outcomes.
+
+## Freeze passive optical-gain observability v1 (2026-10-14)
+
+Use four photon/wind regimes and new 310001, 320001 and 330001 seed families for
+training, validation and evaluation. Pair conditions within each regime and exclude
+all earlier scientific roots plus their detector-key derivatives. Calibrate a strict
+0.005 lower threshold separately in each regime from 16 training-clean roots. Freeze
+the causal four-frame mean and eight consecutive crossing rule before validation;
+never carry the legacy numerical threshold forward.
+
+Keep evaluation sealed unless all four regimes pass the complete validation gate.
+The severe gain ramp must produce at least 29/30 qualifying detections with no
+pre-onset alarm and persistence completed within the 32-frame drift. Clean validation
+requires zero alarm runs, raw crossing fraction at most 0.01 and persistent alarm-frame
+fraction at most 0.001. Treat these as engineering screens: zero clean alarms in 30
+runs still permits a 9.50% one-sided 95% binomial upper bound.
+
+The detector remains observational. Retain paired clean/fault controller errors, but
+do not alter commands or test fallback. If v1 fails or is inadequate, the next route
+is a new modal-dither protocol with fresh cohorts and a dither-free paired science
+control. Independent focal-plane sensing remains a separate later contract; v1
+held-out outcomes may not choose between those branches.

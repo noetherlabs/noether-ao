@@ -542,3 +542,26 @@ response regression changes by only −1.83%, while paired residual variance ris
 detector has been validated, no fallback was activated, and no new seed, timing or
 reserved evidence was acquired. The next step is a frozen P2 protocol with fresh
 training, validation and evaluation streams.
+
+## Frozen optical-gain observability protocol v1
+
+The P2 v1 protocol is now machine-readable, bound to the unchanged base simulation
+hash and represented by an exclusive-write generated plan. Static validation rejects
+direct and derived seed collisions, missing prior exclusions, base-config drift,
+candidate changes, relaxed release gates, altered inference and post-outcome escalation
+selection. The plan declares 64 training trials, 240 validation trials and at most
+1,200 evaluation trials across four photon/wind regimes. It explicitly records that
+no threshold, outcome, validation decision or evaluation release exists.
+
+The old audit now records the post hoc persistence choice exactly. Eight consecutive
+lower crossings remove the one legacy clean excursion and retain all five legacy gain
+detections, with persistence-complete delays of 13–17 frames. Those data remain
+development-only. The frozen v1 numerical threshold will be calibrated separately per
+regime from fresh training-clean data; evaluation stays sealed unless every validation
+regime passes.
+
+No simulator, fresh seed, timing path, fallback or controller action was used in this
+increment. The next boundary is implementation plus a separate nonreserved runner
+smoke and storage preflight before any declared cohort is opened. The focused audit
+and protocol suite passes **34 tests**; the complete local correctness suite passes
+**404 tests in 89.44 seconds**.

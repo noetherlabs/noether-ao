@@ -1,0 +1,178 @@
+# Optical-gain observability protocol v1
+
+## Status and question
+
+This is a frozen, unexecuted P2 protocol. The machine-readable
+[configuration](../configs/optical_gain_observability_v1.yaml) is bound to the base
+simulation by SHA256; the generated [plan](../plans/optical_gain_observability_v1.json)
+contains seed identities and budgets, with every outcome, threshold and release field
+set to false.
+
+The question is narrow: **can a training-calibrated lower-tail transform of the
+existing whitened residual score detect the simplified scalar optical-gain ramp under
+fresh conditions without unacceptable clean alarms?** The detector observes a fixed
+forward controller. It cannot change a command, latch fallback or claim recovery.
+
+The retained M4 cohort is development evidence only. Its
+[read-only audit](../results/optical_gain_observability_audit_v1/README.md) selected
+the candidate below after outcomes were visible, so no M4 seed is eligible for a P2
+validation or evaluation claim.
+
+## Frozen candidate
+
+For each regime, let `s[f]` be the existing whitened residual score at frame `f`.
+After the 128-frame burn-in, the first statistic is the causal four-frame arithmetic
+mean ending at frame 131:
+
+```text
+m[f] = mean(s[f-3], s[f-2], s[f-1], s[f])
+```
+
+The numerical threshold is the NumPy `linear` 0.005 quantile of all training-clean
+`m[f]` values in that regime. A raw crossing uses strict comparison `m[f] < threshold`.
+An alarm frame is an endpoint with eight consecutive raw crossings. The first possible
+alarm is therefore frame 138. A run alarms if any eligible alarm frame exists. To
+attribute an alarm to an injected condition, all eight crossing endpoints in that
+streak must be at or after fault onset; a nearly complete pre-onset streak cannot earn
+a detection at the boundary.
+
+The tail, averaging window, quantile, strict comparison, regime-specific calibration
+and persistence are frozen. There is no union with the legacy upper-tail detector.
+Thresholds come from fresh training-clean records only and become immutable before
+validation. Validation cannot recalibrate them.
+
+Eight-window persistence is a post hoc development choice. In the old M4 evidence,
+the only clean excursion lasted five windows while all five gain-fault runs contained
+streaks of at least 33 windows. Persistence removed the old clean alert and completed
+gain alarms 13–17 frames after onset. That result motivates the rule; it does not
+estimate fresh performance.
+
+## Plant and cohorts
+
+The protocol inherits the base ideal-pyramid plant, then fixes 512 frames, a 128-frame
+burn-in, fault onset at frame 256 and a 32-frame gain ramp. The tested controller is
+`forward` at gain 0.3 and leak 0.999. It is not refit. Every trial uses exact Poisson
+plus read noise, with fallback and detector-to-command coupling disabled.
+
+| Role | Roots per regime | Conditions | Planned trials |
+| --- | ---: | --- | ---: |
+| Training | 16 | clean | 64 |
+| Validation | 30 | clean, terminal gain 0.35 | 240 |
+| Evaluation | 60 | clean, gain 0.35, gain 0.65, vibration, misregistration | 1,200 |
+| **Maximum** |  |  | **1,504** |
+
+The four regimes are the Cartesian product of 1,000 and 1,000,000 photons with wind
+scales 0.5 and 2.0. Within a role and regime, every condition reuses the same atmosphere
+and detector roots to form paired comparisons. The same roots are common random
+numbers across regimes. Training, validation and evaluation streams are otherwise
+disjoint, including the detector key offset. The validator excludes all recorded
+baseline, latency, reserved-controller and smoke roots and their derived detector
+streams.
+
+The gain conditions linearly move the sensor response to multipliers 0.35 or 0.65 over
+32 frames. Vibration retains the base 0.7 rad, 40 Hz injection; misregistration retains
+the two-pixel shift. These are simulation faults, not instrument-calibrated envelopes.
+
+## Alarm accounting
+
+- A clean alarm run contains any persistent alarm from frame 138 through frame 511.
+- A pre-onset alarm run contains an alarm completion before frame 256.
+- A target detection requires no pre-onset alarm, a streak beginning at or after frame
+  256 and its first completion in `[263, 512)`. Every other target run is a miss.
+- A persistent event that straddles frame 256 is reported separately as a boundary
+  alarm and never credited as a target detection or nuisance response.
+- Detection delay is `first_alarm_frame - 256` and is summarized only for detected
+  runs. The miss count is always shown beside it.
+- Nuisance conditions report alarmed and quiet runs, rather than borrowing the target
+  language of hits and misses.
+- Raw crossing, persistent alarm-frame and run fractions use their explicit eligible
+  denominators. Frame values are temporally correlated and receive no binomial
+  confidence interval.
+
+## Validation release gate
+
+Each of the four regimes must independently satisfy every row. One failure seals the
+entire evaluation cohort and remains a retained negative result.
+
+| Gate per regime | Frozen criterion |
+| --- | ---: |
+| Clean alarm runs | 0 / 30 |
+| Clean raw crossing fraction | at most 0.01 |
+| Clean persistent alarm-frame fraction | at most 0.001 |
+| Gain-0.35 pre-onset alarm runs | 0 / 30 |
+| Gain-0.35 qualifying detections | at least 29 / 30 |
+| Gain-0.35 misses | at most 1 / 30 |
+| Detected-only completion delay | every value at most 32 frames |
+| Full-run integrity | all finite; no fallback, unavailable frame or saturation |
+
+The clean run gate is decisive; the persistent frame gate is retained as a separate
+accounting and consistency boundary. The raw crossing gate checks whether the
+training-calibrated tail transfers before persistence suppresses excursions.
+
+These are engineering screening thresholds. If zero of 30 validation-clean runs alarm,
+the one-sided 95% Clopper–Pearson upper bound is still 9.50%. Passing does not establish
+an operational false-alarm rate or safety guarantee.
+
+## Evaluation and inference
+
+Evaluation is opened once, only after a complete immutable validation decision passes
+all regimes. It cannot alter the threshold, persistence or release criteria. Evaluation
+is descriptive; it has no second pass/fail gate.
+
+Run-level clean, target and nuisance proportions receive two-sided 95% exact
+Clopper–Pearson intervals. With zero alarms among 60 clean runs in one regime, the
+one-sided 95% upper bound is 4.87%. Alarm-frame and raw-crossing fractions remain
+descriptive because adjacent windows share samples and atmosphere dynamics.
+
+Every nonclean evaluation condition is paired with its clean record at the same
+regime and seed. Over the declared fault window `[256, 512)`, the primary
+controller-error quantity is `WFE_fault - WFE_clean` in nanometres. Paired Student-t
+intervals use familywise alpha 0.05 with Bonferroni
+correction over 16 predeclared cells: four nonclean conditions by four regimes. Each
+interval therefore has confidence 99.6875%. Strehl deltas are secondary descriptive
+values. Detection does not change either trajectory, so these comparisons measure
+fault consequence under observation, not recovery benefit.
+
+## Evidence and failure handling
+
+Every trial retains the score, lower statistic, raw crossing, P2 alarm, residual
+variance, Strehl, saturation, fallback, model-availability, command and
+applied-command arrays. Explicit frame-index arrays bind the 381 statistic endpoints
+(131–511) and 374 persistence-eligible alarm endpoints (138–511); startup frames are
+not represented by fabricated zeros or NaNs. Per-run WFE, Strehl and saturation
+metrics are retained separately. Measurement and prediction frames are retained for
+the first seed of every role/regime/condition cell. Failed numerical outcomes stay in
+the cohort. Storage planning receives no compression credit.
+
+Before acquisition, the implementation must add a separate runner smoke, immutable
+threshold and release artifacts, source/runtime bindings, deterministic resumption,
+and a whole-run storage preflight. Unit tests and this plan are not execution evidence.
+
+## Predeclared escalation
+
+If v1 fails validation or yields inadequate held-out behavior, v1 ends with that
+result. The first escalation is **modal dither** in a new
+`optical_gain_observability_v2` protocol with wholly new training, validation and
+evaluation streams. That protocol must pair each dithered trial with a dither-free
+science control and report WFE, Strehl and command RMS impact. V1 held-out outcomes
+may not be used to choose a different escalation branch.
+
+This route follows the independent-excitation approach described by
+[Deo et al. (2019)](https://doi.org/10.1051/0004-6361/201935847). An independent
+focal-plane channel, as studied by
+[Chambouleyron et al. (2021)](https://arxiv.org/abs/2103.02297), changes the sensing
+contract more substantially and requires a separate later protocol. Neither route is
+implemented or evaluated here.
+
+## Rebuild the plan
+
+This command validates the base hash and seed separation, then writes with exclusive
+creation. It imports no JAX module and does not simulate, calibrate or inspect a cohort.
+
+```sh
+.venv/bin/python scripts/plan_optical_gain_observability.py \
+  --config configs/optical_gain_observability_v1.yaml \
+  --out runs/optical-gain-observability-plan.json
+```
+
+The committed plan must match the rebuilt JSON apart from its chosen output path.

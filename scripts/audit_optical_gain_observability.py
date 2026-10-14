@@ -12,6 +12,7 @@ import numpy as np
 
 WINDOW_FRAMES = 4
 LOWER_QUANTILE = 0.005
+PERSISTENCE_WINDOWS = 8
 SCALE_QUANTILES = (0.1, 0.5, 0.9)
 
 
@@ -42,6 +43,33 @@ def causal_mean(score: np.ndarray, burn_in: int, window: int) -> tuple[np.ndarra
     statistic = np.convolve(values[burn_in:], np.ones(window) / window, mode="valid")
     frames = np.arange(burn_in + window - 1, len(values), dtype=int)
     return frames, statistic
+
+
+def persistent_alarm(crossings: np.ndarray, persistence: int) -> np.ndarray:
+    """Mark each endpoint whose current crossing streak meets ``persistence``."""
+    values = np.asarray(crossings)
+    if values.ndim != 1 or values.dtype != np.dtype(bool):
+        raise ValueError("Crossings must be a boolean vector")
+    if not isinstance(persistence, int) or persistence < 1:
+        raise ValueError("Persistence must be a positive integer")
+    if persistence > len(values):
+        raise ValueError("Crossing vector is too short for the requested persistence")
+    counts = np.convolve(values.astype(np.int64), np.ones(persistence, dtype=np.int64), mode="full")
+    alarms = counts[: len(values)] == persistence
+    alarms[: persistence - 1] = False
+    return alarms
+
+
+def maximum_true_run(values: np.ndarray) -> int:
+    """Return the longest consecutive run in a boolean vector."""
+    flags = np.asarray(values)
+    if flags.ndim != 1 or flags.dtype != np.dtype(bool):
+        raise ValueError("Values must be a boolean vector")
+    maximum = current = 0
+    for flag in flags:
+        current = current + 1 if flag else 0
+        maximum = max(maximum, current)
+    return maximum
 
 
 def _score(path: Path, frames: int) -> np.ndarray:
@@ -152,23 +180,44 @@ def build_audit(source: Path) -> dict[str, Any]:
             raise ValueError(f"Incomplete no-fallback cohort for {fault}")
 
     fault_screen: list[dict[str, Any]] = []
+    persistence_fault_screen: list[dict[str, Any]] = []
     clean_flags: list[bool] = []
+    clean_persistent_flags: list[bool] = []
+    clean_maximum_runs: list[dict[str, int]] = []
     clean_run_alarms = 0
+    clean_persistent_run_alarms = 0
     for fault, fault_records in records.items():
         pre_onset = 0
         delays: list[int] = []
-        for _, path in sorted(fault_records):
+        persistent_pre_onset = 0
+        persistent_delays: list[int] = []
+        maximum_runs: list[dict[str, int]] = []
+        for seed, path in sorted(fault_records):
             score = _score(path, frames)
             frame_ids, statistic = causal_mean(score, burn_in, WINDOW_FRAMES)
-            alarms = statistic < lower_threshold
+            crossings = statistic < lower_threshold
+            alarms = persistent_alarm(crossings, PERSISTENCE_WINDOWS)
+            maximum_runs.append({"seed": seed, "windows": maximum_true_run(crossings)})
             if fault == "none":
-                clean_flags.extend(alarms.tolist())
-                clean_run_alarms += int(np.any(alarms))
+                clean_flags.extend(crossings.tolist())
+                clean_persistent_flags.extend(alarms[PERSISTENCE_WINDOWS - 1 :].tolist())
+                clean_run_alarms += int(np.any(crossings))
+                clean_persistent_run_alarms += int(np.any(alarms))
+                clean_maximum_runs.append(maximum_runs[-1])
                 continue
-            pre_onset += int(np.any(alarms[frame_ids < onset]))
-            detected = frame_ids[(frame_ids >= onset) & (frame_ids < end) & alarms]
+            pre_onset += int(np.any(crossings[frame_ids < onset]))
+            detected = frame_ids[(frame_ids >= onset) & (frame_ids < end) & crossings]
             if len(detected):
                 delays.append(int(detected[0] - onset))
+            persistent_pre_onset += int(np.any(alarms[frame_ids < onset]))
+            # A streak already underway before onset cannot earn a fault detection.
+            persistent_detected = frame_ids[
+                (frame_ids >= onset + PERSISTENCE_WINDOWS - 1)
+                & (frame_ids < end)
+                & alarms
+            ]
+            if len(persistent_detected):
+                persistent_delays.append(int(persistent_detected[0] - onset))
         if fault != "none":
             fault_screen.append({
                 "fault": fault,
@@ -176,6 +225,14 @@ def build_audit(source: Path) -> dict[str, Any]:
                 "pre_onset_alarm_runs": pre_onset,
                 "detected_runs": len(delays),
                 "detection_delay_frames": delays,
+            })
+            persistence_fault_screen.append({
+                "fault": fault,
+                "runs": len(fault_records),
+                "pre_onset_alarm_runs": persistent_pre_onset,
+                "detected_runs": len(persistent_delays),
+                "detection_delay_frames": persistent_delays,
+                "maximum_consecutive_crossing_windows_by_seed": maximum_runs,
             })
 
     clean_records = records.get("none", [])
@@ -238,6 +295,24 @@ def build_audit(source: Path) -> dict[str, Any]:
                 "window_false_alarm_fraction": float(np.mean(clean_flags)),
             },
             "fault_screen": fault_screen,
+            "development_persistence_screen": {
+                "selection_status": "post_hoc_development_only",
+                "persistence_windows": PERSISTENCE_WINDOWS,
+                "alarm_definition": (
+                    "eight consecutive strict lower-threshold crossings; alarm frame is the "
+                    "streak endpoint; a fault detection requires every streak endpoint at or "
+                    "after onset"
+                ),
+                "clean_evaluation": {
+                    "runs": len(clean_records),
+                    "alarm_runs": clean_persistent_run_alarms,
+                    "eligible_alarm_frames": len(clean_persistent_flags),
+                    "alarm_frames": int(np.count_nonzero(clean_persistent_flags)),
+                    "alarm_frame_fraction": float(np.mean(clean_persistent_flags)),
+                    "maximum_consecutive_crossing_windows_by_seed": clean_maximum_runs,
+                },
+                "fault_screen": persistence_fault_screen,
+            },
         },
         "passive_response_scale": {
             "definition": "dot(prediction-reference, measurement-reference) / squared_norm(prediction-reference)",
@@ -260,6 +335,7 @@ def build_audit(source: Path) -> dict[str, Any]:
         "interpretation": [
             "The original upper-tail detector missed optical-gain drift in every retained M4 run.",
             "In this legacy development screen, a four-frame lower-tail score detected all five optical-gain runs with no pre-onset alarm in those runs, while one of five clean runs alarmed.",
+            "Adding eight-window persistence post hoc removes that clean development alarm and retains all five gain detections with persistence-complete delays of 13 to 17 frames; this is candidate selection, not validation.",
             "The one seed with saved full WFS frames shows why passive scale regression is insufficient: its settled median stayed near one while the paired clean-to-gain residual variance increased substantially.",
             "These observations select a candidate for fresh predeclared training and validation; they do not validate a detector, recovery action, instrument behavior or safety claim.",
         ],

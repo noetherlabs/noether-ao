@@ -1,0 +1,282 @@
+# Frozen P2 inputs. This file and its generated plan contain no measured outcomes.
+schema_version: 1
+study_id: optical_gain_observability_v1
+base_config: configs/simulation.yaml
+base_config_sha256: 71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731
+seeds:
+  training:
+    - 310001
+    - 310002
+    - 310003
+    - 310004
+    - 310005
+    - 310006
+    - 310007
+    - 310008
+    - 310009
+    - 310010
+    - 310011
+    - 310012
+    - 310013
+    - 310014
+    - 310015
+    - 310016
+  validation:
+    - 320001
+    - 320002
+    - 320003
+    - 320004
+    - 320005
+    - 320006
+    - 320007
+    - 320008
+    - 320009
+    - 320010
+    - 320011
+    - 320012
+    - 320013
+    - 320014
+    - 320015
+    - 320016
+    - 320017
+    - 320018
+    - 320019
+    - 320020
+    - 320021
+    - 320022
+    - 320023
+    - 320024
+    - 320025
+    - 320026
+    - 320027
+    - 320028
+    - 320029
+    - 320030
+  evaluation:
+    - 330001
+    - 330002
+    - 330003
+    - 330004
+    - 330005
+    - 330006
+    - 330007
+    - 330008
+    - 330009
+    - 330010
+    - 330011
+    - 330012
+    - 330013
+    - 330014
+    - 330015
+    - 330016
+    - 330017
+    - 330018
+    - 330019
+    - 330020
+    - 330021
+    - 330022
+    - 330023
+    - 330024
+    - 330025
+    - 330026
+    - 330027
+    - 330028
+    - 330029
+    - 330030
+    - 330031
+    - 330032
+    - 330033
+    - 330034
+    - 330035
+    - 330036
+    - 330037
+    - 330038
+    - 330039
+    - 330040
+    - 330041
+    - 330042
+    - 330043
+    - 330044
+    - 330045
+    - 330046
+    - 330047
+    - 330048
+    - 330049
+    - 330050
+    - 330051
+    - 330052
+    - 330053
+    - 330054
+    - 330055
+    - 330056
+    - 330057
+    - 330058
+    - 330059
+    - 330060
+  noise_offset: 100000
+  # Baseline, latency, reserved-controller, component-smoke and runner-smoke roots.
+  excluded_prior_roots:
+    - 11
+    - 12
+    - 13
+    - 17
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 20261008
+    - 21001
+    - 21002
+    - 21003
+    - 22001
+    - 22002
+    - 22003
+    - 22004
+    - 22005
+    - 23001
+    - 23002
+    - 23003
+    - 23004
+    - 23005
+    - 23006
+    - 23007
+    - 23008
+    - 23009
+    - 23010
+    - 24001
+    - 51001
+    - 51002
+    - 51003
+    - 52001
+    - 52002
+    - 52003
+    - 52004
+    - 52005
+    - 53001
+    - 53002
+    - 53003
+    - 53004
+    - 53005
+    - 53006
+    - 53007
+    - 53008
+    - 53009
+    - 53010
+    - 54001
+    - 61001
+    - 61002
+    - 61003
+    - 62001
+    - 62002
+    - 62003
+    - 62004
+    - 62005
+    - 63001
+    - 63002
+    - 63003
+    - 63004
+    - 63005
+    - 63006
+    - 63007
+    - 63008
+    - 63009
+    - 63010
+    - 64001
+loop:
+  frames: 512
+  burn_in: 128
+  fault_onset: 256
+  fault_end: 512
+  optical_gain_drift_frames: 32
+regimes:
+  photons: [1000.0, 1000000.0]
+  wind_scales: [0.5, 2.0]
+  common_random_numbers_across_regimes: true
+controller:
+  name: forward
+  gain: 0.3
+  leak: 0.999
+  refit: false
+  noise: poisson_plus_read
+  fallback: false
+  detector_output_affects_command: false
+detector:
+  source_signal: existing_whitened_residual_score
+  statistic: causal_arithmetic_mean
+  window_frames: 4
+  tail: lower
+  training_quantile: 0.005
+  quantile_method: linear
+  comparison: strict_less_than
+  threshold_scope: per_regime
+  calibration_source: training_clean_only
+  persistence_windows: 8
+  target_streak_must_begin_at_or_after_onset: true
+  upper_tail_union: false
+  freeze_before_validation: true
+  recalibration_after_validation: false
+conditions:
+  training: [clean]
+  validation: [clean, gain_035]
+  evaluation: [clean, gain_035, gain_065, vibration, misregistration]
+  target_conditions: [gain_035, gain_065]
+  nuisance_conditions: [vibration, misregistration]
+  pair_same_seed_across_conditions: true
+faults:
+  gain_035: {kind: optical_gain, terminal_response_multiplier: 0.35}
+  gain_065: {kind: optical_gain, terminal_response_multiplier: 0.65}
+  vibration: {kind: vibration, amplitude_rad: 0.7, frequency_hz: 40.0}
+  misregistration: {kind: misregistration, shift_pixels: 2}
+validation:
+  scope: each_regime
+  integrity_interval: full_run
+  saturation_interval: full_run
+  release_evaluation_only_if_all_regimes_pass: true
+  max_clean_alarm_runs: 0
+  max_clean_raw_crossing_fraction: 0.01
+  max_clean_alarm_frame_fraction: 0.001
+  max_gain_pre_onset_alarm_runs: 0
+  min_gain_detected_runs: 29
+  max_gain_missed_runs: 1
+  max_detection_delay_frames: 32
+  require_all_finite: true
+  require_no_fallback: true
+  require_no_unavailable: true
+  max_saturation_fraction: 0.0
+  failure_action: withhold_evaluation_and_retain_failure
+evaluation:
+  state_before_validation: sealed
+  descriptive_no_pass_claim: true
+  run_interval_method: clopper_pearson_exact_two_sided
+  run_interval_confidence: 0.95
+  frame_interval_method: none_temporally_correlated_descriptive_only
+  paired_error_method: paired_student_t_bonferroni
+  primary_paired_error_metric: wfe_nm
+  paired_error_interval: fault_onset_to_fault_end
+  paired_error_familywise_alpha: 0.05
+  paired_error_family: all_nonclean_conditions_by_regime
+  secondary_error_metrics: [strehl]
+  secondary_interval_method: descriptive_only
+reporting:
+  clean: [alarm_runs, alarm_run_fraction, alarm_frames, alarm_frame_fraction, raw_crossing_fraction]
+  targets: [detected_runs_without_prior_alarm, missed_runs, pre_onset_alarm_runs, boundary_straddling_alarm_runs, detected_only_delay_frames]
+  nuisances: [alarm_runs_without_prior_alarm, quiet_runs, pre_onset_alarm_runs, boundary_straddling_alarm_runs, alarm_delay_frames]
+  controller_error: [paired_wfe_nm_delta, paired_strehl_delta, saturation_fraction]
+  integrity: [finite_runs, fallback_frames, unavailable_frames, failed_runs]
+retention:
+  all_trial_frame_arrays: [score, statistic_frame_id, lower_statistic, raw_crossing, alarm_frame_id, p2_alarm, variance, strehl, saturated, fallback, unavailable, command, applied]
+  all_trial_metrics: [wfe_nm, strehl, saturation_fraction]
+  full_wfs_arrays: [measurement, prediction]
+  full_wfs_policy: first_seed_per_role_regime_condition
+  retain_failed_runs: true
+  compression_credit: false
+escalation:
+  next_protocol: optical_gain_observability_v2
+  next_candidate: modal_dither
+  trigger: v1_validation_failure_or_inadequate_v1_evaluation
+  requires_new_training_validation_evaluation_seeds: true
+  requires_dither_free_paired_science_control: true
+  science_impact_metrics: [wfe_nm, strehl, command_rms]
+  v1_held_out_outcomes_may_not_select_escalation: true
+  independent_sensing_requires_separate_later_protocol: true
