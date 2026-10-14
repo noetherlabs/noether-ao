@@ -276,9 +276,11 @@ declared array shapes and dtypes; retains post-burn-in WFE, Strehl and saturatio
 hash-bound metadata; and keeps produced numerical failures. Training raw streams stay
 immutable while threshold-derived traces are added as separate artifacts at freeze.
 
-Next, prove this path with distinct nonreserved smoke seeds before opening any v1
-cohort on an admitted filesystem. Do not reuse controller-study smoke evidence as an
-observability runner check.
+The strict reduced runner protocol now assigns distinct nonreserved streams and uses
+the production physical commands without entering evaluation. Execute it from clean
+committed source on a filesystem that passes its 5.370 GB admission gate, protect and
+rebuild the evidence, then keep v1 sealed until its separate 10.191 GB gate passes. Do
+not reuse controller-study smoke evidence as an observability runner check.
 
 Acceptance: clean-run and frame false alarms, pre-onset alarms, missed detections,
 detected-only delay, and paired controller error all reported. Useful detection

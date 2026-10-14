@@ -12,6 +12,8 @@ UINT32_LIMIT = 2**32
 BASE_CONFIG = "configs/simulation.yaml"
 BASE_CONFIG_SHA256 = "71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731"
 ROLE_COUNTS = {"training": 16, "validation": 30, "evaluation": 60}
+ROLES = tuple(ROLE_COUNTS)
+SMOKE_STUDY_ID = "optical_gain_observability_runner_smoke_v1"
 PRIOR_ROOTS = frozenset(
     {11, 12, 13, 17, 101, 102, 103, 104, 105, 20261008}
     | set(range(21001, 21004))
@@ -27,6 +29,90 @@ PRIOR_ROOTS = frozenset(
     | set(range(63001, 63011))
     | {64001}
 )
+V1_ROOTS = frozenset(
+    range(310001, 310017)
+) | frozenset(
+    range(320001, 320031)
+) | frozenset(
+    range(330001, 330061)
+)
+
+PROFILES = {
+    "optical_gain_observability_v1": {
+        "base_config": BASE_CONFIG,
+        "base_config_sha256": BASE_CONFIG_SHA256,
+        "role_counts": ROLE_COUNTS,
+        "reserved_roots": PRIOR_ROOTS,
+        "loop": {
+            "frames": 512,
+            "burn_in": 128,
+            "fault_onset": 256,
+            "fault_end": 512,
+            "optical_gain_drift_frames": 32,
+        },
+        "regimes": {
+            "photons": [1000.0, 1000000.0],
+            "wind_scales": [0.5, 2.0],
+            "common_random_numbers_across_regimes": True,
+        },
+        "validation": {
+            "scope": "each_regime",
+            "integrity_interval": "full_run",
+            "saturation_interval": "full_run",
+            "release_evaluation_only_if_all_regimes_pass": True,
+            "max_clean_alarm_runs": 0,
+            "max_clean_raw_crossing_fraction": 0.01,
+            "max_clean_alarm_frame_fraction": 0.001,
+            "max_gain_pre_onset_alarm_runs": 0,
+            "min_gain_detected_runs": 29,
+            "max_gain_missed_runs": 1,
+            "max_detection_delay_frames": 32,
+            "require_all_finite": True,
+            "require_no_fallback": True,
+            "require_no_unavailable": True,
+            "max_saturation_fraction": 0.0,
+            "failure_action": "withhold_evaluation_and_retain_failure",
+        },
+    },
+    SMOKE_STUDY_ID: {
+        "base_config": "configs/controller_runner_smoke_base.yaml",
+        "base_config_sha256": (
+            "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1"
+        ),
+        "role_counts": {"training": 2, "validation": 2, "evaluation": 2},
+        "reserved_roots": PRIOR_ROOTS | V1_ROOTS,
+        "loop": {
+            "frames": 24,
+            "burn_in": 4,
+            "fault_onset": 16,
+            "fault_end": 24,
+            "optical_gain_drift_frames": 4,
+        },
+        "regimes": {
+            "photons": [1000000.0],
+            "wind_scales": [1.0],
+            "common_random_numbers_across_regimes": True,
+        },
+        "validation": {
+            "scope": "each_regime",
+            "integrity_interval": "full_run",
+            "saturation_interval": "full_run",
+            "release_evaluation_only_if_all_regimes_pass": True,
+            "max_clean_alarm_runs": 0,
+            "max_clean_raw_crossing_fraction": 0.01,
+            "max_clean_alarm_frame_fraction": 0.001,
+            "max_gain_pre_onset_alarm_runs": 0,
+            "min_gain_detected_runs": 2,
+            "max_gain_missed_runs": 0,
+            "max_detection_delay_frames": 8,
+            "require_all_finite": True,
+            "require_no_fallback": True,
+            "require_no_unavailable": True,
+            "max_saturation_fraction": 0.0,
+            "failure_action": "withhold_evaluation_and_retain_failure",
+        },
+    },
+}
 
 
 def _keys(value: Any, expected: set[str], label: str) -> dict[str, Any]:
@@ -59,16 +145,20 @@ def _exact(actual: Any, expected: Any, label: str) -> None:
 
 
 def validate_protocol(config: dict[str, Any]) -> None:
-    """Reject leakage or any change to the frozen v1 scientific contract."""
+    """Reject leakage or drift in a supported observability contract."""
     top = {
         "schema_version", "study_id", "base_config", "base_config_sha256", "seeds",
         "loop", "regimes", "controller", "detector", "conditions", "faults",
         "validation", "evaluation", "reporting", "retention", "escalation",
     }
     _keys(config, top, "protocol")
-    if config["schema_version"] != 1 or config["study_id"] != "optical_gain_observability_v1":
+    if config["schema_version"] != 1 or config["study_id"] not in PROFILES:
         raise ValueError("Unsupported optical-gain protocol identity")
-    if config["base_config"] != BASE_CONFIG or config["base_config_sha256"] != BASE_CONFIG_SHA256:
+    profile = PROFILES[config["study_id"]]
+    if (
+        config["base_config"] != profile["base_config"]
+        or config["base_config_sha256"] != profile["base_config_sha256"]
+    ):
         raise ValueError("Unsupported base simulation binding")
 
     seeds = _keys(
@@ -82,8 +172,9 @@ def validate_protocol(config: dict[str, Any]) -> None:
     excluded = _seed_list(seeds["excluded_prior_roots"], "prior exclusion", 1)
     if not excluded.issuperset(PRIOR_ROOTS):
         raise ValueError("Prior exclusions must retain every recorded scientific seed root")
-    used = excluded | {seed + offset for seed in excluded}
-    for role, count in ROLE_COUNTS.items():
+    reserved = excluded | profile["reserved_roots"]
+    used = reserved | {seed + offset for seed in reserved}
+    for role, count in profile["role_counts"].items():
         roots = _seed_list(seeds[role], role, count)
         if len(roots) != count:
             raise ValueError(f"{role} requires exactly {count} seeds")
@@ -96,18 +187,8 @@ def validate_protocol(config: dict[str, Any]) -> None:
             )
         used |= streams
 
-    _exact(
-        config["loop"],
-        {"frames": 512, "burn_in": 128, "fault_onset": 256, "fault_end": 512,
-         "optical_gain_drift_frames": 32},
-        "loop",
-    )
-    _exact(
-        config["regimes"],
-        {"photons": [1000.0, 1000000.0], "wind_scales": [0.5, 2.0],
-         "common_random_numbers_across_regimes": True},
-        "regime",
-    )
+    _exact(config["loop"], profile["loop"], "loop")
+    _exact(config["regimes"], profile["regimes"], "regime")
     _exact(
         config["controller"],
         {"name": "forward", "gain": 0.3, "leak": 0.999, "refit": False,
@@ -144,20 +225,7 @@ def validate_protocol(config: dict[str, Any]) -> None:
          "misregistration": {"kind": "misregistration", "shift_pixels": 2}},
         "fault",
     )
-    _exact(
-        config["validation"],
-        {"scope": "each_regime", "integrity_interval": "full_run",
-         "saturation_interval": "full_run",
-         "release_evaluation_only_if_all_regimes_pass": True,
-         "max_clean_alarm_runs": 0, "max_clean_raw_crossing_fraction": 0.01,
-         "max_clean_alarm_frame_fraction": 0.001, "max_gain_pre_onset_alarm_runs": 0,
-         "min_gain_detected_runs": 29, "max_gain_missed_runs": 1,
-         "max_detection_delay_frames": 32, "require_all_finite": True,
-         "require_no_fallback": True, "require_no_unavailable": True,
-         "max_saturation_fraction": 0.0,
-         "failure_action": "withhold_evaluation_and_retain_failure"},
-        "validation gate",
-    )
+    _exact(config["validation"], profile["validation"], "validation gate")
     _exact(
         config["evaluation"],
         {"state_before_validation": "sealed", "descriptive_no_pass_claim": True,
@@ -249,7 +317,7 @@ def protocol_plan(config: dict[str, Any]) -> dict[str, Any]:
         "status": "not_executed",
         "study_id": config["study_id"],
         "regimes": regimes,
-        "conditions": {role: conditions[role] for role in ROLE_COUNTS},
+        "conditions": {role: conditions[role] for role in ROLES},
         "condition_classes": {
             "target": conditions["target_conditions"],
             "nuisance": conditions["nuisance_conditions"],
@@ -257,7 +325,7 @@ def protocol_plan(config: dict[str, Any]) -> dict[str, Any]:
         "seed_streams": {
             role: [{"atmosphere": seed, "detector": seed + seeds["noise_offset"]}
                    for seed in seeds[role]]
-            for role in ROLE_COUNTS
+            for role in ROLES
         },
         "planned_training_trials": training,
         "planned_validation_trials": validation,

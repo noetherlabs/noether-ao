@@ -57,6 +57,29 @@ def main() -> None:
     observability_resources.add_argument(
         "--target", required=True,
         help="Planned observability directory; it is inspected but not created")
+    observability_training = commands.add_parser("observability-train")
+    observability_training.add_argument("--config", required=True)
+    observability_training.add_argument("--out", required=True)
+    observability_training.add_argument(
+        "--create", action="store_true",
+        help="Create a new observability run; omit when resuming the same bound run")
+    observability_training.add_argument(
+        "--limit", type=_positive_integer, required=True,
+        help="Maximum new training records")
+    observability_freeze_training = commands.add_parser(
+        "observability-freeze-training")
+    observability_freeze_training.add_argument("--config", required=True)
+    observability_freeze_training.add_argument("--out", required=True)
+    observability_validation = commands.add_parser("observability-validate")
+    observability_validation.add_argument("--config", required=True)
+    observability_validation.add_argument("--out", required=True)
+    observability_validation.add_argument(
+        "--limit", type=_positive_integer, required=True,
+        help="Maximum new validation records")
+    observability_freeze_validation = commands.add_parser(
+        "observability-freeze-validation")
+    observability_freeze_validation.add_argument("--config", required=True)
+    observability_freeze_validation.add_argument("--out", required=True)
     args = parser.parse_args()
     if args.experiment == "observability-resources":
         from .observability_resources import load_resource_inputs, resource_preflight
@@ -65,6 +88,38 @@ def main() -> None:
         print(json.dumps(result, sort_keys=True))
         if not result["admitted"]:
             raise SystemExit(2)
+        return
+    if args.experiment == "observability-train":
+        from .observability_resources import load_resource_inputs, resource_preflight
+        from .observability_trials import open_observability_run, train_trials
+        if args.create:
+            protocol, planned_base = load_resource_inputs(Path(args.config))
+            preflight = resource_preflight(protocol, planned_base, Path(args.out))
+            if not preflight["admitted"]:
+                print(json.dumps(preflight, sort_keys=True))
+                raise SystemExit(2)
+        ledger, base, _ = open_observability_run(
+            Path(args.out), Path(args.config), create=args.create)
+        result = train_trials(ledger, base, args.limit)
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "observability-freeze-training":
+        from .observability_trials import open_observability_run
+        ledger, _, _ = open_observability_run(Path(args.out), Path(args.config))
+        result, artifact = ledger.freeze_training()
+        print(json.dumps({"artifact": artifact, "result": result}, sort_keys=True))
+        return
+    if args.experiment == "observability-validate":
+        from .observability_trials import open_observability_run, validate_trials
+        ledger, base, _ = open_observability_run(Path(args.out), Path(args.config))
+        result = validate_trials(ledger, base, args.limit)
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "observability-freeze-validation":
+        from .observability_trials import open_observability_run
+        ledger, _, _ = open_observability_run(Path(args.out), Path(args.config))
+        result, artifact = ledger.freeze_validation()
+        print(json.dumps({"artifact": artifact, "result": result}, sort_keys=True))
         return
     if args.experiment == "study-resources":
         from .controller_resources import load_resource_inputs, resource_preflight

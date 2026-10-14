@@ -201,10 +201,13 @@ printing its JSON report when capacity is insufficient. The first live check fou
 7,994,904,576 bytes free and refused admission. This is a filesystem observation, not
 an execution cost or outcome.
 
-Before acquisition, the implementation must still pass a separate nonreserved runner
-smoke through the physical callbacks on a filesystem that passes storage admission.
-Unit tests and mocked callback checks are not execution evidence, and no P2 threshold,
-validation decision or outcome exists yet.
+Before acquisition, the implementation must still pass the committed
+`optical_gain_observability_runner_smoke_v1` protocol through the physical callbacks
+on a filesystem that passes its 5,370,101,856-byte admission gate. The reduced smoke
+uses two training and two paired validation roots on a 24-frame plant, never enters
+evaluation, and does not require a favorable detector outcome. Unit tests and mocked
+callback checks are not execution evidence, and no P2 threshold, validation decision
+or outcome exists yet.
 
 The physical callback entry points enforce the full storage envelope before every
 chunk. The check adds current free bytes to filesystem blocks already allocated by

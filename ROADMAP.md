@@ -40,8 +40,10 @@ trials as 1,568 numeric archives: 2.341 GB of numeric payload requires a conserv
 now apply the frozen controller/fault settings, retain complete typed arrays and bind
 post-burn-in metrics. Threshold-dependent training traces are added immutably during
 the calibration freeze. The current development volume failed the read-only gate at
-7.995 GB free and no run was created. Next pass a separately seeded runner smoke before
-accessing a declared cohort on an admitted filesystem.
+7.995 GB free and no run was created. A strict reduced runner protocol and the four
+bounded physical stage commands are now prepared with separate nonreserved streams.
+Next execute and protect that smoke before accessing a declared cohort on an admitted
+filesystem.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

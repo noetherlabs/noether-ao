@@ -871,3 +871,25 @@ numerical callback. Keep the bare ledger constructor as a low-level synthetic-te
 boundary; the physical entry points require the provenance artifacts. Load the base
 YAML through the same hash-checking byte path during ledger construction, provenance
 capture and validation release so no check-then-reread window can substitute data.
+
+## Observability runner-smoke boundary (2026-10-14)
+
+Use a dedicated tracked protocol on the existing reduced 8-pixel, four-mode,
+8-pixel-detector plant. Keep the production physical adapter, ledger, threshold and
+validation-decision code unchanged while reducing the loop to 24 frames and one
+photon/wind regime. Assign new 710001, 720001 and 730001 seed families; reserve both
+their derived detector streams and every frozen P2 v1 stream.
+
+Complete two clean training trials, freeze and exactly re-enter the threshold, then
+complete two paired clean/gain validation roots and freeze and exactly re-enter the
+decision. Retain every required frame array, metric, provenance object and terminal
+record. Require the resource envelope, durable stage counts, declared report fields,
+protected-file hashes and source binding to pass. A favorable detector result is not
+a smoke gate: retain either release or withholding and report it only as a reduced
+implementation outcome.
+
+Do not acquire any smoke evaluation trial. A smoke validation artifact cannot open,
+alter or authorize the frozen `optical_gain_observability_v1` evaluation cohort. Run
+only from clean committed source, outside CI and without timing. The static reduced
+envelope requires 5,370,101,856 free bytes; admission remains a real gate even though
+the numeric payload is only 237,616 bytes.

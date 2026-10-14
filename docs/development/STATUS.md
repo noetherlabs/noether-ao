@@ -701,3 +701,23 @@ observability runner smoke on an admitted filesystem.
 After review replaced the remaining check-then-reread base-YAML paths with the exact
 byte-bound loader, the **155-test observability, audit, resource and CLI suite passes**.
 Its duration is likewise withheld because the host remained contended.
+
+## Observability runner smoke prepared
+
+A dedicated `optical_gain_observability_runner_smoke_v1` contract now exercises the
+same physical adapter, ledger, training threshold and validation decision paths on the
+existing 8-pixel/four-mode reduced plant. It assigns wholly separate 710001, 720001
+and 730001 atmosphere families and derived detector streams, retains two training and
+four validation trials, and acquires no evaluation record. Its static maximum contains
+237,616 bytes of numeric payload and requires 5,370,101,856 free bytes under the same
+conservative evidence envelope.
+
+Four bounded commands expose physical training, threshold freeze, validation and
+decision freeze. The smoke runner requires clean committed source, refuses CI, checks
+storage before creation, protects the complete command/run inventory and rebuilds the
+gate report from retained evidence. Release or withholding is reported but is not a
+smoke acceptance gate. The focused observability boundary passes **170 tests**; no
+smoke seed, physical result, threshold, decision or timing was opened. Next commit and
+verify this runner, then acquire it once the reduced storage gate is admitted. The
+complete local correctness suite passes **518 tests in 255.14 seconds**; this is test
+wall time, not an experiment timing measurement.

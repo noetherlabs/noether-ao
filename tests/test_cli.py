@@ -11,7 +11,7 @@ from noether_optics import controller_evidence as evidence
 from noether_optics import controller_resources as resources
 from noether_optics import controller_training_stage as training_stage
 from noether_optics import controller_trials as trials
-from noether_optics import observability_resources
+from noether_optics import observability_resources, observability_trials
 from noether_optics.experiments import runners
 
 
@@ -77,6 +77,139 @@ def test_observability_resources_reports_without_opening_a_run(
     loaded.assert_called_once_with(Path("protocol.yaml"))
     checked.assert_called_once_with(protocol, base, Path("planned-run"))
     assert json.loads(capsys.readouterr().out) == report
+
+
+@pytest.mark.parametrize("create", [False, True])
+def test_observability_train_dispatches_admitted_physical_chunk(
+    monkeypatch, capsys, create
+):
+    ledger, base = SimpleNamespace(), {"fixture": "base"}
+    summary = {"complete": False, "new_records": 1, "total_records": 1}
+    opened = Mock(return_value=(ledger, base, [{"fixture": "evidence"}]))
+    trained = Mock(return_value=summary)
+    loaded = Mock(return_value=({"study_id": "fixture"}, base))
+    preflight = {"admitted": True, "budget": {"required_free_bytes": 123456}}
+    checked = Mock(return_value=preflight)
+    monkeypatch.setattr(observability_trials, "open_observability_run", opened)
+    monkeypatch.setattr(observability_trials, "train_trials", trained)
+    monkeypatch.setattr(observability_resources, "load_resource_inputs", loaded)
+    monkeypatch.setattr(observability_resources, "resource_preflight", checked)
+    argv = [
+        "noether-optics", "observability-train", "--config", "protocol.yaml",
+        "--out", "run", "--limit", "1",
+    ]
+    if create:
+        argv.append("--create")
+    monkeypatch.setattr("sys.argv", argv)
+
+    cli.main()
+
+    if create:
+        loaded.assert_called_once_with(Path("protocol.yaml"))
+        checked.assert_called_once_with({"study_id": "fixture"}, base, Path("run"))
+    else:
+        loaded.assert_not_called()
+        checked.assert_not_called()
+    opened.assert_called_once_with(
+        Path("run"), Path("protocol.yaml"), create=create
+    )
+    trained.assert_called_once_with(ledger, base, 1)
+    assert json.loads(capsys.readouterr().out) == summary
+
+
+def test_observability_train_creation_refuses_insufficient_capacity(
+    monkeypatch, capsys
+):
+    report = {"kind": "optical_gain_observability_resource_preflight", "admitted": False}
+    monkeypatch.setattr(
+        observability_resources, "load_resource_inputs", Mock(return_value=({}, {}))
+    )
+    monkeypatch.setattr(
+        observability_resources, "resource_preflight", Mock(return_value=report)
+    )
+    monkeypatch.setattr(
+        observability_trials,
+        "open_observability_run",
+        lambda *args, **kwargs: pytest.fail("run opened after disk refusal"),
+    )
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "observability-train", "--config", "protocol.yaml",
+        "--out", "run", "--limit", "1", "--create",
+    ])
+
+    with pytest.raises(SystemExit) as error:
+        cli.main()
+
+    assert error.value.code == 2
+    assert json.loads(capsys.readouterr().out) == report
+
+
+@pytest.mark.parametrize("command", [
+    "observability-freeze-training", "observability-freeze-validation"
+])
+def test_observability_freeze_dispatches_exact_bound_stage(
+    monkeypatch, capsys, command
+):
+    result = {"study_id": "fixture", "status": "frozen"}
+    artifact = {"path": "frozen.json", "sha256": "a" * 64}
+    method = Mock(return_value=(result, artifact))
+    ledger = SimpleNamespace()
+    setattr(
+        ledger,
+        "freeze_training" if command.endswith("training") else "freeze_validation",
+        method,
+    )
+    opened = Mock(return_value=(ledger, {"fixture": "base"}, []))
+    monkeypatch.setattr(observability_trials, "open_observability_run", opened)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", command, "--config", "protocol.yaml", "--out", "run",
+    ])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("protocol.yaml"))
+    method.assert_called_once_with()
+    assert json.loads(capsys.readouterr().out) == {
+        "artifact": artifact,
+        "result": result,
+    }
+
+
+def test_observability_validate_dispatches_bound_physical_chunk(monkeypatch, capsys):
+    ledger, base = SimpleNamespace(), {"fixture": "base"}
+    summary = {"complete": False, "new_records": 2, "total_records": 2}
+    opened = Mock(return_value=(ledger, base, [{"fixture": "evidence"}]))
+    validated = Mock(return_value=summary)
+    monkeypatch.setattr(observability_trials, "open_observability_run", opened)
+    monkeypatch.setattr(observability_trials, "validate_trials", validated)
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", "observability-validate", "--config", "protocol.yaml",
+        "--out", "run", "--limit", "2",
+    ])
+
+    cli.main()
+
+    opened.assert_called_once_with(Path("run"), Path("protocol.yaml"))
+    validated.assert_called_once_with(ledger, base, 2)
+    assert json.loads(capsys.readouterr().out) == summary
+
+
+@pytest.mark.parametrize("command", ["observability-train", "observability-validate"])
+@pytest.mark.parametrize("limit", ["0", "-1"])
+def test_observability_chunks_reject_invalid_limit_before_open(
+    monkeypatch, command, limit
+):
+    monkeypatch.setattr(
+        observability_trials,
+        "open_observability_run",
+        lambda *args, **kwargs: pytest.fail("run opened after invalid CLI input"),
+    )
+    monkeypatch.setattr("sys.argv", [
+        "noether-optics", command, "--config", "protocol.yaml",
+        "--out", "run", "--limit", limit,
+    ])
+    with pytest.raises(SystemExit):
+        cli.main()
 
 
 @pytest.mark.parametrize("extra", [[], ["--target", "run", "--limit", "1"],
