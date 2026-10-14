@@ -9,9 +9,9 @@ acceptance evidence. It is not implied by a successful simulation.
 
 **In progress.** The optical plant, training components, durable evidence storage,
 selection barrier, trial adapters, training coordination, and bounded training,
-validation and selection commands are implemented. The remaining work adds the
-evaluation command, establishes a full-run resource/disk budget, and verifies the
-complete runner on separate smoke seeds.
+validation, selection and evaluation commands are implemented. The remaining work
+establishes a full-run resource/disk budget and verifies the complete runner on
+separate smoke seeds.
 
 Deliverable: one reproducible comparison under the [frozen study protocol](docs/controller_study_v1.md),
 with all eligible controllers, paired uncertainty, failed candidates and resource

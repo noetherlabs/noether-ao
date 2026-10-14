@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add a provenance-bound `study-evaluate` command with an explicit positive chunk
+  limit, frozen-selection admission and lazy held-out physics. Resume reports are
+  deterministic JSON and cannot bypass selection or create a study run.
+
 - Add a resume-only `study-select` command that audits complete validation evidence,
   atomically freezes the deterministic selected/withheld controller set and emits
   the provenance-bound selection as sorted JSON without entering numerical physics.

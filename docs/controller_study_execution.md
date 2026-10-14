@@ -13,8 +13,9 @@ durable training records. A bounded coordinator now verifies every terminal fitt
 candidate and publishes the complete aggregate training binding. Its bounded
 `study-train` command is implemented. A bounded `study-validate` command now enters
 the existing lazy trial adapter through the ledger gate. A resume-only `study-select`
-command audits and freezes the deterministic validation verdict. The evaluation
-command, full-run resource reporting and ledger-backed physical smoke remain pending
+command audits and freezes the deterministic validation verdict. A bounded
+`study-evaluate` command now enters the same lazy adapter through the frozen-selection
+gate. Full-run resource reporting and ledger-backed physical smoke remain pending
 before any reserved cohort is used.
 The frozen YAML, plan and original M0–M7 evidence are unchanged.
 
@@ -115,11 +116,10 @@ adapter must enforce those semantics and retain enough raw evidence to audit the
   Verify frame counts and matching open-loop seeds/disturbances; vibration must
   be included in both controlled and paired open-loop truth. Keep full and fault
   intervals. References alone do not establish these physical properties.
-- Use the implemented training, validation and selection commands, then expose the
-  evaluation command. Pass a lazy evaluation callback to `evaluate_chunk`; never
-  generate evaluation arrays or preload its models before
-  the gate. Write raw artifacts atomically and exclusively before publishing their
-  ledger records.
+- Use the implemented training, validation, selection and evaluation commands.
+  Evaluation passes a lazy callback to `evaluate_chunk`; never generate evaluation
+  arrays or preload its models before the gate. Write raw artifacts atomically and
+  exclusively before publishing their ledger records.
   Preserve interrupted raw files and resume identical inputs; never silently
   overwrite or discard them.
 - Distinguish an interrupted adapter from a scientifically failed trial. Return
@@ -310,8 +310,7 @@ partial initialization, disk refusal, exact retries, numeric failure fidelity,
 write/link interruptions, concurrent writers, symlink/path rejection and pickle
 rejection. This layer performs no simulation, training, timing or reserved-cohort
 acquisition. Trial bindings and the learned-fit journal now use these writers.
-The evaluation command, full-run resource reporting and full-runner smoke checks
-remain.
+Full-run resource reporting and full-runner smoke checks remain.
 
 ## Learned fitting and its evidence contract
 
@@ -430,9 +429,9 @@ recheck their inputs and artifacts on resume without fitting again.
 Each public operation holds the ledger lock. Frozen training/selection or existing
 validation records block both entry points. Stage, provenance and artifact bindings
 are rechecked before publication. These adapters do not schedule learned candidates,
-freeze the aggregate training bundle, expose stage commands, or collect resource
-timings. The coordinator and training command now own the first three responsibilities;
-later-stage commands, resource reporting and a full-runner smoke remain outstanding.
+freeze the aggregate training bundle or collect resource timings. The coordinator
+and complete command surface now own stage execution; resource reporting and a
+full-runner smoke remain outstanding.
 
 Tests use separate 101001/102001/103001 cohorts and initialization 104001. They
 exercise chunk recovery, complete-cohort admission, measured-only fitting,
@@ -535,8 +534,7 @@ retained predictor failures, terminal-artifact drift, invalid limits, coordinato
 lock exclusion and the no-execution bound-stage path. These are software checks;
 they do not acquire reserved outcomes, timings or a controller-performance result.
 The eight new coordinator checks bring the complete local suite to 326 passing
-tests. The evaluation command, full-run resource sizing and a separate physical
-runner smoke remain.
+tests. Full-run resource sizing and a separate physical runner smoke remain.
 
 ## Bounded training command
 
@@ -617,6 +615,34 @@ optical backend and prints the complete provenance-bound selection as one sorted
 object. Sixteen focused command-boundary checks and the complete **342-test** local
 correctness suite pass in **94.85 seconds**. No study directory, physical array,
 reserved cohort, controller outcome or timing sample is created by these checks.
+
+## Bounded evaluation command
+
+After selection is frozen, held-out evaluation advances through the final stage
+command:
+
+```sh
+.venv/bin/noether-optics study-evaluate \
+  --config configs/controller_study_v1.yaml \
+  --out runs/controller-study-v1 \
+  --limit 1
+```
+
+The interface resumes an existing provenance-bound run and delegates to
+`controller_trials.evaluate_trials`. Its positive limit bounds newly committed
+evaluation records. The adapter remains lazy: `StudyLedger.evaluate_chunk` verifies
+the frozen selection, recomputes its validation verdict, audits training and artifact
+bindings, and releases only chosen-controller evaluation identities before any
+calibration, model or phase construction. Withheld controllers receive no held-out
+trials. Each record binds the selection hash, and exact resumption skips retained
+successes and failures.
+
+The command has no creation or selection side effect. Missing or nonpositive limits
+and cross-stage flags fail during argument admission before the run opener is called.
+It prints one sorted JSON progress object. Twenty-one focused command-boundary checks
+and the complete **347-test** local correctness suite pass in **90.79 seconds**. The
+tests replace the opener and evaluation entry point; no persistent study run, physical
+array, reserved cohort, controller outcome or timing sample is created.
 
 ## Original ledger engineering review and tests
 

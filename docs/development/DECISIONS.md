@@ -556,9 +556,9 @@ argument admission, before configuration loading, source capture or filesystem
 mutation. Do not expose a free-space override: the opener's existing minimum remains
 in force, while full-run sizing is still a separate pre-acquisition requirement.
 
-The command is implementation wiring only. Do not execute the reserved study until
-later-stage commands, resource/disk reporting and the separately seeded full-runner
-smoke are committed and verified.
+The command is implementation wiring only. The later-stage commands are recorded
+below. Do not execute the reserved study until resource/disk reporting and the
+separately seeded full-runner smoke are committed and verified.
 
 Validation: seven focused CLI tests pass, followed by all 333 local correctness
 tests in 291.82 seconds. No study opener or numerical backend runs in the new tests,
@@ -602,5 +602,27 @@ Validation: four new selection checks bring the focused CLI file to 16 passing t
 followed by all 342 local correctness tests in 94.85 seconds. Invalid cross-stage
 options are rejected before the mocked opener, and the valid path freezes the mocked
 ledger exactly once. No reserved evidence, numerical output or controller result is
-acquired. The evaluation command, full-run sizing and the independent runner smoke
-remain preconditions for the reserved study.
+acquired. The evaluation command is recorded below; full-run sizing and the
+independent runner smoke remain preconditions for the reserved study.
+
+## Bounded evaluation CLI (2026-10-14)
+
+Expose the existing held-out trial adapter as `noether-optics study-evaluate` with
+one required positive `--limit`. The command can only resume a provenance-bound run;
+it opens through `open_study_run`, delegates to `evaluate_trials`, and emits the
+ledger's progress summary as sorted JSON. It has no creation or selection side effect.
+
+Preserve evaluation laziness by entering only through `StudyLedger.evaluate_chunk`.
+That gate must verify and recompute the frozen selection before releasing evaluation
+identities or allowing calibration, model, atmosphere or noise construction. Chosen
+controllers alone receive held-out cases; withheld controllers remain absent. Saved
+successes and failures stay terminal and every record remains bound to the selection
+hash. The CLI adds no alternate physics, resource override or timing capture.
+
+Validation: five new evaluation checks bring the focused CLI file to 21 passing
+tests, followed by all 347 local correctness tests in 90.79 seconds. Invalid input
+is rejected before the mocked opener, and the valid path forwards the exact bound
+ledger, base configuration and chunk size once. No reserved evidence, numerical
+output or controller result is acquired. The four stage commands are now complete;
+full-run sizing and the independent runner smoke remain preconditions for the
+reserved study.

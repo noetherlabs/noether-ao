@@ -113,15 +113,16 @@ Independent validation adds:
 | Training coordination and aggregate freeze | Implemented; bounded `study-train` command, terminal-failure retention and all-model evidence binding |
 | Validation command | Implemented; positive provenance-bound `study-validate` chunks; physics starts only after ledger checks |
 | Selection command | Implemented; resume-only `study-select` audits complete validation and freezes chosen or withheld controllers |
+| Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Study ledger and trial execution | Implemented; immutable evidence and bounded validation/evaluation chunks |
-| Complete new controller comparison | Pending; evaluation command, resource sizing, full-runner smoke and reserved-cohort execution |
+| Complete new controller comparison | Pending; resource/disk sizing, full-runner smoke, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |
 
 The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,
 separate stochastic cohorts and simultaneous paired uncertainty. Reserved outcomes
 have not been acquired. The [execution contract](docs/controller_study_execution.md)
-tracks component boundaries and the committed training, validation and selection
-commands. The reserved study remains procedurally blocked until resource sizing and
+tracks component boundaries and the complete four-stage command surface. The
+reserved study remains procedurally blocked until resource sizing and
 the separate full-runner smoke are complete. The [roadmap](ROADMAP.md) defines the
 next deliverables and deployment gates. [Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
 runs without acquiring benchmark timings.

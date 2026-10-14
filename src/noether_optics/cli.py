@@ -43,6 +43,11 @@ def main() -> None:
     selection = commands.add_parser("study-select")
     selection.add_argument("--config", required=True)
     selection.add_argument("--out", required=True)
+    evaluation = commands.add_parser("study-evaluate")
+    evaluation.add_argument("--config", required=True)
+    evaluation.add_argument("--out", required=True)
+    evaluation.add_argument("--limit", type=_positive_integer, required=True,
+                            help="Maximum new evaluation records")
     args = parser.parse_args()
     if args.experiment == "study-train":
         from .controller_evidence import open_study_run
@@ -64,6 +69,13 @@ def main() -> None:
         from .controller_evidence import open_study_run
         ledger, _, _ = open_study_run(Path(args.out), Path(args.config))
         result = ledger.freeze_selection()
+        print(json.dumps(result, sort_keys=True))
+        return
+    if args.experiment == "study-evaluate":
+        from .controller_evidence import open_study_run
+        from .controller_trials import evaluate_trials
+        ledger, base, _ = open_study_run(Path(args.out), Path(args.config))
+        result = evaluate_trials(ledger, base, args.limit)
         print(json.dumps(result, sort_keys=True))
         return
     from .artifacts import load_config

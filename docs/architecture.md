@@ -16,6 +16,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Evidence and recovery | Source/runtime bindings, immutable numeric artifacts, resumable fits and trial records | [evidence](../src/noether_optics/controller_evidence.py), [fit journal](../src/noether_optics/controller_training_journal.py), [trial adapters](../src/noether_optics/controller_trials.py) |
 | Validation barrier | `study-validate` dispatch, complete-training admission and positive bounded trial chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Selection | `study-select` dispatch, complete validation audit, eligibility checks and frozen models before held-out evaluation | [CLI](../src/noether_optics/cli.py), [study ledger](../src/noether_optics/controller_selection.py) |
+| Evaluation barrier | `study-evaluate` dispatch, frozen-selection admission and positive bounded held-out chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 
 The distinction between software correctness, physical agreement and scientific
 performance is part of the design. A passing test checks an implementation contract.
