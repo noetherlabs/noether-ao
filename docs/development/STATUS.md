@@ -494,3 +494,27 @@ candidates were eligible and none of the training or validation records failed. 
 reproduce byte for byte. No reserved seed or timing sample was acquired, and this
 single held-out record supports no controller comparison. The remaining reserved-study
 blocker is the unchanged 105.033 GB storage-admission threshold.
+
+## Public-release readiness audit
+
+The release audit is complete for source commit `fa8a8b8`; the repository remains
+private and unlicensed. Before the audit, package metadata was hardened so the wheel
+includes the technical README, keeps pytest outside runtime requirements and retains
+the exact upstream Diffraction-Dragrace MIT notice. The full local suite passed 370
+tests in 92.32 seconds, and GitHub Correctness run
+[`38509422393`](https://github.com/noetherlabs/noether-ao/actions/runs/38509422393)
+passed from the same commit.
+
+Gitleaks 8.30.1 reported zero findings across 38 commits and 2,394 Git objects. A
+read-only archive inspection opened 1,372 tracked NPZ files containing 10,937 arrays
+and found no string, object or unreadable array. Two clean wheel builds produced the
+same SHA256, and an isolated no-dependency installation exposed all ten CLI commands.
+The machine-readable evidence and scoped direct-license inventory are retained under
+`results/verification/release-readiness-20261014/`.
+
+The audit verdict is **not ready for public release**. No project license exists;
+historical commits retain former `AGENTS.md` and `outbox/` paths; 35 protected result
+files contain local provenance paths; and standard wheel metadata does not reproduce
+the Git/URL dependency sources used by the locked environment. A monitored security
+route and human review of three unsent drafts also remain. No visibility, license,
+history, evidence file, reserved cohort or timing sample was changed.

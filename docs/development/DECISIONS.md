@@ -686,3 +686,23 @@ require the derived report and summary to rebuild byte for byte. Record that all
 reduced candidates were eligible, without interpreting their scores as comparative
 evidence. The run accessed no reserved stream, completed no evaluation cohort and
 recorded no timing. Full-study storage admission remains unchanged and unsatisfied.
+
+## Public-release audit boundary (2026-10-14)
+
+Audit the source, complete Git history, retained numerical archives, direct
+dependency terms and built wheel before making any public-release claim. Record
+aggregate privacy findings without copying credential candidates or private values
+into the report. Anchor package inspection to committed source and retain enough
+machine-readable evidence to repeat the decision.
+
+Treat a clean secret scan and deterministic wheel as necessary evidence, not release
+authorization. The project owner must choose the project license, publication-history
+strategy, treatment of workstation paths, dependency distribution contract, monitored
+security route and disposition of unsubmitted drafts. Do not infer those choices from
+the request for a professional repository.
+
+Do not rewrite protected scientific artifacts to remove provenance paths because that
+would invalidate recorded hashes. Do not rewrite private Git history merely because
+former agent instructions and draft locations are historical. Implement explicit
+owner choices in a separate bounded change, repeat clean installation and audit checks,
+and change visibility only when directly authorized.

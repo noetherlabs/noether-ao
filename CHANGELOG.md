@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Record a reproducible public-release audit covering complete-history credentials,
+  retained numerical archives, direct dependency terms, wheel construction and
+  package-source resolution. Preserve the private visibility and measured evidence
+  while making the remaining license, history, privacy, distribution, security and
+  draft-review decisions explicit.
+
 - Include the technical README in built package metadata, keep pytest in the
   development dependency group, and preserve the upstream MIT notice beside the
   retained Diffraction-Dragrace patch.

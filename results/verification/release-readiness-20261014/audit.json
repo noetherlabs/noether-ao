@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "kind": "public_release_readiness_audit",
+  "created_utc": "2026-10-14T04:06:56Z",
+  "source_commit": "fa8a8b8cf7f5f4bf35ff4b002119e05984592a00",
+  "repository": {
+    "name": "noetherlabs/noether-ao",
+    "url": "https://github.com/noetherlabs/noether-ao",
+    "visibility": "PRIVATE",
+    "tracked_files": 2027,
+    "commits": 38,
+    "git_objects": 2394
+  },
+  "checks": {
+    "credentials": {
+      "status": "pass",
+      "tool": "gitleaks 8.30.1",
+      "scope": "complete Git history",
+      "findings": 0,
+      "secrets_recorded_in_report": false
+    },
+    "numeric_archives": {
+      "status": "pass",
+      "npz_files": 1372,
+      "arrays": 10937,
+      "stored_bytes": 321252531,
+      "string_arrays": 0,
+      "object_or_unreadable_arrays": 0
+    },
+    "package_lock": {
+      "status": "pass",
+      "command": "uv lock --check",
+      "exit_status": 0
+    },
+    "standards_only_resolution": {
+      "status": "blocker",
+      "command": "uv lock --check --no-sources",
+      "exit_status": 1,
+      "reason": "Published package metadata does not reproduce the repository's Git and URL source pins."
+    },
+    "wheel": {
+      "status": "pass_with_release_metadata_blocker",
+      "filename": "noether_optics-0.1.0-py3-none-any.whl",
+      "sha256": "c2bbd3b09a4df36469d63ce6836e9abab8b55278073b19efcf6d84df26263ddf",
+      "repeat_build_sha256_equal": true,
+      "members": 26,
+      "python_files": 22,
+      "readme_body": true,
+      "pytest_is_runtime_dependency": false,
+      "license_members": 0,
+      "isolated_no_dependency_install": true,
+      "cli_help_passed": true,
+      "commands": [
+        "latency",
+        "validate",
+        "faults",
+        "fidelity",
+        "mixed",
+        "study-train",
+        "study-validate",
+        "study-select",
+        "study-evaluate",
+        "study-resources"
+      ]
+    },
+    "correctness": {
+      "status": "pass",
+      "local_tests": 370,
+      "local_elapsed_seconds": 92.32,
+      "github_run_id": 38509422393,
+      "github_run_url": "https://github.com/noetherlabs/noether-ao/actions/runs/38509422393",
+      "github_conclusion": "success"
+    },
+    "dragrace_notice": {
+      "status": "pass",
+      "upstream": "https://github.com/Jashcraf/Diffraction-Dragrace",
+      "license": "MIT",
+      "upstream_and_retained_notice_sha256": "05f02e4bdb6b7b7b8f7d934e93cf09f2dc40fb3c4bdf9981457cb68cd000e5ef",
+      "patch_sha256": "5d10d9e0bc00926fb2f0bc705b0217d6dc4d0a07cbda747e221a994237c38bf7"
+    }
+  },
+  "privacy_review": {
+    "tracked_absolute_home_path_files": 35,
+    "tracked_absolute_home_path_manifest_sha256": "5da0fc102084a756309ae4f54c1dd676c0beaf4ef3846d3b2605dbecc388735e",
+    "historical_agents_md_commits": 4,
+    "historical_outbox_commits": 4,
+    "current_agents_md_tracked": false,
+    "current_outbox_tracked": false,
+    "current_unsent_drafts": 3,
+    "git_author_identities": 1
+  },
+  "dependency_licenses": [
+    {"name": "hatchling", "role": "build", "version": "1.27.0", "license": "MIT"},
+    {"name": "jax", "role": "runtime", "version": "0.10.2", "license": "Apache-2.0"},
+    {"name": "jaxlib", "role": "runtime", "version": "0.10.2", "license": "Apache-2.0"},
+    {"name": "dLux", "role": "runtime", "version": "0.15.1", "license": "BSD-3-Clause"},
+    {"name": "zodiax", "role": "runtime", "version": "0.5.0", "license": "BSD-3-Clause"},
+    {"name": "equinox", "role": "runtime", "version": "0.13.8", "license": "Apache-2.0"},
+    {"name": "optax", "role": "runtime", "version": "0.2.8", "license": "Apache-2.0"},
+    {"name": "numpy", "role": "runtime", "version": "2.4.6", "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0"},
+    {"name": "scipy", "role": "runtime", "version": "1.17.1", "license": "BSD family plus bundled third-party notices"},
+    {"name": "matplotlib", "role": "runtime", "version": "3.11.2", "license": "Matplotlib license plus bundled font licenses"},
+    {"name": "PyYAML", "role": "runtime", "version": "6.0.3", "license": "MIT"},
+    {"name": "psutil", "role": "runtime", "version": "7.2.2", "license": "BSD-3-Clause"},
+    {"name": "hcipy", "role": "runtime", "version": "0.7.1", "license": "MIT"},
+    {"name": "abcdLux", "role": "runtime", "version": "0.0.2", "license": "BSD-3-Clause"},
+    {"name": "pytest", "role": "development", "version": "9.1.1", "license": "MIT"},
+    {"name": "lentil", "role": "optional dragrace", "version": "0.8.9", "license": "BSD classifier; exact variant requires release review"},
+    {"name": "poppy", "role": "optional dragrace", "version": "1.1.2", "license": "BSD-3-Clause"},
+    {"name": "prysm", "role": "optional dragrace", "version": "0.22", "license": "MIT"},
+    {"name": "PyPROPER3", "role": "optional dragrace", "version": "3.3.7", "license": "BSD metadata; exact variant requires release review"},
+    {"name": "threadpoolctl", "role": "optional dragrace", "version": "3.7.0", "license": "BSD-3-Clause"}
+  ],
+  "release_blockers": [
+    "No project license has been selected or granted.",
+    "The wheel therefore contains no project license metadata or license file.",
+    "Thirty-five retained result files expose an absolute local home path.",
+    "The complete Git history still contains prior AGENTS.md and outbox paths.",
+    "Git and URL dependency pins are expressed through uv-only source overrides rather than reproducible published metadata.",
+    "No monitored public security-reporting route has been named.",
+    "Three unsent contribution drafts still require human publication review."
+  ],
+  "release_ready": false
+}

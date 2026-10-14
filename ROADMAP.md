@@ -57,17 +57,26 @@ this repository currently makes no deployed-performance or customer claim.
 
 ## Public release
 
-The repository remains private and unlicensed. Preparing its source and
-presentation does not make it an open-source release. Release work includes:
+The repository remains private and unlicensed. The
+[release-readiness audit](docs/release_readiness.md) completed the credential,
+retained-array, direct-license and package-construction reviews against commit
+`fa8a8b8`. It found no credential or unreadable-array blocker, retained the upstream
+Diffraction-Dragrace notice, and reproduced the same wheel hash twice. Preparing the
+source does not make it an open-source release.
 
-- Select and approve a license for project-owned code and artifacts; inventory
-  third-party licenses and retain required notices for dependencies and patches.
-- Review the complete history and retained artifacts for redistribution rights,
-  private information and credentials before changing visibility.
-- Verify the documented installation and examples from a clean checkout, publish
-  a tagged version, and state supported environments and known limitations.
-- Publish contribution, issue and security-reporting routes that are actually
-  monitored, then authorize the visibility change.
+Release now requires explicit owner decisions and their implementation:
+
+- Select and approve a license for project-owned code and artifacts.
+- Choose whether a public release preserves, reviews and squashes, or separates the
+  existing private Git history.
+- Accept the 35 retained provenance files containing workstation paths or publish
+  labeled derived copies without changing the protected originals.
+- Align published dependency metadata with the Git/URL sources used by the tested
+  environment, then verify a standards-only installation.
+- Name monitored issue and security-reporting routes and review the three unsent
+  Diffraction-Dragrace drafts.
+- Repeat the release audit, publish a tagged version and authorize visibility only
+  after those gates pass.
 
 The [development plan](docs/development/PLAN.md) records implementation scope;
 the [status](docs/development/STATUS.md) records checks actually completed.

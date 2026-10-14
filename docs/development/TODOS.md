@@ -5,21 +5,23 @@ new CI failures and actionable owner feedback before the research tasks below.
 Complete one bounded task per autonomous run. Do not create speculative busywork
 if all actionable tasks are done or require new evidence unavailable locally.
 
-## P1 — Public-release preparation
+## P1 — Resolve public-release owner decisions
 
-Before changing visibility or selecting a license, inventory project-owned files,
-the retained upstream patch, direct dependencies and their license/notice terms.
-Review complete Git history and distributable artifacts for secrets or private
-information; report findings without exposing sensitive values. Verify package
-contents and a fresh install/example using the documented environment. Preserve
-all measured source identities and keep this work separate from the scientific
-protocol. The owner has requested professional open-source preparation; the
-repository is still private and no project license has been chosen.
+The concrete [release-readiness record](../release_readiness.md) is complete for
+source commit `fa8a8b8`. Full-history credential scanning found zero findings; all
+1,372 tracked NPZ archives were readable and pickle-free; two wheel builds matched;
+the pinned environment and 370-test correctness run passed. The README is embedded
+in package metadata, pytest is development-only, and the exact upstream
+Diffraction-Dragrace MIT notice is retained. The repository remains private and no
+project license has been chosen.
 
-Acceptance: a concrete release-readiness record, remaining owner decisions clearly
-identified, and documentation matching the actual distributable package. Do not
-invent security contacts, adoption, credentials, hardware results or a release.
-This preparatory review is actionable without buying compute or publishing data.
+Remaining work is owner-gated: choose a project license and publication-history
+strategy; decide how public artifacts handle 35 protected files containing local
+provenance paths; define package metadata for the tested Git/URL dependency pins;
+name a monitored security-reporting route; and review the three unsent Dragrace
+drafts. Implement those decisions, verify a standards-only clean install, then
+repeat the audit before any tag or visibility change. Do not rewrite measured files
+or private Git history merely to make the release appear clean.
 
 ## P1 — Execute the predeclared controller study
 

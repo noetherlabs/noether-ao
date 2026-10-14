@@ -169,6 +169,9 @@ additional `noether-optics/` wrapper directory inside the repository.
 Developed by Noether Labs. See [Contributing](CONTRIBUTING.md) for setup, validation
 and evidence standards, and the [changelog](CHANGELOG.md) for implemented changes.
 
-The repository is currently private and has no open-source license. Public release
-and licensing are pending. The [release checklist](ROADMAP.md#public-release)
-records that work explicitly; the current documentation does not confer reuse rights.
+The repository is currently private and has no open-source license. A dated
+[release-readiness audit](docs/release_readiness.md) found no credential or retained
+array-format blocker and verified a deterministic wheel, but publication still
+requires owner decisions on licensing, history, provenance paths, distribution and
+support. The [release checklist](ROADMAP.md#public-release) tracks those gates; the
+current documentation does not confer reuse rights.

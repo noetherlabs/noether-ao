@@ -4,7 +4,9 @@ Noether AO accepts changes that improve the reliability of an experiment, the
 fairness of a comparison, or the diagnosis of a failure. Start with the
 [architecture](docs/architecture.md) and [roadmap](ROADMAP.md). The repository is
 currently private; a public contribution and licensing policy will accompany its
-release.
+release. The [release-readiness record](docs/release_readiness.md) identifies the
+owner decisions that remain before external contributions can be accepted under a
+declared license.
 
 ## Development setup
 
