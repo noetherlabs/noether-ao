@@ -509,7 +509,6 @@ dependencies = [
     { name = "numpy" },
     { name = "optax" },
     { name = "psutil" },
-    { name = "pytest" },
     { name = "pyyaml" },
     { name = "scipy" },
     { name = "zodiax" },
@@ -522,6 +521,11 @@ dragrace = [
     { name = "prysm" },
     { name = "pyproper3" },
     { name = "threadpoolctl" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
 ]
 
 [package.metadata]
@@ -540,13 +544,15 @@ requires-dist = [
     { name = "prysm", marker = "extra == 'dragrace'", git = "https://github.com/brandondube/prysm.git?rev=5008f47803af6ff69eed474fca049456076e4a7d" },
     { name = "psutil", specifier = "==7.2.2" },
     { name = "pyproper3", marker = "extra == 'dragrace'", url = "https://downloads.sourceforge.net/project/proper-library/proper_v3.3.7_python.zip" },
-    { name = "pytest", specifier = "==9.1.1" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "scipy", specifier = "==1.17.1" },
     { name = "threadpoolctl", marker = "extra == 'dragrace'", specifier = "==3.7.0" },
     { name = "zodiax", specifier = "==0.5.0" },
 ]
 provides-extras = ["dragrace"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = "==9.1.1" }]
 
 [[package]]
 name = "numexpr"

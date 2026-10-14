@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Include the technical README in built package metadata, keep pytest in the
+  development dependency group, and preserve the upstream MIT notice beside the
+  retained Diffraction-Dragrace patch.
+
 - Add a predeclared end-to-end controller runner smoke with distinct seed streams,
   reduced physical inputs, the production stage commands, protected evidence and a
   reproducible gate report. Retain a passing run from committed source with 12 pilots,
