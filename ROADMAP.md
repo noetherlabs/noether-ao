@@ -29,8 +29,9 @@ shows that the upper-tail score moves downward under the simplified gain fault. 
 [v1 observability protocol](docs/optical_gain_observability_v1.md) now freezes a
 training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
 cohorts and validation-only release gates. Reserved acquisition has started from
-source commit `ae62a92`: 16 of 64 training-clean records are retained, completing the
-first declared regime. No fresh threshold, validation decision or held-out outcome exists.
+source commit `ae62a92`: 24 of 64 training-clean records are retained, completing the
+first declared regime and half of the second. No fresh threshold, validation decision
+or held-out outcome exists.
 The causal detector and raw-artifact-verified training threshold
 freeze are implemented. The immutable validation barrier rechecks the frozen training
 evidence and publishes either release or withholding from the complete validation

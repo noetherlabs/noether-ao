@@ -799,3 +799,22 @@ GitHub also reports the repository as public at this boundary, while the release
 readiness record still has unresolved license, history, provenance-path, dependency
 metadata, security-route and draft-review decisions. Visibility was not changed by
 this acquisition work and does not itself grant reuse rights.
+
+## P2 v1 training acquisition reaches 24 of 64
+
+A fourth bounded call resumed the manifest-bound run from the detached checkout at
+source commit `ae62a92a644c50c8e08d58ac07bf4e41d8d9c8ee`. It retained eight more
+terminal completions: atmosphere seeds 310001 through 310008 paired with detector
+seeds 410001 through 410008 in `regime-01` (1,000 photons, wind scale 2.0).
+
+The training ledger now contains **24 of 64** declared identities: all 16 in
+`regime-00` and eight in `regime-01`. All 24 records are terminal completions with
+matching raw NPZ and metadata artifacts; no terminal failure is present. The ignored
+run contains 83,544,120 bytes, and the target retained 13,417,275,392 free bytes
+against the unchanged 10,190,604,096-byte storage gate after the chunk. No experiment
+timing was collected or inferred.
+
+No threshold, detector trace, validation decision, validation record or evaluation
+record exists. The next action is to resume the remaining 40 training records from
+the same source-pinned checkout in bounded chunks, preserving the sealed downstream
+cohorts.

@@ -246,7 +246,7 @@ assigns new nonoverlapping seed streams; training-only, per-regime calibration; 
 validation-only release; run-, frame- and raw-crossing gates; target misses and
 detected-only delay; paired clean/fault controller error; and no detector action or
 fallback. It predeclares modal dither with paired science controls as the first v2
-escalation. Sixteen of 64 training-clean terminal records are retained; no new threshold,
+escalation. Twenty-four of 64 training-clean terminal records are retained; no new threshold,
 validation decision or evaluation outcome has been generated.
 
 The causal transform and immutable training threshold freeze are implemented. The
@@ -274,11 +274,10 @@ compression credit. The current development target was refused at 7.995 GB free 
 was not created.
 
 The full run later passed the same independent gate with 16,472,510,464 bytes free and
-was created from clean source commit `ae62a92`. Three bounded calls retain seeds
-310001 through 310016 and detector seeds 410001 through 410016, completing
-`regime-00`; all 16 records are terminal completions with hash-bound raw arrays and
-metadata. The run contains 44,974,583 bytes at this boundary. No experiment timing
-was collected.
+was created from clean source commit `ae62a92`. Four bounded calls retain all 16
+declared seed pairs in `regime-00` and the first eight in `regime-01`, for 24 terminal
+completions with hash-bound raw arrays and metadata. The run contains 83,544,120 bytes
+at this boundary. No experiment timing was collected.
 
 The physical training/validation adapter and complete retention path are implemented.
 It applies the exact forward-controller, noise and condition mapping; normalizes all
@@ -299,7 +298,7 @@ intervals, explicit failure denominators and no second gate. Synthetic smoke fix
 cover resumption, interruption, retained failures, evidence drift and report
 idempotence without opening a declared cohort.
 
-Next resume the remaining 48 training records from the source-pinned acquisition
+Next resume the remaining 40 training records from the source-pinned acquisition
 checkout in bounded chunks while the original admission envelope remains satisfied.
 Freeze the threshold only after all 64 terminal records and preserve any negative
 threshold, validation or evaluation result.
