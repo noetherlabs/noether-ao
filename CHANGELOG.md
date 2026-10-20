@@ -5,8 +5,9 @@
 - Start the frozen P2 v1 training cohort after the unchanged whole-run storage gate
   admits the target. Retain the first 24 of 64 clean training records from source
   commit `ae62a92`, completing the first declared regime and half of the second with
-  immutable raw arrays and metadata; keep threshold publication, validation and
-  evaluation sealed.
+  immutable raw arrays and metadata. Pause further acquisition when a later read-only
+  preflight finds 5,300,817,920 free bytes against the 10,190,604,096-byte gate; keep
+  threshold publication, validation and evaluation sealed.
 
 - Complete the sealed optical-gain evaluation lifecycle. Require an immutable favorable
   validation release before enumerating held-out identities, resume terminal successes

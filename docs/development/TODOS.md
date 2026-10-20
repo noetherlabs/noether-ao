@@ -277,7 +277,10 @@ The full run later passed the same independent gate with 16,472,510,464 bytes fr
 was created from clean source commit `ae62a92`. Four bounded calls retain all 16
 declared seed pairs in `regime-00` and the first eight in `regime-01`, for 24 terminal
 completions with hash-bound raw arrays and metadata. The run contains 83,544,120 bytes
-at this boundary. No experiment timing was collected.
+at this boundary. A later read-only preflight found 5,300,817,920 free bytes against
+the unchanged 10,190,604,096-byte requirement and refused continuation before a fifth
+acquisition call. The 24 retained records remain unchanged. No experiment timing was
+collected.
 
 The physical training/validation adapter and complete retention path are implemented.
 It applies the exact forward-controller, noise and condition mapping; normalizes all
@@ -298,10 +301,10 @@ intervals, explicit failure denominators and no second gate. Synthetic smoke fix
 cover resumption, interruption, retained failures, evidence drift and report
 idempotence without opening a declared cohort.
 
-Next resume the remaining 40 training records from the source-pinned acquisition
-checkout in bounded chunks while the original admission envelope remains satisfied.
-Freeze the threshold only after all 64 terminal records and preserve any negative
-threshold, validation or evaluation result.
+Next recover at least 4,889,786,176 bytes on the target filesystem, rerun the read-only
+preflight and resume the remaining 40 training records from the source-pinned checkout
+only after admission. Freeze the threshold only after all 64 terminal records and
+preserve any negative threshold, validation or evaluation result.
 Clean-run and frame false alarms,
 pre-onset alarms, misses, detected-only delay and paired controller error must all be
 reported. Useful detection does not establish safe fallback or a general safety claim.

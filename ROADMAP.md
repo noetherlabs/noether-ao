@@ -28,10 +28,11 @@ fallback. A read-only [legacy-evidence audit](results/optical_gain_observability
 shows that the upper-tail score moves downward under the simplified gain fault. The
 [v1 observability protocol](docs/optical_gain_observability_v1.md) now freezes a
 training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
-cohorts and validation-only release gates. Reserved acquisition has started from
-source commit `ae62a92`: 24 of 64 training-clean records are retained, completing the
-first declared regime and half of the second. No fresh threshold, validation decision
-or held-out outcome exists.
+cohorts and validation-only release gates. Reserved acquisition from source commit
+`ae62a92` has retained 24 of 64 training-clean records, completing the first declared
+regime and half of the second. A later read-only preflight paused continuation at
+5,300,817,920 free bytes against the unchanged 10,190,604,096-byte storage gate. No
+fresh threshold, validation decision or held-out outcome exists.
 The causal detector and raw-artifact-verified training threshold
 freeze are implemented. The immutable validation barrier rechecks the frozen training
 evidence and publishes either release or withholding from the complete validation
@@ -49,9 +50,9 @@ streams. The retained smoke
 passes all 14 implementation gates from committed source, including exact freeze
 re-entry and zero evaluation access. Its reduced detector outcome was unfavorable and
 was retained as `evaluation_withheld`; it is not v1 evidence. The sealed evaluation
-and immutable report lifecycle is implemented. Next resume the remaining training
-records in bounded chunks, freeze the threshold only after all 64 terminal records,
-and preserve any negative downstream decision.
+and immutable report lifecycle is implemented. Resume the remaining training records
+in bounded chunks only after the storage gate readmits the target, freeze the threshold
+only after all 64 terminal records, and preserve any negative downstream decision.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report

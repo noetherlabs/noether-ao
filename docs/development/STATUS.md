@@ -818,3 +818,17 @@ No threshold, detector trace, validation decision, validation record or evaluati
 record exists. The next action is to resume the remaining 40 training records from
 the same source-pinned checkout in bounded chunks, preserving the sealed downstream
 cohorts.
+
+## P2 v1 continuation refused after storage regression
+
+Before starting the next bounded chunk, the same read-only resource preflight reported
+`insufficient`: 5,300,817,920 free bytes against the unchanged 10,190,604,096-byte
+requirement, a shortfall of 4,889,786,176 bytes. No observability acquisition process
+was active, and no new physical trial was started.
+
+The manifest-bound evidence remains unchanged at **24 of 64** terminal training-clean
+records with no failures. No threshold, detector trace, validation decision,
+validation record or evaluation record exists. Continuation remains blocked until the
+target filesystem again passes the declared whole-run gate; the next action is to
+reclaim storage outside the retained evidence, rerun the preflight and resume only
+after admission.
