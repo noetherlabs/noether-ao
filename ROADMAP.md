@@ -28,8 +28,10 @@ fallback. A read-only [legacy-evidence audit](results/optical_gain_observability
 shows that the upper-tail score moves downward under the simplified gain fault. The
 [v1 observability protocol](docs/optical_gain_observability_v1.md) now freezes a
 training-calibrated lower-tail candidate, eight-window persistence, fresh disjoint
-cohorts and validation-only release gates. The plan is unexecuted: no fresh threshold
-or outcome exists. The causal detector and raw-artifact-verified training threshold
+cohorts and validation-only release gates. Reserved acquisition has started from
+source commit `ae62a92`: 16 of 64 training-clean records are retained, completing the
+first declared regime. No fresh threshold, validation decision or held-out outcome exists.
+The causal detector and raw-artifact-verified training threshold
 freeze are implemented. The immutable validation barrier rechecks the frozen training
 evidence and publishes either release or withholding from the complete validation
 identity set. A protocol-bound stage ledger now publishes immutable terminal records,
@@ -39,14 +41,16 @@ trials as 1,568 numeric archives: 2.341 GB of numeric payload requires a conserv
 10.191 GB free with no compression credit. Physical training and validation callbacks
 now apply the frozen controller/fault settings, retain complete typed arrays and bind
 post-burn-in metrics. Threshold-dependent training traces are added immutably during
-the calibration freeze. The current development volume failed the read-only gate at
-7.995 GB free and no run was created. A strict reduced runner protocol and the four
-bounded physical stage commands use separate nonreserved streams. The retained smoke
+the calibration freeze. After earlier refusals, the full run was admitted with
+16,472,510,464 bytes free against the 10,190,604,096-byte gate. A strict reduced
+runner protocol and the four bounded physical stage commands use separate nonreserved
+streams. The retained smoke
 passes all 14 implementation gates from committed source, including exact freeze
 re-entry and zero evaluation access. Its reduced detector outcome was unfavorable and
-was retained as `evaluation_withheld`; it is not v1 evidence. Next implement the sealed
-evaluation/report lifecycle without opening a cohort, then keep declared v1 execution
-blocked until the separate 10.191 GB filesystem gate passes.
+was retained as `evaluation_withheld`; it is not v1 evidence. The sealed evaluation
+and immutable report lifecycle is implemented. Next resume the remaining training
+records in bounded chunks, freeze the threshold only after all 64 terminal records,
+and preserve any negative downstream decision.
 
 Deliverable: a report of clean false alarms, missed faults, detection delay and paired
 fault-versus-clean controller error. Any later recovery experiment must also report
@@ -78,15 +82,17 @@ this repository currently makes no deployed-performance or customer claim.
 
 ## Public release
 
-The repository remains private and unlicensed. The
+GitHub currently reports the repository as public, while it remains unlicensed. The
 [release-readiness audit](docs/release_readiness.md) completed the credential,
 retained-array, direct-license and package-construction reviews against commit
 `fa8a8b8`. It found no credential or unreadable-array blocker, retained the upstream
 Diffraction-Dragrace notice, and reproduced the same wheel hash twice. Preparing the
-source does not make it an open-source release.
+source or changing visibility does not make it an open-source release.
 
 Release now requires explicit owner decisions and their implementation:
 
+- Confirm whether the current public visibility is intentional; if it is, treat the
+  remaining items as active exposure remediation rather than future publication work.
 - Select and approve a license for project-owned code and artifacts.
 - Choose whether a public release preserves, reviews and squashes, or separates the
   existing private Git history.
@@ -96,8 +102,7 @@ Release now requires explicit owner decisions and their implementation:
   environment, then verify a standards-only installation.
 - Name monitored issue and security-reporting routes and review the three unsent
   Diffraction-Dragrace drafts.
-- Repeat the release audit, publish a tagged version and authorize visibility only
-  after those gates pass.
+- Repeat the release audit and publish a tagged version only after those gates pass.
 
 The [development plan](docs/development/PLAN.md) records implementation scope;
 the [status](docs/development/STATUS.md) records checks actually completed.

@@ -773,3 +773,29 @@ a software verification result, not experiment timing. No physical trial, timing
 threshold, decision or evaluation outcome was generated. A fresh read-only check found
 3,705,163,776 bytes free against the 10,190,604,096-byte requirement, so v1 remains
 sealed.
+
+## P2 v1 training acquisition started
+
+The full observability run passed its unchanged storage preflight with
+16,472,510,464 bytes free against the 10,190,604,096-byte requirement. Run creation
+bound the frozen protocol, base configuration and runtime to clean source commit
+`ae62a92a644c50c8e08d58ac07bf4e41d8d9c8ee`; the manifest records protocol SHA256
+`2b387e8108fb801e6594cbb4531e9e2951f3f245279382ed65e399ce88243221`.
+
+Three bounded calls retained the first **16 of 64** training-clean records: atmosphere
+seeds 310001 through 310016 with detector seeds 410001 through 410016, completing
+`regime-00` (1,000 photons, wind scale 0.5). Every record is a terminal completion
+with its raw NPZ and metric metadata hash-bound in the ledger; no terminal failure is
+present. The ignored run directory contains 44,974,583 bytes at this boundary. No timing was
+collected or inferred.
+
+This is calibration acquisition, not detector validation. No threshold, detector
+trace, validation decision or evaluation record exists, and the held-out cohort
+remains sealed. The next action is to resume the remaining 48 training records from
+the source-pinned acquisition checkout in bounded chunks, then invoke the one-way
+threshold freeze only after the ledger reverifies all 64 terminal identities.
+
+GitHub also reports the repository as public at this boundary, while the release
+readiness record still has unresolved license, history, provenance-path, dependency
+metadata, security-route and draft-review decisions. Visibility was not changed by
+this acquisition work and does not itself grant reuse rights.

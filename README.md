@@ -98,8 +98,11 @@ A read-only [optical-gain observability audit](results/optical_gain_observabilit
 reclassifies the old M4 cohort as P2 development evidence. It selects a four-frame
 lower-tail score with eight-window persistence, then the frozen
 [P2 protocol](docs/optical_gain_observability_v1.md) assigns fresh, disjoint training,
-validation and sealed evaluation streams. No P2 threshold or outcome has been
-generated; the candidate is not validated and cannot act on the controller.
+validation and sealed evaluation streams. The full run is now acquiring its frozen
+training-clean cohort: 16 of 64 terminal records are retained from source commit
+`ae62a92`, completing the first declared regime. No P2 threshold, validation decision or
+evaluation outcome has been generated; the candidate is not validated and cannot act
+on the controller.
 The shared detector kernel, physical trial adapter and raw-artifact-verified training
 threshold freeze are implemented. The adapter applies only the declared plant,
 controller, noise and fault settings, retains exact float64/boolean frame streams and
@@ -172,7 +175,7 @@ Independent validation adds:
 | Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
 | Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
 | End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen unexecuted v1 protocol; complete physical stage, release-gated evaluation and immutable reporting paths implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
+| Optical-gain observability | Frozen v1 protocol in training acquisition at 16/64 records; first declared regime complete; complete physical stage, release-gated evaluation and immutable reporting paths implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
 | Study ledger and trial execution | Implemented; immutable evidence, bounded validation/evaluation chunks and complete-cohort descriptive reports |
 | Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
 | Instrument deployment | Planned; no hardware or on-sky result |
@@ -223,9 +226,9 @@ additional `noether-optics/` wrapper directory inside the repository.
 Developed by Noether Labs. See [Contributing](CONTRIBUTING.md) for setup, validation
 and evidence standards, and the [changelog](CHANGELOG.md) for implemented changes.
 
-The repository is currently private and has no open-source license. A dated
-[release-readiness audit](docs/release_readiness.md) found no credential or retained
+GitHub currently exposes the repository publicly, but the project has no open-source
+license. A dated [release-readiness audit](docs/release_readiness.md) found no credential or retained
 array-format blocker and verified a deterministic wheel, but publication still
 requires owner decisions on licensing, history, provenance paths, distribution and
-support. The [release checklist](ROADMAP.md#public-release) tracks those gates; the
-current documentation does not confer reuse rights.
+support. Public visibility alone does not grant reuse rights or complete the release.
+The [release checklist](ROADMAP.md#public-release) tracks the unresolved gates.

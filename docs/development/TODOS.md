@@ -12,10 +12,11 @@ source commit `fa8a8b8`. Full-history credential scanning found zero findings; a
 1,372 tracked NPZ archives were readable and pickle-free; two wheel builds matched;
 the pinned environment and 370-test correctness run passed. The README is embedded
 in package metadata, pytest is development-only, and the exact upstream
-Diffraction-Dragrace MIT notice is retained. The repository remains private and no
-project license has been chosen.
+Diffraction-Dragrace MIT notice is retained. GitHub currently reports the repository
+as public, but no project license has been chosen.
 
-Remaining work is owner-gated: choose a project license and publication-history
+Remaining work is owner-gated: confirm whether the current public visibility is
+intentional; choose a project license and publication-history
 strategy; decide how public artifacts handle 35 protected files containing local
 provenance paths; define package metadata for the tested Git/URL dependency pins;
 name a monitored security-reporting route; and review the three unsent Dragrace
@@ -239,12 +240,14 @@ in those runs, and one clean alarm run out of five. Passive response regression 
 near nominal in the one full-frame seed while residual variance rose by 2.99 times.
 The old cohort is now ineligible for P2 evaluation.
 
-The [P2 v1 protocol](../optical_gain_observability_v1.md) is frozen and unexecuted. It
+The [P2 v1 protocol](../optical_gain_observability_v1.md) is frozen and its training
+stage is in progress. It
 assigns new nonoverlapping seed streams; training-only, per-regime calibration; a
 validation-only release; run-, frame- and raw-crossing gates; target misses and
 detected-only delay; paired clean/fault controller error; and no detector action or
 fallback. It predeclares modal dither with paired science controls as the first v2
-escalation. No new threshold or outcome has been generated.
+escalation. Sixteen of 64 training-clean terminal records are retained; no new threshold,
+validation decision or evaluation outcome has been generated.
 
 The causal transform and immutable training threshold freeze are implemented. The
 freeze requires all 64 declared training-clean identities, verifies each score against
@@ -270,6 +273,13 @@ numeric payload and a 10.191 GB free-space requirement from all declared array s
 compression credit. The current development target was refused at 7.995 GB free and
 was not created.
 
+The full run later passed the same independent gate with 16,472,510,464 bytes free and
+was created from clean source commit `ae62a92`. Three bounded calls retain seeds
+310001 through 310016 and detector seeds 410001 through 410016, completing
+`regime-00`; all 16 records are terminal completions with hash-bound raw arrays and
+metadata. The run contains 44,974,583 bytes at this boundary. No experiment timing
+was collected.
+
 The physical training/validation adapter and complete retention path are implemented.
 It applies the exact forward-controller, noise and condition mapping; normalizes all
 declared array shapes and dtypes; retains post-burn-in WFE, Strehl and saturation in
@@ -289,9 +299,11 @@ intervals, explicit failure denominators and no second gate. Synthetic smoke fix
 cover resumption, interruption, retained failures, evidence drift and report
 idempotence without opening a declared cohort.
 
-Next keep v1 sealed until a target passes the independent 10.191 GB storage gate.
-After admission, execute bounded stages from clean committed source and preserve any
-negative threshold, validation or evaluation result. Clean-run and frame false alarms,
+Next resume the remaining 48 training records from the source-pinned acquisition
+checkout in bounded chunks while the original admission envelope remains satisfied.
+Freeze the threshold only after all 64 terminal records and preserve any negative
+threshold, validation or evaluation result.
+Clean-run and frame false alarms,
 pre-onset alarms, misses, detected-only delay and paired controller error must all be
 reported. Useful detection does not establish safe fallback or a general safety claim.
 
