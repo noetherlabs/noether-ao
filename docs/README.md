@@ -23,11 +23,6 @@ Choose a route through the project:
 [Milestone history](history.md) preserves the original measured commit identities;
 [source inventory](source_manifest.json) records the historical source audit.
 
-The [development plan](development/PLAN.md), [status](development/STATUS.md),
-[decisions](development/DECISIONS.md) and [task queue](development/TODOS.md) form a
-chronological engineering record. Dated entries describe what was known at each
-increment; later entries and the roadmap describe the current position.
-
 The [Dragrace patch](../contributions/dragrace.patch) can be reconstructed using
 the reproduction guide. Its [draft descriptions](../contributions/drafts/) remain
 unsubmitted upstream.

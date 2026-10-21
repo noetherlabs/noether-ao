@@ -1,83 +1,62 @@
-# noether-ao
+# Noether AO
 
-**Differentiable adaptive optics. Reproducible control experiments.**
+**Differentiable adaptive optics and reproducible control experiments.**
 
-Noether AO is a research framework for designing and evaluating optical control
-systems before instrument integration. It combines differentiable propagation,
-noisy wavefront sensing, delayed control and fault injection in one reproducible
-experimental pipeline.
-
-The product objective is to make observatory control changes testable: compare a
-candidate with a tuned baseline, inspect why it fails, and carry the same evidence
-into hardware qualification. Today, the repository provides simulation, benchmarks
-and an auditable study framework. Hardware integration is on the roadmap.
+Noether AO is research software for studying optical control under sensor noise,
+command delay and model mismatch. Built on dLux and JAX, it combines an optical
+plant, classical and learned controllers, and reproducible experiment protocols.
 
 [Quickstart](#quickstart) · [Results](#measured-evidence) ·
-[Architecture](docs/architecture.md) · [Documentation](docs/README.md) ·
-[Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+[Documentation](docs/README.md) · [Architecture](docs/architecture.md) ·
+[Contributing](CONTRIBUTING.md)
 
-## Why this exists
+## Overview
 
-A fast optical model is useful only if it improves a feedback loop. That requires
-accounting for sensor noise, command delay, compute cost and model mismatch.
-A fault detector must also be judged by what its recovery action does to the
-wavefront. Detection alone is insufficient.
-
-This project makes those tradeoffs explicit:
-
-- **Differentiable physics:** dLux/JAX propagation, frozen-flow turbulence, a modal
-  deformable mirror and an ideal pyramid wavefront sensor.
-- **Comparable controllers:** integrator, temporal predictor, forward-model
-  estimation, and fixed or learned mixtures in the same delayed plant.
-- **Inspectable experiments:** paired trials, saved observations and commands,
-  source/runtime identities, deterministic selection and resumable evidence.
+- **Optical simulation:** differentiable propagation, frozen-flow turbulence, a
+  modal deformable mirror and an ideal pyramid wavefront sensor.
+- **Control:** integral, predictive and forward-model controllers, with fixed and
+  learned mixtures evaluated in the same delayed plant.
+- **Fault experiments:** sensor and controller faults, residual-based detection,
+  and paired comparisons of continued control and fallback.
+- **Reproducibility:** explicit configurations, disjoint study cohorts, retained
+  raw measurements and deterministic reconstruction of reported results.
 
 ## Quickstart
 
-Use Python 3.11 and uv. Access currently requires an authorized GitHub account.
+Use Python 3.11 and [uv](https://docs.astral.sh/uv/).
 
 ```sh
 git clone https://github.com/noetherlabs/noether-ao.git
 cd noether-ao
 uv sync --frozen --python 3.11
+```
+
+Run the reduced validation example:
+
+```sh
+.venv/bin/noether-optics validate \
+  --config configs/reproduction_smoke.yaml \
+  --out runs/first-validation
+```
+
+This writes physical checks to `gates.json`, controller metrics to `table.md`,
+and a comparison figure to `result.png`. Use a new output directory for each run.
+The reduced example checks functionality; it does not reproduce the full studies.
+
+Run the correctness tests:
+
+```sh
 CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q
 ```
 
-For a first physical validation run, use the reduced functional configuration:
-
-```sh
-.venv/bin/noether-optics validate --config configs/reproduction_smoke.yaml --out runs/first-validation
-```
-
-Use a new output directory for each run. Inspect `gates.json` for the physical
-checks, `table.md` for controller metrics, and `result.png` for the comparison.
-This reduced functional run does not reproduce the full scientific claim tables.
-See the [reproduction guide](docs/reproduction.md) for complete experiments,
-optional Dragrace dependencies, saved-table reconstruction and timing precautions.
-
-## System
-
-```mermaid
-flowchart LR
-    A[Atmosphere and injected faults] --> P[Optical plant]
-    P --> W[Noisy wavefront sensor]
-    W --> C[Controller and residual detector]
-    C --> D[Delayed DM command]
-    D --> P
-    W --> E[Raw evidence and provenance]
-    C --> E
-    E --> V[Paired metrics and validation gates]
-```
-
-The [architecture guide](docs/architecture.md) maps each layer to its implementation
-and states the model assumptions. Software tests, independent physical agreement
-and controller performance are assessed separately.
+The [reproduction guide](docs/reproduction.md) covers complete experiments,
+optional dependencies, resource requirements and reconstruction from saved data.
 
 ## Measured evidence
 
-The completed v0 experiments test propagation latency (C1), model fidelity under
-photon noise (C2), learned controller mixtures (C3), and detection with fallback
-(C4). These verdicts are generated from retained runs, including negative results.
+The completed v0 experiments examine propagation latency (C1), optical-model
+fidelity (C2), learned controller mixtures (C3), and detection with fallback (C4).
+The following summary is generated from retained results.
 
 <!-- BEGIN HEADLINES -->
 
@@ -90,146 +69,57 @@ photon noise (C2), learned controller mixtures (C3), and detection with fallback
 
 <!-- END HEADLINES -->
 
-The [results report](docs/results.md) provides definitions, paired intervals, raw
-data and limits. The timing figures describe CPU propagation components on an
-Apple M1; they do not establish a full control-loop deadline.
+See the [results report](docs/results.md) for methods, paired uncertainty and raw
+evidence. Latency measurements describe CPU propagation components on an Apple M1,
+not a complete control-loop deadline.
 
-A read-only [optical-gain observability audit](results/optical_gain_observability_audit_v1/README.md)
-reclassifies the old M4 cohort as P2 development evidence. It selects a four-frame
-lower-tail score with eight-window persistence, then the frozen
-[P2 protocol](docs/optical_gain_observability_v1.md) assigns fresh, disjoint training,
-validation and sealed evaluation streams. The full run has retained 24 of 64 frozen
-training-clean records from source commit `ae62a92`, completing the first declared
-regime and half of the second. Further acquisition is paused after a read-only
-preflight found 5,300,817,920 free bytes against the unchanged 10,190,604,096-byte
-storage gate. No P2 threshold, validation decision or evaluation outcome has been
-generated; the candidate is not validated and cannot act on the controller.
-The shared detector kernel, physical trial adapter and raw-artifact-verified training
-threshold freeze are implemented. The adapter applies only the declared plant,
-controller, noise and fault settings, retains exact float64/boolean frame streams and
-writes post-burn-in WFE, Strehl and saturation metrics in hash-bound metadata. Because
-a training crossing cannot exist before its regime threshold, immutable training raw
-streams are acquired first and their detector traces are published as separate hashed
-artifacts during the one-way threshold freeze. Validation retains the complete trace
-in its trial archive and can publish release or withholding only after all 240 terminal
-identities are present. Produced nonfinite streams remain attached to terminal failure
-records. A protocol-bound ledger resumes in declared order and retries only callbacks
-interrupted before terminal publication. Bounded training, threshold-freeze,
-validation, decision-freeze and release-gated evaluation commands expose those same
-gates without a parallel execution path. Evaluation identities remain inaccessible
-until a pre-existing validation release reproduces from its complete evidence chain.
-Every terminal evaluation record binds the run manifest, frozen threshold and release;
-only the complete declared cohort can publish the immutable descriptive report. That
-report reconstructs exact run-level binomial intervals, temporally correlated frame
-fractions without spurious intervals, and Bonferroni-adjusted paired fault-window WFE
-intervals. It does not apply a second acceptance gate. A strict reduced runner protocol
-with wholly separate seed streams is committed for the nonreserved physical smoke. The
-retained
-[runner result](results/optical_gain_observability_runner_smoke_v1/README.md) passes
-all 14 implementation gates from source commit `a997753`: two training records, an
-exactly reproducible threshold freeze, four paired validation records, an exactly
-reproducible withheld decision and no evaluation record. The reduced outcome included
-one clean alarm and zero qualifying gain detections, so it is explicitly not detector
-validation. No P2 v1 threshold, decision or outcome has been generated.
+## Research studies
 
-The public physical callback entry points recheck the whole-study storage envelope
-before entering the ledger. Already allocated run blocks count toward the original
-admission capacity, while unrelated filesystem consumption can stop a later chunk.
-Run creation performs the read-only storage refusal before importing JAX, then binds
-clean committed source, runtime options, protocol and base configuration as retained
-provenance. Every admitted numerical callback rechecks those persisted bindings.
+| Study | Scope and status | Documentation |
+| --- | --- | --- |
+| Pyramid sensor validation | Finite-grid intensity and derivative agreement with an independent HCIPy reference. | [Protocol](docs/pyramid_validation.md) · [Report](results/pyramid_validation_v1/report.md) |
+| Controller comparison | Frozen training, selection and evaluation protocol. Full comparison pending; reduced execution checks completed. | [Protocol](docs/controller_study_v1.md) · [Runner checks](results/controller_runner_smoke_v1/README.md) |
+| Optical-gain observability | Frozen detection study. Training is incomplete; detector performance is not validated. | [Protocol](docs/optical_gain_observability_v1.md) · [Exploratory audit](results/optical_gain_observability_audit_v1/README.md) |
 
-```sh
-.venv/bin/noether-optics observability-resources \
-  --config configs/optical_gain_observability_v1.yaml \
-  --target runs/optical_gain_observability_v1
+Implementation checks and scientific results are reported separately. The
+[controller component checks](results/controller_physics_smoke_v1/README.md) and
+[observability runner checks](results/optical_gain_observability_runner_smoke_v1/README.md)
+verify execution on reduced configurations; they do not establish controller
+superiority or detector performance.
+
+## Documentation
+
+- [Architecture](docs/architecture.md) — optical model, controllers and experiment boundaries.
+- [Reproduction](docs/reproduction.md) — installation, commands and resource planning.
+- [Results](docs/results.md) — measured findings, uncertainty and limitations.
+- [Documentation index](docs/README.md) — protocols and reference material.
+- [Roadmap](ROADMAP.md) — planned research and instrument integration.
+
+```text
+src/noether_optics/   Optical models, controllers and experiment runners
+configs/             Simulation settings and frozen study configurations
+plans/               Declared experiment plans
+tests/               Numerical, physical and integrity checks
+results/             Retained measurements, reports and provenance
+scripts/             Reproduction and reporting tools
+docs/                Methods, protocols and architecture
 ```
 
-The 1,504-trial P2 envelope contains 1,568 numeric archives after separating the 64
-training detector traces. Its numeric payload remains 2,341,413,792 bytes and requires
-10,190,604,096 free bytes after archive expansion, metadata, write headroom and
-operating reserve. It assumes the maximum evaluation cohort is released, gives no
-compression credit, creates no directory and opens no seed.
+The Python package is `noether_optics`; the command-line interface is
+`noether-optics`.
 
-Independent validation adds:
+## Scope and limitations
 
-- **Ideal-pyramid agreement:** [36 intensity cases, 30 derivative cases and 24
-  deliberate-error controls](results/pyramid_validation_v1/report.md) against an
-  HCIPy matrix-integral reference under matched finite-grid conventions.
-- **Controller component checks:** [nine declared gates](results/controller_physics_smoke_v1/README.md)
-  pass on a reduced plant with retained raw outputs. The network is untrained in
-  this smoke run; the result verifies component wiring.
-- **End-to-end execution smoke:** [nine runner gates](results/controller_runner_smoke_v1/README.md)
-  pass through the production training, validation, selection and evaluation
-  commands. The run stops after one held-out record and makes no performance claim.
+The experiments use a simulated optical plant. They do not establish on-sky
+performance, instrument validation or hard real-time operation. The current
+results do not demonstrate a general advantage for learned control or guarantee
+that fallback improves performance. Model assumptions and comparison limits are
+documented in the [architecture guide](docs/architecture.md#model-boundary).
 
-## What works today
+## Contributing and licence
 
-| Capability | State |
-| --- | --- |
-| Baseline experiments and report reconstruction | Implemented; retained runs and independent physical checks |
-| Durable pilot acquisition and predictor fitting | Implemented; complete measured cohorts, saved coefficients and failed outcomes |
-| Learned fitting and interrupted-run recovery | Implemented; common initialization, fixed Adam budget and saved episode gradients |
-| Training coordination and aggregate freeze | Implemented; bounded `study-train` command, terminal-failure retention and all-model evidence binding |
-| Validation command | Implemented; positive provenance-bound `study-validate` chunks; physics starts only after ledger checks |
-| Selection command | Implemented; resume-only `study-select` audits complete validation and freezes chosen or withheld controllers |
-| Evaluation command | Implemented; positive `study-evaluate` chunks enter held-out physics only after frozen-selection checks |
-| Whole-run storage preflight | Implemented; 42.167 GB numeric payload, 105.033 GB conservative free-space requirement, zero compression credit |
-| End-to-end runner smoke | Passed from committed source; 12 pilots, 2 fitted models, 100 validation records and 1 held-out record retained |
-| Optical-gain observability | Frozen v1 protocol paused at 24/64 training records by its storage gate; first declared regime complete and second at 8/16; complete physical stage, release-gated evaluation and immutable reporting paths implemented; distinct reduced runner smoke passed 14 implementation gates with evaluation withheld and no evaluation record |
-| Study ledger and trial execution | Implemented; immutable evidence, bounded validation/evaluation chunks and complete-cohort descriptive reports |
-| Complete new controller comparison | Pending; adequate study storage, reserved-cohort execution and final report |
-| Instrument deployment | Planned; no hardware or on-sky result |
+Developed by Noether Labs. See [Contributing](CONTRIBUTING.md) for development and
+validation requirements, and the [changelog](CHANGELOG.md) for changes.
 
-The [next study](docs/controller_study_v1.md) predeclares equal candidate budgets,
-separate stochastic cohorts and simultaneous paired uncertainty. Reserved outcomes
-have not been acquired. The [execution contract](docs/controller_study_execution.md)
-tracks component boundaries and the complete four-stage command surface. A static
-preflight now derives the full evidence budget without importing JAX or accessing a
-cohort:
-
-```sh
-.venv/bin/noether-optics study-resources \
-  --config configs/controller_study_v1.yaml \
-  --target runs/controller-study-v1
-```
-
-It budgets 42,166,977,776 bytes of numeric payload, 94,996,396,512 bytes for retained
-evidence, and 105,033,365,984 required free bytes after temporary-write headroom and
-operating reserve. Compression receives no credit. The command prints auditable JSON,
-creates no directory and returns status 2 when capacity is insufficient. The reserved
-study's `study-train --create` path enforces the same budget and has no bypass flag.
-The separate full-runner smoke has passed from committed source. The reserved study
-remains blocked until a target filesystem satisfies this preflight. The
-[roadmap](ROADMAP.md) defines the next deliverables and deployment gates.
-[Correctness CI](https://github.com/noetherlabs/noether-ao/actions/workflows/correctness.yml)
-runs without acquiring benchmark timings.
-
-## Repository layout
-
-| Path | Contents |
-| --- | --- |
-| `src/noether_optics/` | Python implementation and experiment entry points |
-| `configs/`, `plans/` | Explicit physical settings, frozen protocols and trial plans |
-| `tests/` | Numerical, physical, integrity and recovery checks |
-| `results/` | Retained measurements, arrays, reports and provenance |
-| `scripts/` | Reproduction, verification and reporting tools |
-| `docs/` | Methods, architecture, execution contracts and development history |
-| `contributions/` | Reconstructable Dragrace patch and unsubmitted drafts |
-
-The GitHub repository and a fresh clone are named **noether-ao**. The Python
-package `noether_optics` and CLI `noether-optics` retain their original names to
-keep recorded environments and reproduction commands compatible. There is no
-additional `noether-optics/` wrapper directory inside the repository.
-
-## Development and availability
-
-Developed by Noether Labs. See [Contributing](CONTRIBUTING.md) for setup, validation
-and evidence standards, and the [changelog](CHANGELOG.md) for implemented changes.
-
-GitHub currently exposes the repository publicly, but the project has no open-source
-license. A dated [release-readiness audit](docs/release_readiness.md) found no credential or retained
-array-format blocker and verified a deterministic wheel, but publication still
-requires owner decisions on licensing, history, provenance paths, distribution and
-support. Public visibility alone does not grant reuse rights or complete the release.
-The [release checklist](ROADMAP.md#public-release) tracks the unresolved gates.
+This repository does not currently include an open-source licence. See the
+[release status](ROADMAP.md#public-release) for the outstanding requirements.

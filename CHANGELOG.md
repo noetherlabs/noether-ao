@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Restructure the README around installation, capabilities, measured findings and
+  study references. Keep detailed acquisition and resource accounting in the
+  technical documentation; correct repository visibility in the contribution guide.
+
 - Start the frozen P2 v1 training cohort after the unchanged whole-run storage gate
   admits the target. Retain the first 24 of 64 clean training records from source
   commit `ae62a92`, completing the first declared regime and half of the second with

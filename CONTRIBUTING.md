@@ -3,10 +3,9 @@
 Noether AO accepts changes that improve the reliability of an experiment, the
 fairness of a comparison, or the diagnosis of a failure. Start with the
 [architecture](docs/architecture.md) and [roadmap](ROADMAP.md). The repository is
-currently private; a public contribution and licensing policy will accompany its
-release. The [release-readiness record](docs/release_readiness.md) identifies the
-owner decisions that remain before external contributions can be accepted under a
-declared license.
+publicly visible but does not yet include an open-source licence. A declared
+licence and contribution policy remain prerequisites for accepting external
+contributions. See the [release status](ROADMAP.md#public-release).
 
 ## Development setup
 
@@ -54,11 +53,15 @@ history.
 
 ## Documentation
 
-Update the README when capabilities, commands, evidence or study status change.
+Keep the README focused on the project, installation, stable capabilities and a
+concise summary of measured findings. Put experimental methods, acquisition
+progress, resource accounting and stage-by-stage execution details in the relevant
+protocol or report. Link to those documents rather than copying their contents
+into the README.
+
 Preserve the generated `HEADLINES` section and verify its reconstruction. Check
-local links and shell examples. The [development record](docs/development/STATUS.md),
-[decisions](docs/development/DECISIONS.md) and [task queue](docs/development/TODOS.md)
-preserve the reasoning and checks behind each increment.
+local links and shell examples. Keep implementation notes and task coordination
+out of public-facing documentation.
 
 Keep local agent instructions and scheduler settings out of tracked source.
 Private correspondence must never enter Git. The [Dragrace patch](contributions/dragrace.patch)
