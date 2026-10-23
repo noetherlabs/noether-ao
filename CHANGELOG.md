@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Add controller-filtered instruments with explicit delay, clipping and command
+  memory; reanalyse retained identification recordings without new acquisition.
+  Add coupled linear-sensor perturbations and nominal-response restoration with
+  rank and reconstructor-amplification checks. Qualify restoration algebra and
+  noiseless integrator behavior separately from scientific performance.
+
 - Reject baseline simulation configurations that reuse atmosphere, derived detector
   or initialization random streams. Require unique training seeds and integer roots
   with uint32 headroom for the detector offset. Recorded baseline inputs and results

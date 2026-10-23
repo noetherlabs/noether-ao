@@ -57,6 +57,130 @@ def stationary_noise(frames: int, modes: int, *, seed: int, rho: float,
     return result
 
 
+def nominal_response(cal: dict) -> np.ndarray:
+    """Return row-command response (R0 H0).T from nominal calibration only.
+
+    H0 maps column modal coefficients to raw sensor channels; R0 maps those
+    channels to calibrated residuals. This never evaluates the physical plant.
+    """
+    recon = _matrix(cal['reconstructor'], 'Nominal reconstructor')
+    interaction = _matrix(cal['interaction'], 'Nominal interaction')
+    if interaction.shape != (recon.shape[1], recon.shape[0]):
+        raise ValueError('Incompatible nominal calibration matrices')
+    return _matrix((recon @ interaction).T, 'Nominal response')
+
+
+def controller_filtered_instrument(probe, response, *, gain: float, leak: float,
+                                   delay_frames: int, command_clip_rad: float) -> dict:
+    """Replay only external probes through a fixed nominal integrator.
+
+    The instrument is the delayed issued command of this reference recursion,
+    not the command or saturation recorded from the physical plant. No measured
+    residual, fitted response, realized fault or evaluator truth is accepted.
+    Use a nominal response fixed before collection. Replay from frame zero,
+    including burn-in; slice its outputs only after completing the recursion.
+    """
+    probe, response = _matrix(probe, 'Requested probe'), _matrix(response, 'Nominal response')
+    frames, modes = probe.shape
+    scalars = (gain, leak, command_clip_rad)
+    if (response.shape != (modes, modes)
+            or type(delay_frames) is not int or not 1 <= delay_frames < frames
+            or any(not np.isscalar(value) or np.asarray(value).dtype.kind not in 'fiu'
+                   or not np.isfinite(value) for value in scalars)
+            or gain < 0 or not 0 <= leak <= 1 or command_clip_rad <= 0):
+        raise ValueError('Invalid nominal integrator parameters')
+    applied, feedback, issued = (np.zeros_like(probe) for _ in range(3))
+    saturated = np.zeros(frames, dtype=bool)
+    previous = np.zeros(modes)
+    for frame in range(frames):
+        if frame >= delay_frames:
+            applied[frame] = issued[frame-delay_frames]
+        with np.errstate(over='ignore', invalid='ignore'):
+            # The integrator has no estimate clipping. Its memory follows the
+            # preceding clipped issued command, including the external probe.
+            feedback[frame] = leak*previous - gain*(applied[frame] @ response)
+            requested = feedback[frame] + probe[frame]
+        if not np.isfinite(requested).all():
+            raise ValueError('Nominal probe recursion exceeds the numerical range')
+        issued[frame] = np.clip(requested, -command_clip_rad, command_clip_rad)
+        saturated[frame] = np.any(issued[frame] != requested)
+        previous = issued[frame]
+    return {'instrument': applied, 'command': issued,
+            'feedback_requested': feedback, 'saturated': saturated}
+
+
+def linear_sensor_transform(config: dict, cal: dict, transform) -> dict:
+    """Apply a synthetic raw-channel response error before observation noise.
+
+    For column sensor readings, plant*(phase) = reference + S(plant(phase)-reference).
+    Both atmospheric and DM residual contributions pass through S. Nominal
+    interaction/reconstruction remain stale, and detector/additive noise are
+    generated downstream. This is a modal sensor mismatch, not pyramid physics.
+    The returned calibration is for plant execution, never an estimator input.
+    """
+    transform = _matrix(transform, 'Sensor transform')
+    modes = config['modes']
+    reference = np.asarray(cal['reference'])
+    if (config['sensor'] != 'linear' or cal['twin_modes'] != modes
+            or transform.shape != (modes, modes) or reference.shape != (modes,)
+            or reference.dtype.kind not in 'fiu' or not np.isfinite(reference).all()):
+        raise ValueError('Sensor transforms require the full linear modal sensor')
+    matrix, ref = jnp.asarray(transform), jnp.asarray(reference)
+
+    def wrapped(plant):
+        return lambda phase: ref + matrix @ (plant(phase)-ref)
+
+    return dict(cal, plant=wrapped(cal['plant']),
+                misregistered_plant=wrapped(cal['misregistered_plant']))
+
+
+def restore_nominal_response(cal: dict, estimated_response, *,
+                             maximum_reconstructor_gain: float, rcond: float = 1e-10) -> dict:
+    """Map an estimated response back to the declared nominal transfer.
+
+    Rnew = B0.T solve(Bhat.T, R0); the actual row response becomes
+    Btrue inv(Bhat) B0. This preserves nominal transfer, not a Tikhonov penalty
+    recomputed in new sensor coordinates. Never replace the detector reference
+    with a fitted intercept. The explicit operator-norm budget bounds relative
+    reconstructor amplification; neither it nor invertibility proves stability.
+    """
+    response = _matrix(estimated_response, 'Estimated response')
+    recon = _matrix(cal['reconstructor'], 'Nominal reconstructor')
+    target = nominal_response(cal)
+    scalars = (maximum_reconstructor_gain, rcond)
+    if (response.shape != target.shape
+            or any(not np.isscalar(value) or np.asarray(value).dtype.kind not in 'fiu'
+                   or not np.isfinite(value) for value in scalars)
+            or maximum_reconstructor_gain <= 0 or not 0 < rcond < 1):
+        raise ValueError('Invalid nominal-response restoration inputs')
+    _, singular, rank = _basis(response, rcond)
+    result = {'status': 'withheld', 'reason': None, 'reconstructor': None,
+              'target_response': target, 'response_singular_values': singular,
+              'relative_reconstructor_gain': None,
+              'maximum_reconstructor_gain': maximum_reconstructor_gain, 'rcond': rcond}
+    if rank != len(response):
+        result['reason'] = 'singular_response'
+        return result
+    if _basis(target, rcond)[2] != len(target):
+        raise ValueError('Nominal target response must have full modal rank')
+    with np.errstate(over='ignore', invalid='ignore'):
+        # An exact nominal estimate must preserve the original calibration bytes,
+        # including at a unity amplification budget. Do not use a near-equality
+        # shortcut for estimated responses that actually differ from the target.
+        corrected = (recon.copy() if np.array_equal(response, target)
+                     else target.T @ np.linalg.solve(response.T, recon))
+    if not np.isfinite(corrected).all():
+        result['reason'] = 'nonfinite_restoration'
+        return result
+    amplification = float(np.linalg.norm(corrected, ord=2) / np.linalg.norm(recon, ord=2))
+    result['relative_reconstructor_gain'] = amplification
+    if not np.isfinite(amplification) or amplification > maximum_reconstructor_gain:
+        result['reason'] = 'reconstructor_gain_budget'
+        return result
+    result.update(status='ready', reconstructor=corrected)
+    return result
+
+
 def instrumented_kernel(config: dict, cal: dict, *, fault: str = 'none'):
     """Reuse the physical loop with finite probes and additive sensor noise.
 

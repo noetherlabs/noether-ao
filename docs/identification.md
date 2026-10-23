@@ -71,6 +71,80 @@ cancellation. This implementation is not Internal Controller Identification
 (ICI), the distinct nonlinear parameterization introduced by
 [Meroi et al. (2026)](https://arxiv.org/html/2610.27970v1).
 
+## Controller-filtered instruments
+
+The reference instrument replays the external probe through the known nominal
+collection law, without accessing actual measurements, commands or faults:
+
+$$
+x_t^p=c_{t-\ell}^p,\qquad
+f_t^p=\lambda c_{t-1}^p-kx_t^pB_0,\qquad
+c_t^p=\operatorname{clip}(f_t^p+p_t),\qquad z_t=x_t^p.
+$$
+
+Here $B_0=(R_0H_0)^\top$ comes from the declared reconstructor and interaction
+matrix. It includes their regularization and is distinct from both the
+evaluator's physical finite-grid response and the $I$ baseline below. All
+reference parameters must be fixed before collection. The deterministic replay
+preserves external-probe independence; it does not establish instrument
+relevance, optimal variance or validity under an incorrectly specified
+observation equation. Model-based instrument construction is established
+[closed-loop IV practice](https://doi.org/10.1016/j.automatica.2004.09.016).
+
+Replay starts with the same zero command/FIFO and includes the complete burn-in.
+The state follows the clipped issued reference command. The integrator does not
+clip its residual estimate. Actual plant saturation and a response estimated
+from the recording are never inputs to this replay. The raw and filtered
+instruments use the same response solver, predictor, relevance cutoff and
+training episodes.
+
+The retained development recordings can be reanalysed without acquiring another
+trajectory:
+
+```sh
+JAX_PLATFORMS=cpu JAX_ENABLE_X64=1 .venv/bin/python scripts/compare_reference_iv.py --out runs/reference-iv
+```
+
+The command requires clean committed source and verifies the original artifacts
+and their independent reconstruction. Its completion manifest distinguishes
+acquisition source from analysis source and binds all consumed files. Its
+256 MiB free-space check covers only this small derived output; it does not
+change a full-study resource gate. The comparison remains exploratory because
+these development recordings have already been examined.
+
+## Synthetic mismatch and nominal-response restoration
+
+For a declared raw-sensor column transform $S$, the linear adapter replaces the
+complete clean response by $m_0+S(h(\phi-\mathrm{DM})-m_0)$ before adding noise.
+It transforms both atmosphere and DM contributions. Physical phase, basis and
+wavefront-error computation remain unchanged. This defines a synthetic coupled
+modal-response error, not a model of nonlinear pyramid optical gain.
+
+With a nominal column Jacobian $H_0$ and fixed reconstructor $R_0$, an estimated
+row response $\widehat B$ defines
+
+$$
+R_{\mathrm{new}}=B_0^\top\operatorname{solve}(\widehat B^\top,R_0),\qquad
+B_{\mathrm{new}}=B_{\mathrm{true}}\widehat B^{-1}B_0.
+$$
+
+An exact response estimate restores the nominal transfer; supplying $B_0$
+preserves the original reconstructor. This policy does not recompute a Tikhonov
+penalty in new sensor coordinates. It never substitutes a fitted intercept for
+the detector reference. Singular estimates and corrections exceeding an
+explicit reconstructor operator-norm budget are withheld. These numerical
+checks do not prove closed-loop stability. Physical outcome evaluation still
+needs independent unprobed trajectories and retained failures.
+
+For $\widehat B=sB_0$, the correction reduces to $R_0/s$. Under the qualified
+integrator this is equivalent to changing its gain from $k$ to $k/s$, including
+clipping and command memory. Scalar calibration recovery therefore cannot alone
+establish superiority over gain tuning. Adaptive modal gain control is already
+an established AO approach; see [Deo et al. (2021)](https://arxiv.org/abs/2103.09921).
+The present adapter does not implement CLOSE. Deployment is qualified only for
+the integrator; forward-model controllers and detector scores need a coherent
+updated observation model before using the corrected reconstructor.
+
 ## Common prediction endpoint
 
 For each response estimate, reconstruct a disturbance-coordinate sequence
