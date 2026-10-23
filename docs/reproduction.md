@@ -24,6 +24,14 @@ Run these from the repository root. Each output directory must be new. The full
 configuration is [simulation.yaml](../configs/simulation.yaml); seeds, noise,
 atmosphere, delays, fault settings and acceptance tolerances are explicit.
 
+The baseline configuration validator checks both atmosphere roots and derived
+detector seeds (`root + 100000`). All of these streams must be distinct within
+and across training and evaluation, and separate from the weight-initialization
+seed. Roots must be nonnegative integers with room for the detector offset in
+uint32; boolean seeds and duplicate training roots are rejected. The recorded
+baseline configuration satisfies these checks. Existing retained results are
+unchanged; validation prevents new configurations from silently reusing streams.
+
 ```sh
 # M1: synchronized timing; run alone, outside CI
 .venv/bin/noether-optics latency --config configs/latency.yaml --out runs/m1

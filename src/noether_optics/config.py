@@ -15,12 +15,24 @@ def validate_simulation(config: dict) -> None:
     if config['dt_s'] <= 0 or config['delay_frames'] < 1:
         raise ValueError('Positive time step and at least one frame of delay required')
     train=config['training_seeds']; test=config['seeds']
+    # simulation.loop derives detector keys by adding 100000 to each root.
+    # Distinct root IDs alone do not guarantee distinct random streams.
+    if not train or not all(type(s) is int and 0 <= s < 2**32 - 100000
+                            for s in train+test):
+        raise ValueError('Explicit integer seeds with uint32 detector-stream headroom required')
     if len(set(test)) != len(test) or len(test)<5:
         raise ValueError('At least five distinct held-out seeds required')
-    if set(train)&set(test):
-        raise ValueError('Training and evaluation seeds overlap')
-    if not train or not all(isinstance(s,int) and s>=0 for s in train+test):
-        raise ValueError('Explicit nonnegative integer seeds required')
+    if len(set(train)) != len(train):
+        raise ValueError('Training seeds must be unique')
+    roots = train + test
+    streams = roots + [seed + 100000 for seed in roots]
+    if len(set(streams)) != len(streams):
+        raise ValueError('Training or evaluation atmosphere/detector streams overlap')
+    initial = config['seed']
+    if type(initial) is not int or not 0 <= initial < 2**32:
+        raise ValueError('Initialization seed must be an integer that fits uint32')
+    if initial in streams:
+        raise ValueError('Initialization seed overlaps an atmosphere or detector stream')
     levels=config['fidelity']['levels']; flux=config['fidelity']['fluxes']
     if len(levels)<3 or max(flux)/min(flux)<10000:
         raise ValueError('At least three fidelities and four decades of flux required')
