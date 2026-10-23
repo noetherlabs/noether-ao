@@ -170,12 +170,20 @@ def initialize_weights(seed: int, width: int = 8) -> tuple:
 def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
          predictor: jax.Array, threshold: float = 1e30, fallback: bool = False,
          fault: str = 'none', params: tuple | None = None,
-         differentiable_noise: bool = False) -> dict[str,jax.Array]:
+         differentiable_noise: bool = False, *, command_probe: jax.Array | None = None,
+         measurement_perturbation: jax.Array | None = None) -> dict[str,jax.Array]:
     """Run a causal delayed AO loop via lax.scan.
 
     Evaluation uses exact Poisson shot noise plus Gaussian read noise. Training's
     reparameterized Gaussian approximation is explicitly selected. Discrete fallback
     and Poisson sampling are not differentiable; the optical/control path is.
+
+    Optional finite, externally generated probes enter after the controller and
+    before clipping. The next controller state follows the issued command,
+    including the probe. Additive measurement perturbations enter after detector
+    noise, in the sensor's output units. Neither input replaces detector noise.
+    Opting in adds command-stage and perturbation telemetry; the default path and
+    output schema remain unchanged. Callers must establish independent streams.
     """
     if controller not in CONTROLLERS or fault not in FAULTS:
         raise ValueError('Unknown controller or fault')
@@ -183,6 +191,19 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
     if delay < 1:
         raise ValueError('Delay must be at least one frame')
     m, mb = config['modes'], cal['twin_modes']
+    instrumented = command_probe is not None or measurement_perturbation is not None
+    if instrumented:
+        if fault == 'stuck_actuator':
+            raise ValueError('Instrumented modal commands do not describe a stuck-actuator surface')
+        sensor_size = m if config['sensor'] == 'linear' else cal['reference'].size
+        command_probe = jnp.zeros((len(phases), m)) if command_probe is None else jnp.asarray(command_probe)
+        measurement_perturbation = (jnp.zeros((len(phases), sensor_size))
+                                   if measurement_perturbation is None else jnp.asarray(measurement_perturbation))
+        if (command_probe.shape != (len(phases), m)
+                or measurement_perturbation.shape != (len(phases), sensor_size)
+                or command_probe.dtype.kind not in 'fiu'
+                or measurement_perturbation.dtype.kind not in 'fiu'):
+            raise ValueError('Probe and measurement perturbation shapes/dtypes must match the loop')
     flux, read = config['photons'], config['read_noise_e']
     gain, leak = config['gain'], config['leak']
     basis, mask = cal['basis'], cal['mask']
@@ -196,7 +217,10 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
 
     def frame(carry, inputs):
         fifo, command, previous, predicted, latched = carry
-        t, phase, key = inputs
+        if instrumented:
+            t, phase, key, probe, perturbation = inputs
+        else:
+            t, phase, key = inputs
         active = (t >= fcfg['onset']) & (t < fcfg['end'])
         applied = fifo[0]
         dm = jnp.tensordot(applied, basis, axes=1)
@@ -226,6 +250,8 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
             else:
                 observed = jax.random.poisson(shot_key, counts).astype(jnp.float64) + read*jax.random.normal(read_key, counts.shape)
             measured = observed/flux
+        if instrumented:
+            measured = measured + perturbation
         model_scale = jnp.where(active, fcfg['model_phase_scale'],1) if fault == 'model_mismatch' else 1.0
         expected = model((predicted[:mb]-applied[:mb])*model_scale)
         data = measured[:mb] if config['sensor']=='linear' else measured
@@ -269,6 +295,9 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
         if controller in ('forward','fixed','learned'):
             candidate = jnp.where(unavailable,command,candidate)
         candidate = jnp.where(latched, ci, candidate)
+        if instrumented:
+            feedback_requested = candidate
+            candidate = candidate + probe
         clipped = jnp.clip(candidate,-config['command_clip_rad'],config['command_clip_rad'])
         next_fifo = jnp.concatenate((fifo[1:],clipped[None,:]),axis=0)
         # One-frame model for the next measurement. Never sees future phase.
@@ -279,10 +308,16 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
                   'fallback':latched,'saturated':jnp.any(candidate!=clipped),
                   'command':clipped,'applied':applied,'estimate':pseudo,'unavailable':unavailable,
                   'measurement':data,'prediction':expected}
+        if instrumented:
+            output.update(feedback_requested=feedback_requested, probe_requested=probe,
+                          combined_requested=candidate, measurement_perturbation=perturbation)
         return (next_fifo,clipped,pseudo,next_prediction,latched),output
 
     initial = (jnp.zeros((delay,m)),zero,zero,zero,jnp.asarray(False))
-    return jax.lax.scan(frame,initial,(jnp.arange(len(phases)),phases,keys))[1]
+    inputs = (jnp.arange(len(phases)),phases,keys)
+    if instrumented:
+        inputs = (*inputs, command_probe, measurement_perturbation)
+    return jax.lax.scan(frame,initial,inputs)[1]
 
 
 def summarize(outputs: dict, config: dict) -> dict[str,float]:
