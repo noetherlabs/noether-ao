@@ -1,0 +1,178 @@
+{
+  "acquisition_source_commit": "78aa5ec34ed1e5dae239569c476d0e68b8db45bc",
+  "analysis_source": {
+    "commit": "5ea94185b0720573f1a691c19db5f5580648e8ca",
+    "files": {
+      "configs/controller_physics_smoke.yaml": "c727ac84568c63c0b5f9029fd3876b96f1d0609f5c3d89698395142a800ba209",
+      "configs/controller_runner_smoke_base.yaml": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+      "configs/controller_runner_smoke_v1.yaml": "9cbef12533693b9337d1a9b578d1c8c3d3af4a5d64d1c16b912ba4e5f3637e26",
+      "configs/controller_study_v1.yaml": "ea6d332f279af75140f0eb462efa4b3e6a12fb73451f3aefb80d8bfbab6d87dd",
+      "configs/dragrace_cpu_all.yaml": "bce95283b6152c37876850644c598d94b0a88cdb576192435a589b852bcd5d84",
+      "configs/identification_smoke.yaml": "3e3bf348632a847938fc6f70637e0dd3f137035e4916d15e86f8b7bff4c29321",
+      "configs/latency.yaml": "d1893369b73e29ff468cc0d3c0e5c40bd66e150b54cb7add47eadd0d79f496c1",
+      "configs/latency_smoke.yaml": "3ac4f15e74ff8f6ec8c4622150bffeb4e05fc18695d407d4806f4a00342bb108",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+      "configs/optical_gain_observability_v1.yaml": "2b387e8108fb801e6594cbb4531e9e2951f3f245279382ed65e399ce88243221",
+      "configs/pyramid_validation.yaml": "203334696ad7881530ed3d6303915710ef294735b678f6d413218cc030c733ac",
+      "configs/reproduction_smoke.yaml": "410aeee992a924821318051510dad8dc784e66517c4ac7cf2dbd570801314a3b",
+      "configs/simulation.yaml": "71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731",
+      "configs/wfs_calibration.yaml": "35929f28e48d781887e90afcfe81472c6c8882702094bbfc8ce48f3c107d691a",
+      "pyproject.toml": "a6cda9c71142de8e685667bf6d5ddd78e92a0c23983a69a3f3171c3b71e93587",
+      "scripts/audit_optical_gain_observability.py": "95e7141a5455a58aef6a67a3c600b2ca6eeb6dfa144fdbfa70bad2ade51e1436",
+      "scripts/audit_provenance.py": "df5443a393f6fdef82321b908a168a97a81f23bc38efab6b22872255f82cd15b",
+      "scripts/check_identification.py": "37dea6a7fd52567883553f777c71c765c64d6d705ee50c0dc251b46da8c48d36",
+      "scripts/compare_reference_iv.py": "3a7c8b3e1539418faf8961f5c5958118200825d8494e43981303ec25dc348fce",
+      "scripts/compare_wfs_calibration.py": "723a92f60822bab56be4023222c14e29acbb3d13dc38be67179452b3e1918cfa",
+      "scripts/plan_controller_study.py": "f8e97f63be679a7e9e545ddaa804c484bf6ee6c422c481a5c791e90f7cc041d9",
+      "scripts/plan_optical_gain_observability.py": "0683b68d06e02cb85495ad0fc8492000149a0920b7c0252eae33af6d9f272582",
+      "scripts/rebuild_all.py": "81bb90a0f676d24b2a21aa75ebca3a82d8879a6b9e7b22dc72d44f8e81bb5b7f",
+      "scripts/resume_fidelity.py": "0d37e20864d64d02b0277f9772205b3a4204ba8d12ccee6948c12ecf0d097f87",
+      "scripts/run_controller_study_smoke.py": "436dd66870e4178bd8e283461148baec354380354ce5e290c44cc80c680f7b1d",
+      "scripts/run_dragrace.py": "6840288ac5aecbbf46e41fa1a672e6e1ed28e49802d2ebfab849a9b7ae2bec09",
+      "scripts/run_observability_smoke.py": "9f9c57312a5ec82748bbd9f2db6ebc613d56431f5345f8039b4114ae79f62991",
+      "scripts/smoke_controller_physics.py": "954dcda91ab0e89852798774bd8e4eb9be82f383d373f7d00b23235fe9ae15ed",
+      "scripts/validate_pyramid.py": "571eec9e4cb0b1ae383be2872fd24bd575a7cd89d10bede1ee6fcddeb4f9c00b",
+      "scripts/verify_checkout.py": "cf8e3f125d16d5627c65e3aaecd1c6ca9fbf90c6aee203953f65e0849bd6c2c5",
+      "scripts/write_report.py": "9c378cb5b71c7e55d2b09f36219a52ede5204f2c50f6f84114db87e4a8cddc99",
+      "src/noether_optics/__init__.py": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+      "src/noether_optics/artifacts.py": "83a8c74d118144344d348c152dbcdbb96c258785a4fac2badff28159eedd9b0b",
+      "src/noether_optics/atmosphere.py": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+      "src/noether_optics/cli.py": "16dbeb9004bfe9c3e2309fe5e94319945d80eaebf90da397642fec8f2ae50d03",
+      "src/noether_optics/config.py": "fc261adbb4bc34f6d8134ad9b184343090128fbfbeb8651a0aefbfa62c7a0f00",
+      "src/noether_optics/controller_evidence.py": "b6692e481243dd5c004a3432e5ee9c4b005ff99db1b54443df0d22b1fd106a19",
+      "src/noether_optics/controller_physics.py": "b7c095930dba88bb517e0d055ca9847a1d31684f9f7460a61c87f2b3d374ebb0",
+      "src/noether_optics/controller_pilots.py": "cc1cdef07a855777fd3f12f64553257489bfb8bd06664661a379caff587c5123",
+      "src/noether_optics/controller_protocol.py": "807ab81d25ca06c01310dda651fffb98680a88608e5a14a6a51a008d0a87fc44",
+      "src/noether_optics/controller_resources.py": "c8867121454582680758c67eeeeaa95af836f86e3e5e083582cd3a9e4dfb9ce8",
+      "src/noether_optics/controller_selection.py": "65638bb3e7ee1db0bb72e1b339db4454424b4c019ec04623f1f6db5f33dcdca0",
+      "src/noether_optics/controller_training.py": "6f4504ba11cedce1af030739b4302c47a6c414f5a7beaa6922dd83389e9df569",
+      "src/noether_optics/controller_training_journal.py": "96b9bba962823d6e2a40d8c367b178a60e847ec57d8da6c9fd9dfecd4df4a01f",
+      "src/noether_optics/controller_training_stage.py": "154eb7d727849b4cf760056b8527ef0d4d11f745ba6299bccc06cd4ea739adea",
+      "src/noether_optics/controller_trials.py": "42e09762bc4d389a0cde84d4b420f4f448fc81cd5901bd4e806b08dfb5d62d70",
+      "src/noether_optics/experiments/__init__.py": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+      "src/noether_optics/experiments/rebuild.py": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+      "src/noether_optics/experiments/runners.py": "99654b50d9c4da624b291e12a31a2e114881dc4d78b15e6c5375e749223bfafa",
+      "src/noether_optics/identification.py": "ebca5a392517978723c216fefad249b3ad4c1a3a267eb5f9c3f651dd3fcf308e",
+      "src/noether_optics/latency.py": "603299fc543fd0294481a5cba07cc58932135ff59055fd22566c026025fe3922",
+      "src/noether_optics/observability_detector.py": "d0b5b01cdef59ae789d9907b7f214b95acbf7c8dc0593aa154ff0c6b84d483cf",
+      "src/noether_optics/observability_evaluation.py": "430b23b86c69045c60b1be44982b9419c102eb24f6369d5662a8e87e6abb1b00",
+      "src/noether_optics/observability_protocol.py": "463375c50f3d7cf512cee1096e0a677575f7a12fe2fd8ce06845467635af83ca",
+      "src/noether_optics/observability_resources.py": "56cb7212976f3f62df7ba0da38d7a7366a9e0c4a2e6d156d0b1298f7b575d423",
+      "src/noether_optics/observability_run.py": "39f5f8e4fd947a5d6c08a19d8eed3a8d48193e3733f0bcef5b8912d319ea556a",
+      "src/noether_optics/observability_trials.py": "195c7244e6c1ec7afbe370a61220d1cd04ea7d47200d5642add3a11ae628cd8c",
+      "src/noether_optics/observability_validation.py": "fd22726f1929e4d33ccf67a6b6a0b73ec0b88d372e0e409f73ed56954450ceb4",
+      "src/noether_optics/optics.py": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+      "src/noether_optics/pyramid_reference.py": "cf476be20080d0eb9599d8be84494e5ae3bcd63379eb3a6921128f694a5a8b19",
+      "src/noether_optics/resource_envelope.py": "0b76242f686afa0df686da5384b699b9b1e268c636e97e97af1c146a74ab60c7",
+      "src/noether_optics/simulation.py": "fff8bc1ed32b6e0f48b20a3fb4683649fdb9c13676465c36b0d900e6cdaec245",
+      "src/noether_optics/wfs_calibration.py": "cfe3ecc6ef521cde2dfd745689bfbb5d06c17fd084539fc3ce01995683bdabd0",
+      "uv.lock": "487e85326305d9440397e8b69e614594768742d7a17d19874b136ec7c3412b04"
+    },
+    "schema_version": 1
+  },
+  "artifacts": [
+    {
+      "bytes": 47806,
+      "file": "reference-6100101-rho0.npz",
+      "sha256": "c279b87248fddbefcef890e4acb0f3d4bc1f33b12995b89d232b7216ec165697"
+    },
+    {
+      "bytes": 47823,
+      "file": "reference-6100102-rho0.npz",
+      "sha256": "4f1d5e49a2d0d56382507497f79c2fd77328f4cf9329e32ffa5dc22e6184ef93"
+    },
+    {
+      "bytes": 32690,
+      "file": "forecast-6100201-rho0-drift0.npz",
+      "sha256": "aa0443a9f9318d0771a31e219614dd8250b19e6d61defbc95ea3e19c6860508f"
+    },
+    {
+      "bytes": 32694,
+      "file": "forecast-6100202-rho0-drift0.npz",
+      "sha256": "3498e5fe64e5b5ea893cb609821cc1f158dca3fe520cc1727a0cf3648826b0fb"
+    },
+    {
+      "bytes": 47806,
+      "file": "reference-6100101-rho0.8.npz",
+      "sha256": "c279b87248fddbefcef890e4acb0f3d4bc1f33b12995b89d232b7216ec165697"
+    },
+    {
+      "bytes": 47823,
+      "file": "reference-6100102-rho0.8.npz",
+      "sha256": "4f1d5e49a2d0d56382507497f79c2fd77328f4cf9329e32ffa5dc22e6184ef93"
+    },
+    {
+      "bytes": 32705,
+      "file": "forecast-6100201-rho0.8-drift0.npz",
+      "sha256": "8a402be178a81a7c5c144580884b050826ca6ec13308f7f3bbdd5412d6712c21"
+    },
+    {
+      "bytes": 32676,
+      "file": "forecast-6100202-rho0.8-drift0.npz",
+      "sha256": "8b62c77ec0830146ebb02cb7d667586de2b67e9022a3f8b906b6864948e344b7"
+    },
+    {
+      "bytes": 32722,
+      "file": "forecast-6100201-rho0.8-drift1.npz",
+      "sha256": "996745949a835975827f20d2d03deccaadd97a26f49780eeefe9abc717e8c7a3"
+    },
+    {
+      "bytes": 32694,
+      "file": "forecast-6100202-rho0.8-drift1.npz",
+      "sha256": "028f343cd9f1313b6442b81a8d804ce1bce9bf35b2d358afb41670ef909ea19b"
+    },
+    {
+      "bytes": 52160,
+      "file": "evidence.json",
+      "sha256": "23bd8acebc8414d411b574389b4c9e570761a948415add06d8225d47d86325a1"
+    }
+  ],
+  "input_sha256": {
+    "results/identification_component_smoke_v1/6100101-rho0-drift0-probe1.npz": "66cae37da8413be219a08ae6d3dc07aa52930859d0167b26b3eccbc31a476351",
+    "results/identification_component_smoke_v1/6100101-rho0.8-drift0-probe1.npz": "fe57a0f70f91f3526de13f4e3a12d1011eac98882407b18308a5c0a125c35043",
+    "results/identification_component_smoke_v1/6100102-rho0-drift0-probe1.npz": "fc2cea3436759443e6e79a7cd68c53a824a772351f0837e4c839a07a3a8a98bb",
+    "results/identification_component_smoke_v1/6100102-rho0.8-drift0-probe1.npz": "9de26b9b9f631acb1d3f7e2ffd922bce85be9598729cfec2d2e6195fcd3901a9",
+    "results/identification_component_smoke_v1/6100201-rho0-drift0-probe0.npz": "d8dd5e3efa386467c1b4b8d1fa7273d0c775b91d8736a337979b87fa15e307f2",
+    "results/identification_component_smoke_v1/6100201-rho0-drift0-probe1.npz": "7e845d993be78c27dabcff614fa11d5eff7d15c0d9ead0918db9b6c38974d247",
+    "results/identification_component_smoke_v1/6100201-rho0.8-drift0-probe0.npz": "b66ac7f0f2697ff3efde8f4d7574d8f34d1bc4da3018f80bd910eda46f6ed0d9",
+    "results/identification_component_smoke_v1/6100201-rho0.8-drift0-probe1.npz": "9a94615e52fa53fb9a8e72823bd53314a839fa3602e5623a935e5ba89346d331",
+    "results/identification_component_smoke_v1/6100201-rho0.8-drift1-probe0.npz": "3d2c24997c9b5992297b84a0ad7004ac2873a3d6edb60e5bfc4826846c6c96cc",
+    "results/identification_component_smoke_v1/6100201-rho0.8-drift1-probe1.npz": "3ccda6762a3827b8631adc8d20ef4fe7d2c86acf857d0da41594f83edd3e1e85",
+    "results/identification_component_smoke_v1/6100202-rho0-drift0-probe0.npz": "ee5612a7e1ab8ece8ec303b7451e557483357f6fefe058e6899f91038dea82b3",
+    "results/identification_component_smoke_v1/6100202-rho0-drift0-probe1.npz": "10522cefbca20b8719949ef41186f32f6a3736cd1cfae8b1e960f249bfa05377",
+    "results/identification_component_smoke_v1/6100202-rho0.8-drift0-probe0.npz": "f2ab283a4eb29ecf6b5117b1f18f046fa73e873945b626b9f8a3a2bbc289681f",
+    "results/identification_component_smoke_v1/6100202-rho0.8-drift0-probe1.npz": "85852194e5433a8f46dd5e6abd55c66731e9531f9fbd958df3bcd299cedfb227",
+    "results/identification_component_smoke_v1/6100202-rho0.8-drift1-probe0.npz": "b81a4db1ca218908424c690235db5227c38927158c47b58b5add07c123858417",
+    "results/identification_component_smoke_v1/6100202-rho0.8-drift1-probe1.npz": "01ffd51316ca67adafb90006330bae8b2d9721a317507b5f61899f89862a44ce",
+    "results/identification_component_smoke_v1/evidence.json": "31b1e833c776e6b6142155b643755cbd897aa65ca336011b5228886d869f5327",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0-drift0-iv.npz": "8c7ea5db1e8497fc91416bfed04a0ff9d6c5828842047453711a8c19cd665942",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0-drift0-nominal.npz": "903d949a6cf7d2f77d247f1abe66fa3e17a87db305512f2dcd0b524df2d2ac32",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0-drift0-ols.npz": "327d8e78c5d4d6249dced063ba96b004e833235e94afcb09add3f40b259a94d8",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift0-iv.npz": "beee4aa06dd4a947d790ce82d8420412d54b7b6d99ce80ee0179f8bb5ceca61c",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift0-nominal.npz": "bcccd0a46ee2d7bc5a0f6c95818fe56e5da9423dd6cd31048b448f0752285854",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift0-ols.npz": "f5ae603ea87fe147ed60666928b0e50dadf347ee7e23558e2fdf64f08f5a4138",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift1-iv.npz": "1515741f2a6a81a4c6a5c8aa4d63b5ee62e0fe5fc8197e7a95c5c07744030fb9",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift1-nominal.npz": "3ec98acb02a84f544287267464e1cae61e795c323977d79e875cba1c42354f78",
+    "results/identification_component_smoke_v1/forecast-6100201-rho0.8-drift1-ols.npz": "2d6748be841aabbf1d6330be92bcc8ab8309d571e77f3fc0bffec8b4d7f92036",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0-drift0-iv.npz": "04b2768f41e8834989972ff1534612482efdd172e7cd85f2a95e84706e016870",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0-drift0-nominal.npz": "a8f70c3ee0c5bbf2195b2293b24ed429a050c5f40cf7725002897f06448cbce6",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0-drift0-ols.npz": "2032cabc3c6ea38009386cf3cffaa4dba1e5ea82d13f67171d040a5f7659dc52",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift0-iv.npz": "c622d2fcfd8faaef88035b224045fdd29452a9520148f70726345ec91346deb8",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift0-nominal.npz": "3757fbb7160d1127ae7cd3c4465ffc7a94cd66c9848b7e58395d095c2a4221e6",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift0-ols.npz": "3b24fa433beeb6fcaa2eaee32b0987a3cab3e95d3bc072ffb0a85209dac43fb9",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift1-iv.npz": "ed3730a4f1cec2a123f6ef9588adf5d8e1f4693c8f68139aeda164efbab1ccf3",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift1-nominal.npz": "179d00daaf062122a31c144b4a8cc86d14791809047cf2aba781fba2058a6298",
+    "results/identification_component_smoke_v1/forecast-6100202-rho0.8-drift1-ols.npz": "0f17492c9a74f7a3ab033f2275a03ebd68ab1634bb617240836b867db232719a",
+    "results/identification_component_smoke_v1/manifest.json": "3b944bfb86418eb9b614fe94995406a56b913ad06be94e81ba1a20bfbbfe18d6",
+    "results/identification_component_smoke_v1/verify.py": "eb0de1e768793e9c72c442b2c2ef3d6fefc62da11cdec0b332f319dc8e7a4d06"
+  },
+  "jax_backend": "cpu",
+  "jax_x64": true,
+  "new_trajectories": 0,
+  "runtime": {
+    "dLux": "0.15.1",
+    "jax": "0.10.2",
+    "jaxlib": "0.10.2",
+    "numpy": "2.4.6"
+  }
+}

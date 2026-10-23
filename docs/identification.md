@@ -112,6 +112,10 @@ acquisition source from analysis source and binds all consumed files. Its
 change a full-study resource gate. The comparison remains exploratory because
 these development recordings have already been examined.
 
+The [retained comparison](../results/controller_filtered_iv_v1/README.md) found
+higher response and forecast error with this reference filter than with raw
+delayed probes, despite both candidates passing the relevance cutoff.
+
 ## Synthetic mismatch and nominal-response restoration
 
 For a declared raw-sensor column transform $S$, the linear adapter replaces the

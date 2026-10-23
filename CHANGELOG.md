@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Retain the controller-filtered IV comparison with independent reconstruction:
+  response and forecast errors exceed raw-probe IV on the reused development
+  recordings. Preserve the original baselines and acquisition provenance.
+
 - Add controller-filtered instruments with explicit delay, clipping and command
   memory; reanalyse retained identification recordings without new acquisition.
   Add coupled linear-sensor perturbations and nominal-response restoration with
