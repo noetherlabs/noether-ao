@@ -102,6 +102,11 @@ deploying an alternative controller would improve wavefront error.
 
 ## Component checks
 
+The retained [development measurements](../results/identification_component_smoke_v1/README.md)
+include raw trajectories and an independent NumPy reconstruction. They show
+lower response error for IV than OLS, higher forecast error for both than the
+nominal calibration, and a positive probing cost in every paired recording.
+
 ```sh
 CI=true JAX_PLATFORMS=cpu JAX_ENABLE_X64=1 .venv/bin/python -m pytest -q tests/test_identification.py
 JAX_PLATFORMS=cpu JAX_ENABLE_X64=1 .venv/bin/python scripts/check_identification.py --out runs/identification-smoke
