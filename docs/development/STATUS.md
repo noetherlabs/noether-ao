@@ -1,10 +1,11 @@
 # Development status
 
 All required available-platform gates passed. Negative scientific findings remain
-negative. The owner subsequently authorized publication to the private
-`noetherlabs/noether-ao` repository, then requested commits only on main. Upstream
-Dragrace drafts and correspondence remain unsent. See [milestone history](../history.md)
-and [next work](TODOS.md).
+negative. The repository is publicly visible, and changes are integrated as
+commits on main. A project license remains undecided. The broader Dragrace drafts
+and correspondence remain unsent; separate issue-led correctness contributions
+are linked in the [contribution guide](../../CONTRIBUTING.md).
+See [milestone history](../history.md) and [next work](TODOS.md).
 
 | Milestone | Gate | Evidence and reason |
 | --- | --- | --- |

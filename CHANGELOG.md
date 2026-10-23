@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Reject baseline simulation configurations that reuse atmosphere, derived detector
+  or initialization random streams. Require unique training seeds and integer roots
+  with uint32 headroom for the detector offset. Recorded baseline inputs and results
+  are unchanged.
+
 - Restructure the README around installation, capabilities, measured findings and
   study references. Keep detailed acquisition and resource accounting in the
   technical documentation; correct repository visibility in the contribution guide.

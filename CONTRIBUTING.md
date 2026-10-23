@@ -64,6 +64,9 @@ local links and shell examples. Keep implementation notes and task coordination
 out of public-facing documentation.
 
 Keep local agent instructions and scheduler settings out of tracked source.
-Private correspondence must never enter Git. The [Dragrace patch](contributions/dragrace.patch)
-and its [drafts](contributions/drafts/) are unsubmitted upstream work and do not
-imply maintainer or institutional approval.
+Private correspondence must never enter Git. The broader
+[Dragrace patch](contributions/dragrace.patch) and its [drafts](contributions/drafts/)
+remain unsubmitted upstream proposals. Separately submitted correctness fixes are
+tracked in [Diffraction-Dragrace #3](https://github.com/Jashcraf/Diffraction-Dragrace/pull/3)
+and [#5](https://github.com/Jashcraf/Diffraction-Dragrace/pull/5). Submission does not
+imply maintainer acceptance or institutional endorsement.
