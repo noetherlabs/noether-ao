@@ -1,62 +1,22 @@
 # Noether AO
 
-**Differentiable adaptive optics and reproducible control experiments.**
+**Differentiable adaptive optics / reproducible closed-loop control.**
 
-Noether AO is research software for studying optical control under sensor noise,
-command delay and model mismatch. Built on dLux and JAX, it combines an optical
-plant, classical and learned controllers, and reproducible experiment protocols.
+JAX and dLux models of wavefront propagation, frozen-flow turbulence, deformable mirrors and pyramid wavefront sensing. Classical, predictive and learned controllers run against shared delays, sensor noise and fault conditions.
 
-[Quickstart](#quickstart) · [Results](#measured-evidence) ·
-[Documentation](docs/README.md) · [Architecture](docs/architecture.md) ·
-[Contributing](CONTRIBUTING.md)
+[Results](docs/results.md) · [Architecture](docs/architecture.md) · [Reproduction](docs/reproduction.md) · [Research roadmap](ROADMAP.md)
 
-## Overview
+## Experiments
 
-- **Optical simulation:** differentiable propagation, frozen-flow turbulence, a
-  modal deformable mirror and an ideal pyramid wavefront sensor.
-- **Control:** integral, predictive and forward-model controllers, with fixed and
-  learned mixtures evaluated in the same delayed plant.
-- **Fault experiments:** sensor and controller faults, residual-based detection,
-  and paired comparisons of continued control and fallback.
-- **Reproducibility:** explicit configurations, disjoint study cohorts, retained
-  raw measurements and deterministic reconstruction of reported results.
+- **Optical physics:** independently check sampled PSFs and pyramid-sensor intensities and derivatives against HCIPy.
+- **Control:** compare integrator, temporal predictor, forward-model and learned-mixture policies with separated training, selection and evaluation data.
+- **Degradation:** inject optical-gain drift, vibration, sensor faults and control delays; measure both detection and the cost of fallback.
 
-## Quickstart
-
-Use Python 3.11 and [uv](https://docs.astral.sh/uv/).
-
-```sh
-git clone https://github.com/noetherlabs/noether-ao.git
-cd noether-ao
-uv sync --frozen --python 3.11
-```
-
-Run the reduced validation example:
-
-```sh
-.venv/bin/noether-optics validate \
-  --config configs/reproduction_smoke.yaml \
-  --out runs/first-validation
-```
-
-This writes physical checks to `gates.json`, controller metrics to `table.md`,
-and a comparison figure to `result.png`. Use a new output directory for each run.
-The reduced example checks functionality; it does not reproduce the full studies.
-
-Run the correctness tests:
-
-```sh
-CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q
-```
-
-The [reproduction guide](docs/reproduction.md) covers complete experiments,
-optional dependencies, resource requirements and reconstruction from saved data.
+Current investigations extend the measured-telemetry pathway toward controller-aware system identification, calibrated observation noise and instrument replay. These directions are not released instrument integrations.
 
 ## Measured evidence
 
-The completed v0 experiments examine propagation latency (C1), optical-model
-fidelity (C2), learned controller mixtures (C3), and detection with fallback (C4).
-The following summary is generated from retained results.
+The initial C1–C4 experiments retain raw measurements, configurations and non-winning results.
 
 <!-- BEGIN HEADLINES -->
 
@@ -69,57 +29,32 @@ The following summary is generated from retained results.
 
 <!-- END HEADLINES -->
 
-See the [results report](docs/results.md) for methods, paired uncertainty and raw
-evidence. Latency measurements describe CPU propagation components on an Apple M1,
-not a complete control-loop deadline.
+The CPU component timings are not full sensor-to-actuator latency measurements. Methods and paired uncertainty are in the [results report](docs/results.md).
 
-## Research studies
+## Active studies
 
-| Study | Scope and status | Documentation |
-| --- | --- | --- |
-| Pyramid sensor validation | Finite-grid intensity and derivative agreement with an independent HCIPy reference. | [Protocol](docs/pyramid_validation.md) · [Report](results/pyramid_validation_v1/report.md) |
-| Controller comparison | Frozen training, selection and evaluation protocol. Full comparison pending; reduced execution checks completed. | [Protocol](docs/controller_study_v1.md) · [Runner checks](results/controller_runner_smoke_v1/README.md) |
-| Optical-gain observability | Frozen detection study. Training is incomplete; detector performance is not validated. | [Protocol](docs/optical_gain_observability_v1.md) · [Exploratory audit](results/optical_gain_observability_audit_v1/README.md) |
+| Study | Record |
+| --- | --- |
+| Pyramid wavefront sensing | [Protocol](docs/pyramid_validation.md) · [Independent comparison](results/pyramid_validation_v1/report.md) |
+| Frozen controller comparison | [Protocol](docs/controller_study_v1.md) · [Runner checks](results/controller_runner_smoke_v1/README.md) |
+| Optical-gain observability | [Protocol](docs/optical_gain_observability_v1.md) · [Audit](results/optical_gain_observability_audit_v1/README.md) |
 
-Implementation checks and scientific results are reported separately. The
-[controller component checks](results/controller_physics_smoke_v1/README.md) and
-[observability runner checks](results/optical_gain_observability_runner_smoke_v1/README.md)
-verify execution on reduced configurations; they do not establish controller
-superiority or detector performance.
+The full controller study and optical-gain validation remain in progress. [ROADMAP.md](ROADMAP.md) tracks acceptance and resource gates.
 
-## Documentation
+## Run
 
-- [Architecture](docs/architecture.md) — optical model, controllers and experiment boundaries.
-- [Reproduction](docs/reproduction.md) — installation, commands and resource planning.
-- [Results](docs/results.md) — measured findings, uncertainty and limitations.
-- [Documentation index](docs/README.md) — protocols and reference material.
-- [Roadmap](ROADMAP.md) — planned research and instrument integration.
+Python 3.11 and [uv](https://docs.astral.sh/uv/).
 
-```text
-src/noether_optics/   Optical models, controllers and experiment runners
-configs/             Simulation settings and frozen study configurations
-plans/               Declared experiment plans
-tests/               Numerical, physical and integrity checks
-results/             Retained measurements, reports and provenance
-scripts/             Reproduction and reporting tools
-docs/                Methods, protocols and architecture
+```bash
+git clone https://github.com/noetherlabs/noether-ao.git
+cd noether-ao
+uv sync --frozen --python 3.11
+.venv/bin/noether-optics validate --config configs/reproduction_smoke.yaml --out runs/first-validation
+CI=true JAX_PLATFORMS=cpu .venv/bin/python -m pytest -q
 ```
 
-The Python package is `noether_optics`; the command-line interface is
-`noether-optics`.
+The reduced validation is a functional check, not a reproduction of the full experimental campaigns. See the [reproduction guide](docs/reproduction.md) for complete runs and provenance.
 
-## Scope and limitations
+## Release
 
-The experiments use a simulated optical plant. They do not establish on-sky
-performance, instrument validation or hard real-time operation. The current
-results do not demonstrate a general advantage for learned control or guarantee
-that fallback improves performance. Model assumptions and comparison limits are
-documented in the [architecture guide](docs/architecture.md#model-boundary).
-
-## Contributing and licence
-
-Developed by Noether Labs. See [Contributing](CONTRIBUTING.md) for development and
-validation requirements, and the [changelog](CHANGELOG.md) for changes.
-
-This repository does not currently include an open-source licence. See the
-[release status](ROADMAP.md#public-release) for the outstanding requirements.
+Current research results use simulated optical systems; instrument qualification and hard real-time performance require separate measurements. The repository is publicly visible but project-owned code is not yet licensed for redistribution. [Release requirements](ROADMAP.md#public-release).
