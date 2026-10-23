@@ -9,6 +9,7 @@ JAX and dLux models of wavefront propagation, frozen-flow turbulence, deformable
 ## Experiments
 
 - **Optical physics:** independently check sampled PSFs and pyramid-sensor intensities and derivatives against HCIPy.
+- **Sensor calibration:** compare independent response matrices, held-out reconstruction and calibration transfer with HCIPy and SPECULA, retaining native-model disagreement.
 - **Control:** compare integrator, temporal predictor, forward-model and learned-mixture policies with separated training, selection and evaluation data.
 - **Degradation:** inject optical-gain drift, vibration, sensor faults and control delays; measure both detection and the cost of fallback.
 
@@ -36,6 +37,7 @@ The CPU component timings are not full sensor-to-actuator latency measurements. 
 | Study | Record |
 | --- | --- |
 | Pyramid wavefront sensing | [Protocol](docs/pyramid_validation.md) · [Independent comparison](results/pyramid_validation_v1/report.md) |
+| Wavefront-sensor calibration | [Protocol](docs/wfs_calibration.md) · [HCIPy/SPECULA comparison](results/wfs_calibration_v1/README.md) |
 | Frozen controller comparison | [Protocol](docs/controller_study_v1.md) · [Runner checks](results/controller_runner_smoke_v1/README.md) |
 | Optical-gain observability | [Protocol](docs/optical_gain_observability_v1.md) · [Audit](results/optical_gain_observability_audit_v1/README.md) |
 | Closed-loop response identification | [Methods](docs/identification.md) · [Development measurements](results/identification_component_smoke_v1/README.md) |

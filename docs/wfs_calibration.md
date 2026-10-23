@@ -5,6 +5,10 @@ from individual images to interaction matrices, independently calibrated
 reconstructors, held-out mixed wavefronts and calibration transfer. It does not
 change the production sensor, controllers or frozen observability experiments.
 
+Completed evidence: [findings](../results/wfs_calibration_v1/README.md),
+[full report](../results/wfs_calibration_v1/report.md) and
+[reconstruction verification](../results/wfs_calibration_v1/verification.json).
+
 ## Declared comparison
 
 Four optical paths receive identical phase arrays in radians at 750 nm:
@@ -81,9 +85,28 @@ Use the pinned Noether environment (`uv sync --frozen --python 3.11`). SPECULA i
 an optional isolated environment; install the source revision recorded in the
 saved provenance with its dependencies. Its Python is passed explicitly:
 
+The retained run used HCIPy 0.7.1 and SPECULA commit
+`d37bbcc48db2387a1b021eb9744f046b733ca159` (Python 3.12.0, NumPy 2.5.4,
+SciPy 1.18.1). This SPECULA checkout includes the separate, unmerged
+[Shack–Hartmann sampling fix #836](https://github.com/ArcetriAdaptiveOptics/SPECULA/pull/836);
+the pyramid code is unchanged by that patch. An isolated source installation is:
+
 ```sh
+uv venv --python 3.12 .venv-specula
+uv pip install --python .venv-specula/bin/python \
+  'git+https://github.com/salma2vec/SPECULA.git@d37bbcc48db2387a1b021eb9744f046b733ca159' \
+  'numpy==2.5.4' 'scipy==1.18.1'
+```
+
+All installed dependency versions are retained in the backend JSON files; the
+command above pins the source and numerical kernels, not the entire transitive
+environment. Reproduction should use the recorded versions. SPECULA remains
+optional for the core test suite, but the comparison runner requires all backends.
+
+```sh
+mkdir -p runs
 PYTHONPATH=src JAX_ENABLE_X64=1 .venv/bin/python scripts/compare_wfs_calibration.py \
-  --out results/wfs_calibration_v1 --specula-python /absolute/path/to/specula/python
+  --out runs/wfs-calibration-new --specula-python .venv-specula/bin/python
 PYTHONPATH=src .venv/bin/python scripts/compare_wfs_calibration.py \
   --out results/wfs_calibration_v1 --render-only
 ```
