@@ -40,6 +40,7 @@ The CPU component timings are not full sensor-to-actuator latency measurements. 
 | Wavefront-sensor calibration | [Protocol](docs/wfs_calibration.md) · [HCIPy/SPECULA comparison](results/wfs_calibration_v1/README.md) |
 | Frozen controller comparison | [Protocol](docs/controller_study_v1.md) · [Runner checks](results/controller_runner_smoke_v1/README.md) |
 | Optical-gain observability | [Protocol](docs/optical_gain_observability_v1.md) · [Audit](results/optical_gain_observability_audit_v1/README.md) |
+| Scheduled controller handover | [Methods](docs/scheduled_fallback.md) · [Paired simulation results](results/scheduled_fallback_v1/README.md) |
 | Closed-loop response identification | [Methods](docs/identification.md) · [Development measurements](results/identification_component_smoke_v1/README.md) · [Instrument comparison](results/controller_filtered_iv_v1/README.md) |
 
 The full controller study and optical-gain validation remain in progress. [ROADMAP.md](ROADMAP.md) tracks acceptance and resource gates.

@@ -1,0 +1,5315 @@
+{
+  "acquisition": {
+    "assessment_sha256": "e2dad6e74f580b6cbf30924138204674295c04e2db0691972481d26856b2313f",
+    "configuration_sha256": "4649ee3e476c835fc60298c40b1f28aa45f221ebc8c25f6b9f236f52de1c38ad",
+    "qualification_manifest_sha256": "d3c01921a7a24bac33b19a9456e3a8004341f81f1ba6fe1cdc88b3305e7ae271",
+    "records": 33,
+    "selected_policy_binding_sha256": {
+      "configuration": "56282124372a04bb2beb0789baa5f4d1b2affa61e0d46e041c180a24f94e3970",
+      "fit_record": "f68d58e4d1d4919d396f73f525c0a5df94b8f490640fde1464d634927e7eec14",
+      "freeze_record": "f6794cc5ebd5519b0562ba6503230a6d3e6c974bbff524ced7834b0511310152",
+      "selection_record": "d589218efd0be1f344ef25faa900d1c05f73c05913d556bd45fa572c7069f230"
+    },
+    "smoke_terminal_record_sha256": "135a71bc898d2daba9e73ee61ac36a3e719445e17ba4bc35f2ec46a999d62f41",
+    "terminal_record_sha256": "252b2f18ffc81a6ae216bef278dfc695c3d05b9b3dada0e23e0648526146940f"
+  },
+  "artifacts": {
+    "assessment.json": {
+      "bytes": 623274,
+      "sha256": "fdb57705b2abe04b04e1dd390b1a298e60ad0c1851cdd07e85d8cfa2a72da356"
+    },
+    "calibration.npz": {
+      "arrays": {
+        "basis": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            16,
+            16
+          ]
+        },
+        "common_reconstructor": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            1024
+          ]
+        },
+        "common_reference": {
+          "dtype": "float64",
+          "shape": [
+            1024
+          ]
+        },
+        "interaction": {
+          "dtype": "float64",
+          "shape": [
+            1024,
+            8
+          ]
+        },
+        "mask": {
+          "dtype": "float64",
+          "shape": [
+            16,
+            16
+          ]
+        },
+        "preconditioner": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            8
+          ]
+        },
+        "projection": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            256
+          ]
+        },
+        "reconstructor": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            1024
+          ]
+        },
+        "reference": {
+          "dtype": "float64",
+          "shape": [
+            1024
+          ]
+        },
+        "stuck_patch": {
+          "dtype": "float64",
+          "shape": [
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 252936,
+      "native_sha256": "82c2e1ab50792073987e490a36e0494afb7572946da77fbdb7ab0caf1f6c74c7",
+      "sha256": "82c2e1ab50792073987e490a36e0494afb7572946da77fbdb7ab0caf1f6c74c7"
+    },
+    "config.json": {
+      "bytes": 6531,
+      "sha256": "147878c01a69e903def3ef83ae9a063f87fe2f47a116ea2b0a81e6add45fcc60"
+    },
+    "models.npz": {
+      "arrays": {
+        "predictor_coefficients": {
+          "dtype": "float64",
+          "shape": [
+            8,
+            2
+          ]
+        }
+      },
+      "bytes": 426,
+      "native_sha256": "b550ef327c0857d6d70d02ee3cd366760e97df7c5c11053c97b80326a6c37c4e",
+      "sha256": "b550ef327c0857d6d70d02ee3cd366760e97df7c5c11053c97b80326a6c37c4e"
+    },
+    "phases/282001001.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "b02d50e866b301fb515d4983c5dcb67bdc33fcaafbe56096190c7bf45c679716",
+      "sha256": "b02d50e866b301fb515d4983c5dcb67bdc33fcaafbe56096190c7bf45c679716"
+    },
+    "phases/282001002.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "d7aaf5dcb9c8a72373cacb76710bb37a9c2b8cfe60da23cc332178571a037d12",
+      "sha256": "d7aaf5dcb9c8a72373cacb76710bb37a9c2b8cfe60da23cc332178571a037d12"
+    },
+    "phases/282001003.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "abcf82bd48b0162b9ac7d9c50a7d3ec11e935eeb36e9e1137db5ef9dd110501a",
+      "sha256": "abcf82bd48b0162b9ac7d9c50a7d3ec11e935eeb36e9e1137db5ef9dd110501a"
+    },
+    "phases/282001004.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "a6593055bc04c4baed90bddf290d89ae4c75d59fc89ad1a90a7d1a4be87af1a3",
+      "sha256": "a6593055bc04c4baed90bddf290d89ae4c75d59fc89ad1a90a7d1a4be87af1a3"
+    },
+    "phases/282001005.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "35f8e666e8115bd1466bf906751f1e393245c3c50680fd649ec744025cae86f6",
+      "sha256": "35f8e666e8115bd1466bf906751f1e393245c3c50680fd649ec744025cae86f6"
+    },
+    "phases/282001006.npz": {
+      "arrays": {
+        "phase": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        }
+      },
+      "bytes": 262408,
+      "native_sha256": "9c4048c5d3eb3f6f6686de00badf9b6428e0c5107035d2ca801884dbbc558d01",
+      "sha256": "9c4048c5d3eb3f6f6686de00badf9b6428e0c5107035d2ca801884dbbc558d01"
+    },
+    "policies.json": {
+      "bytes": 1817,
+      "sha256": "a62217efa6d241df0f7cfbc1d6ba4c74860f27ba448c1f148a1e77f1274c39e6"
+    },
+    "raw/R1-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "1e7ed8dd7c8043023aa398a504b8e53d6ad156aa4739ccbde01b7cb4204ecbcb",
+      "sha256": "1e7ed8dd7c8043023aa398a504b8e53d6ad156aa4739ccbde01b7cb4204ecbcb"
+    },
+    "raw/R1-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "a3906eb60647ff16e749d64e72088150e9e56552600d24e334dcf37e602131e0",
+      "sha256": "a3906eb60647ff16e749d64e72088150e9e56552600d24e334dcf37e602131e0"
+    },
+    "raw/R1-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "fa30e0a1af48e19d18f183740f0dc800e1f4bb6a9409f048ac36323d9195377c",
+      "sha256": "fa30e0a1af48e19d18f183740f0dc800e1f4bb6a9409f048ac36323d9195377c"
+    },
+    "raw/R1-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "b07f41e1c110e03d8ebe0e30e383d03c4575ec91d8ce0356da9b78cd21c7425a",
+      "sha256": "b07f41e1c110e03d8ebe0e30e383d03c4575ec91d8ce0356da9b78cd21c7425a"
+    },
+    "raw/R2-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "2eb8a9b75f967336e3822153a281c7d15ca8da1e643eeb4265081289dc186e95",
+      "sha256": "2eb8a9b75f967336e3822153a281c7d15ca8da1e643eeb4265081289dc186e95"
+    },
+    "raw/R2-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "3b7911b599bcf17141c83a828e7a4c7c6ea7b92ede67680846146cfcd411cd30",
+      "sha256": "3b7911b599bcf17141c83a828e7a4c7c6ea7b92ede67680846146cfcd411cd30"
+    },
+    "raw/R2-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "8e84dd763f829fbc0ef97454f34ce7f8953616a6b3dc79f74f1dfb5d4850c712",
+      "sha256": "8e84dd763f829fbc0ef97454f34ce7f8953616a6b3dc79f74f1dfb5d4850c712"
+    },
+    "raw/R2-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "0c600c6d5396e987cece22474970493437ce63d63ab81d67b16c5c6b23506544",
+      "sha256": "0c600c6d5396e987cece22474970493437ce63d63ab81d67b16c5c6b23506544"
+    },
+    "raw/R3-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "245d91fe2554b63f9176948d1fdec2bfdb9361906e61b6044dce011fb2661565",
+      "sha256": "245d91fe2554b63f9176948d1fdec2bfdb9361906e61b6044dce011fb2661565"
+    },
+    "raw/R3-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "70bd4d903fa39fce2922cbbc479be0ac3e1e5ac629400cfa494fa68652fb70ac",
+      "sha256": "70bd4d903fa39fce2922cbbc479be0ac3e1e5ac629400cfa494fa68652fb70ac"
+    },
+    "raw/R3-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "379305976dbec61ac0d11c4887989e373196a6aae2e6be746f2462e0133e86dc",
+      "sha256": "379305976dbec61ac0d11c4887989e373196a6aae2e6be746f2462e0133e86dc"
+    },
+    "raw/R3-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "3fc5742974bbfd8b95cfe2eec8d51da34fab70bafac4a3822c2a8d189d9be8cf",
+      "sha256": "3fc5742974bbfd8b95cfe2eec8d51da34fab70bafac4a3822c2a8d189d9be8cf"
+    },
+    "raw/R4-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "d4f346ef157310e99d0c854c8908ac3399ddf7803e575cc2e1cf86e4007dcebc",
+      "sha256": "d4f346ef157310e99d0c854c8908ac3399ddf7803e575cc2e1cf86e4007dcebc"
+    },
+    "raw/R4-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "39243cfe71ce1999c6634dcb0cabb043699383a69084a2510c5612b150625dab",
+      "sha256": "39243cfe71ce1999c6634dcb0cabb043699383a69084a2510c5612b150625dab"
+    },
+    "raw/R4-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "ef1e065b9a526d0bddaf99de678edb0100034324b7d193c8c718938a67b72771",
+      "sha256": "ef1e065b9a526d0bddaf99de678edb0100034324b7d193c8c718938a67b72771"
+    },
+    "raw/R4-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "1dcbbe95ff31e5d1b0e2314e3de6153330cceba7d9f1ce21cac915cb5a597a31",
+      "sha256": "1dcbbe95ff31e5d1b0e2314e3de6153330cceba7d9f1ce21cac915cb5a597a31"
+    },
+    "raw/R5-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "660c5debfc82b7ec2cfa3b724a211a6c7bfc1bf0ca07a2465735afcb55bb9b09",
+      "sha256": "660c5debfc82b7ec2cfa3b724a211a6c7bfc1bf0ca07a2465735afcb55bb9b09"
+    },
+    "raw/R5-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "1782ca3c7765948aa15a11a224454e893707f49f66a42708905e1817aed20fd8",
+      "sha256": "1782ca3c7765948aa15a11a224454e893707f49f66a42708905e1817aed20fd8"
+    },
+    "raw/R5-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "14518775dfeb91217132685ac8acb18bb3e7943704c98d7bbdbd25929ee989db",
+      "sha256": "14518775dfeb91217132685ac8acb18bb3e7943704c98d7bbdbd25929ee989db"
+    },
+    "raw/R5-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "466be1cc7af171b8eb094d71d2aebc16f9c462aec5249968440c213652b6f614",
+      "sha256": "466be1cc7af171b8eb094d71d2aebc16f9c462aec5249968440c213652b6f614"
+    },
+    "raw/R6-nominal-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "a38987bbdd0198a3d0de91f7462a2b095ee0366a863a86dc3d142f3b8cc5f823",
+      "sha256": "a38987bbdd0198a3d0de91f7462a2b095ee0366a863a86dc3d142f3b8cc5f823"
+    },
+    "raw/R6-nominal-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "535380c3f4d3323561b8ba36e350f2e24135f0d7e4d9905dfd6b227325779187",
+      "sha256": "535380c3f4d3323561b8ba36e350f2e24135f0d7e4d9905dfd6b227325779187"
+    },
+    "raw/R6-optical_gain_drift-continue_P.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "92f0287a284828f5a07f9c8a6c58e1c0c89b3872939f5d2126eb9815c30a1bf0",
+      "sha256": "92f0287a284828f5a07f9c8a6c58e1c0c89b3872939f5d2126eb9815c30a1bf0"
+    },
+    "raw/R6-optical_gain_drift-switch_P_to_I.npz": {
+      "arrays": {
+        "alarm": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "applied": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "camera_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "command": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "command_delta": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "fallback": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "fallback_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "first_invalid_frame": {
+          "dtype": "int64",
+          "shape": [
+            128
+          ]
+        },
+        "forced_intervention": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "live_frame": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "measurement": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "measurement_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "policy_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "prediction": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "primary_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "raw_clean": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_count_rate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            1024
+          ]
+        },
+        "raw_residual": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            16,
+            16
+          ]
+        },
+        "raw_strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "raw_variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "residual_estimate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "saturated": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "score": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "selected_candidate": {
+          "dtype": "float64",
+          "shape": [
+            128,
+            8
+          ]
+        },
+        "strehl": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        },
+        "trial_valid": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "unavailable": {
+          "dtype": "bool",
+          "shape": [
+            128
+          ]
+        },
+        "variance": {
+          "dtype": "float64",
+          "shape": [
+            128
+          ]
+        }
+      },
+      "bytes": 4536828,
+      "native_sha256": "982f21200038a1560ee77aba69c69e53c9ddca406861e41f10819894ae54060a",
+      "sha256": "982f21200038a1560ee77aba69c69e53c9ddca406861e41f10819894ae54060a"
+    },
+    "test_verify.py": {
+      "bytes": 6481,
+      "sha256": "d9da06ba409c2fcf2c305b967b5cdfb16b0c4702d0febe13ddfff4b31475b746"
+    },
+    "verify.py": {
+      "bytes": 40758,
+      "sha256": "9173777435e31118c50da8d78166672b2d99089585f46c508196ce87ba1f2c25"
+    }
+  },
+  "numerical_function_sources": {
+    "functions": {
+      "_canonical": "5d0e40591205297e07857721386b42fc60c6d7456920f42e8235d28902f2ddd7",
+      "_close": "f707400079ee9c1b6d7f862c2bc894e743ab659f7f2101c02f37c1ed7bca1c88",
+      "_finite_json": "3b304be1c8d14d4a1ffed88e44fe0041c84a9e7122ac5bdaa177d6c009c022de",
+      "_json": "bdc8532b330a5a55d77a18853410455bea36af29f6fa4a1cdd74562d2b9ec827",
+      "_require": "13b56be9c56c725b83c63380cf55e7d51b4eb9cef67d2225e6e4791a4660533d",
+      "assessment_from_reduced": "e1156e6b3c6110eb69e09275b4e835da80c4c6972c4b2052369d5d67e001b2d7",
+      "check_causal_pair": "30354c45e4d755ae6015e85bf6738d5fcfd0987427ecd588b67c467906cadaf5",
+      "check_trace": "956cdc8b81096ee02bba20ed47ccfaa90d27de4da6051a5b4d41b617a4b209b4",
+      "describe": "86625cd8b66fe6694b245e0d3c4bc84340b2931f527212a94fa466d461710603",
+      "paired_descriptive_outcomes": "438f90ce43d814f8e7cc73ea4886f617ba77b3c2b76e29650648c2e9e1e80fda",
+      "physical_metrics": "867b3baddc13481cd8c47fd22dfd0acd78e991b88614b348543a9b2e4c4d334f",
+      "profile_contract": "33295a34ba87b75abe72ef1b197df40ac6731373a03dc299d2280ce8133809a4",
+      "return_to_reference": "ff21f301f40d7f783054b959ae3dd74f5f9aa6c03dd97e7175450a2d409f354b",
+      "window_cost": "616a9f4f02e099ee4aa0d3537998fa3e8e453baba9019eda26ca3f77f1c7492d"
+    },
+    "source_sha256": "aabc816cd598f72513d7275794f24fb41a5d76c8d76a11f283d71b4446d10063"
+  },
+  "presentation_files": {
+    "scope": "Optional presentation only; numerical reconstruction uses the integrity-bound artifacts.",
+    "unhashed": [
+      "README.md",
+      "plot.py",
+      "comparison.png",
+      "comparison.svg"
+    ]
+  },
+  "provenance_limit": "Native digests identify privately retained acquisition records. This package does not replay their complete provenance chain or authenticate acquisition times.",
+  "schema": "noether.scheduled-fallback.public-manifest.v1",
+  "scope": "Derived numerical evidence and retained-array reconstruction; acquisition is not reproduced.",
+  "trials": [
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R1-nominal-continue_P",
+        "root_seed": 282001001,
+        "stage": "trial"
+      },
+      "native_record_sha256": "ca18f3be544bd2c265a6a1b5f78fbdde32baf0ff9bbe196f4aebd6aa9eb8bf58",
+      "raw": "raw/R1-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R1-nominal-switch_P_to_I",
+        "root_seed": 282001001,
+        "stage": "trial"
+      },
+      "native_record_sha256": "bcada84ff2d0296b14c89c11c726f7947377ed3de1804a1ff974ad325a15031d",
+      "raw": "raw/R1-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R1-optical_gain_drift-continue_P",
+        "root_seed": 282001001,
+        "stage": "trial"
+      },
+      "native_record_sha256": "2ec692481b71b9c45096390dae0ab4e305d94c19c4fd648ce6b5058e05482f8e",
+      "raw": "raw/R1-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R1-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001001,
+        "stage": "trial"
+      },
+      "native_record_sha256": "1361a91eb136e08340e03287c9bf800e90875f47b6471c69c7f97584efcd92c7",
+      "raw": "raw/R1-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R2-nominal-continue_P",
+        "root_seed": 282001002,
+        "stage": "trial"
+      },
+      "native_record_sha256": "c3ec6d543449bc3871c3948cf4e44950a17b46c060dae9cddfc38dfd56c27338",
+      "raw": "raw/R2-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R2-nominal-switch_P_to_I",
+        "root_seed": 282001002,
+        "stage": "trial"
+      },
+      "native_record_sha256": "b09a671237a08e6a095d4973414731cfab67441d27764043e0208822e01dbe92",
+      "raw": "raw/R2-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R2-optical_gain_drift-continue_P",
+        "root_seed": 282001002,
+        "stage": "trial"
+      },
+      "native_record_sha256": "051ca4e7fd808f7c618df0ebaf3007936efd9dab8574144d6b0d830632a99cbc",
+      "raw": "raw/R2-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R2-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001002,
+        "stage": "trial"
+      },
+      "native_record_sha256": "d383b7973c2b90a9b3b1d65dfd5471469490cf409a6622480710988d5c5601ca",
+      "raw": "raw/R2-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R3-nominal-continue_P",
+        "root_seed": 282001003,
+        "stage": "trial"
+      },
+      "native_record_sha256": "7552ead2b4ae00ea1a4ea927135b86b791678595c086bf10616a33ad0e4520f6",
+      "raw": "raw/R3-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R3-nominal-switch_P_to_I",
+        "root_seed": 282001003,
+        "stage": "trial"
+      },
+      "native_record_sha256": "023b0f639a1f6d849d66aaba9b559d293d62a18592ea47303253095c30a8a8cf",
+      "raw": "raw/R3-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R3-optical_gain_drift-continue_P",
+        "root_seed": 282001003,
+        "stage": "trial"
+      },
+      "native_record_sha256": "b587c3b63d6aa982b40ec414a4826e010a0e71f76c9be4ead5ce47738b939823",
+      "raw": "raw/R3-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R3-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001003,
+        "stage": "trial"
+      },
+      "native_record_sha256": "7bc91bacf7a3ddfde07512d47badfc799f3f88af480528913f8ea394ec007655",
+      "raw": "raw/R3-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R4-nominal-continue_P",
+        "root_seed": 282001004,
+        "stage": "trial"
+      },
+      "native_record_sha256": "6f52a8437005f38fadc8613c6028f1d9e631ee339fec5b017878e654774b6f64",
+      "raw": "raw/R4-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R4-nominal-switch_P_to_I",
+        "root_seed": 282001004,
+        "stage": "trial"
+      },
+      "native_record_sha256": "b449f6d7f3f340323ba8956db13939141a63a36fcba8d2158a827502e28b885e",
+      "raw": "raw/R4-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R4-optical_gain_drift-continue_P",
+        "root_seed": 282001004,
+        "stage": "trial"
+      },
+      "native_record_sha256": "4d35618dba8b58b7ad935bcbdc1ebf546e9f479bbcb84f250c56b2475851096d",
+      "raw": "raw/R4-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R4-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001004,
+        "stage": "trial"
+      },
+      "native_record_sha256": "f9ba658262c900e5caa883f989f9da742a6891e56d86f5abcaea800d2b5e6572",
+      "raw": "raw/R4-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R5-nominal-continue_P",
+        "root_seed": 282001005,
+        "stage": "trial"
+      },
+      "native_record_sha256": "baa9e4698081f0355aad22c8d7d99cbe28cf472a9f2a97769c40f0365a7a9255",
+      "raw": "raw/R5-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R5-nominal-switch_P_to_I",
+        "root_seed": 282001005,
+        "stage": "trial"
+      },
+      "native_record_sha256": "66b3784888acc0b35d03d4c5f4a84c60f4f3631a92d81fa59ae85d7de076e56d",
+      "raw": "raw/R5-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R5-optical_gain_drift-continue_P",
+        "root_seed": 282001005,
+        "stage": "trial"
+      },
+      "native_record_sha256": "e00b896c57d52453b221cd57571f08d14d0ae6037666f44f9c9bf172235eb8c8",
+      "raw": "raw/R5-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R5-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001005,
+        "stage": "trial"
+      },
+      "native_record_sha256": "ff1c97b895af209e7fbd0dee2fd48d7a862a3a4e53edef7d454b33addbb108c6",
+      "raw": "raw/R5-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "nominal",
+        "id": "R6-nominal-continue_P",
+        "root_seed": 282001006,
+        "stage": "trial"
+      },
+      "native_record_sha256": "82e1a0d7a9e75630eddb9d03b3a9995cdc9f2f78c8d490bd6781a551b0b4bbba",
+      "raw": "raw/R6-nominal-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "nominal",
+        "id": "R6-nominal-switch_P_to_I",
+        "root_seed": 282001006,
+        "stage": "trial"
+      },
+      "native_record_sha256": "4024174f4ba18a468c4cf91f1bb7905277e9558519f1f681457483b3fd269837",
+      "raw": "raw/R6-nominal-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "continue_P",
+        "condition": "optical_gain_drift",
+        "id": "R6-optical_gain_drift-continue_P",
+        "root_seed": 282001006,
+        "stage": "trial"
+      },
+      "native_record_sha256": "df510a070a0eecd68d0b5fc5324cdfdf5d04664a5777ed0dbf7c42bb15379d91",
+      "raw": "raw/R6-optical_gain_drift-continue_P.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    },
+    {
+      "case": {
+        "candidate_id": "switch_P_to_I",
+        "condition": "optical_gain_drift",
+        "id": "R6-optical_gain_drift-switch_P_to_I",
+        "root_seed": 282001006,
+        "stage": "trial"
+      },
+      "native_record_sha256": "51a515e3a684e1ab36abd6e3c22a933fd0019fc4fe92cfbc920a34d1c0ec35a0",
+      "raw": "raw/R6-optical_gain_drift-switch_P_to_I.npz",
+      "validity": {
+        "first_invalid_frame": -1,
+        "reason": null,
+        "valid": true
+      }
+    }
+  ]
+}

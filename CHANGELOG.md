@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Retain 24 scheduled-fallback trials with exact numerical archives, paired
+  uncertainty, a standalone measurement verifier and all-realization figures.
+  Both predeclared intervals include zero; acquisition reproduction and
+  instrument safety remain outside this evidence package.
+
 - Retain the controller-filtered IV comparison with independent reconstruction:
   response and forecast errors exceed raw-probe IV on the reused development
   recordings. Preserve the original baselines and acquisition provenance.

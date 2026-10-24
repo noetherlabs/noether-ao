@@ -1,0 +1,258 @@
+{
+  "cases": [
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R1-nominal-continue_P",
+      "root_seed": 282001001,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R1-nominal-switch_P_to_I",
+      "root_seed": 282001001,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R1-optical_gain_drift-continue_P",
+      "root_seed": 282001001,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R1-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001001,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R2-nominal-continue_P",
+      "root_seed": 282001002,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R2-nominal-switch_P_to_I",
+      "root_seed": 282001002,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R2-optical_gain_drift-continue_P",
+      "root_seed": 282001002,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R2-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001002,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R3-nominal-continue_P",
+      "root_seed": 282001003,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R3-nominal-switch_P_to_I",
+      "root_seed": 282001003,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R3-optical_gain_drift-continue_P",
+      "root_seed": 282001003,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R3-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001003,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R4-nominal-continue_P",
+      "root_seed": 282001004,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R4-nominal-switch_P_to_I",
+      "root_seed": 282001004,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R4-optical_gain_drift-continue_P",
+      "root_seed": 282001004,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R4-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001004,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R5-nominal-continue_P",
+      "root_seed": 282001005,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R5-nominal-switch_P_to_I",
+      "root_seed": 282001005,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R5-optical_gain_drift-continue_P",
+      "root_seed": 282001005,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R5-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001005,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "nominal",
+      "id": "R6-nominal-continue_P",
+      "root_seed": 282001006,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "nominal",
+      "id": "R6-nominal-switch_P_to_I",
+      "root_seed": 282001006,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "continue_P",
+      "condition": "optical_gain_drift",
+      "id": "R6-optical_gain_drift-continue_P",
+      "root_seed": 282001006,
+      "stage": "trial"
+    },
+    {
+      "candidate_id": "switch_P_to_I",
+      "condition": "optical_gain_drift",
+      "id": "R6-optical_gain_drift-switch_P_to_I",
+      "root_seed": 282001006,
+      "stage": "trial"
+    }
+  ],
+  "cohort": {
+    "actions": [
+      "continue_P",
+      "switch_P_to_I"
+    ],
+    "burn_in": 32,
+    "conditions": [
+      "nominal",
+      "optical_gain_drift"
+    ],
+    "drift_frames": 32,
+    "end": 128,
+    "first_application": 82,
+    "frames": 128,
+    "onset": 64,
+    "optical_gain": 0.35,
+    "roots": [
+      282001001,
+      282001002,
+      282001003,
+      282001004,
+      282001005,
+      282001006
+    ],
+    "switch_frame": 80
+  },
+  "experiment_id": "ao-scheduled-fallback-recovery-v1-c3-20261024",
+  "metric_contract": {
+    "denominator": "same-root same-phase zero-DM residual-variance integral over primary window",
+    "invalidity": "Any invalid frame withholds the entire paired-root cost and any complete mean or interval; no survivor mean, substitute seed or hidden exclusion.",
+    "primary": "scheduled_P_to_I_minus_continuing_P",
+    "primary_interval": {
+      "conditions": 2,
+      "degrees_of_freedom": 5,
+      "family_alpha": 0.05,
+      "interpretation": "distribution-sensitive descriptive interval",
+      "student_t_quantile_probability": 0.9875
+    },
+    "primary_window": [
+      82,
+      128
+    ],
+    "reference_return": {
+      "baseline": "continuing P mean physical variance",
+      "baseline_window": [
+        32,
+        64
+      ],
+      "consecutive_frames": 8,
+      "search_window": [
+        82,
+        128
+      ],
+      "threshold_multiplier": 1.1,
+      "unobserved": "RIGHT_CENSORED"
+    },
+    "safety_claim_supported": false,
+    "secondary_post_onset_window": [
+      64,
+      128
+    ],
+    "smoke_requires_all_eight_valid_and_exact_noop": false
+  },
+  "physical": {
+    "burn_in": 32,
+    "command_clip_rad": 5.0,
+    "delay_frames": 2,
+    "detector_n": 32,
+    "diameter_m": 1.0,
+    "dt_s": 0.001,
+    "frames": 128,
+    "modes": 8,
+    "n": 16,
+    "photons": 100000.0,
+    "r0_m": 0.4,
+    "read_noise_e": 0.3,
+    "screen_factor": 4,
+    "sensor": "pyramid",
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "wind_scale": 2.0
+  },
+  "profile": "study",
+  "schema": "noether.scheduled-fallback.public-protocol.v1"
+}
