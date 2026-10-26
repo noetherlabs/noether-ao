@@ -1,0 +1,10 @@
+[
+  {
+    "mode": "cpu_one",
+    "reason": "OS lacks sched_setaffinity; cannot enforce one CPU"
+  },
+  {
+    "mode": "gpu",
+    "reason": "Installed JAX exposes CPU only"
+  }
+]

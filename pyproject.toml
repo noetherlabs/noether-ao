@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "noether-optics"
+version = "0.1.0"
+description = "Reproducible civil-astronomy adaptive-optics experiments"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "jax==0.10.2",
+    "jaxlib==0.10.2",
+    "dLux==0.15.1",
+    "zodiax==0.5.0",
+    "equinox==0.13.8",
+    "optax==0.2.8",
+    "numpy==2.4.6",
+    "scipy==1.17.1",
+    "matplotlib==3.11.2",
+    "pyyaml==6.0.3",
+    "psutil==7.2.2",
+    "hcipy==0.7.1",
+    "abcdlux==0.0.2",
+]
+
+[project.scripts]
+noether-optics = "noether_optics.cli:main"
+
+[project.optional-dependencies]
+dragrace = [
+    "lentil==0.8.9",
+    "poppy==1.1.2",
+    "prysm",
+    "pyproper3",
+    "threadpoolctl==3.7.0",
+]
+
+[dependency-groups]
+dev = ["pytest==9.1.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.uv.sources]
+abcdlux = { git = "https://github.com/LouisDesdoigts/abcdLux", rev = "62bfb8be619ce7387ab0df4f9f74bb5f6f833979" }
+prysm = { git = "https://github.com/brandondube/prysm.git", rev = "5008f47803af6ff69eed474fca049456076e4a7d" }
+pyproper3 = { url = "https://downloads.sourceforge.net/project/proper-library/proper_v3.3.7_python.zip" }

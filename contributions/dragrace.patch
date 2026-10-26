@@ -1,0 +1,191 @@
+diff --git a/cases/pupil_to_focus/mft_ao_scan.yaml b/cases/pupil_to_focus/mft_ao_scan.yaml
+new file mode 100644
+index 0000000..12c2cee
+--- /dev/null
++++ b/cases/pupil_to_focus/mft_ao_scan.yaml
+@@ -0,0 +1,32 @@
++# Small-pupil AO regime; identical optical physics to mft_array_scan.
++# The fixed focal grid makes this an MFT scan, not an FFT latency claim.
++# Tail estimates are empirical; the observed maximum is not a worst-case bound.
++id: mft_ao_scan
++kind: pupil_to_focus
++algorithm_class: matrix_dft
++wavelength_m: 632.8e-9
++pupil:
++  diameter_m: 0.01
++  samples_across_diameter: 32
++  array_samples: 32
++  aperture: circular
++output:
++  focal_length_m: 1.0
++  samples_per_lambda_f_d: 4.0
++  extent_lambda_f_d: 32.0
++dtype: complex128
++basis_caching: precomputed
++scan:
++  parameter: n_pupil
++  values: [32, 64, 96, 128, 192, 256]
++execution:
++  warmup: 10
++  repeats: 1000
++  timeout_s: 300.0
++accuracy:
++  reference: internal_mft
++  max_rel_l2: 1.0e-10
++notes: >
++  Small-pupil scan for AO component latency. Focal grid and accuracy gate match
++  mft_array_scan. Timing runs belong on a local machine, never in CI. Inspect
++  the full stored distribution and machine fingerprint before interpreting tails.
+diff --git a/docs/parsing_results.md b/docs/parsing_results.md
+index e029250..b5fbb28 100644
+--- a/docs/parsing_results.md
++++ b/docs/parsing_results.md
+@@ -560,3 +560,17 @@ a version bump; removing or repurposing one is. Because results are meant to
+ accumulate across machines and months, prefer adding a new key to redefining an
+ existing one — an old file with a missing key is parseable, an old file whose
+ `rel_l2` means something different is not.
++
++## AO tail-latency report columns
++
++`dragrace report` appends `p99 ms` and `max ms` to its timing table. Aggregate
++rows add `p99_s` and `max_s`. Both come from `timing.device_compute`, including
++for scan points, without changing old summary columns or measurement code.
++The percentile uses the existing index convention: sorted samples at
++`min(n - 1, int(0.99 * n))`. The maximum is the largest observed sample, not a
++worst-case execution bound. Missing, empty, negative or non-finite distributions
++produce missing tails (`-`), not a substitute derived from the median.
++
++`mft_ao_scan` holds the existing MFT scan's physics and focal grid fixed while
++scanning smaller pupils. Its larger repeat count supports inspection of tails;
++shared CI runners remain unsuitable for timing.
+diff --git a/src/dragrace/report.py b/src/dragrace/report.py
+index a7d3bb3..96b9d17 100644
+--- a/src/dragrace/report.py
++++ b/src/dragrace/report.py
+@@ -9,6 +9,7 @@ present that as a property of the propagators.
+ from __future__ import annotations
+ 
+ import json
++import math
+ from collections import defaultdict
+ from pathlib import Path
+ 
+@@ -24,6 +25,11 @@ def _row(r: dict, blocks: dict, path: Path, scan_param: str | None = None) -> di
+     """
+     t = blocks.get("timing", {}) or {}
+     stats = t.get("device_compute_stats", {}) or {}
++    samples = t.get("device_compute") or []
++    # Match the existing index-based p95 convention, including small samples.
++    valid = isinstance(samples, list) and bool(samples) and all(
++        type(x) in (int, float) and math.isfinite(x) and x >= 0 for x in samples)
++    ordered = sorted(samples) if valid else []
+     acc = blocks.get("accuracy", {}) or {}
+     fl = blocks.get("flops", {}) or {}
+     return {
+@@ -52,6 +58,8 @@ def _row(r: dict, blocks: dict, path: Path, scan_param: str | None = None) -> di
+         "median_s": stats.get("median"),
+         "min_s": stats.get("min"),
+         "p95_s": stats.get("p95"),
++        "p99_s": ordered[min(len(ordered) - 1, int(0.99 * len(ordered)))] if ordered else None,
++        "max_s": ordered[-1] if ordered else None,
+         "iqr_s": stats.get("iqr"),
+         "traced": t.get("traced", False),
+         # Cores the timed region actually used. `threads` in the config is a
+@@ -339,8 +347,9 @@ def render_text(rows: list[dict]) -> str:
+         timed = [r for r in rs if r["status"] == "ok" and r["median_s"] and not r["traced"]]
+         if timed:
+             out.append(f"\n{'adapter':<16}{'case':<24}{'config':<16}"
+-                       f"{'median ms':>11}{'GFLOP':>9}{'GFLOP/s':>10}{'A':>7}  gate")
+-            out.append("-" * 100)
++                       f"{'median ms':>11}{'GFLOP':>9}{'GFLOP/s':>10}{'A':>7}  gate"
++                       f"{'p99 ms':>11}{'max ms':>11}")
++            out.append("-" * 122)
+             # Scan points sort by size first, so a scan reads down the table as
+             # a curve rather than as adapters interleaved by wall time.
+             for r in sorted(timed, key=lambda r: (r["case"], r["config"],
+@@ -348,9 +357,11 @@ def render_text(rows: list[dict]) -> str:
+                 g = r["ideal_gflop"] or 0
+                 rate = g / r["median_s"] if r["median_s"] else 0
+                 a = f"{r['A_overhead']:.2f}" if r["A_overhead"] else "-"
++                p99 = f"{r['p99_s'] * 1e3:.3f}" if r.get("p99_s") is not None else "-"
++                maximum = f"{r['max_s'] * 1e3:.3f}" if r.get("max_s") is not None else "-"
+                 out.append(f"{r['adapter']:<16}{_case_label(r):<24}{r['config']:<16}"
+                            f"{r['median_s'] * 1e3:>11.3f}{g:>9.3f}{rate:>10.2f}{a:>7}  "
+-                           f"{r['gate'] or '-'}")
++                           f"{r['gate'] or '-':<4}{p99:>11}{maximum:>11}")
+ 
+         out += render_scans(rs)
+ 
+diff --git a/tests/test_ao_tails.py b/tests/test_ao_tails.py
+new file mode 100644
+index 0000000..730c5a2
+--- /dev/null
++++ b/tests/test_ao_tails.py
+@@ -0,0 +1,67 @@
++"""AO case physics and tail reporting, with synthetic clocks only."""
++import json
++from pathlib import Path
++
++import pytest
++import yaml
++
++from dragrace.case import Case
++from dragrace.report import aggregate, render_text
++
++
++def test_ao_case_preserves_existing_mft_physics():
++    old = yaml.safe_load(Path('cases/pupil_to_focus/mft_array_scan.yaml').read_text())
++    new = yaml.safe_load(Path('cases/pupil_to_focus/mft_ao_scan.yaml').read_text())
++    for key in ('kind', 'algorithm_class', 'wavelength_m', 'output', 'dtype',
++                'basis_caching', 'accuracy'):
++        assert new[key] == old[key]
++    assert new['pupil']['diameter_m'] == old['pupil']['diameter_m']
++    assert new['pupil']['aperture'] == old['pupil']['aperture']
++    points = Case.from_dict(new).scan_cases()
++    assert [p.n_pupil for p in points] == [32, 64, 96, 128, 192, 256]
++    assert all(p.n_focus == 128 and p.n_across == p.n_pupil for p in points)
++
++
++def result(samples):
++    return {'case_id': 'ao', 'config_id': 'cpu', 'mode': 'timing', 'status': 'ok',
++            'adapter': {'name': 'example'}, 'machine': {'id': 'm', 'cpu': 'test'},
++            'accuracy': {'gate': 'pass'}, 'timing': {
++                'device_compute': samples,
++                'device_compute_stats': {'median': .001, 'min': .0005, 'p95': .002}}}
++
++
++@pytest.mark.parametrize('scan', [False, True])
++def test_tails_use_distribution_and_preserve_old_values(tmp_path, scan):
++    r = result([i / 1000 for i in range(100, 0, -1)])
++    if scan:
++        r['scan'] = {'parameter': 'n_pupil', 'points': [
++            {'scan_value': 32, 'timing': r.pop('timing'), 'status': 'ok',
++             'accuracy': r.pop('accuracy')}]}
++    (tmp_path / 'result.json').write_text(json.dumps(r))
++    rows = aggregate(tmp_path)
++    assert rows[0]['p99_s'] == .1
++    assert rows[0]['max_s'] == .1
++    assert rows[0]['median_s'] == .001
++    assert rows[0]['min_s'] == .0005
++    text = render_text(rows)
++    assert 'p99 ms' in text and 'max ms' in text and '100.000' in text
++
++
++@pytest.mark.parametrize('samples', [None, [], [float('nan')], [-1], ['bad'], 1, [True], {'x': 2}])
++def test_missing_or_invalid_distribution_is_not_invented(tmp_path, samples):
++    (tmp_path / 'result.json').write_text(json.dumps(result(samples)))
++    rows = aggregate(tmp_path)
++    assert rows[0]['p99_s'] is None and rows[0]['max_s'] is None
++    assert rows[0]['median_s'] == .001
++    assert 'nan' not in render_text(rows)
++
++
++def test_single_sample_and_excluded_rows(tmp_path):
++    r = result([.123])
++    (tmp_path / 'result.json').write_text(json.dumps(r))
++    rows = aggregate(tmp_path)
++    assert rows[0]['p99_s'] == rows[0]['max_s'] == .123
++    rows[0]['traced'] = True
++    assert '123.000' not in render_text(rows)
++    rows[0].update(traced=False, status='accuracy_fail')
++    assert '123.000' not in render_text(rows)

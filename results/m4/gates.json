@@ -1,0 +1,5 @@
+{
+  "complete_unique_trials": true,
+  "finite_raw_outputs": true,
+  "training_evaluation_disjoint": true
+}

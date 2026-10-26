@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scope": "Path-only normalization of distributed metadata; original acquisition identities and numerical arrays preserved.",
+  "files": [
+    {
+      "path": "results/m1/provenance.json",
+      "original_sha256": "6f817f1137219f61057538443f3ebe3ec76ba087ca29f1bd5c818260c2ccf00b",
+      "distributed_sha256": "19f30c4d9ecb67b9ec2fdef321bb582fa685f8ce19a5179fbb019f0d64222222",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/controller_runner_smoke_v1/commands.json",
+      "original_sha256": "1a4ec8129b5b74595af326b78df4094bf1c4be5049d835fa0e27db66ff06a849",
+      "distributed_sha256": "9ac5207a60bc016fd5a2070a36b0ba415e54fbacc46ed3f7a448383ff091e1c7",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/optical_gain_observability_runner_smoke_v1/commands.json",
+      "original_sha256": "f2fa54e30dfb8e7040a7c89924a58d096c23466b701acaa35aa494111cfe7ac4",
+      "distributed_sha256": "70003d8b95bd0bb8efc33b49a0808e5fba3e6759f98ef0aecfd5aff72e0b5945",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/controller_physics_smoke_v1/verification.json",
+      "original_sha256": "afb3e731932ad5869cc462d6c60f45bebc8eaab3b24446ad15d437e14b80097f",
+      "distributed_sha256": "eaaebee57bc48b708e1480b511b879c15ba9befb29863377a9c23cccd2a1c113",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/aggregated.json",
+      "original_sha256": "bd18e406f00d43d078bce335fa7d05283d14e93f449a95f206c6f9db77f8b246",
+      "distributed_sha256": "a330b6796f11f3d490104b52c01229f163ce13da8d92e9bc04f68fff3b89c8b8",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/hcipy/result.json",
+      "original_sha256": "6f3ed1f95922ae7bcf24d2c4a4b33d0652b49f42e0c990d759d79eff434c3128",
+      "distributed_sha256": "99f032cdb36be27769cf5c9ee079fa2b1bb4523e38c62113fa512bd455f81750",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/proper/result.json",
+      "original_sha256": "277d20ecfbef679f4a8da84d6efba8c55f27112e9f55bb174d70d0ca93a0216f",
+      "distributed_sha256": "dae583aeeedabeac34d55e5a4cbe16a456d723542d5d4c72ceee2f218bd84b27",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/poppy/result.json",
+      "original_sha256": "0d7ffdef7039f214a835d5220d7d61384665baa26953e34b0e4222d11500bf08",
+      "distributed_sha256": "dcf7ce9ebd03c63e65f0c9292cec4e3bd3c9a86bd817924cb9046416db781d3c",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/numpy_baseline/result.json",
+      "original_sha256": "add5eafbf80577d77c0806afa384277eacaada3cd46173f79f194e9b5085c7d7",
+      "distributed_sha256": "13b789a7497a688ff9fc36464caa610789a245e9621a2024606e27a081e330fe",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/lentil/result.json",
+      "original_sha256": "296eca66ee97f4ee22622a179d99eded179abe2fb0af72be1d2b3f15d4ce0c37",
+      "distributed_sha256": "92bdb9943930506ea61a16a5c4be3368d12a53a44ff053182026733c840f012c",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/abcdlux/result.json",
+      "original_sha256": "9aa0a20bb230b1c49336c5634dda0ad6b0bb5c01763a3fa5d0a31342c825789d",
+      "distributed_sha256": "2e3c70d592bb7a3036b3190708bbdde180178dc96ced5fc5f75fa95e4991ffd3",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/dlux/result.json",
+      "original_sha256": "0b2bb2df750b299e5bf6131ecf7618ee33433b7d5fb8c5961a274063d5227ef7",
+      "distributed_sha256": "b493d1f98a9f67bdeec1aae57b173698b2e218da9e76416024342dd6ef02fd2e",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/m2/raw/prysm/result.json",
+      "original_sha256": "281b95b21981d411558a7b97fff444ead676390b68ef25bdaa583075a1c9a681",
+      "distributed_sha256": "7acb6087f2f88f0ffa9e82f3c2a311c6384ccaae4215aacb6b08445474fcd7e0",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/wfs_calibration_v1/provenance.json",
+      "original_sha256": "e39be47333c936061908c764004322d4a7f9716c8cfd97f69a8bf20c44d9b0ac",
+      "distributed_sha256": "9c57467ae907357ef4bfab51f5879b8e783e1c0e899d38da63e699bff192a8d3",
+      "change": "Machine-local paths normalized; numerical values and acquisition source hashes unchanged."
+    },
+    {
+      "path": "results/wfs_calibration_v1/manifest.json",
+      "original_sha256": "b4c46962dad0c4ccf3a1ee68e5330f37389a0d3cddad2cbf2626a13aa6a21d09",
+      "distributed_sha256": "f2dd330f258fb2703330954adefb0f41d8b53a1dc7163b25c8aa4a291f1bd449",
+      "change": "Integrity inventory updated for distributed metadata."
+    },
+    {
+      "path": "results/controller_runner_smoke_v1/protected_sha256.json",
+      "original_sha256": "668e21b5e84b95b6da44315fa73a2b28eeeb041f4e15cb703f5538b4a5c7e7b6",
+      "distributed_sha256": "8a764237aa67f2ea369a8479a7dfd1f49d05b2369c5ceb507cc4315b8b451d50",
+      "change": "Integrity inventory updated for distributed metadata."
+    },
+    {
+      "path": "results/optical_gain_observability_runner_smoke_v1/protected_sha256.json",
+      "original_sha256": "7a77e03a31184a22c355dd37be1d78ec24a822a7801140989e61ccbb606884f3",
+      "distributed_sha256": "50a93322cf006b65f12f941e63c678fa241a7d0ed98fd3262e6dd95b1f4a0c93",
+      "change": "Integrity inventory updated for distributed metadata."
+    }
+  ]
+}

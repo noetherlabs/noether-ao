@@ -1,0 +1,10 @@
+seed: 20261008
+sizes: [32, 64, 96, 128, 192, 256]
+wavelength_counts: [1, 3, 5]
+precisions: [float32, float64]
+modes: [cpu_one, cpu_all, gpu]
+repeats: 10000
+warmup: 32
+opd_rms_m: 5.0e-8
+wavelength_range_m: [6.0e-7, 8.0e-7]
+tolerance: {float32: 1.0e-5, float64: 1.0e-11}

@@ -1,0 +1,11 @@
+{
+  "pixel_cases": 36,
+  "derivative_cases": 30,
+  "negative_controls": 24,
+  "max_intensity_relative_l2": 1.6942335379634155e-14,
+  "max_derivative_relative_l2": 9.360885028878882e-11,
+  "max_power_error": 9.769962616701378e-15,
+  "min_control_relative_l2": 0.031291468420221256,
+  "all_pass": true,
+  "scope": "Matched finite-grid ideal pyramid only; not native HCIPy defaults or instrument validation"
+}

@@ -1,0 +1,9 @@
+{
+  "hcipy_psf": true,
+  "fitting_d": true,
+  "fitting_r0": true,
+  "linear_delay": true,
+  "linear_stable": true,
+  "pyramid_delay": true,
+  "pyramid_stable": true
+}

@@ -1,0 +1,56 @@
+{
+  "record": {
+    "artifacts": [
+      {
+        "path": "evidence/validation/trials/be3f6a690d1898b3864867bb1e053e18896bd527fad96930b909f0198ed372ac.npz",
+        "sha256": "c09e83ae12e653e476220427d9dbf2a6fbfd225e6b28e554d6bae27762560505"
+      },
+      {
+        "path": "evidence/validation/trials/be3f6a690d1898b3864867bb1e053e18896bd527fad96930b909f0198ed372ac.json",
+        "sha256": "102400732278ab10cb64fb9b20bec217f4c0cbf3b0fd509593a524586b68a011"
+      },
+      {
+        "path": "evidence/validation/atmospheres/bc72ce716df2eb3c57fdcb173206b95f833c12381f453c51e39cff272343bd00.npz",
+        "sha256": "aa03aa0cce1ae981a4fede5fb525755754713c6feb80418281c6e6984fa5f5ab"
+      },
+      {
+        "path": "evidence/validation/atmospheres/bc72ce716df2eb3c57fdcb173206b95f833c12381f453c51e39cff272343bd00.json",
+        "sha256": "0c314573143af938a9b331cf4f4ecf6c527a32e00dae30f493abb4a206c40ad3"
+      },
+      {
+        "path": "evidence/validation/open_loop/faa47b1c0e140da2f3e3a5bb1f3baf51c27a18fa467e29e1c868365c5a92d8cd.json",
+        "sha256": "db95fdcf79c6e2cf0145945ed9ecc28ae0d17c8f1b23c27b4e487c969a839bae"
+      }
+    ],
+    "case": {
+      "candidate": {
+        "controller": "forward",
+        "id": "forward-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "detector_seed": 162005,
+      "fault": "none",
+      "photons": 1000000.0,
+      "seed": 62005,
+      "stage": "validation",
+      "wind_scale": 1.0
+    },
+    "error": null,
+    "metrics": {
+      "all_outputs_finite": true,
+      "open_wfe_nm": 103.52451789010583,
+      "saturation_fraction": 0.0,
+      "strehl": 0.6336635592938942,
+      "wfe_nm": 79.57317377379873
+    },
+    "open_loop": {
+      "path": "evidence/validation/open_loop/faa47b1c0e140da2f3e3a5bb1f3baf51c27a18fa467e29e1c868365c5a92d8cd.npz",
+      "sha256": "6087bea3f048894faf6c194cc2a2b9aa8725e7ef794f94c8583157cddbc642b8"
+    },
+    "status": "completed"
+  },
+  "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c"
+}

@@ -1,0 +1,22 @@
+# Freeze before the retained comparison. No controller or existing study changes.
+grids: [32, 64]
+detector_n: 64
+wavelength_m: 7.5e-7
+separation_diameters: 0.6
+modes: [tilt_x, tilt_y, defocus, astigmatism_oblique, coma_x]
+poke_rad: 0.0001
+heldout_seed: 20261024
+heldout_count: 16
+phase_rms_rad: [0.001, 0.05, 0.25]
+noise_seed: 20261025
+noise_count: 512
+photons: 100000.0
+read_noise_e: 1.0
+pinv_rcond: 1.0e-10
+tolerances:
+  matched_reference_relative_l2: 1.0e-10
+  matched_interaction_relative_l2: 1.0e-6
+  derivative_step_relative_l2: 1.0e-5
+  piston_relative_l2: 1.0e-10
+  small_signal_phase_relative_rms: 0.01
+  negative_control_minimum_relative_rms: 0.1

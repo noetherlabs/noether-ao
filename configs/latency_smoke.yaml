@@ -1,0 +1,19 @@
+# Functional fresh-checkout exercise only; retains the minimum sample count.
+seed: 20261008
+sizes:
+- 32
+wavelength_counts:
+- 1
+precisions:
+- float64
+modes:
+- cpu_all
+repeats: 10000
+warmup: 32
+opd_rms_m: 5.0e-08
+wavelength_range_m:
+- 6.0e-07
+- 8.0e-07
+tolerance:
+  float32: 1.0e-05
+  float64: 1.0e-11

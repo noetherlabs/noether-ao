@@ -1,0 +1,21 @@
+{
+  "git_commit": "2a76d9e04af99c20b66aa51392a11da0dd30d407",
+  "tracked_dirty": false,
+  "source_sha256": {
+    "src/noether_optics/__init__.py": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+    "src/noether_optics/artifacts.py": "69861778b0abaf851760fbc358fcb70819a9f6536a2606f567698bd0df000b39",
+    "src/noether_optics/cli.py": "75e805d51e639f8e569e74c7103d0b3a1b633fbb0aade40c7efc45c6e6a34d0e",
+    "src/noether_optics/latency.py": "2387b405fa7dcab807930d597c0e48348ea61eb2535c1ca2706b70a6efcc5d83",
+    "src/noether_optics/optics.py": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb"
+  },
+  "utc": "2026-10-07T21:52:57.519032+00:00",
+  "argv": [
+    "./.venv/bin/noether-optics",
+    "latency",
+    "--config",
+    "configs/latency.yaml",
+    "--out",
+    "results/m1"
+  ],
+  "lock_sha256": "8f945ab8d932221f7abac98c1686e5eaca8781ceda08d48d5b2bf5733723f793"
+}

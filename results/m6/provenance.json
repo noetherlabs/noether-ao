@@ -1,0 +1,27 @@
+{
+  "git_commit": "810b14e8b9189c3da08460d0026233dda1376569",
+  "tracked_dirty": false,
+  "source_sha256": {
+    "src/noether_optics/__init__.py": "d6c2f3ce3829a642c4da3df4c46fd36fc093d56b61825fdb051b8c7f4ffd04fb",
+    "src/noether_optics/artifacts.py": "0289cf810d7bf82b2d9ac1dbc2a2a8774fe1569e49483f9010becd1b42cd34c3",
+    "src/noether_optics/atmosphere.py": "e75454bc3a84ab5ed083720c44948295ddfb196da9acd5a0b1546bd89d21c082",
+    "src/noether_optics/cli.py": "ecc5797a2e3b5724c1bd3feb9b8abb9dff1b1ab42a8e7b712e11eef3da7198d7",
+    "src/noether_optics/config.py": "7091de6f9c30e649dc04850ede96cc08b80af38175cfc821d4a2a5ef48ec1cd0",
+    "src/noether_optics/experiments/__init__.py": "d59e28c0cf4d314d7aad4ae696185b552276b9954c4e7429a9995e326005ee96",
+    "src/noether_optics/experiments/rebuild.py": "35fecc07cd14e5b465fab0e73244a39553bca48942fde41816742063a9cf8649",
+    "src/noether_optics/experiments/runners.py": "938d31bacb658725ac45799127316844cab5e6edad279f7a7a9433a9da4b84d6",
+    "src/noether_optics/latency.py": "9b200054b652bba4df172dda1bb56ce0436fa9b36fdcacd66674660db1e5c2a5",
+    "src/noether_optics/optics.py": "16d4b699102f19eba12463829676223f5a4c2f29797f6ae6e1a137fa5139c4eb",
+    "src/noether_optics/simulation.py": "658d11a80d0ca3f29cb273df40d91890a9f25f7ce4d8b83918210475eaf69f40"
+  },
+  "utc": "2026-10-10T11:06:43.093601+00:00",
+  "argv": [
+    ".venv/bin/noether-optics",
+    "mixed",
+    "--config",
+    "configs/simulation.yaml",
+    "--out",
+    "results/m6"
+  ],
+  "lock_sha256": "36bff42c303b6956cc5277f64b5004eb0ea3dfe24232180ff82c0029a102306a"
+}

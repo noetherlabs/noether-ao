@@ -1,0 +1,55 @@
+{
+  "integrator": {
+    "family": "integrator",
+    "id": "I4",
+    "knob_name": "gain",
+    "knob_value": 0.5,
+    "parameters": {
+      "gain": 0.5,
+      "leak": 0.999
+    }
+  },
+  "predictive": {
+    "family": "predictive",
+    "id": "P3",
+    "knob_name": "ridge",
+    "knob_value": 0.01,
+    "parameters": {
+      "coefficients": {
+        "array": "predictor_coefficients"
+      }
+    }
+  },
+  "provenance": {
+    "artifact_sha256": {
+      "candidates.json": "678abda43163cf5201cfb4d617a7fcbbc3cadd3327ba1738a87505217680cdca",
+      "input-snapshot.json": "2fed71a6f65b01caf49191c0fc34a6ef198945e72cf2871379f79a396d0583e0",
+      "models.npz": "d4177af45cb3108f4afc198eee38ef1f6771443032391a3e679244ca9d017bae",
+      "selection-freeze.json": "3484f83eec62204f6c3efa2c3e595bc0f34f9627629671a2213f1334e8d43ed9",
+      "selection.json": "7387b917a2acb96e6161edd1cc2ff0484c49015e49735106eb0056ef86b876cc"
+    },
+    "binding": {
+      "configuration": {
+        "native_sha256": "56282124372a04bb2beb0789baa5f4d1b2affa61e0d46e041c180a24f94e3970"
+      },
+      "fit_record": {
+        "native_sha256": "f68d58e4d1d4919d396f73f525c0a5df94b8f490640fde1464d634927e7eec14"
+      },
+      "freeze_record": {
+        "native_sha256": "f6794cc5ebd5519b0562ba6503230a6d3e6c974bbff524ced7834b0511310152"
+      },
+      "selection_record": {
+        "native_sha256": "d589218efd0be1f344ef25faa900d1c05f73c05913d556bd45fa572c7069f230"
+      }
+    },
+    "family_winners": {
+      "integrator": "I4",
+      "predictive": "P3"
+    },
+    "parameter_sha256": {
+      "integrator": "0eb3e99d93e98bf55317f80758190224a11dc1a411b5a5b9f928cf71f727089a",
+      "predictive": "3f29401303993f431125b57a02e94296b20d67a6649ef7654ba237751770eb69"
+    },
+    "upstream_experiment_id": "ao-predictor-integrator-transfer-v1-20261019"
+  }
+}

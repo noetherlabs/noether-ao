@@ -1,0 +1,120 @@
+{
+  "manifest_sha256": "3ce0013701ff09b13645134322e9e49e15b122636d075f8cec71e51bcf6a9b47",
+  "result": {
+    "candidates": [
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-00",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.7481506340040904
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-00",
+          "parameters": {
+            "horizon": 2,
+            "ridge": 0.01
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.6948656682560787
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-00",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.7320388618060171
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-00",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.7342169664746269
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-00",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.7386797041460216
+      }
+    ],
+    "completed_validation_trials": 100,
+    "failed_validation_records": 0,
+    "pairwise_family": 120,
+    "selected": {
+      "fixed": {
+        "controller": "fixed",
+        "id": "fixed-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "forward": {
+        "controller": "forward",
+        "id": "forward-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "integrator": {
+        "controller": "integrator",
+        "id": "integrator-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "learned": {
+        "controller": "learned",
+        "id": "learned-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "predictive": {
+        "controller": "predictive",
+        "id": "predictive-00",
+        "parameters": {
+          "horizon": 2,
+          "ridge": 0.01
+        }
+      }
+    },
+    "validation_records": 100
+  },
+  "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c",
+  "validation_sha256": "cd8e143f610f69cdabb783db283647cd3874e660422d7ed7809aa14b04b10aac"
+}

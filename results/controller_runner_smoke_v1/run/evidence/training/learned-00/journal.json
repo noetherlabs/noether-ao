@@ -1,0 +1,179 @@
+{
+  "calibration": {
+    "path": "evidence/training/learned-00/calibration.npz",
+    "sha256": "1726ea0ab9abba50bf1a133053e1adc49ea4ee7041a3ebf2c964b3f2dced47a3"
+  },
+  "candidate": {
+    "controller": "learned",
+    "id": "learned-00",
+    "parameters": {
+      "gain": 0.3,
+      "leak": 0.999
+    }
+  },
+  "episodes": [
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61001,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.4574655942600068,
+      "phase": {
+        "path": "evidence/training/atmospheres/2f86fe1857505557622062704cdfac5c54e20451fe96e7b865947a2916a114f2.npz",
+        "sha256": "fd417a5a2fe1627903196fae75749697923f10b059a8a05d1e28c0c3c1f69b18"
+      }
+    },
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61002,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.1789435664340409,
+      "phase": {
+        "path": "evidence/training/atmospheres/f66c724c6b09805aabfca18188e254a432ff67e48ac8aa5ee5d76ae7e2d36944.npz",
+        "sha256": "f6dd39d07119f5ed93c9d392c949195f4357412286d7d574a5e97392f09d07d8"
+      }
+    },
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61003,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.495996396184877,
+      "phase": {
+        "path": "evidence/training/atmospheres/be394e71745fba930a1601cb7409b2fd594e539ec8ca056a77cb966d456c1512.npz",
+        "sha256": "0833f4901899c3dca1d06a4a6d0da91f0e8039592c0f92f031261a98182383e6"
+      }
+    },
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61001,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.3613298513644516,
+      "phase": {
+        "path": "evidence/training/atmospheres/92b4fc1e7f82df95a8754dc86112470231122f37abd83ac0e832022293bd314b.npz",
+        "sha256": "09dcd7a5d073ea6f0efde5d350c4ca8bc8169c49d685c6bfabac5f24e5b844a5"
+      }
+    },
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61002,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.156710211405868,
+      "phase": {
+        "path": "evidence/training/atmospheres/56f516d80ec8fdd368f9e3486fc148edc64612a50e8e48db942e2021a9ca96e9.npz",
+        "sha256": "9b88e444ed9a218d4fb7248bbdcfc073a25b053dd0230d56ca3c54762218321c"
+      }
+    },
+    {
+      "case": {
+        "photons": 1000000.0,
+        "seed": 61003,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.4662289296255038,
+      "phase": {
+        "path": "evidence/training/atmospheres/dc6e7219ffdc6fbff282ddc9117255c9de4b68e1105a214d0aae6df51df9ffba.npz",
+        "sha256": "e7da81a1f187f30de254415f0f76f2e4d3f44d8434f62d93b55088d561d7e5c5"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61001,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.4574655942600068,
+      "phase": {
+        "path": "evidence/training/atmospheres/2f86fe1857505557622062704cdfac5c54e20451fe96e7b865947a2916a114f2.npz",
+        "sha256": "fd417a5a2fe1627903196fae75749697923f10b059a8a05d1e28c0c3c1f69b18"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61002,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.1789435664340409,
+      "phase": {
+        "path": "evidence/training/atmospheres/f66c724c6b09805aabfca18188e254a432ff67e48ac8aa5ee5d76ae7e2d36944.npz",
+        "sha256": "f6dd39d07119f5ed93c9d392c949195f4357412286d7d574a5e97392f09d07d8"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61003,
+        "wind_scale": 0.5
+      },
+      "open_variance": 1.495996396184877,
+      "phase": {
+        "path": "evidence/training/atmospheres/be394e71745fba930a1601cb7409b2fd594e539ec8ca056a77cb966d456c1512.npz",
+        "sha256": "0833f4901899c3dca1d06a4a6d0da91f0e8039592c0f92f031261a98182383e6"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61001,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.3613298513644516,
+      "phase": {
+        "path": "evidence/training/atmospheres/92b4fc1e7f82df95a8754dc86112470231122f37abd83ac0e832022293bd314b.npz",
+        "sha256": "09dcd7a5d073ea6f0efde5d350c4ca8bc8169c49d685c6bfabac5f24e5b844a5"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61002,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.156710211405868,
+      "phase": {
+        "path": "evidence/training/atmospheres/56f516d80ec8fdd368f9e3486fc148edc64612a50e8e48db942e2021a9ca96e9.npz",
+        "sha256": "9b88e444ed9a218d4fb7248bbdcfc073a25b053dd0230d56ca3c54762218321c"
+      }
+    },
+    {
+      "case": {
+        "photons": 2000000.0,
+        "seed": 61003,
+        "wind_scale": 1.0
+      },
+      "open_variance": 1.4662289296255038,
+      "phase": {
+        "path": "evidence/training/atmospheres/dc6e7219ffdc6fbff282ddc9117255c9de4b68e1105a214d0aae6df51df9ffba.npz",
+        "sha256": "e7da81a1f187f30de254415f0f76f2e4d3f44d8434f62d93b55088d561d7e5c5"
+      }
+    }
+  ],
+  "manifest_sha256": "3ce0013701ff09b13645134322e9e49e15b122636d075f8cec71e51bcf6a9b47",
+  "shared_evidence": [
+    {
+      "path": "evidence/provenance/source.json",
+      "sha256": "ad058fdf4169cbdb322c46254fa544e759558174438374fada0a1b506eba7170"
+    },
+    {
+      "path": "evidence/provenance/runtime.json",
+      "sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719"
+    },
+    {
+      "path": "evidence/provenance/study.json",
+      "sha256": "706c4397274c821f70629944946e22c38961526b98e3931f3cd5676fecfd7e3c"
+    },
+    {
+      "path": "evidence/provenance/base.json",
+      "sha256": "fb70c2f5a0aa33157e8be5f55dbbb13ec442092db5e89b152b0d53e5c95e0e1a"
+    }
+  ]
+}

@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "kind": "legacy_optical_gain_observability_audit",
+  "source": {
+    "directory": "results/m4",
+    "git_commit": "5fc820d7229214de1092f76bcd24bbf14c086c32",
+    "input_files": 48,
+    "input_manifest_sha256": "ad5ade2b8b5d291008355b2c61b01a412218ee6603b3f7164b357f089f990be0",
+    "sha256": {
+      "config.json": "21dd9838dd4982fcd08fb85d5e08df2f82bdbdd8920f53f9b7c3ffc2f5c41c0a",
+      "detector.json": "25a1aedb6feda660740fba6d674719f74ae2580e9aa26882dbefc1796ad0419b",
+      "index.json": "3b06419d5251d8660e100c9ca5db35dd148fbb7ced76f210759c2ab6db676943",
+      "provenance.json": "b7bc8c7dbb4c99b3276a259caf005809de1ddcd0c535dc4790d017b0788054c9",
+      "raw/calibration_11.npz": "39a7605f1905fa2faa7ea0a8fa13e6283fdd69a58176713e3baac31053dc7b43",
+      "raw/calibration_12.npz": "6babbd1f55feba008b5fc1cafe3ee2058d164c49b98b45f439d7b10cf4d7c4bf",
+      "raw/calibration_13.npz": "e628235e9a9427ee9d6be432292acd6dc2932cba6991a0dc2b6ec23f1cd77fb3",
+      "raw/trial_0000.npz": "c5c775b13d08604e8847e516a00cfe49c07e4b433fb7e1b5cfa915bebf4d1ebf",
+      "raw/trial_0001.npz": "2eb679ca4a1bce4a59b1ece3d14259bb82b6c422b2c307024e58579fe975a727",
+      "raw/trial_0002.npz": "eda75d46a0f14bd6e69c58d6a1d44a1ea7f54077f61cf143dfc83a36be900647",
+      "raw/trial_0003.npz": "99be566f19ddacac235f7dcdfd731b6530b047e738bf89e3abae693667f7d879",
+      "raw/trial_0004.npz": "d974eb384b61464c62faae400be40bd0003b74381e1a40ba7215fbe70eca918d",
+      "raw/trial_0010.npz": "496faf15d9d393cc32ec7758cd6aaa1a0a0971c35bc1053ec0c60fd43c82858a",
+      "raw/trial_0011.npz": "ce2ef3fb9245dcfc53a03da3f81210e2a660f09a16a733e09b0414f68e6c64be",
+      "raw/trial_0012.npz": "039438c12d1941f5019fa1c5e82b9c812e782688090fed475d3db8142688f7e2",
+      "raw/trial_0013.npz": "6e96380c254be55daa88c886b5734304b86f3a8473bd69b90a91d89b3ff89685",
+      "raw/trial_0014.npz": "68b17ca84f4a5cb1f8f73d720ad66d5e51b211a39f6b74c74d1ad683820223c7",
+      "raw/trial_0020.npz": "3e888e82b277652c8e566036d8b40f433ae99a5bff951c9f7abe772d1226d93b",
+      "raw/trial_0021.npz": "3631707c24d18402cb00b7f064ad2dd82947a60abc595f49c11f0d85f45122d8",
+      "raw/trial_0022.npz": "06fdb58cd5287c5e48a740c3647591179ce12e42e49007c978289fa64f536aeb",
+      "raw/trial_0023.npz": "e459c06c8cb038a318cde68c2eea10d157e18dce6936ea740dd64455053e3c83",
+      "raw/trial_0024.npz": "58d86b2bfd9e218cdf288b2622566d28d71577a96caaf7381f52fe06f466659a",
+      "raw/trial_0030.npz": "fedf71c664e2fd28d37770ec676dfaed862009903f8569ff0c3a1465051c55f4",
+      "raw/trial_0031.npz": "4d835e5b5bc164b7d9582f8ec70acc4b2d2b0ef358c9b9145f0b6fa792132e98",
+      "raw/trial_0032.npz": "d96b601967c9e7183c168cf2aca0af5a67aa8d75da489f4a8e898aeb3fe02801",
+      "raw/trial_0033.npz": "79caea8c6abbb6ec86130defd45d11017fbc94e4f485f0eb6657103e37989764",
+      "raw/trial_0034.npz": "9b1436919134290c12993468577688a474254d5d1787e54f24ce61713b5e3eef",
+      "raw/trial_0040.npz": "38cd8b1b980cd896b6a21e590a7ba4ab2d2e714895b2cf00beabafa6e8892e78",
+      "raw/trial_0041.npz": "2bfafe31acf7c6c66426f390a2d05bdf4a4be776c83c5e7f221034d7ac679416",
+      "raw/trial_0042.npz": "98b93b5cdd9fbd053571f2457ef3e1d51910d7dd6a3d518e970313653c1c95b1",
+      "raw/trial_0043.npz": "9e1a5c24bc6a8858316371dd1a13d95c7361c6ba96c0982189ce79eadbae44dc",
+      "raw/trial_0044.npz": "0b7e9506cf153aa97139a40796d3068395b11add5d2b747a347bba2a3497e794",
+      "raw/trial_0050.npz": "e4bcfb9d83cbe6a026687cc1738a8a22029babb7610259dbd9fd4a1ee471dfbf",
+      "raw/trial_0051.npz": "709d3a012261ccfe9359f4c3a90b8993d6a8526fe0b80c0b73f5b6192212e561",
+      "raw/trial_0052.npz": "2689b2ba8c7fd7b61409b50557f723762b3b92144ba197be8451a811225ae75c",
+      "raw/trial_0053.npz": "a42793d2e4027223da3632afd20e6777a8b25b504fcfefab641b38a0c55e73fe",
+      "raw/trial_0054.npz": "3521442a9aa49c3efbfcf5d924cb00dd6fd6ebfc04f2fb29e06670df3e551b88",
+      "raw/trial_0060.npz": "e1a5533b01f0febcd64cb8ca2defe67a3da6db72b05ef895c6713c89185cfa0e",
+      "raw/trial_0061.npz": "c107770b62eb3aa1afb0bd1d3574fa0042098cd8bbf792c8ed2187b52d501594",
+      "raw/trial_0062.npz": "9564093f941a395b8f980dae4253210afe6f8b5cadebcf4aa779c27b2a59cfd5",
+      "raw/trial_0063.npz": "c2e571d6e30967d294d79cdc06e0ed0e4925382d46fe2247fc80e47adfc0ee99",
+      "raw/trial_0064.npz": "b507e15a6094cb5aa35eedc2c30985111964e8e31babfe8455a00f007c4a6e11",
+      "raw/trial_0070.npz": "e1a5533b01f0febcd64cb8ca2defe67a3da6db72b05ef895c6713c89185cfa0e",
+      "raw/trial_0071.npz": "c107770b62eb3aa1afb0bd1d3574fa0042098cd8bbf792c8ed2187b52d501594",
+      "raw/trial_0072.npz": "9564093f941a395b8f980dae4253210afe6f8b5cadebcf4aa779c27b2a59cfd5",
+      "raw/trial_0073.npz": "c2e571d6e30967d294d79cdc06e0ed0e4925382d46fe2247fc80e47adfc0ee99",
+      "raw/trial_0074.npz": "b507e15a6094cb5aa35eedc2c30985111964e8e31babfe8455a00f007c4a6e11",
+      "summary.json": "f85c9a5131fd8a2878cffe7b74fa863dbd2b0017c77dcaaea1ef272fcb9f1b17"
+    }
+  },
+  "scope": {
+    "status": "exploratory_existing_evidence_only",
+    "legacy_m4_evaluation_reclassified_as_p2_development": true,
+    "eligible_for_future_p2_evaluation": false,
+    "new_simulation_run": false,
+    "new_seed_access": false,
+    "timing_measurement": false,
+    "control_action_evaluated": false
+  },
+  "legacy_upper_tail_detector": {
+    "calibration_quantile": 0.995,
+    "threshold": 10.674235294898313,
+    "rebuilt_threshold": 10.674235294898313,
+    "threshold_reproduces": true,
+    "optical_gain_detected_without_prior_alarm": 0,
+    "optical_gain_runs": 5
+  },
+  "exploratory_lower_tail_candidate": {
+    "statistic": "causal rolling mean of the existing whitened residual score",
+    "tail": "lower",
+    "window_frames": 4,
+    "calibration_quantile": 0.005,
+    "numpy_quantile_method": "linear",
+    "calibration_windows": 351,
+    "threshold": 5.496816292919353,
+    "clean_evaluation": {
+      "runs": 5,
+      "alarm_runs": 1,
+      "evaluated_windows": 585,
+      "alarm_windows": 5,
+      "window_false_alarm_fraction": 0.008547008547008548
+    },
+    "fault_screen": [
+      {
+        "fault": "stuck_actuator",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      },
+      {
+        "fault": "optical_gain",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 5,
+        "detection_delay_frames": [
+          10,
+          9,
+          8,
+          6,
+          8
+        ]
+      },
+      {
+        "fault": "misregistration",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      },
+      {
+        "fault": "vibration",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      },
+      {
+        "fault": "model_mismatch",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      },
+      {
+        "fault": "late_twin",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      },
+      {
+        "fault": "missing_twin",
+        "runs": 5,
+        "pre_onset_alarm_runs": 0,
+        "detected_runs": 0,
+        "detection_delay_frames": []
+      }
+    ],
+    "development_persistence_screen": {
+      "selection_status": "post_hoc_development_only",
+      "persistence_windows": 8,
+      "alarm_definition": "eight consecutive strict lower-threshold crossings; alarm frame is the streak endpoint; a fault detection requires every streak endpoint at or after onset",
+      "clean_evaluation": {
+        "runs": 5,
+        "alarm_runs": 0,
+        "eligible_alarm_frames": 550,
+        "alarm_frames": 0,
+        "alarm_frame_fraction": 0.0,
+        "maximum_consecutive_crossing_windows_by_seed": [
+          {
+            "seed": 101,
+            "windows": 0
+          },
+          {
+            "seed": 102,
+            "windows": 0
+          },
+          {
+            "seed": 103,
+            "windows": 0
+          },
+          {
+            "seed": 104,
+            "windows": 5
+          },
+          {
+            "seed": 105,
+            "windows": 0
+          }
+        ]
+      },
+      "fault_screen": [
+        {
+          "fault": "stuck_actuator",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "optical_gain",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 5,
+          "detection_delay_frames": [
+            17,
+            16,
+            15,
+            13,
+            15
+          ],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 70
+            },
+            {
+              "seed": 102,
+              "windows": 71
+            },
+            {
+              "seed": 103,
+              "windows": 68
+            },
+            {
+              "seed": 104,
+              "windows": 33
+            },
+            {
+              "seed": 105,
+              "windows": 48
+            }
+          ]
+        },
+        {
+          "fault": "misregistration",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "vibration",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "model_mismatch",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "late_twin",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        },
+        {
+          "fault": "missing_twin",
+          "runs": 5,
+          "pre_onset_alarm_runs": 0,
+          "detected_runs": 0,
+          "detection_delay_frames": [],
+          "maximum_consecutive_crossing_windows_by_seed": [
+            {
+              "seed": 101,
+              "windows": 0
+            },
+            {
+              "seed": 102,
+              "windows": 0
+            },
+            {
+              "seed": 103,
+              "windows": 0
+            },
+            {
+              "seed": 104,
+              "windows": 0
+            },
+            {
+              "seed": 105,
+              "windows": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "passive_response_scale": {
+    "definition": "dot(prediction-reference, measurement-reference) / squared_norm(prediction-reference)",
+    "reference": "prediction[0], fixed by the saved loop's zero initial prediction and command",
+    "full_frame_seed": 101,
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "clean": {
+      "pre_fault_interval": {
+        "frames": [
+          40,
+          80
+        ],
+        "response_scale_q10": 0.9813147307332526,
+        "response_scale_median": 1.0050241405388356,
+        "response_scale_q90": 1.0263852580224655,
+        "score_median": 7.442885006163775,
+        "residual_variance_mean_rad2": 0.057977632933780734
+      },
+      "settled_interval": {
+        "frames": [
+          112,
+          160
+        ],
+        "response_scale_q10": 0.985702218635197,
+        "response_scale_median": 1.0002960375925514,
+        "response_scale_q90": 1.0185915442664455,
+        "score_median": 6.841896067741622,
+        "residual_variance_mean_rad2": 0.055833550948275655
+      }
+    },
+    "optical_gain": {
+      "pre_fault_interval": {
+        "frames": [
+          40,
+          80
+        ],
+        "response_scale_q10": 0.9813147307332526,
+        "response_scale_median": 1.0050241405388356,
+        "response_scale_q90": 1.0263852580224655,
+        "score_median": 7.442885006163775,
+        "residual_variance_mean_rad2": 0.057977632933780734
+      },
+      "settled_interval": {
+        "frames": [
+          112,
+          160
+        ],
+        "response_scale_q10": 0.9597042129842888,
+        "response_scale_median": 0.9819749639160235,
+        "response_scale_q90": 1.0034343068182907,
+        "score_median": 2.7292364007808194,
+        "residual_variance_mean_rad2": 0.16711465744408485
+      }
+    },
+    "settled_response_median_relative_change": -0.01831565155513548,
+    "settled_score_median_ratio": 0.39890059330902516,
+    "settled_residual_variance_ratio": 2.993086676484186
+  },
+  "interpretation": [
+    "The original upper-tail detector missed optical-gain drift in every retained M4 run.",
+    "In this legacy development screen, a four-frame lower-tail score detected all five optical-gain runs with no pre-onset alarm in those runs, while one of five clean runs alarmed.",
+    "Adding eight-window persistence post hoc removes that clean development alarm and retains all five gain detections with persistence-complete delays of 13 to 17 frames; this is candidate selection, not validation.",
+    "The one seed with saved full WFS frames shows why passive scale regression is insufficient: its settled median stayed near one while the paired clean-to-gain residual variance increased substantially.",
+    "These observations select a candidate for fresh predeclared training and validation; they do not validate a detector, recovery action, instrument behavior or safety claim."
+  ],
+  "next_gate": "Predeclare disjoint P2 training, validation and evaluation streams; calibrate the lower tail only on training, freeze all thresholds after validation, and keep fallback disabled while observability is assessed.",
+  "primary_sources": [
+    {
+      "title": "A telescope-ready approach for modal compensation of pyramid wavefront sensor optical gain",
+      "url": "https://doi.org/10.1051/0004-6361/201935847",
+      "relevance": "Independent modal dithers can identify optical gain and update a reconstructor."
+    },
+    {
+      "title": "Pyramid wavefront sensor optical gains compensation using a convolutional model",
+      "url": "https://arxiv.org/abs/2006.08294",
+      "relevance": "Residual-wavefront statistics and AO telemetry can support non-invasive gain estimation."
+    },
+    {
+      "title": "The focal-plane assisted pyramid wavefront sensor",
+      "url": "https://arxiv.org/abs/2103.02297",
+      "relevance": "An independent focal-plane channel can track optical gain frame by frame."
+    }
+  ]
+}

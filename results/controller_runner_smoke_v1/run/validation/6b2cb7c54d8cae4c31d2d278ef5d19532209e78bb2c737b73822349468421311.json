@@ -1,0 +1,56 @@
+{
+  "record": {
+    "artifacts": [
+      {
+        "path": "evidence/validation/trials/6b2cb7c54d8cae4c31d2d278ef5d19532209e78bb2c737b73822349468421311.npz",
+        "sha256": "3b3d9b9c242fb6d72c4b4d871dfac5730a4860377fbd20bd6612f2a45b268432"
+      },
+      {
+        "path": "evidence/validation/trials/6b2cb7c54d8cae4c31d2d278ef5d19532209e78bb2c737b73822349468421311.json",
+        "sha256": "c1f5dcc815c204b7ae3215c262aa04437fd9789c9f0fac0671ba3d66dd29665a"
+      },
+      {
+        "path": "evidence/validation/atmospheres/87fab9673b2cd9d96a7c689062a4d0d4cbb12bd7578ff3a690f7678b7396a77a.npz",
+        "sha256": "7845e635fbc10ce48a11506bd740eb11b6099d3c679fd72d55451788cd6b37ee"
+      },
+      {
+        "path": "evidence/validation/atmospheres/87fab9673b2cd9d96a7c689062a4d0d4cbb12bd7578ff3a690f7678b7396a77a.json",
+        "sha256": "4fd489cd28a55a209652da1450a78b0d763a9c99416e03776b1329395ddab8d7"
+      },
+      {
+        "path": "evidence/validation/open_loop/9227d9b4a4e8aa60b52cff389686f2967736414ba05ecbf9984a9dc76b88b5d7.json",
+        "sha256": "7820e48bea0709b0c1b8bc6c0b90f20b4fc48e5174eb0eaf25868f1edf308845"
+      }
+    ],
+    "case": {
+      "candidate": {
+        "controller": "learned",
+        "id": "learned-00",
+        "parameters": {
+          "gain": 0.3,
+          "leak": 0.999
+        }
+      },
+      "detector_seed": 162002,
+      "fault": "none",
+      "photons": 2000000.0,
+      "seed": 62002,
+      "stage": "validation",
+      "wind_scale": 0.5
+    },
+    "error": null,
+    "metrics": {
+      "all_outputs_finite": true,
+      "open_wfe_nm": 186.39735548966564,
+      "saturation_fraction": 0.0,
+      "strehl": 0.2966228608307833,
+      "wfe_nm": 130.92839020125027
+    },
+    "open_loop": {
+      "path": "evidence/validation/open_loop/9227d9b4a4e8aa60b52cff389686f2967736414ba05ecbf9984a9dc76b88b5d7.npz",
+      "sha256": "529b84b44d8d8fd6e183eade1c12fce56947aed9b9645dd152bf6556f2c0a320"
+    },
+    "status": "completed"
+  },
+  "training_sha256": "16122be6456b40fe0ea644695725f4532c8cd8bc27e554f0261847b49c1bca4c"
+}

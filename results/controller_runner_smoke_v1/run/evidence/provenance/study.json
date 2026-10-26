@@ -1,0 +1,176 @@
+{
+  "base_config": "configs/controller_runner_smoke_base.yaml",
+  "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+  "candidate_grids": {
+    "fixed": {
+      "gain": [
+        0.3
+      ],
+      "leak": [
+        0.999
+      ]
+    },
+    "forward": {
+      "gain": [
+        0.3
+      ],
+      "leak": [
+        0.999
+      ]
+    },
+    "integrator": {
+      "gain": [
+        0.3
+      ],
+      "leak": [
+        0.999
+      ]
+    },
+    "learned": {
+      "gain": [
+        0.3
+      ],
+      "leak": [
+        0.999
+      ]
+    },
+    "predictive": {
+      "horizon": [
+        2
+      ],
+      "ridge": [
+        0.01
+      ]
+    }
+  },
+  "candidates_per_controller": 1,
+  "conditions": {
+    "evaluation_faults": [
+      "none",
+      "optical_gain",
+      "vibration"
+    ],
+    "photons": [
+      1000000.0,
+      2000000.0
+    ],
+    "validation_faults": [
+      "none"
+    ],
+    "wind_scales": [
+      0.5,
+      1.0
+    ]
+  },
+  "evaluation": {
+    "fallback": false,
+    "familywise_alpha": 0.05,
+    "interval_method": "paired_student_t_bonferroni",
+    "noise": "poisson_plus_read",
+    "refit_after_selection": false
+  },
+  "loop": {
+    "burn_in": 2,
+    "fault_end": 8,
+    "fault_onset": 4,
+    "frames": 8
+  },
+  "schema_version": 1,
+  "seeds": {
+    "evaluation": [
+      63001,
+      63002,
+      63003,
+      63004,
+      63005,
+      63006,
+      63007,
+      63008,
+      63009,
+      63010
+    ],
+    "excluded_legacy": [
+      11,
+      12,
+      13,
+      17,
+      101,
+      102,
+      103,
+      104,
+      105,
+      20261008,
+      21001,
+      21002,
+      21003,
+      22001,
+      22002,
+      22003,
+      22004,
+      22005,
+      23001,
+      23002,
+      23003,
+      23004,
+      23005,
+      23006,
+      23007,
+      23008,
+      23009,
+      23010,
+      24001,
+      51001,
+      51002,
+      51003,
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53007,
+      53008,
+      53009,
+      53010,
+      54001
+    ],
+    "initialization": 64001,
+    "noise_offset": 100000,
+    "training": [
+      61001,
+      61002,
+      61003
+    ],
+    "validation": [
+      62001,
+      62002,
+      62003,
+      62004,
+      62005
+    ]
+  },
+  "selection": {
+    "max_saturation_fraction": 0.01,
+    "metric": "mean_relative_wfe_to_open",
+    "no_eligible_candidate": "withhold_evaluation",
+    "require_each_trial_below_open": true,
+    "scope": "global_across_clean_regimes",
+    "tie_break": "candidate_order"
+  },
+  "study_id": "controller_runner_smoke_v1",
+  "training": {
+    "burn_in": 2,
+    "frames": 8,
+    "learned_learning_rate": 0.02,
+    "learned_noise": "gaussian_pathwise",
+    "learned_steps": 1,
+    "pilot_gain": 0.3,
+    "pilot_leak": 0.999,
+    "predictor_telemetry": "measured_pseudo_open_loop"
+  }
+}

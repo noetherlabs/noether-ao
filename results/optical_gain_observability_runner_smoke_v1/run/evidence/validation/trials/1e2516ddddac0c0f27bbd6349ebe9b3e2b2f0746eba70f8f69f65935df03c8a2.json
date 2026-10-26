@@ -1,0 +1,29 @@
+{
+  "case": {
+    "atmosphere_seed": 720001,
+    "condition": "gain_035",
+    "detector_seed": 820001,
+    "photons": 1000000.0,
+    "regime_id": "regime-00",
+    "role": "validation",
+    "wind_scale": 1.0
+  },
+  "error": null,
+  "kind": "optical_gain_observability_trial_metadata",
+  "metric_interval": {
+    "name": "post_burn_in",
+    "start_frame": 4,
+    "stop_frame_exclusive": 24
+  },
+  "metrics": {
+    "saturation_fraction": 0.0,
+    "strehl": 0.8045032914340758,
+    "wfe_nm": 56.25507347994996
+  },
+  "raw": {
+    "path": "evidence/validation/trials/1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2.npz",
+    "sha256": "2dc3076a4d14db0ead7638caae80220fb2758694f24a24f202fd2f67f7689d64"
+  },
+  "schema_version": 1,
+  "status": "completed"
+}

@@ -1,0 +1,4 @@
+level,n,wavelengths,p50_ms,p99_ms,max_ms,miss_1ms,source_raw
+low,32,1,0.026041,0.20220925,32.663042000000004,0.0008,results/m1/cpu_all_n32_w1_float64.npz
+medium,64,3,0.3841665,0.9417970900000011,5.872292000000001,0.008,results/m1/cpu_all_n64_w3_float64.npz
+high,96,5,1.332729,6.782540660000004,32.755833,0.9219,results/m1/cpu_all_n96_w5_float64.npz

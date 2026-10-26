@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "measurement_contract": "idiomatic-v1",
+  "case_id": "mft_ao_scan",
+  "config_id": "dragrace_cpu_all",
+  "mode": "timing",
+  "adapter": {
+    "name": "proper",
+    "status": "unverified",
+    "reviewed_by": "",
+    "grid_centering": "pixel"
+  },
+  "status": "unsupported",
+  "case_kind": "pupil_to_focus",
+  "machine": {
+    "cpu": "arm",
+    "cpu_vendor": "unknown",
+    "logical_cores": 8,
+    "ram_bytes": 8589934592,
+    "platform": "macOS-14.6-arm64-arm-64bit",
+    "python": "3.11.15",
+    "gpus": [],
+    "id": "sha256:d4ec86edc24f9711"
+  },
+  "provenance": {
+    "git_sha": "d194dab",
+    "utc": "2026-10-08T11:58:10+00:00",
+    "run_id": "",
+    "argv": [
+      "../Diffraction-Dragrace/src/dragrace/worker.py",
+      "--case",
+      "../Diffraction-Dragrace/cases/pupil_to_focus/mft_ao_scan.yaml",
+      "--config",
+      "./configs/dragrace_cpu_all.yaml",
+      "--adapter",
+      "proper",
+      "--mode",
+      "timing",
+      "--out",
+      "./results/m2/raw/proper"
+    ]
+  },
+  "reason": "PROPER is FFT/Fresnel-based; no matrix-DFT path for matrix_dft. Sampling is set by beam_ratio, so it cannot hit an arbitrary focal grid the way an MFT can."
+}

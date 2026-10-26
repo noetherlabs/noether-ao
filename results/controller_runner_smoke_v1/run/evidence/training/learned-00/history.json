@@ -1,0 +1,88 @@
+{
+  "candidate": {
+    "controller": "learned",
+    "id": "learned-00",
+    "parameters": {
+      "gain": 0.3,
+      "leak": 0.999
+    }
+  },
+  "cases": [
+    {
+      "photons": 1000000.0,
+      "seed": 61001,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61002,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61003,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61001,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61002,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 1000000.0,
+      "seed": 61003,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61001,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61002,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61003,
+      "wind_scale": 0.5
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61001,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61002,
+      "wind_scale": 1.0
+    },
+    {
+      "photons": 2000000.0,
+      "seed": 61003,
+      "wind_scale": 1.0
+    }
+  ],
+  "checkpoint_count": 2,
+  "error": null,
+  "final_episode_count": 12,
+  "raw": {
+    "path": "evidence/training/learned-00/history.npz",
+    "sha256": "7bf2c83cf2bc8243797e73e5eba53758222888a1b3c9f4849fd118bf17b1f8ac"
+  },
+  "status": "ready",
+  "steps": [
+    {
+      "episode_count": 12,
+      "gradient_norm": "step_0_gradient_norm",
+      "mean_loss": "step_0_mean_loss",
+      "step": 0
+    }
+  ]
+}

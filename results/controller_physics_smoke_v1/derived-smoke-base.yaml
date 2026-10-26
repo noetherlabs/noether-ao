@@ -1,0 +1,133 @@
+burn_in: 40
+command_clip_rad: 5.0
+delay_frames: 2
+detector:
+  calibration_quantile: 0.995
+detector_n: 32
+diameter_m: 1.0
+dt_s: 0.001
+estimate_clip_rad: 3.0
+faults:
+  drift_frames: 32
+  end: 160
+  model_phase_scale: 1.6
+  onset: 80
+  optical_gain: 0.35
+  shift_pixels: 2
+  stuck_radius_d: 0.08
+  vibration_hz: 40.0
+  vibration_rad: 0.7
+fidelity:
+  equivalence_fraction: 0.05
+  fluxes:
+  - 100.0
+  - 1000.0
+  - 10000.0
+  - 100000.0
+  - 1000000.0
+  levels:
+  - modes: 100
+    n: 32
+    name: low
+    wavelengths_m:
+    - 7.5e-07
+  - modes: 150
+    n: 64
+    name: medium
+    wavelengths_m:
+    - 6.5e-07
+    - 7.5e-07
+    - 8.5e-07
+  - modes: 200
+    n: 96
+    name: high
+    wavelengths_m:
+    - 6.5e-07
+    - 7.0e-07
+    - 7.5e-07
+    - 8.0e-07
+    - 8.5e-07
+  m1_result: results/m1
+  truth:
+    modes: 200
+    n: 96
+    wavelengths_m:
+    - 6.5e-07
+    - 7.0e-07
+    - 7.5e-07
+    - 8.0e-07
+    - 8.5e-07
+forward_ridge: 1.0e-05
+forward_step: 0.5
+forward_steps: 3
+frames: 160
+gain: 0.3
+layers:
+- outer_scale_m: 25.0
+  velocity_m_s:
+  - 10.0
+  - 0.0
+  weight: 0.6
+- outer_scale_m: 15.0
+  velocity_m_s:
+  - -7.0
+  - 7.0
+  weight: 0.4
+leak: 0.999
+mixed:
+  faults:
+  - none
+  - optical_gain
+  - vibration
+  fluxes:
+  - 1000.0
+  - 100000.0
+  learning_rate: 0.02
+  training_frames: 32
+  training_steps: 20
+  winds:
+  - 0.5
+  - 2.0
+modes: 8
+n: 16
+photons: 1000000.0
+predictor_ridge: 0.01
+r0_m: 0.4
+read_noise_e: 0.3
+reconstructor_ridge: 1.0e-06
+screen_factor: 2
+seed: 17
+seeds:
+- 101
+- 102
+- 103
+- 104
+- 105
+sensor: pyramid
+training_seeds:
+- 11
+- 12
+- 13
+validation:
+  delays:
+  - 1
+  - 2
+  - 4
+  fitting_frames: 32
+  fitting_modes:
+  - 100
+  - 196
+  - 324
+  - 484
+  fitting_n: 96
+  fitting_slope_tolerance: 0.4
+  psf_tolerance: 1.0e-08
+  r0_slope_tolerance: 0.1
+  r0_values:
+  - 0.2
+  - 0.3
+  - 0.4
+wavelength_m: 7.5e-07
+wavelengths_m:
+- 7.5e-07
+wind_scale: 1.0

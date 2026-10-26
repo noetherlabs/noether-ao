@@ -1,0 +1,27 @@
+{
+  "identity": {
+    "case": {
+      "photons": 2000000.0,
+      "seed": 61003,
+      "wind_scale": 1.0
+    },
+    "journal": {
+      "path": "evidence/training/learned-00/journal.json",
+      "sha256": "bb843986bbbc8bb68c477b831a3f9c5b0e0814e8d1e2a349b33bafe49864fa6b"
+    },
+    "open_variance": 1.4662289296255038,
+    "parameters": {
+      "path": "evidence/training/learned-00/steps/0001/parameters.npz",
+      "sha256": "fe2e9cd4013ae9967b3bc7ff9a732552198fea0d99d6f3c91b0b6a213514b7a0"
+    },
+    "phase": {
+      "path": "evidence/training/atmospheres/dc6e7219ffdc6fbff282ddc9117255c9de4b68e1105a214d0aae6df51df9ffba.npz",
+      "sha256": "e7da81a1f187f30de254415f0f76f2e4d3f44d8434f62d93b55088d561d7e5c5"
+    },
+    "step": 1
+  },
+  "raw": {
+    "path": "evidence/training/learned-00/steps/0001/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.npz",
+    "sha256": "2e6d73a98c36e56774f65eb4d65c2c5fbeeb3aa8cba9c12e60697a428a785b88"
+  }
+}

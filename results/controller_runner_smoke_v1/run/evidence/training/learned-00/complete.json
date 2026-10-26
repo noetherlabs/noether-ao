@@ -1,0 +1,284 @@
+{
+  "journal": {
+    "path": "evidence/training/learned-00/journal.json",
+    "sha256": "bb843986bbbc8bb68c477b831a3f9c5b0e0814e8d1e2a349b33bafe49864fa6b"
+  },
+  "result": {
+    "evidence": [
+      {
+        "path": "evidence/provenance/base.json",
+        "sha256": "fb70c2f5a0aa33157e8be5f55dbbb13ec442092db5e89b152b0d53e5c95e0e1a"
+      },
+      {
+        "path": "evidence/provenance/runtime.json",
+        "sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719"
+      },
+      {
+        "path": "evidence/provenance/source.json",
+        "sha256": "ad058fdf4169cbdb322c46254fa544e759558174438374fada0a1b506eba7170"
+      },
+      {
+        "path": "evidence/provenance/study.json",
+        "sha256": "706c4397274c821f70629944946e22c38961526b98e3931f3cd5676fecfd7e3c"
+      },
+      {
+        "path": "evidence/training/atmospheres/2f86fe1857505557622062704cdfac5c54e20451fe96e7b865947a2916a114f2.npz",
+        "sha256": "fd417a5a2fe1627903196fae75749697923f10b059a8a05d1e28c0c3c1f69b18"
+      },
+      {
+        "path": "evidence/training/atmospheres/56f516d80ec8fdd368f9e3486fc148edc64612a50e8e48db942e2021a9ca96e9.npz",
+        "sha256": "9b88e444ed9a218d4fb7248bbdcfc073a25b053dd0230d56ca3c54762218321c"
+      },
+      {
+        "path": "evidence/training/atmospheres/92b4fc1e7f82df95a8754dc86112470231122f37abd83ac0e832022293bd314b.npz",
+        "sha256": "09dcd7a5d073ea6f0efde5d350c4ca8bc8169c49d685c6bfabac5f24e5b844a5"
+      },
+      {
+        "path": "evidence/training/atmospheres/be394e71745fba930a1601cb7409b2fd594e539ec8ca056a77cb966d456c1512.npz",
+        "sha256": "0833f4901899c3dca1d06a4a6d0da91f0e8039592c0f92f031261a98182383e6"
+      },
+      {
+        "path": "evidence/training/atmospheres/dc6e7219ffdc6fbff282ddc9117255c9de4b68e1105a214d0aae6df51df9ffba.npz",
+        "sha256": "e7da81a1f187f30de254415f0f76f2e4d3f44d8434f62d93b55088d561d7e5c5"
+      },
+      {
+        "path": "evidence/training/atmospheres/f66c724c6b09805aabfca18188e254a432ff67e48ac8aa5ee5d76ae7e2d36944.npz",
+        "sha256": "f6dd39d07119f5ed93c9d392c949195f4357412286d7d574a5e97392f09d07d8"
+      },
+      {
+        "path": "evidence/training/learned-00/calibration.npz",
+        "sha256": "1726ea0ab9abba50bf1a133053e1adc49ea4ee7041a3ebf2c964b3f2dced47a3"
+      },
+      {
+        "path": "evidence/training/learned-00/history.json",
+        "sha256": "04a139cd549e6107d62c896260bec58f5ec5736008f707d42cec1f2271effdfa"
+      },
+      {
+        "path": "evidence/training/learned-00/history.npz",
+        "sha256": "7bf2c83cf2bc8243797e73e5eba53758222888a1b3c9f4849fd118bf17b1f8ac"
+      },
+      {
+        "path": "evidence/training/learned-00/journal.json",
+        "sha256": "bb843986bbbc8bb68c477b831a3f9c5b0e0814e8d1e2a349b33bafe49864fa6b"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/0c59fdb2ce3c4b9aa3fec9e97ed9b159417b7ca8c1303637ccffbec83cba375d.json",
+        "sha256": "229beaf90980255e0a58ca6539ddf5b829e0933d26fbf065a55ca367f1333207"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/0c59fdb2ce3c4b9aa3fec9e97ed9b159417b7ca8c1303637ccffbec83cba375d.npz",
+        "sha256": "1c5b71309a282d485c8989ceb2995a403acd84707a0cfc65a3f17c82d3c63ccc"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/273359d1e8e2ed4861d39bb4034e051bca8cc6d9ec833347e00124a281314d94.json",
+        "sha256": "058b4554c8c95a46ad7ec48c4b16d5a85272c5b0bc167b1b540ee78e744f491f"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/273359d1e8e2ed4861d39bb4034e051bca8cc6d9ec833347e00124a281314d94.npz",
+        "sha256": "7858ae5f175c2f96e7c0b92268ffa2c13663cc7f8dfe158603699649113d153b"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/554e9c1b2252b17ede61f5b0a3e27ebbffc48e943cee5bcfd587ab6d6de9b9fc.json",
+        "sha256": "572f69bb5c2d24fc8abbc97d32bd87682f07c82f1534dc44c39f5b15c376b4cf"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/554e9c1b2252b17ede61f5b0a3e27ebbffc48e943cee5bcfd587ab6d6de9b9fc.npz",
+        "sha256": "5d072528a425d36ddedefdd84c03d155b1c5d0f16b577add42f4b53a8d15600e"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.json",
+        "sha256": "798d121a7ac8d3a4f7e661b0dd82e3988d4fe97384cac9362e5874d5c13c37f8"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.npz",
+        "sha256": "a154b771fc9194b596f8fda8110531a9778e4c66da264d50beb88e6bb0113244"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/62d9fef3f6df790ddb7870d3b2b1652fc2cf065d1e361c143ff2e71563616381.json",
+        "sha256": "da8fbd6fef15a2679e0254ed27130627ed5a3626f32f5f2ca6a4250b42e28295"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/62d9fef3f6df790ddb7870d3b2b1652fc2cf065d1e361c143ff2e71563616381.npz",
+        "sha256": "abdef87b375bbad5c1ad96ff3af1fc234c20bf10772712d95daee47d42feeb8e"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/6e74a692f754b9457521530c737fe3ca3e93dd63a8da3e5b876d5a5e9d1d63a3.json",
+        "sha256": "9b4c717771f5356a03efdfbb9884c35e7f4ffdffa382e66aa497b11753cc8d96"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/6e74a692f754b9457521530c737fe3ca3e93dd63a8da3e5b876d5a5e9d1d63a3.npz",
+        "sha256": "939d4845ecdddb151bb92c4c758f38cccef04ebdf80456bb030f9f6a17137bfc"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/84a0b01962ac8ba46cf046c2ae9d8d4744c9371399c5ad3cd1e835ad23653363.json",
+        "sha256": "ae0f652ceb9706ac0f0a1207adbf66440ba65b1fa43de0682e8163b8ffe32068"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/84a0b01962ac8ba46cf046c2ae9d8d4744c9371399c5ad3cd1e835ad23653363.npz",
+        "sha256": "fe4201bf8c587aae2c6b531860991208c37ac6f88cf0587f16ddeb39bc175cc3"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.json",
+        "sha256": "791bc0d31b63221e74b8f7bf3f9556fe34ee6cf35927512d71339dbb78f39ae7"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.npz",
+        "sha256": "35e83a65d608f3227d55c93bee88aa94d2f14d095d1dc86fd417e93ab8b62e3a"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/ad311b1efad80c0c3719e58a8f54e157dca52b1e4f5b3b91a143795919dd5c78.json",
+        "sha256": "e7e5fcb57f348f40f52a8e92cf762ead8bfe8d816405e8b9c06267083042bd06"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/ad311b1efad80c0c3719e58a8f54e157dca52b1e4f5b3b91a143795919dd5c78.npz",
+        "sha256": "a9deae43f3735ce57606be10479ab4d8fa4dda3ecf86a1ebed1f64fc049086cd"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/e447a73aaad60f57a1874350910fcd4d9926213c67f36bba117b5ea255bc9fdc.json",
+        "sha256": "54074f6604c916b3b8862c93f1dde025701500feaf26d16c813c86e9f7e049a8"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/e447a73aaad60f57a1874350910fcd4d9926213c67f36bba117b5ea255bc9fdc.npz",
+        "sha256": "549524d90ed8eccc4c38a73499326339d54ec42feb3240e63a79da063f987b25"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/ea9938772a3e019953edb2ad9bfc586fe9c04a1d09d6b18b2e6e604368eecf6a.json",
+        "sha256": "875c4c0f277d4f4c2e62ae86765f44564b3e9cb67124994f4eebd1bf1ef81a42"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/ea9938772a3e019953edb2ad9bfc586fe9c04a1d09d6b18b2e6e604368eecf6a.npz",
+        "sha256": "7639b5acb9c1485be52443dd6ea885fe1a90bf097aa4ea5c4e5de3a8273f0439"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/eb35c329d9468b22065be51d866ba62d7d126c4d840d8a7c00ed932c63809db3.json",
+        "sha256": "97568a719db7e2566a35eb43b49f65e3aac29b039faa0b3dd46075709ebb2b46"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/eb35c329d9468b22065be51d866ba62d7d126c4d840d8a7c00ed932c63809db3.npz",
+        "sha256": "a9844065ca26ff0d6fbbe0836a37b54372d36274a85fef97ac2e9e28070d7b92"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0000/parameters.npz",
+        "sha256": "25ba455e02cf0ae06bfd43a74b6e1650fbc1d2e25a7b31a90e6a5fb3f2a488ff"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/0c59fdb2ce3c4b9aa3fec9e97ed9b159417b7ca8c1303637ccffbec83cba375d.json",
+        "sha256": "44fa908d06639eb03d1393259ef56f8771118ff58033e4e780ae8c5d34fca833"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/0c59fdb2ce3c4b9aa3fec9e97ed9b159417b7ca8c1303637ccffbec83cba375d.npz",
+        "sha256": "7d888da5fcbf29020ecc46ad7b660ebd19a34cf47a1d5c939501748fab7508fc"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/273359d1e8e2ed4861d39bb4034e051bca8cc6d9ec833347e00124a281314d94.json",
+        "sha256": "68b236f3d3f2a95a6ff337b459f68a7fbfaf38968670a11b051cde3693bb809c"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/273359d1e8e2ed4861d39bb4034e051bca8cc6d9ec833347e00124a281314d94.npz",
+        "sha256": "e59941a3fe315db266dbe957da5547b5d89fec1b6cea65848db69fb0162c46c9"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/554e9c1b2252b17ede61f5b0a3e27ebbffc48e943cee5bcfd587ab6d6de9b9fc.json",
+        "sha256": "5b388814d6705a69a26a376897537a1461305754c58e443d6ac28108c31a80be"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/554e9c1b2252b17ede61f5b0a3e27ebbffc48e943cee5bcfd587ab6d6de9b9fc.npz",
+        "sha256": "132ae17c9169a61ca88fa2000462d9f777f454590e7bdfb1410d9823e4be473f"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.json",
+        "sha256": "af58913bb27e5f5ded5d999caa700fa6c3cff2520e57198b8ab83f1827aefb75"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.npz",
+        "sha256": "2e6d73a98c36e56774f65eb4d65c2c5fbeeb3aa8cba9c12e60697a428a785b88"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/62d9fef3f6df790ddb7870d3b2b1652fc2cf065d1e361c143ff2e71563616381.json",
+        "sha256": "2d584cd36db6e20aa6e8b4f88427f81144fe03fe0e5de9b0e3dcb9304c60ef4e"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/62d9fef3f6df790ddb7870d3b2b1652fc2cf065d1e361c143ff2e71563616381.npz",
+        "sha256": "54647c54688c18daca4dc74e6394f161a61cb090ef701fe86f95af44cf6227fa"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/6e74a692f754b9457521530c737fe3ca3e93dd63a8da3e5b876d5a5e9d1d63a3.json",
+        "sha256": "cc48e484dcc9ea74d4bd42cbf898f969eb911fdffd09785e8d572ea194afc8b9"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/6e74a692f754b9457521530c737fe3ca3e93dd63a8da3e5b876d5a5e9d1d63a3.npz",
+        "sha256": "05523853674666151b0b34bdfc432a42eab64cd20e10d92b3b18a11cb6b15d57"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/84a0b01962ac8ba46cf046c2ae9d8d4744c9371399c5ad3cd1e835ad23653363.json",
+        "sha256": "5488d3301aacb160ca5221d3ac6948c62fc8018cacfea7352701472ccda0fd88"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/84a0b01962ac8ba46cf046c2ae9d8d4744c9371399c5ad3cd1e835ad23653363.npz",
+        "sha256": "527ee29922572b3698b40a7728d8bb4bebc53bc580109be4d492d41562e349d6"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.json",
+        "sha256": "d05abd4cfdd793fefa9e80b2fcaa36b67671c7e706c03b9e34ec61f2967c0ada"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.npz",
+        "sha256": "5ae10f2c2345f01dab755201a2f4b93a2635959ac12da8c0276a66371e547093"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/ad311b1efad80c0c3719e58a8f54e157dca52b1e4f5b3b91a143795919dd5c78.json",
+        "sha256": "194fc31f66f65a1747cd00fdf5fbaf95191fcb1792233fdc1d2747dfcca2ffa2"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/ad311b1efad80c0c3719e58a8f54e157dca52b1e4f5b3b91a143795919dd5c78.npz",
+        "sha256": "eeb6a7feb665f3f022493c7ecb5f39d48bcd402fa49d3a41ab6e18db2c6fb081"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/e447a73aaad60f57a1874350910fcd4d9926213c67f36bba117b5ea255bc9fdc.json",
+        "sha256": "2297727bba7f9d49f61e74c4d33df65d2785383d97035e9d55fd3e033d6b4145"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/e447a73aaad60f57a1874350910fcd4d9926213c67f36bba117b5ea255bc9fdc.npz",
+        "sha256": "2057be9e6db0a4a9769e843dfc3da6d0e5844accf71b3b663f4ec215a95069cb"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/ea9938772a3e019953edb2ad9bfc586fe9c04a1d09d6b18b2e6e604368eecf6a.json",
+        "sha256": "f88cb12a5db23b05bb33d1f757ba375b5bb918b6119f06aa43743b5092e40fa6"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/ea9938772a3e019953edb2ad9bfc586fe9c04a1d09d6b18b2e6e604368eecf6a.npz",
+        "sha256": "533c5c2d2a0abb9ed3a612462346781cc40e9ab782d40e22f85362377faf2a89"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/eb35c329d9468b22065be51d866ba62d7d126c4d840d8a7c00ed932c63809db3.json",
+        "sha256": "6934be02f3ea2ddc0d769414e64fc9096cbac2f78cec3d83cb0483d4cc61e0a0"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/eb35c329d9468b22065be51d866ba62d7d126c4d840d8a7c00ed932c63809db3.npz",
+        "sha256": "6e67552b10c58950264bb3553ad15dffa352b0ea4f9c0e93b52faeffcb38409b"
+      },
+      {
+        "path": "evidence/training/learned-00/steps/0001/parameters.npz",
+        "sha256": "fe2e9cd4013ae9967b3bc7ff9a732552198fea0d99d6f3c91b0b6a213514b7a0"
+      }
+    ],
+    "model": {
+      "artifacts": [
+        {
+          "path": "evidence/training/learned-00/parameters.npz",
+          "sha256": "fe2e9cd4013ae9967b3bc7ff9a732552198fea0d99d6f3c91b0b6a213514b7a0"
+        },
+        {
+          "path": "evidence/training/learned-00/history.npz",
+          "sha256": "7bf2c83cf2bc8243797e73e5eba53758222888a1b3c9f4849fd118bf17b1f8ac"
+        },
+        {
+          "path": "evidence/training/learned-00/history.json",
+          "sha256": "04a139cd549e6107d62c896260bec58f5ec5736008f707d42cec1f2271effdfa"
+        }
+      ],
+      "error": null,
+      "status": "ready"
+    }
+  }
+}

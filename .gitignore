@@ -1,0 +1,12 @@
+.venv/
+.venv-specula/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.DS_Store
+
+# Local experimental runs; published evidence lives under results/.
+runs/
+
+.local/
+*.log

@@ -1,0 +1,336 @@
+{
+  "kind": "predeclared_plan",
+  "status": "not_executed",
+  "study_id": "controller_study_v1",
+  "candidates": [
+    {
+      "id": "integrator-00",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "integrator-01",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "integrator-02",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "integrator-03",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "integrator-04",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "integrator-05",
+      "controller": "integrator",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "predictive-00",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 1,
+        "ridge": 0.001
+      }
+    },
+    {
+      "id": "predictive-01",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 1,
+        "ridge": 0.01
+      }
+    },
+    {
+      "id": "predictive-02",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 2,
+        "ridge": 0.001
+      }
+    },
+    {
+      "id": "predictive-03",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 2,
+        "ridge": 0.01
+      }
+    },
+    {
+      "id": "predictive-04",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 3,
+        "ridge": 0.001
+      }
+    },
+    {
+      "id": "predictive-05",
+      "controller": "predictive",
+      "parameters": {
+        "horizon": 3,
+        "ridge": 0.01
+      }
+    },
+    {
+      "id": "forward-00",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "forward-01",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "forward-02",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "forward-03",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "forward-04",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "forward-05",
+      "controller": "forward",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "fixed-00",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "fixed-01",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "fixed-02",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "fixed-03",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "fixed-04",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "fixed-05",
+      "controller": "fixed",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "learned-00",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "learned-01",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.1,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "learned-02",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "learned-03",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.3,
+        "leak": 0.999
+      }
+    },
+    {
+      "id": "learned-04",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.99
+      }
+    },
+    {
+      "id": "learned-05",
+      "controller": "learned",
+      "parameters": {
+        "gain": 0.5,
+        "leak": 0.999
+      }
+    }
+  ],
+  "seed_streams": {
+    "training": [
+      {
+        "atmosphere": 21001,
+        "detector": 121001
+      },
+      {
+        "atmosphere": 21002,
+        "detector": 121002
+      },
+      {
+        "atmosphere": 21003,
+        "detector": 121003
+      }
+    ],
+    "validation": [
+      {
+        "atmosphere": 22001,
+        "detector": 122001
+      },
+      {
+        "atmosphere": 22002,
+        "detector": 122002
+      },
+      {
+        "atmosphere": 22003,
+        "detector": 122003
+      },
+      {
+        "atmosphere": 22004,
+        "detector": 122004
+      },
+      {
+        "atmosphere": 22005,
+        "detector": 122005
+      }
+    ],
+    "evaluation": [
+      {
+        "atmosphere": 23001,
+        "detector": 123001
+      },
+      {
+        "atmosphere": 23002,
+        "detector": 123002
+      },
+      {
+        "atmosphere": 23003,
+        "detector": 123003
+      },
+      {
+        "atmosphere": 23004,
+        "detector": 123004
+      },
+      {
+        "atmosphere": 23005,
+        "detector": 123005
+      },
+      {
+        "atmosphere": 23006,
+        "detector": 123006
+      },
+      {
+        "atmosphere": 23007,
+        "detector": 123007
+      },
+      {
+        "atmosphere": 23008,
+        "detector": 123008
+      },
+      {
+        "atmosphere": 23009,
+        "detector": 123009
+      },
+      {
+        "atmosphere": 23010,
+        "detector": 123010
+      }
+    ]
+  },
+  "planned_training_episodes": 12,
+  "planned_validation_trials_per_controller": 120,
+  "planned_validation_trials": 600,
+  "maximum_planned_evaluation_trials": 600,
+  "predeclared_pairwise_family": 120,
+  "simultaneous_interval_confidence": 0.9995833333333334,
+  "outcomes_generated": false,
+  "protocol_sha256": "ea6d332f279af75140f0eb462efa4b3e6a12fb73451f3aefb80d8bfbab6d87dd",
+  "base_config_sha256": "71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731"
+}

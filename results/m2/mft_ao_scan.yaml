@@ -1,0 +1,32 @@
+# Small-pupil AO regime; identical optical physics to mft_array_scan.
+# The fixed focal grid makes this an MFT scan, not an FFT latency claim.
+# Tail estimates are empirical; the observed maximum is not a worst-case bound.
+id: mft_ao_scan
+kind: pupil_to_focus
+algorithm_class: matrix_dft
+wavelength_m: 632.8e-9
+pupil:
+  diameter_m: 0.01
+  samples_across_diameter: 32
+  array_samples: 32
+  aperture: circular
+output:
+  focal_length_m: 1.0
+  samples_per_lambda_f_d: 4.0
+  extent_lambda_f_d: 32.0
+dtype: complex128
+basis_caching: precomputed
+scan:
+  parameter: n_pupil
+  values: [32, 64, 96, 128, 192, 256]
+execution:
+  warmup: 10
+  repeats: 1000
+  timeout_s: 300.0
+accuracy:
+  reference: internal_mft
+  max_rel_l2: 1.0e-10
+notes: >
+  Small-pupil scan for AO component latency. Focal grid and accuracy gate match
+  mft_array_scan. Timing runs belong on a local machine, never in CI. Inspect
+  the full stored distribution and machine fingerprint before interpreting tails.

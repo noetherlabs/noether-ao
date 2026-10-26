@@ -1,0 +1,65 @@
+{
+  "candidate": {
+    "controller": "predictive",
+    "id": "predictive-00",
+    "parameters": {
+      "horizon": 2,
+      "ridge": 0.01
+    }
+  },
+  "modes": 4,
+  "pilot_journal": {
+    "path": "evidence/training/pilots/journal.json",
+    "sha256": "b116a61288eb3a7962057bd35d25ecf1dcd843ab843901ff8428aca93aa44bee"
+  },
+  "pilots": [
+    {
+      "path": "evidence/training/pilots/records/62d9fef3f6df790ddb7870d3b2b1652fc2cf065d1e361c143ff2e71563616381.json",
+      "sha256": "fe8217494e9eb6a263257e3f42dac2160511c048d6b1a3e4586729316d571f63"
+    },
+    {
+      "path": "evidence/training/pilots/records/e447a73aaad60f57a1874350910fcd4d9926213c67f36bba117b5ea255bc9fdc.json",
+      "sha256": "a0ac7b4aade30e170e8250b6a264187e4391a0dd46d4c86638c97846dac7b040"
+    },
+    {
+      "path": "evidence/training/pilots/records/554e9c1b2252b17ede61f5b0a3e27ebbffc48e943cee5bcfd587ab6d6de9b9fc.json",
+      "sha256": "faaf3acd4658a0d7490301a90597a68b2cb375252d0679cd5b333d1249615a47"
+    },
+    {
+      "path": "evidence/training/pilots/records/ad311b1efad80c0c3719e58a8f54e157dca52b1e4f5b3b91a143795919dd5c78.json",
+      "sha256": "d705e3d11591555e6b1aa477bd76e2b41054f5c3b29c1b62b6d0838ac65551ec"
+    },
+    {
+      "path": "evidence/training/pilots/records/84a0b01962ac8ba46cf046c2ae9d8d4744c9371399c5ad3cd1e835ad23653363.json",
+      "sha256": "3decfdf8f36c7f2822eb0040d33595531f8649768890465d28c2ae01291d956d"
+    },
+    {
+      "path": "evidence/training/pilots/records/273359d1e8e2ed4861d39bb4034e051bca8cc6d9ec833347e00124a281314d94.json",
+      "sha256": "1e46bf948779cfcfca283cca55fc21c8d5315f3047546cbc8bcfca5a1ee9d80c"
+    },
+    {
+      "path": "evidence/training/pilots/records/8cd04c1fafdc0c5da736693606ab0bf32b26e667a8b538bef89d135d1511ddb8.json",
+      "sha256": "ad6073d156207c5862b20a557273bcf6b33599363cb1a9cff9be4f7d0ae94d2c"
+    },
+    {
+      "path": "evidence/training/pilots/records/0c59fdb2ce3c4b9aa3fec9e97ed9b159417b7ca8c1303637ccffbec83cba375d.json",
+      "sha256": "9e015a7ae00629de3f4f3ee1b78a9aad2bac4d9f7dcc2bae3807ca0663dea7ea"
+    },
+    {
+      "path": "evidence/training/pilots/records/eb35c329d9468b22065be51d866ba62d7d126c4d840d8a7c00ed932c63809db3.json",
+      "sha256": "7ae082e2e03f0e8868bd10c1cabce3054cc1895579d91ade644cbf9c11bd8d13"
+    },
+    {
+      "path": "evidence/training/pilots/records/6e74a692f754b9457521530c737fe3ca3e93dd63a8da3e5b876d5a5e9d1d63a3.json",
+      "sha256": "08bcf465fd5bb276e5e2c715c934e111c6602d36638447250e34d1f4f9b1eeae"
+    },
+    {
+      "path": "evidence/training/pilots/records/ea9938772a3e019953edb2ad9bfc586fe9c04a1d09d6b18b2e6e604368eecf6a.json",
+      "sha256": "bf7a7081056cabe39730f322bcfdf2b57911eeb8e7139c8ad255c0d0f119ce9d"
+    },
+    {
+      "path": "evidence/training/pilots/records/565ca3d9dee62c854828ff032fa51a9060484548972514d85ead3a8159836d67.json",
+      "sha256": "de578e6b528607c1e1f72477e97316d8e9cb770b569ca9cd4908e09dbb63294e"
+    }
+  ]
+}

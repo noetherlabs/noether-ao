@@ -1,0 +1,371 @@
+{
+  "kind": "controller_physics_smoke",
+  "smoke": {
+    "kind": "controller_physics_smoke",
+    "base_overrides": {
+      "n": 16,
+      "modes": 8,
+      "detector_n": 32,
+      "screen_factor": 2
+    },
+    "training_seeds": [
+      51001,
+      51002,
+      51003
+    ],
+    "validation_seeds": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005
+    ],
+    "evaluation_seeds": [
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53007,
+      53008,
+      53009,
+      53010
+    ],
+    "initialization_seed": 54001,
+    "frames": 24,
+    "burn_in": 6,
+    "fault_onset": 12,
+    "fault_end": 24,
+    "trial_seed": 52001,
+    "trial_photons": 1000000.0,
+    "trial_wind_scale": 0.5,
+    "tolerances": {
+      "pilot_absolute": 1e-12,
+      "zero_dm_absolute": 1e-12,
+      "minimum_omitted_vibration_error": 1e-08
+    }
+  },
+  "study": {
+    "schema_version": 1,
+    "study_id": "controller_physics_smoke",
+    "base_config": "derived-smoke-base.yaml",
+    "base_config_sha256": "22bbf7f48288b01ea1790bc7fc64941414506562e38d62a8c5ec75e9c4760ebc",
+    "seeds": {
+      "training": [
+        51001,
+        51002,
+        51003
+      ],
+      "validation": [
+        52001,
+        52002,
+        52003,
+        52004,
+        52005
+      ],
+      "evaluation": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010
+      ],
+      "initialization": 54001,
+      "noise_offset": 100000,
+      "excluded_legacy": [
+        11,
+        12,
+        13,
+        17,
+        101,
+        102,
+        103,
+        104,
+        105,
+        20261008
+      ]
+    },
+    "loop": {
+      "frames": 24,
+      "burn_in": 6,
+      "fault_onset": 12,
+      "fault_end": 24
+    },
+    "training": {
+      "frames": 24,
+      "burn_in": 6,
+      "pilot_gain": 0.3,
+      "pilot_leak": 0.999,
+      "learned_steps": 20,
+      "learned_learning_rate": 0.02,
+      "predictor_telemetry": "measured_pseudo_open_loop",
+      "learned_noise": "gaussian_pathwise"
+    },
+    "conditions": {
+      "photons": [
+        1000.0,
+        1000000.0
+      ],
+      "wind_scales": [
+        0.5,
+        2.0
+      ],
+      "validation_faults": [
+        "none"
+      ],
+      "evaluation_faults": [
+        "none",
+        "optical_gain",
+        "vibration"
+      ]
+    },
+    "candidates_per_controller": 6,
+    "candidate_grids": {
+      "integrator": {
+        "gain": [
+          0.1,
+          0.3,
+          0.5
+        ],
+        "leak": [
+          0.99,
+          0.999
+        ]
+      },
+      "predictive": {
+        "horizon": [
+          1,
+          2,
+          3
+        ],
+        "ridge": [
+          0.001,
+          0.01
+        ]
+      },
+      "forward": {
+        "gain": [
+          0.1,
+          0.3,
+          0.5
+        ],
+        "leak": [
+          0.99,
+          0.999
+        ]
+      },
+      "fixed": {
+        "gain": [
+          0.1,
+          0.3,
+          0.5
+        ],
+        "leak": [
+          0.99,
+          0.999
+        ]
+      },
+      "learned": {
+        "gain": [
+          0.1,
+          0.3,
+          0.5
+        ],
+        "leak": [
+          0.99,
+          0.999
+        ]
+      }
+    },
+    "selection": {
+      "metric": "mean_relative_wfe_to_open",
+      "scope": "global_across_clean_regimes",
+      "max_saturation_fraction": 0.01,
+      "require_each_trial_below_open": true,
+      "no_eligible_candidate": "withhold_evaluation",
+      "tie_break": "candidate_order"
+    },
+    "evaluation": {
+      "noise": "poisson_plus_read",
+      "fallback": false,
+      "refit_after_selection": false,
+      "familywise_alpha": 0.05,
+      "interval_method": "paired_student_t_bonferroni"
+    }
+  },
+  "base": {
+    "seed": 17,
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "training_seeds": [
+      11,
+      12,
+      13
+    ],
+    "n": 16,
+    "modes": 8,
+    "sensor": "pyramid",
+    "detector_n": 32,
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "diameter_m": 1.0,
+    "r0_m": 0.4,
+    "screen_factor": 2,
+    "layers": [
+      {
+        "weight": 0.6,
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ]
+      },
+      {
+        "weight": 0.4,
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ]
+      }
+    ],
+    "wind_scale": 1.0,
+    "frames": 160,
+    "burn_in": 40,
+    "dt_s": 0.001,
+    "delay_frames": 2,
+    "photons": 1000000.0,
+    "read_noise_e": 0.3,
+    "gain": 0.3,
+    "leak": 0.999,
+    "reconstructor_ridge": 1e-06,
+    "forward_ridge": 1e-05,
+    "forward_steps": 3,
+    "forward_step": 0.5,
+    "estimate_clip_rad": 3.0,
+    "command_clip_rad": 5.0,
+    "predictor_ridge": 0.01,
+    "faults": {
+      "onset": 80,
+      "end": 160,
+      "stuck_radius_d": 0.08,
+      "optical_gain": 0.35,
+      "drift_frames": 32,
+      "shift_pixels": 2,
+      "vibration_rad": 0.7,
+      "vibration_hz": 40.0,
+      "model_phase_scale": 1.6
+    },
+    "validation": {
+      "psf_tolerance": 1e-08,
+      "fitting_n": 96,
+      "fitting_modes": [
+        100,
+        196,
+        324,
+        484
+      ],
+      "fitting_frames": 32,
+      "fitting_slope_tolerance": 0.4,
+      "r0_values": [
+        0.2,
+        0.3,
+        0.4
+      ],
+      "r0_slope_tolerance": 0.1,
+      "delays": [
+        1,
+        2,
+        4
+      ]
+    },
+    "detector": {
+      "calibration_quantile": 0.995
+    },
+    "fidelity": {
+      "m1_result": "results/m1",
+      "truth": {
+        "n": 96,
+        "modes": 200,
+        "wavelengths_m": [
+          6.5e-07,
+          7e-07,
+          7.5e-07,
+          8e-07,
+          8.5e-07
+        ]
+      },
+      "levels": [
+        {
+          "name": "low",
+          "n": 32,
+          "modes": 100,
+          "wavelengths_m": [
+            7.5e-07
+          ]
+        },
+        {
+          "name": "medium",
+          "n": 64,
+          "modes": 150,
+          "wavelengths_m": [
+            6.5e-07,
+            7.5e-07,
+            8.5e-07
+          ]
+        },
+        {
+          "name": "high",
+          "n": 96,
+          "modes": 200,
+          "wavelengths_m": [
+            6.5e-07,
+            7e-07,
+            7.5e-07,
+            8e-07,
+            8.5e-07
+          ]
+        }
+      ],
+      "fluxes": [
+        100.0,
+        1000.0,
+        10000.0,
+        100000.0,
+        1000000.0
+      ],
+      "equivalence_fraction": 0.05
+    },
+    "mixed": {
+      "fluxes": [
+        1000.0,
+        100000.0
+      ],
+      "winds": [
+        0.5,
+        2.0
+      ],
+      "faults": [
+        "none",
+        "optical_gain",
+        "vibration"
+      ],
+      "training_frames": 32,
+      "training_steps": 20,
+      "learning_rate": 0.02
+    }
+  }
+}

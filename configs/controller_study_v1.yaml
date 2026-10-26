@@ -1,0 +1,61 @@
+# Predeclared experiment inputs. No outcomes from this study have been generated.
+schema_version: 1
+study_id: controller_study_v1
+base_config: configs/simulation.yaml
+base_config_sha256: 71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731
+seeds:
+  training: [21001, 21002, 21003]
+  validation: [22001, 22002, 22003, 22004, 22005]
+  evaluation: [23001, 23002, 23003, 23004, 23005, 23006, 23007, 23008, 23009, 23010]
+  initialization: 24001
+  noise_offset: 100000
+  excluded_legacy: [11, 12, 13, 17, 101, 102, 103, 104, 105, 20261008]
+loop:
+  frames: 512
+  burn_in: 128
+  fault_onset: 256
+  fault_end: 512
+training:
+  frames: 256
+  burn_in: 64
+  pilot_gain: 0.3
+  pilot_leak: 0.999
+  learned_steps: 20
+  learned_learning_rate: 0.02
+  predictor_telemetry: measured_pseudo_open_loop
+  learned_noise: gaussian_pathwise
+conditions:
+  photons: [1000.0, 1000000.0]
+  wind_scales: [0.5, 2.0]
+  validation_faults: [none]
+  evaluation_faults: [none, optical_gain, vibration]
+candidates_per_controller: 6
+candidate_grids:
+  integrator:
+    gain: [0.1, 0.3, 0.5]
+    leak: [0.99, 0.999]
+  predictive:
+    horizon: [1, 2, 3]
+    ridge: [0.001, 0.01]
+  forward:
+    gain: [0.1, 0.3, 0.5]
+    leak: [0.99, 0.999]
+  fixed:
+    gain: [0.1, 0.3, 0.5]
+    leak: [0.99, 0.999]
+  learned:
+    gain: [0.1, 0.3, 0.5]
+    leak: [0.99, 0.999]
+selection:
+  metric: mean_relative_wfe_to_open
+  scope: global_across_clean_regimes
+  max_saturation_fraction: 0.01
+  require_each_trial_below_open: true
+  no_eligible_candidate: withhold_evaluation
+  tie_break: candidate_order
+evaluation:
+  noise: poisson_plus_read
+  fallback: false
+  refit_after_selection: false
+  familywise_alpha: 0.05
+  interval_method: paired_student_t_bonferroni

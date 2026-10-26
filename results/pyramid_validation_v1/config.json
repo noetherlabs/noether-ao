@@ -1,0 +1,35 @@
+{
+  "grids": [
+    32,
+    64,
+    96
+  ],
+  "detector_n": 128,
+  "reference_wavelength_m": 7.5e-07,
+  "wavelength_sets_m": [
+    [
+      7.5e-07
+    ],
+    [
+      6.5e-07,
+      7.5e-07,
+      8.5e-07
+    ]
+  ],
+  "separation_diameters": 0.6,
+  "phase_rms_rad": 0.05,
+  "derivative_step_rad": 1e-05,
+  "modes": [
+    "tilt_x",
+    "tilt_y",
+    "defocus",
+    "astigmatism_oblique",
+    "coma_x"
+  ],
+  "tolerances": {
+    "intensity_relative_l2": 1e-10,
+    "derivative_relative_l2": 1e-06,
+    "total_power_absolute": 1e-12,
+    "minimum_control_relative_l2": 0.0001
+  }
+}

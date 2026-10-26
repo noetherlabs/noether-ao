@@ -1,0 +1,125 @@
+{
+  "bindings": {
+    "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+    "protocol_sha256": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+    "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+    "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+    "source_sha256": "155e0d88f9e0d11c4531dc807bca1cd4e0f2d56f88d7c48af33f774bd3ec7def"
+  },
+  "calculation_dtype": "float64",
+  "detector": {
+    "calibration_source": "training_clean_only",
+    "comparison": "strict_less_than",
+    "freeze_before_validation": true,
+    "persistence_windows": 8,
+    "quantile_method": "linear",
+    "recalibration_after_validation": false,
+    "source_signal": "existing_whitened_residual_score",
+    "statistic": "causal_arithmetic_mean",
+    "tail": "lower",
+    "target_streak_must_begin_at_or_after_onset": true,
+    "threshold_scope": "per_regime",
+    "training_quantile": 0.005,
+    "upper_tail_union": false,
+    "window_frames": 4
+  },
+  "kind": "optical_gain_threshold_freeze",
+  "schema_version": 2,
+  "status": "frozen_before_validation",
+  "study_id": "optical_gain_observability_runner_smoke_v1",
+  "thresholds": [
+    {
+      "calibration_records": 2,
+      "calibration_windows": 34,
+      "regime": {
+        "id": "regime-00",
+        "photons": 1000000.0,
+        "wind_scale": 1.0
+      },
+      "statistic_sha256": "104785695f043d68879d7c71d79f09329f6f6af7e6c8940cae0c60b4b85d6005",
+      "threshold": 605.120365512364,
+      "training_record_ids": [
+        "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+        "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c"
+      ]
+    }
+  ],
+  "training_artifact_layout": {
+    "detector_after_threshold": [
+      "statistic_frame_id",
+      "lower_statistic",
+      "raw_crossing",
+      "alarm_frame_id",
+      "p2_alarm"
+    ],
+    "per_run_metrics": [
+      "wfe_nm",
+      "strehl",
+      "saturation_fraction"
+    ],
+    "raw_before_threshold": [
+      "score",
+      "variance",
+      "strehl",
+      "saturated",
+      "fallback",
+      "unavailable",
+      "command",
+      "applied"
+    ]
+  },
+  "training_manifest_sha256": "a7e0694f931471ea2ccc08261f9a0d922360bb3b50322305b3c4c752a8706bef",
+  "training_records": [
+    {
+      "artifact": {
+        "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+        "sha256": "51e8882592e880f6f440447b2d0913372d65dd5e2e199a45cbacdd79ac0f4b23"
+      },
+      "case": {
+        "atmosphere_seed": 710001,
+        "condition": "clean",
+        "detector_seed": 810001,
+        "photons": 1000000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 1.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+        "sha256": "b0979cb4ab4c11bdaf465a7479ee93fff2e3868d9263aa9afe0e827c01d6eada"
+      },
+      "id": "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+      "metadata": {
+        "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.json",
+        "sha256": "6bdcf36411c3624378efb6e0b868e95be4445550943cda6140c0867d2250e41d"
+      },
+      "score_sha256": "8f8f123b8261a13db724452577256e5f0666fa8db8a858840dfc7949bdc7dcfe"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+        "sha256": "3f0b2bac61b973412783b77ac678f633386ccc33857730c74f21b7dbcf32241c"
+      },
+      "case": {
+        "atmosphere_seed": 710002,
+        "condition": "clean",
+        "detector_seed": 810002,
+        "photons": 1000000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 1.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+        "sha256": "967c7ac71ff326365cbe442b30f5a30a77330e8fdbf287e17ef25f27d668fbee"
+      },
+      "id": "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c",
+      "metadata": {
+        "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.json",
+        "sha256": "782de2fe6700a1e77f1da8ff37b86ea87a74930417c3e6cbdad5144f6e6a12bb"
+      },
+      "score_sha256": "e4b8d54ecbc62cd731798481f8b333ac17f6406b413c22419e736ca52fb84a4b"
+    }
+  ],
+  "validation_released": false
+}

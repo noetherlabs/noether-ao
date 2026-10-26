@@ -1,0 +1,110 @@
+# Predeclared nonreserved inputs for the end-to-end runner smoke. No outcomes yet.
+schema_version: 1
+study_id: controller_runner_smoke_v1
+base_config: configs/controller_runner_smoke_base.yaml
+base_config_sha256: 72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1
+seeds:
+  training: [61001, 61002, 61003]
+  validation: [62001, 62002, 62003, 62004, 62005]
+  evaluation: [63001, 63002, 63003, 63004, 63005, 63006, 63007, 63008, 63009, 63010]
+  initialization: 64001
+  noise_offset: 100000
+  # Baseline, reserved-study and component-smoke roots remain unavailable here.
+  excluded_legacy:
+    - 11
+    - 12
+    - 13
+    - 17
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 20261008
+    - 21001
+    - 21002
+    - 21003
+    - 22001
+    - 22002
+    - 22003
+    - 22004
+    - 22005
+    - 23001
+    - 23002
+    - 23003
+    - 23004
+    - 23005
+    - 23006
+    - 23007
+    - 23008
+    - 23009
+    - 23010
+    - 24001
+    - 51001
+    - 51002
+    - 51003
+    - 52001
+    - 52002
+    - 52003
+    - 52004
+    - 52005
+    - 53001
+    - 53002
+    - 53003
+    - 53004
+    - 53005
+    - 53006
+    - 53007
+    - 53008
+    - 53009
+    - 53010
+    - 54001
+loop:
+  frames: 8
+  burn_in: 2
+  fault_onset: 4
+  fault_end: 8
+training:
+  frames: 8
+  burn_in: 2
+  pilot_gain: 0.3
+  pilot_leak: 0.999
+  learned_steps: 1
+  learned_learning_rate: 0.02
+  predictor_telemetry: measured_pseudo_open_loop
+  learned_noise: gaussian_pathwise
+conditions:
+  photons: [1000000.0, 2000000.0]
+  wind_scales: [0.5, 1.0]
+  validation_faults: [none]
+  evaluation_faults: [none, optical_gain, vibration]
+candidates_per_controller: 1
+candidate_grids:
+  integrator:
+    gain: [0.3]
+    leak: [0.999]
+  predictive:
+    horizon: [2]
+    ridge: [0.01]
+  forward:
+    gain: [0.3]
+    leak: [0.999]
+  fixed:
+    gain: [0.3]
+    leak: [0.999]
+  learned:
+    gain: [0.3]
+    leak: [0.999]
+selection:
+  metric: mean_relative_wfe_to_open
+  scope: global_across_clean_regimes
+  max_saturation_fraction: 0.01
+  require_each_trial_below_open: true
+  no_eligible_candidate: withhold_evaluation
+  tie_break: candidate_order
+evaluation:
+  noise: poisson_plus_read
+  fallback: false
+  refit_after_selection: false
+  familywise_alpha: 0.05
+  interval_method: paired_student_t_bonferroni

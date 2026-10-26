@@ -1,0 +1,16 @@
+{
+  "byte_identical_rebuilds": 2,
+  "outputs_sha256": {
+    "summary.json": "c3585197011c30eb0f64695650869ce9c7092fa7b07965ff6e56f19c8839228c",
+    "report.md": "056af3e622e10a4d3951ddad298f538707870daca3ba3c956a94c0de7dc7e80c",
+    "comparison.png": "112b81be2e0722c2913853654f366e0ef8523f7fbae7e873ee8e40511c171dd4"
+  },
+  "unchanged_input_files": 22,
+  "manifest_sha256": "b4c46962dad0c4ccf3a1ee68e5330f37389a0d3cddad2cbf2626a13aa6a21d09",
+  "acquisition_commit": "4c19b85cc64c37a1555cc4392369a211a3a9da81",
+  "acquisition_tracked_dirty": false,
+  "local_core_tests_before_integration": 568,
+  "affected_tests_after_integration": 76,
+  "optional_specula_cpu_smoke": "passed",
+  "retained_acquisition": "all_required_gates_pass; native equivalence not claimed"
+}

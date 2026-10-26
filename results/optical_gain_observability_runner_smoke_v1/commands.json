@@ -1,0 +1,1242 @@
+{
+  "decision": {
+    "arguments": [
+      "observability-freeze-validation",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run"
+    ],
+    "result": {
+      "artifact": {
+        "path": "validation_release.json",
+        "sha256": "7e67dafb026700263ec9e47e264dd2ce342e2daff321f45d4baea86e5a7e0443"
+      },
+      "result": {
+        "bindings": {
+          "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+          "protocol_sha256": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+          "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+          "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+          "source_sha256": "155e0d88f9e0d11c4531dc807bca1cd4e0f2d56f88d7c48af33f774bd3ec7def",
+          "threshold_sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+        },
+        "evaluation_released": false,
+        "failure_action": "withhold_evaluation_and_retain_failure",
+        "kind": "optical_gain_validation_release",
+        "regimes": [
+          {
+            "clean": {
+              "alarm_eligible_frames": 20,
+              "alarm_frame_fraction": 0.05,
+              "alarm_frames": 1,
+              "alarm_runs": 1,
+              "raw_crossing_fraction": 0.23529411764705882,
+              "raw_crossing_frames": 34,
+              "raw_crossings": 8
+            },
+            "completed_clean_runs": 2,
+            "completed_gain_runs": 2,
+            "criteria": {
+              "all_finite_outputs": {
+                "comparison": "==",
+                "limit": true,
+                "observed": true,
+                "passed": true
+              },
+              "clean_alarm_frame_fraction": {
+                "comparison": "<=",
+                "limit": 0.001,
+                "observed": 0.05,
+                "passed": false
+              },
+              "clean_alarm_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 1,
+                "passed": false
+              },
+              "clean_raw_crossing_fraction": {
+                "comparison": "<=",
+                "limit": 0.01,
+                "observed": 0.23529411764705882,
+                "passed": false
+              },
+              "failed_runs": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "fallback_frames": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "gain_detected_runs": {
+                "comparison": ">=",
+                "limit": 2,
+                "observed": 0,
+                "passed": false
+              },
+              "gain_missed_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 2,
+                "passed": false
+              },
+              "gain_pre_onset_alarm_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "maximum_detection_delay_frames": {
+                "comparison": "<=",
+                "limit": 8,
+                "observed": null,
+                "passed": false
+              },
+              "saturation_fraction": {
+                "comparison": "<=",
+                "limit": 0.0,
+                "observed": 0.0,
+                "passed": true
+              },
+              "unavailable_frames": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              }
+            },
+            "failed_runs": 0,
+            "gain_035": {
+              "boundary_straddling_alarm_runs": 1,
+              "detected_only_delay_frames": [],
+              "detected_runs": 0,
+              "missed_runs": 2,
+              "pre_onset_alarm_runs": 0
+            },
+            "integrity": {
+              "all_completed_outputs_finite": true,
+              "fallback_frames": 0,
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "passed": false,
+            "planned_runs_per_condition": 2,
+            "regime": {
+              "id": "regime-00",
+              "photons": 1000000.0,
+              "wind_scale": 1.0
+            }
+          }
+        ],
+        "schema_version": 1,
+        "status": "evaluation_withheld",
+        "study_id": "optical_gain_observability_runner_smoke_v1",
+        "threshold_reference": {
+          "path": "thresholds.json",
+          "sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+        },
+        "validation_manifest_sha256": "3f2b51bc86dc07a68974ad6ea5e23867ad9e4924e51fe54730119f97e7a9f55f",
+        "validation_records": [
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d.npz",
+              "sha256": "61ec4394a0c22775025eff9de2c2d4499fd7336e7955e2380984fe79db07fe4a"
+            },
+            "case": {
+              "atmosphere_seed": 720001,
+              "condition": "clean",
+              "detector_seed": 820001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d",
+            "metadata": {
+              "path": "evidence/validation/trials/2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d.json",
+              "sha256": "beae1dd2998eb9767694d8b9b0c7943fe163a6ff4744905dcf9f36c1403f326e"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 1,
+              "alarm_run": true,
+              "all_finite": true,
+              "boundary_straddling_alarm": true,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 8,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.8082613692750742,
+                "wfe_nm": 55.57926240829164
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da.npz",
+              "sha256": "8a335cb2c2610a4100eb4910384e76fcfb5d9b758dd13a2238f41b9b9d5c6418"
+            },
+            "case": {
+              "atmosphere_seed": 720002,
+              "condition": "clean",
+              "detector_seed": 820002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da",
+            "metadata": {
+              "path": "evidence/validation/trials/b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da.json",
+              "sha256": "38fb523dc45db519a65138549a5e0cf6dba1444ceef83f04ebb748cde272cedf"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 0,
+              "alarm_run": false,
+              "all_finite": true,
+              "boundary_straddling_alarm": false,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 0,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.7444616723766351,
+                "wfe_nm": 65.1256908802594
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2.npz",
+              "sha256": "2dc3076a4d14db0ead7638caae80220fb2758694f24a24f202fd2f67f7689d64"
+            },
+            "case": {
+              "atmosphere_seed": 720001,
+              "condition": "gain_035",
+              "detector_seed": 820001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2",
+            "metadata": {
+              "path": "evidence/validation/trials/1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2.json",
+              "sha256": "22860e799dbdcc88f4dd03a47611f226e71c65ed8902f2f144840fa15382c112"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 2,
+              "alarm_run": true,
+              "all_finite": true,
+              "boundary_straddling_alarm": true,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 9,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.8045032914340758,
+                "wfe_nm": 56.25507347994996
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67.npz",
+              "sha256": "fae00749b844ce586e681c44f53905a510cc099fe9bafec34ad7c159f470a441"
+            },
+            "case": {
+              "atmosphere_seed": 720002,
+              "condition": "gain_035",
+              "detector_seed": 820002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67",
+            "metadata": {
+              "path": "evidence/validation/trials/19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67.json",
+              "sha256": "48247e3501604be035e5cb6761a5ba961cfb812b8a7edbbea27a56d0e96dab0a"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 0,
+              "alarm_run": false,
+              "all_finite": true,
+              "boundary_straddling_alarm": false,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 3,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.7443999912612653,
+                "wfe_nm": 65.13331092832898
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          }
+        ]
+      }
+    }
+  },
+  "decision_recheck": {
+    "arguments": [
+      "observability-freeze-validation",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run"
+    ],
+    "result": {
+      "artifact": {
+        "path": "validation_release.json",
+        "sha256": "7e67dafb026700263ec9e47e264dd2ce342e2daff321f45d4baea86e5a7e0443"
+      },
+      "result": {
+        "bindings": {
+          "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+          "protocol_sha256": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+          "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+          "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+          "source_sha256": "155e0d88f9e0d11c4531dc807bca1cd4e0f2d56f88d7c48af33f774bd3ec7def",
+          "threshold_sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+        },
+        "evaluation_released": false,
+        "failure_action": "withhold_evaluation_and_retain_failure",
+        "kind": "optical_gain_validation_release",
+        "regimes": [
+          {
+            "clean": {
+              "alarm_eligible_frames": 20,
+              "alarm_frame_fraction": 0.05,
+              "alarm_frames": 1,
+              "alarm_runs": 1,
+              "raw_crossing_fraction": 0.23529411764705882,
+              "raw_crossing_frames": 34,
+              "raw_crossings": 8
+            },
+            "completed_clean_runs": 2,
+            "completed_gain_runs": 2,
+            "criteria": {
+              "all_finite_outputs": {
+                "comparison": "==",
+                "limit": true,
+                "observed": true,
+                "passed": true
+              },
+              "clean_alarm_frame_fraction": {
+                "comparison": "<=",
+                "limit": 0.001,
+                "observed": 0.05,
+                "passed": false
+              },
+              "clean_alarm_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 1,
+                "passed": false
+              },
+              "clean_raw_crossing_fraction": {
+                "comparison": "<=",
+                "limit": 0.01,
+                "observed": 0.23529411764705882,
+                "passed": false
+              },
+              "failed_runs": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "fallback_frames": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "gain_detected_runs": {
+                "comparison": ">=",
+                "limit": 2,
+                "observed": 0,
+                "passed": false
+              },
+              "gain_missed_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 2,
+                "passed": false
+              },
+              "gain_pre_onset_alarm_runs": {
+                "comparison": "<=",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              },
+              "maximum_detection_delay_frames": {
+                "comparison": "<=",
+                "limit": 8,
+                "observed": null,
+                "passed": false
+              },
+              "saturation_fraction": {
+                "comparison": "<=",
+                "limit": 0.0,
+                "observed": 0.0,
+                "passed": true
+              },
+              "unavailable_frames": {
+                "comparison": "==",
+                "limit": 0,
+                "observed": 0,
+                "passed": true
+              }
+            },
+            "failed_runs": 0,
+            "gain_035": {
+              "boundary_straddling_alarm_runs": 1,
+              "detected_only_delay_frames": [],
+              "detected_runs": 0,
+              "missed_runs": 2,
+              "pre_onset_alarm_runs": 0
+            },
+            "integrity": {
+              "all_completed_outputs_finite": true,
+              "fallback_frames": 0,
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "passed": false,
+            "planned_runs_per_condition": 2,
+            "regime": {
+              "id": "regime-00",
+              "photons": 1000000.0,
+              "wind_scale": 1.0
+            }
+          }
+        ],
+        "schema_version": 1,
+        "status": "evaluation_withheld",
+        "study_id": "optical_gain_observability_runner_smoke_v1",
+        "threshold_reference": {
+          "path": "thresholds.json",
+          "sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+        },
+        "validation_manifest_sha256": "3f2b51bc86dc07a68974ad6ea5e23867ad9e4924e51fe54730119f97e7a9f55f",
+        "validation_records": [
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d.npz",
+              "sha256": "61ec4394a0c22775025eff9de2c2d4499fd7336e7955e2380984fe79db07fe4a"
+            },
+            "case": {
+              "atmosphere_seed": 720001,
+              "condition": "clean",
+              "detector_seed": 820001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d",
+            "metadata": {
+              "path": "evidence/validation/trials/2794bb1b1943ae0e0d80af76505f4b86fb9e2e347c46db22566f3a5386ab476d.json",
+              "sha256": "beae1dd2998eb9767694d8b9b0c7943fe163a6ff4744905dcf9f36c1403f326e"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 1,
+              "alarm_run": true,
+              "all_finite": true,
+              "boundary_straddling_alarm": true,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 8,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.8082613692750742,
+                "wfe_nm": 55.57926240829164
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da.npz",
+              "sha256": "8a335cb2c2610a4100eb4910384e76fcfb5d9b758dd13a2238f41b9b9d5c6418"
+            },
+            "case": {
+              "atmosphere_seed": 720002,
+              "condition": "clean",
+              "detector_seed": 820002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da",
+            "metadata": {
+              "path": "evidence/validation/trials/b9d4285f223c0ca37bbd319da4818e8c9ce4113d66b325f8a3e46c062d4345da.json",
+              "sha256": "38fb523dc45db519a65138549a5e0cf6dba1444ceef83f04ebb748cde272cedf"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 0,
+              "alarm_run": false,
+              "all_finite": true,
+              "boundary_straddling_alarm": false,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 0,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.7444616723766351,
+                "wfe_nm": 65.1256908802594
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2.npz",
+              "sha256": "2dc3076a4d14db0ead7638caae80220fb2758694f24a24f202fd2f67f7689d64"
+            },
+            "case": {
+              "atmosphere_seed": 720001,
+              "condition": "gain_035",
+              "detector_seed": 820001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2",
+            "metadata": {
+              "path": "evidence/validation/trials/1e2516ddddac0c0f27bbd6349ebe9b3e2b2f0746eba70f8f69f65935df03c8a2.json",
+              "sha256": "22860e799dbdcc88f4dd03a47611f226e71c65ed8902f2f144840fa15382c112"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 2,
+              "alarm_run": true,
+              "all_finite": true,
+              "boundary_straddling_alarm": true,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 9,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.8045032914340758,
+                "wfe_nm": 56.25507347994996
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          },
+          {
+            "artifact": {
+              "path": "evidence/validation/trials/19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67.npz",
+              "sha256": "fae00749b844ce586e681c44f53905a510cc099fe9bafec34ad7c159f470a441"
+            },
+            "case": {
+              "atmosphere_seed": 720002,
+              "condition": "gain_035",
+              "detector_seed": 820002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "validation",
+              "wind_scale": 1.0
+            },
+            "error": null,
+            "id": "19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67",
+            "metadata": {
+              "path": "evidence/validation/trials/19e3dfa519c749e4749672a44ddb25f27cc8a88b4c13bc3fd025ec13eada7b67.json",
+              "sha256": "48247e3501604be035e5cb6761a5ba961cfb812b8a7edbbea27a56d0e96dab0a"
+            },
+            "metrics": {
+              "alarm_eligible_frames": 10,
+              "alarm_frames": 0,
+              "alarm_run": false,
+              "all_finite": true,
+              "boundary_straddling_alarm": false,
+              "detected": false,
+              "detection_delay_frames": null,
+              "fallback_frames": 0,
+              "pre_onset_alarm": false,
+              "raw_crossing_frames": 17,
+              "raw_crossings": 3,
+              "retained_trial_metrics": {
+                "saturation_fraction": 0.0,
+                "strehl": 0.7443999912612653,
+                "wfe_nm": 65.13331092832898
+              },
+              "saturated_frames": 0,
+              "saturation_fraction": 0.0,
+              "unavailable_frames": 0
+            },
+            "status": "completed"
+          }
+        ]
+      }
+    }
+  },
+  "resources": {
+    "arguments": [
+      "observability-resources",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--target",
+      "results/optical_gain_observability_runner_smoke_v1/run"
+    ],
+    "result": {
+      "admitted": true,
+      "assumptions": {
+        "archive_member_allowance_bytes": 4096,
+        "archive_payload_factor": 2,
+        "elapsed_costs_included": false,
+        "failed_or_withheld_trials_reduce_storage": true,
+        "frame_identity_dtype": "int64",
+        "full_wfs_policy": "first_seed_per_role_regime_condition",
+        "maximum_evaluation_release_assumed": true,
+        "metadata_filesystem_fraction": "1/8",
+        "numeric_boolean_bytes": 1,
+        "numeric_float_dtype": "float64",
+        "per_run_metrics_in_metadata_envelope": true,
+        "training_threshold_dependent_arrays_are_separate": true
+      },
+      "budget": {
+        "archive_envelope_bytes": 1392736,
+        "compression_credit_bytes": 0,
+        "largest_single_archive_envelope_bytes": 115718,
+        "metadata_filesystem_envelope_bytes": 536870912,
+        "numeric_payload_bytes": 237616,
+        "operating_reserve_bytes": 4294967296,
+        "required_free_bytes": 5370101856,
+        "retained_evidence_envelope_bytes": 538263648,
+        "temporary_write_headroom_bytes": 536870912
+      },
+      "categories": [
+        {
+          "archive_envelope_bytes": 37136,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 37136,
+          "members_per_archive": 8,
+          "name": "training_standard_trial_outputs",
+          "numeric_payload_bytes": 2184
+        },
+        {
+          "archive_envelope_bytes": 94480,
+          "archives": 1,
+          "largest_archive_envelope_bytes": 94480,
+          "members_per_archive": 10,
+          "name": "training_full_wfs_trial_outputs",
+          "numeric_payload_bytes": 26760
+        },
+        {
+          "archive_envelope_bytes": 42476,
+          "archives": 2,
+          "largest_archive_envelope_bytes": 21238,
+          "members_per_archive": 5,
+          "name": "training_threshold_detector_outputs",
+          "numeric_payload_bytes": 758
+        },
+        {
+          "archive_envelope_bytes": 116748,
+          "archives": 2,
+          "largest_archive_envelope_bytes": 58374,
+          "members_per_archive": 13,
+          "name": "validation_standard_trial_outputs",
+          "numeric_payload_bytes": 5126
+        },
+        {
+          "archive_envelope_bytes": 231436,
+          "archives": 2,
+          "largest_archive_envelope_bytes": 115718,
+          "members_per_archive": 15,
+          "name": "validation_full_wfs_trial_outputs",
+          "numeric_payload_bytes": 54278
+        },
+        {
+          "archive_envelope_bytes": 291870,
+          "archives": 5,
+          "largest_archive_envelope_bytes": 58374,
+          "members_per_archive": 13,
+          "name": "evaluation_standard_trial_outputs",
+          "numeric_payload_bytes": 12815
+        },
+        {
+          "archive_envelope_bytes": 578590,
+          "archives": 5,
+          "largest_archive_envelope_bytes": 115718,
+          "members_per_archive": 15,
+          "name": "evaluation_full_wfs_trial_outputs",
+          "numeric_payload_bytes": 135695
+        }
+      ],
+      "counts": {
+        "full_wfs_trial_archives": 8,
+        "maximum_evaluation_trials": 10,
+        "numeric_archives": 18,
+        "training_trials": 2,
+        "validation_trials": 4
+      },
+      "filesystem": {
+        "checked_path": "./results",
+        "free_bytes": 5511426048
+      },
+      "kind": "optical_gain_observability_resource_preflight",
+      "outcomes_generated": false,
+      "schema_version": 1,
+      "schemas": {
+        "all_trial_frame_arrays": [
+          {
+            "bytes_per_trial": 192,
+            "dtype": "float64",
+            "elements": 24,
+            "name": "score",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 136,
+            "dtype": "int64",
+            "elements": 17,
+            "name": "statistic_frame_id",
+            "shape": [
+              17
+            ]
+          },
+          {
+            "bytes_per_trial": 136,
+            "dtype": "float64",
+            "elements": 17,
+            "name": "lower_statistic",
+            "shape": [
+              17
+            ]
+          },
+          {
+            "bytes_per_trial": 17,
+            "dtype": "bool",
+            "elements": 17,
+            "name": "raw_crossing",
+            "shape": [
+              17
+            ]
+          },
+          {
+            "bytes_per_trial": 80,
+            "dtype": "int64",
+            "elements": 10,
+            "name": "alarm_frame_id",
+            "shape": [
+              10
+            ]
+          },
+          {
+            "bytes_per_trial": 10,
+            "dtype": "bool",
+            "elements": 10,
+            "name": "p2_alarm",
+            "shape": [
+              10
+            ]
+          },
+          {
+            "bytes_per_trial": 192,
+            "dtype": "float64",
+            "elements": 24,
+            "name": "variance",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 192,
+            "dtype": "float64",
+            "elements": 24,
+            "name": "strehl",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 24,
+            "dtype": "bool",
+            "elements": 24,
+            "name": "saturated",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 24,
+            "dtype": "bool",
+            "elements": 24,
+            "name": "fallback",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 24,
+            "dtype": "bool",
+            "elements": 24,
+            "name": "unavailable",
+            "shape": [
+              24
+            ]
+          },
+          {
+            "bytes_per_trial": 768,
+            "dtype": "float64",
+            "elements": 96,
+            "name": "command",
+            "shape": [
+              24,
+              4
+            ]
+          },
+          {
+            "bytes_per_trial": 768,
+            "dtype": "float64",
+            "elements": 96,
+            "name": "applied",
+            "shape": [
+              24,
+              4
+            ]
+          }
+        ],
+        "all_trial_metrics": [
+          "wfe_nm",
+          "strehl",
+          "saturation_fraction"
+        ],
+        "full_wfs_arrays": [
+          {
+            "bytes_per_trial": 12288,
+            "dtype": "float64",
+            "elements": 1536,
+            "name": "measurement",
+            "shape": [
+              24,
+              8,
+              8
+            ]
+          },
+          {
+            "bytes_per_trial": 12288,
+            "dtype": "float64",
+            "elements": 1536,
+            "name": "prediction",
+            "shape": [
+              24,
+              8,
+              8
+            ]
+          }
+        ]
+      },
+      "status": "sufficient",
+      "study_id": "optical_gain_observability_runner_smoke_v1",
+      "target": "./results/optical_gain_observability_runner_smoke_v1/run"
+    }
+  },
+  "seed_audit": {
+    "prior_experiment_overlap": [],
+    "reserved_v1_overlap": [],
+    "separate": true,
+    "smoke_streams": [
+      710001,
+      710002,
+      720001,
+      720002,
+      730001,
+      730002,
+      810001,
+      810002,
+      820001,
+      820002,
+      830001,
+      830002
+    ]
+  },
+  "threshold": {
+    "arguments": [
+      "observability-freeze-training",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run"
+    ],
+    "result": {
+      "artifact": {
+        "path": "thresholds.json",
+        "sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+      },
+      "result": {
+        "bindings": {
+          "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+          "protocol_sha256": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+          "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+          "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+          "source_sha256": "155e0d88f9e0d11c4531dc807bca1cd4e0f2d56f88d7c48af33f774bd3ec7def"
+        },
+        "calculation_dtype": "float64",
+        "detector": {
+          "calibration_source": "training_clean_only",
+          "comparison": "strict_less_than",
+          "freeze_before_validation": true,
+          "persistence_windows": 8,
+          "quantile_method": "linear",
+          "recalibration_after_validation": false,
+          "source_signal": "existing_whitened_residual_score",
+          "statistic": "causal_arithmetic_mean",
+          "tail": "lower",
+          "target_streak_must_begin_at_or_after_onset": true,
+          "threshold_scope": "per_regime",
+          "training_quantile": 0.005,
+          "upper_tail_union": false,
+          "window_frames": 4
+        },
+        "kind": "optical_gain_threshold_freeze",
+        "schema_version": 2,
+        "status": "frozen_before_validation",
+        "study_id": "optical_gain_observability_runner_smoke_v1",
+        "thresholds": [
+          {
+            "calibration_records": 2,
+            "calibration_windows": 34,
+            "regime": {
+              "id": "regime-00",
+              "photons": 1000000.0,
+              "wind_scale": 1.0
+            },
+            "statistic_sha256": "104785695f043d68879d7c71d79f09329f6f6af7e6c8940cae0c60b4b85d6005",
+            "threshold": 605.120365512364,
+            "training_record_ids": [
+              "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+              "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c"
+            ]
+          }
+        ],
+        "training_artifact_layout": {
+          "detector_after_threshold": [
+            "statistic_frame_id",
+            "lower_statistic",
+            "raw_crossing",
+            "alarm_frame_id",
+            "p2_alarm"
+          ],
+          "per_run_metrics": [
+            "wfe_nm",
+            "strehl",
+            "saturation_fraction"
+          ],
+          "raw_before_threshold": [
+            "score",
+            "variance",
+            "strehl",
+            "saturated",
+            "fallback",
+            "unavailable",
+            "command",
+            "applied"
+          ]
+        },
+        "training_manifest_sha256": "a7e0694f931471ea2ccc08261f9a0d922360bb3b50322305b3c4c752a8706bef",
+        "training_records": [
+          {
+            "artifact": {
+              "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+              "sha256": "51e8882592e880f6f440447b2d0913372d65dd5e2e199a45cbacdd79ac0f4b23"
+            },
+            "case": {
+              "atmosphere_seed": 710001,
+              "condition": "clean",
+              "detector_seed": 810001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "training",
+              "wind_scale": 1.0
+            },
+            "detector_artifact": {
+              "path": "evidence/training/detectors/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+              "sha256": "b0979cb4ab4c11bdaf465a7479ee93fff2e3868d9263aa9afe0e827c01d6eada"
+            },
+            "id": "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+            "metadata": {
+              "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.json",
+              "sha256": "6bdcf36411c3624378efb6e0b868e95be4445550943cda6140c0867d2250e41d"
+            },
+            "score_sha256": "8f8f123b8261a13db724452577256e5f0666fa8db8a858840dfc7949bdc7dcfe"
+          },
+          {
+            "artifact": {
+              "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+              "sha256": "3f0b2bac61b973412783b77ac678f633386ccc33857730c74f21b7dbcf32241c"
+            },
+            "case": {
+              "atmosphere_seed": 710002,
+              "condition": "clean",
+              "detector_seed": 810002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "training",
+              "wind_scale": 1.0
+            },
+            "detector_artifact": {
+              "path": "evidence/training/detectors/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+              "sha256": "967c7ac71ff326365cbe442b30f5a30a77330e8fdbf287e17ef25f27d668fbee"
+            },
+            "id": "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c",
+            "metadata": {
+              "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.json",
+              "sha256": "782de2fe6700a1e77f1da8ff37b86ea87a74930417c3e6cbdad5144f6e6a12bb"
+            },
+            "score_sha256": "e4b8d54ecbc62cd731798481f8b333ac17f6406b413c22419e736ca52fb84a4b"
+          }
+        ],
+        "validation_released": false
+      }
+    }
+  },
+  "threshold_recheck": {
+    "arguments": [
+      "observability-freeze-training",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run"
+    ],
+    "result": {
+      "artifact": {
+        "path": "thresholds.json",
+        "sha256": "930594df9223d1228e6ec771f94ccff728ed7dc8366156c1a4b371116bf5e36a"
+      },
+      "result": {
+        "bindings": {
+          "base_config_sha256": "72f646b4c9df8777c7cc9c0fa333f1031212348743f007949116b598063ba3d1",
+          "protocol_sha256": "af08f3c880bdb54a1144dee2c19cc1fa212a2315f0f85002f94eb0061655ca69",
+          "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+          "source_commit": "a997753109061484ca7bd768f4484e923f88a327",
+          "source_sha256": "155e0d88f9e0d11c4531dc807bca1cd4e0f2d56f88d7c48af33f774bd3ec7def"
+        },
+        "calculation_dtype": "float64",
+        "detector": {
+          "calibration_source": "training_clean_only",
+          "comparison": "strict_less_than",
+          "freeze_before_validation": true,
+          "persistence_windows": 8,
+          "quantile_method": "linear",
+          "recalibration_after_validation": false,
+          "source_signal": "existing_whitened_residual_score",
+          "statistic": "causal_arithmetic_mean",
+          "tail": "lower",
+          "target_streak_must_begin_at_or_after_onset": true,
+          "threshold_scope": "per_regime",
+          "training_quantile": 0.005,
+          "upper_tail_union": false,
+          "window_frames": 4
+        },
+        "kind": "optical_gain_threshold_freeze",
+        "schema_version": 2,
+        "status": "frozen_before_validation",
+        "study_id": "optical_gain_observability_runner_smoke_v1",
+        "thresholds": [
+          {
+            "calibration_records": 2,
+            "calibration_windows": 34,
+            "regime": {
+              "id": "regime-00",
+              "photons": 1000000.0,
+              "wind_scale": 1.0
+            },
+            "statistic_sha256": "104785695f043d68879d7c71d79f09329f6f6af7e6c8940cae0c60b4b85d6005",
+            "threshold": 605.120365512364,
+            "training_record_ids": [
+              "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+              "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c"
+            ]
+          }
+        ],
+        "training_artifact_layout": {
+          "detector_after_threshold": [
+            "statistic_frame_id",
+            "lower_statistic",
+            "raw_crossing",
+            "alarm_frame_id",
+            "p2_alarm"
+          ],
+          "per_run_metrics": [
+            "wfe_nm",
+            "strehl",
+            "saturation_fraction"
+          ],
+          "raw_before_threshold": [
+            "score",
+            "variance",
+            "strehl",
+            "saturated",
+            "fallback",
+            "unavailable",
+            "command",
+            "applied"
+          ]
+        },
+        "training_manifest_sha256": "a7e0694f931471ea2ccc08261f9a0d922360bb3b50322305b3c4c752a8706bef",
+        "training_records": [
+          {
+            "artifact": {
+              "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+              "sha256": "51e8882592e880f6f440447b2d0913372d65dd5e2e199a45cbacdd79ac0f4b23"
+            },
+            "case": {
+              "atmosphere_seed": 710001,
+              "condition": "clean",
+              "detector_seed": 810001,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "training",
+              "wind_scale": 1.0
+            },
+            "detector_artifact": {
+              "path": "evidence/training/detectors/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.npz",
+              "sha256": "b0979cb4ab4c11bdaf465a7479ee93fff2e3868d9263aa9afe0e827c01d6eada"
+            },
+            "id": "0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5",
+            "metadata": {
+              "path": "evidence/training/trials/0a11d58a2b06b6a29eeb0540ca9c0930cd143c525181b0f6c6344cd3000eb8b5.json",
+              "sha256": "6bdcf36411c3624378efb6e0b868e95be4445550943cda6140c0867d2250e41d"
+            },
+            "score_sha256": "8f8f123b8261a13db724452577256e5f0666fa8db8a858840dfc7949bdc7dcfe"
+          },
+          {
+            "artifact": {
+              "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+              "sha256": "3f0b2bac61b973412783b77ac678f633386ccc33857730c74f21b7dbcf32241c"
+            },
+            "case": {
+              "atmosphere_seed": 710002,
+              "condition": "clean",
+              "detector_seed": 810002,
+              "photons": 1000000.0,
+              "regime_id": "regime-00",
+              "role": "training",
+              "wind_scale": 1.0
+            },
+            "detector_artifact": {
+              "path": "evidence/training/detectors/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+              "sha256": "967c7ac71ff326365cbe442b30f5a30a77330e8fdbf287e17ef25f27d668fbee"
+            },
+            "id": "b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c",
+            "metadata": {
+              "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.json",
+              "sha256": "782de2fe6700a1e77f1da8ff37b86ea87a74930417c3e6cbdad5144f6e6a12bb"
+            },
+            "score_sha256": "e4b8d54ecbc62cd731798481f8b333ac17f6406b413c22419e736ca52fb84a4b"
+          }
+        ],
+        "validation_released": false
+      }
+    }
+  },
+  "training": {
+    "arguments": [
+      "observability-train",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run",
+      "--create",
+      "--limit",
+      "2"
+    ],
+    "result": {
+      "complete": true,
+      "new_records": 2,
+      "planned_records": 2,
+      "total_records": 2
+    }
+  },
+  "validation": {
+    "arguments": [
+      "observability-validate",
+      "--config",
+      "configs/optical_gain_observability_runner_smoke_v1.yaml",
+      "--out",
+      "results/optical_gain_observability_runner_smoke_v1/run",
+      "--limit",
+      "4"
+    ],
+    "result": {
+      "complete": true,
+      "new_records": 4,
+      "planned_records": 4,
+      "total_records": 4
+    }
+  }
+}

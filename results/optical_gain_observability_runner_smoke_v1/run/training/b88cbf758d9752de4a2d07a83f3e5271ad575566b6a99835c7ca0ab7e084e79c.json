@@ -1,0 +1,24 @@
+{
+  "manifest_sha256": "24d9c496b9eaeb673fbc978e540b36612f4d4296e14879321187349c793ab64a",
+  "record": {
+    "artifact": {
+      "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.npz",
+      "sha256": "3f0b2bac61b973412783b77ac678f633386ccc33857730c74f21b7dbcf32241c"
+    },
+    "case": {
+      "atmosphere_seed": 710002,
+      "condition": "clean",
+      "detector_seed": 810002,
+      "photons": 1000000.0,
+      "regime_id": "regime-00",
+      "role": "training",
+      "wind_scale": 1.0
+    },
+    "error": null,
+    "metadata": {
+      "path": "evidence/training/trials/b88cbf758d9752de4a2d07a83f3e5271ad575566b6a99835c7ca0ab7e084e79c.json",
+      "sha256": "782de2fe6700a1e77f1da8ff37b86ea87a74930417c3e6cbdad5144f6e6a12bb"
+    },
+    "status": "completed"
+  }
+}
