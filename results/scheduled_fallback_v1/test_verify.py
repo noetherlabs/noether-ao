@@ -3,7 +3,6 @@ import hashlib
 import importlib.util
 import io
 import json
-import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -21,13 +20,11 @@ class ReleaseVerification(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)/'evidence'
-        shutil.copytree(ROOT,self.root,copy_function=os.link,
+        shutil.copytree(ROOT,self.root,
                         ignore=shutil.ignore_patterns('__pycache__','.pytest_cache'))
 
     def replace(self,name,data):
         path=self.root/name
-        if path.exists():
-            path.unlink()  # Break the private test hard link before writing.
         path.write_bytes(data)
 
     def rebind(self,name,data,arrays=None):
@@ -45,6 +42,14 @@ class ReleaseVerification(unittest.TestCase):
         self.assertEqual(report['failures']['trials'],24)
         self.assertEqual(len(report['paired_descriptive_outcomes']),12)
         self.assertFalse(report['safety_claim_supported'])
+
+    def test_fixture_in_place_edit_preserves_source_evidence(self):
+        source=ROOT/'models.npz'
+        copied=self.root/'models.npz'
+        original=source.read_bytes()
+        self.assertFalse(source.samefile(copied))
+        copied.write_bytes(b'changed fixture bytes')
+        self.assertEqual(source.read_bytes(),original)
 
     def test_changed_raw_byte_is_rejected(self):
         name='raw/R1-nominal-continue_P.npz'

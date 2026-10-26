@@ -4887,8 +4887,8 @@
       "sha256": "982f21200038a1560ee77aba69c69e53c9ddca406861e41f10819894ae54060a"
     },
     "test_verify.py": {
-      "bytes": 6481,
-      "sha256": "d9da06ba409c2fcf2c305b967b5cdfb16b0c4702d0febe13ddfff4b31475b746"
+      "bytes": 6680,
+      "sha256": "2fdf6058d0b4fde863d54235259d188e838f493d34e1f43d041cc15f1007b04c"
     },
     "verify.py": {
       "bytes": 40758,
