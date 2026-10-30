@@ -21,7 +21,9 @@
 - [Execution and evidence contracts](controller_study_execution.md)
 - [Optical-gain observability](optical_gain_observability_v1.md)
 
-The controller and observability protocols specify planned evaluations. Reduced
-checks and exploratory results are labelled separately from complete studies.
+The controller protocol specifies a planned evaluation. Optical-gain observability
+completed its [validation study](../results/optical_gain_observability_v1/README.md)
+and withheld evaluation after failing its frozen gate. Reduced checks and
+exploratory results are labelled separately from complete studies.
 
 [References](research_notes.md) describe the literature and numerical conventions.

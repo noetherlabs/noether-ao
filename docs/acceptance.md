@@ -44,4 +44,5 @@ support a recovery claim. The release calculation and exclusive artifact are
 implemented with synthetic tests. A locked, protocol-bound ledger also preserves and
 revalidates terminal training/validation records across interrupted chunks. Static
 storage admission requires 10,190,604,096 free bytes for the maximum retained run with
-no compression credit. No declared P2 threshold or validation result exists.
+no compression credit. The [completed validation study](../results/optical_gain_observability_v1/README.md)
+failed the gate in all four regimes; its frozen decision withholds evaluation.

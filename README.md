@@ -29,6 +29,7 @@ and optional dependencies are in the [reproduction guide](docs/reproduction.md).
 | Wavefront-sensor calibration | [Calibration protocol](docs/wfs_calibration.md) | [HCIPy/SPECULA comparison](results/wfs_calibration_v1/README.md) |
 | Closed-loop response identification | [Estimators](docs/identification.md) | [Identification](results/identification_component_smoke_v1/README.md), [filtered instruments](results/controller_filtered_iv_v1/README.md) |
 | Scheduled controller handover | [Measurement design](docs/scheduled_fallback.md) | [Paired trials](results/scheduled_fallback_v1/README.md) |
+| Optical-gain detection | [Frozen protocol](docs/optical_gain_observability_v1.md) | [240-run validation: evaluation withheld](results/optical_gain_observability_v1/README.md) |
 | Control, noise and faults | [Physical criteria](docs/acceptance.md) | [Baseline comparisons](docs/results.md) |
 
 ## Baseline findings

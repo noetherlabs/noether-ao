@@ -1,0 +1,1776 @@
+{
+  "bindings": {
+    "base_config_sha256": "71e98a0ab39ba8ec668247beaae2bab450bd767be80d2942a086a43051bf1731",
+    "protocol_sha256": "2b387e8108fb801e6594cbb4531e9e2951f3f245279382ed65e399ce88243221",
+    "runtime_sha256": "030b8324cdaf09bfcf6e3c4bc04fd35bf643271c1e26053ddde2cfd5814a7719",
+    "source_commit": "ae62a92a644c50c8e08d58ac07bf4e41d8d9c8ee",
+    "source_sha256": "be6b932f40cb6f7340e2018c09815091b91f8404626ce906a32975a962439995"
+  },
+  "calculation_dtype": "float64",
+  "detector": {
+    "calibration_source": "training_clean_only",
+    "comparison": "strict_less_than",
+    "freeze_before_validation": true,
+    "persistence_windows": 8,
+    "quantile_method": "linear",
+    "recalibration_after_validation": false,
+    "source_signal": "existing_whitened_residual_score",
+    "statistic": "causal_arithmetic_mean",
+    "tail": "lower",
+    "target_streak_must_begin_at_or_after_onset": true,
+    "threshold_scope": "per_regime",
+    "training_quantile": 0.005,
+    "upper_tail_union": false,
+    "window_frames": 4
+  },
+  "kind": "optical_gain_threshold_freeze",
+  "schema_version": 2,
+  "status": "frozen_before_validation",
+  "study_id": "optical_gain_observability_v1",
+  "thresholds": [
+    {
+      "calibration_records": 16,
+      "calibration_windows": 6096,
+      "regime": {
+        "id": "regime-00",
+        "photons": 1000.0,
+        "wind_scale": 0.5
+      },
+      "statistic_sha256": "feca4daf3fc7d5a1c7ba907e37ba3c70eed044679a5f171f9ece05c485b44609",
+      "threshold": 1.149591219684276,
+      "training_record_ids": [
+        "c132e82bf7331a6a772c8909a732852c593c3626c8224d06e483dc71d6d099ac",
+        "78a9b9ff8fa5f8909d618df06b5cddcac56e93460c36869ade340645d0a5c081",
+        "bc8b2422ddb839f0da656357bb9e9dae72107447f0ed5623a2d8a4b94d4d0c72",
+        "4d29d5e0b5ba31b70f0f3cbf6e062bffe64d8d6a77becb2b8a64bba56e2756c0",
+        "02d631bdc5d6c18543558202d33acfecd925e7054fc74ee74ba6de97f738c7c4",
+        "9b3f57cc1860a1c59ceac6d67566304cd6f5903944cd906f51ed273734fb22ce",
+        "18e08736b62453df72b2c497e9bb92b3e1e3c42d1655bfd83209a9cc8b497c99",
+        "b9a9375f93c5f01f6ceaa363f308b14c0dda006df220efd9f170c7c87f709f4e",
+        "63cb61302bb0772af175a3bef7aee71c022f12016e9be718c5430d162bed8635",
+        "c92aa97ef4de575678fde26cc0d6875e89f506b382f5f54a7db5f786001b82eb",
+        "59d8285cdd6b1e233a06daa602b2832cab1b217e6d7b255107262d2acd073ced",
+        "3a1c68f58969816d1da06e7556a4bbb436232fd5d68787717a7d0ceefb728bad",
+        "87b8df80a21546627eb67c166be9604ce6e31c085e646e4fed2c2b70191c7977",
+        "9b6086d0960c6436d9387cb2e70157da4b4d30df650e2b50a81357259b466626",
+        "bcd71d3368976f7a41ebdd3042df42f6d076b448dfeb0f7bb088702206e52fe5",
+        "4d970e9a05ee26804572ac611f119e6e176b50c94036a9f09aa3f1186daad5e6"
+      ]
+    },
+    {
+      "calibration_records": 16,
+      "calibration_windows": 6096,
+      "regime": {
+        "id": "regime-01",
+        "photons": 1000.0,
+        "wind_scale": 2.0
+      },
+      "statistic_sha256": "56dcecfa41d7f52c8e126335641a3f928643680ee8137822ec578571d95e7cf7",
+      "threshold": 1.1572746172693802,
+      "training_record_ids": [
+        "990879fedf81797f0b588166ff7b4e767aa763e5807da47450aa88b54faafe4d",
+        "6f75377aef3e0ce2499240b85460ae73ed18f3ab2405db7f5f7097fc25f70b3e",
+        "b786b0d114f026abc5288338006156c0683e6127db2f0d94ab827cea03406bd3",
+        "22363d7bb9aa86f662d6a0c9c17bec91032d8b1a691baa3b3c12f010ac79ca17",
+        "f5c3ad75188ab493f7b709f3a12af392a51cadd9bfbc7143a42676753a25b42c",
+        "7de4dc80ebb4194fe85eea545f9a4a935715116e73a3d56c669b39abe1ea21f4",
+        "06a4496ee0826a702c152ea8457045bafdbdb0ca77f5cccdc90154d9bc318b41",
+        "7e18cc2342959a7a9965367c8c8e0ebbcb591fa84ed1d7735e171ee696c6dc90",
+        "dc11dae8de84d499fc2b86185e7ab6738968117a83c8026ca5cfbd8e405c73cc",
+        "070f768e28863f1e270ae6edcbb2b867142dd1c8d21147a95c8e99e528eb496f",
+        "5762bcbb0511ccfc26ad50f5dad50e28615551c7acd50b62bd600db25d2b6ac7",
+        "c8feef198b594af951edeb7592996e189f6fc2034db6054df56d200845463bf9",
+        "26373dfa2289a8719ee66bdcec3ba7f6aab027c63836b3db47a93fa37f05214e",
+        "26dbc0023e134c20ac520788655299bde1557b964d9e39c27dd6e246c3fa7a39",
+        "68a111de2ebb1b9d78bda503c3f856405a9badf72ae85b4726c2c9a7303bceaf",
+        "d598982e22ec9a5b62f18b414a437837ec5ca7e53859a20b182025ae38c0c03d"
+      ]
+    },
+    {
+      "calibration_records": 16,
+      "calibration_windows": 6096,
+      "regime": {
+        "id": "regime-02",
+        "photons": 1000000.0,
+        "wind_scale": 0.5
+      },
+      "statistic_sha256": "3b4b77a4edf25f12fc2e7676e9bef6849254f153801e3da9075d1dbfa78deba5",
+      "threshold": 4.986058032675402,
+      "training_record_ids": [
+        "99baeb0008544eef9b684f20123997159a046c77180990313718e89e4ffa97d3",
+        "a5358ee0100759ab689143e7db22c333297a9ca2cd61729d5481fc3e5e79f465",
+        "f632ba6749b7508651400b12beadcaf4c0a16f85cf6aff106756f00465f66ee0",
+        "57b81b66f8b3b7058b44836bb86b5fd69486d94dae6ecb4a7b3a76cc17c1656c",
+        "e2c39ed573432f4fb3bfe458dc81e36f04d1be8a57da64693f26bbfa4fb5fb70",
+        "37796f4a9e878bae8cf4150624f37fe1a231cda606cd24b8344e57b0c745721d",
+        "b5f0ea1d4127bc5f10e2d96c527842866cb7c7d5cb8737348e57cdafb0882ac9",
+        "84adc11ddc340a51bf468ab87ed7e2869a1740cddd6a455dbd0f19b85cb8ebbf",
+        "aecaf725949f3726f1769578f0df206f6cf4cba69c37fcbd91ab7b7d1f6c85e7",
+        "8278ce7fb6db43f74c9907ab3ae9fe104a7241d6dcebe708f48148db178693ac",
+        "e327dc4e519b5651e5e3510470ac8279eeb0045cca491fdf819a8d122a41a722",
+        "cb9b3c26e5c3f009b7fb2242a392337580144fe53d6f83e544df0b956089a584",
+        "ee17f1d2248664156889e411017ea67dc0e7956f409e3ef165f1dfbde65a0142",
+        "373eac17d377021b5069af7dd7c5229d8bac900b062986f99cffe0dfbbb31b59",
+        "9d4a7ebb79194e5f15568a34959858035ae03947ced1ef8f85d36ed7e36e114f",
+        "cf32f68cc59b4844a4c9d03db499f7007e16d17a1dc7d1a39b6914bfa8254e04"
+      ]
+    },
+    {
+      "calibration_records": 16,
+      "calibration_windows": 6096,
+      "regime": {
+        "id": "regime-03",
+        "photons": 1000000.0,
+        "wind_scale": 2.0
+      },
+      "statistic_sha256": "adad0915ec0350b1632e426e69221962331ddd8b621be2584f0aae3e1355e414",
+      "threshold": 6.327239931637379,
+      "training_record_ids": [
+        "bb10e5cdd77690de81dd26084ce9f0b75e5f53489803246a94f2858336e78217",
+        "39d6aa6a4f511db5cf874c980b7c5a6bdd34ca586003a19f542b111e840338fe",
+        "ce53edd45338ff098e465ee3852519ed24e86da34848a98299952cd3f809ec07",
+        "5567fdbc211c293901b4c236f32ee8d170a2a02b0b67cfd94fa5f0a237dde2e1",
+        "995bcbb750ef77c699e204a1ea4007482851842a9cd7ed83bcfdb59d478bc54c",
+        "d511b506818b31b4bd31809fe4bc97e2fd29f509d38e42285595a9c488872c32",
+        "b7249e2d47bb93c9a97fb66fe4ce4b16eb0f0bdf320a7da7caf0984088ffb2c9",
+        "9018412df60cbae575858840aa0dd7c05e94a37769f74eaaadc0330592e3e6f5",
+        "be652ac4f3821d126e2f82a6006b74ff4ff3c2c825e189d1fbd189167f09c2a1",
+        "9b65d128798a5cc17e84219cea0e8a880091bb30b99129323b03b389f657b8f9",
+        "3ba012dd1417eeaa203ad98d760d464cbec319e8aac88aebcacf8c5659c2680b",
+        "b9ce88c540857db577ab0ed91232d6ae33dff0f175f3deb629dd83752180dd78",
+        "e108732b137b6a95e40227b4ff117804b2a6b6304753c51384670493b54c721a",
+        "9d63e58ecac563ed1934af1be9f3b5552ee6d8c53f4d8238206eabbd328f6555",
+        "74e9d2d4680a598291e458306fe092fd8d9dc6f8b5767a4b97a8cd9f7bcbd419",
+        "63a2bbcbe99b15e3a77e1d4ef69347ce0223e986f8de86c193d8138a8c6b0978"
+      ]
+    }
+  ],
+  "training_artifact_layout": {
+    "detector_after_threshold": [
+      "statistic_frame_id",
+      "lower_statistic",
+      "raw_crossing",
+      "alarm_frame_id",
+      "p2_alarm"
+    ],
+    "per_run_metrics": [
+      "wfe_nm",
+      "strehl",
+      "saturation_fraction"
+    ],
+    "raw_before_threshold": [
+      "score",
+      "variance",
+      "strehl",
+      "saturated",
+      "fallback",
+      "unavailable",
+      "command",
+      "applied"
+    ]
+  },
+  "training_manifest_sha256": "a0362ba43b9236b653f983f43bb425104b7d22efa8fe2a149c9ee87c90747fd0",
+  "training_records": [
+    {
+      "artifact": {
+        "path": "evidence/training/trials/c132e82bf7331a6a772c8909a732852c593c3626c8224d06e483dc71d6d099ac.npz",
+        "sha256": "d0ada458c6bc5e95258a98238eb31dae25b1aeee7aa914dd7143c6f55ae67a39"
+      },
+      "case": {
+        "atmosphere_seed": 310001,
+        "condition": "clean",
+        "detector_seed": 410001,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/c132e82bf7331a6a772c8909a732852c593c3626c8224d06e483dc71d6d099ac.npz",
+        "sha256": "f2591bd84efaec828e50c362235ff7a209062b81ef617b6326a5fb79130f091d"
+      },
+      "id": "c132e82bf7331a6a772c8909a732852c593c3626c8224d06e483dc71d6d099ac",
+      "metadata": {
+        "path": "evidence/training/trials/c132e82bf7331a6a772c8909a732852c593c3626c8224d06e483dc71d6d099ac.json",
+        "sha256": "762215321d59a186baa7fbfe814695ed3266c4f41c0a047aec1b9e8a03aa1185"
+      },
+      "score_sha256": "fa71cee1806a9a5153af1627bc3611a5f65cc098495804238b1bb857d432d8b0"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/78a9b9ff8fa5f8909d618df06b5cddcac56e93460c36869ade340645d0a5c081.npz",
+        "sha256": "d0e6496ebc37183ae06bdff51e98935c7c4792cc9f9a5c5b864d37a1fd633999"
+      },
+      "case": {
+        "atmosphere_seed": 310002,
+        "condition": "clean",
+        "detector_seed": 410002,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/78a9b9ff8fa5f8909d618df06b5cddcac56e93460c36869ade340645d0a5c081.npz",
+        "sha256": "257d221e7f0ef27c04d1084ef7e80dd002b26f4428f2f834c93f33c9349e18db"
+      },
+      "id": "78a9b9ff8fa5f8909d618df06b5cddcac56e93460c36869ade340645d0a5c081",
+      "metadata": {
+        "path": "evidence/training/trials/78a9b9ff8fa5f8909d618df06b5cddcac56e93460c36869ade340645d0a5c081.json",
+        "sha256": "35d9a4dd37425857993deded34f5a6f21f6fb1c6c69f7e34ca427b2bbd9756a5"
+      },
+      "score_sha256": "46f4f4d4f8e637a1e0fb99d3d74bc9bd69ae9713a8691962821f871c0057bcd5"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/bc8b2422ddb839f0da656357bb9e9dae72107447f0ed5623a2d8a4b94d4d0c72.npz",
+        "sha256": "23374d332c09bb447d35195d41c2c344530ea7d24a12fe2818a753fd05bc665a"
+      },
+      "case": {
+        "atmosphere_seed": 310003,
+        "condition": "clean",
+        "detector_seed": 410003,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/bc8b2422ddb839f0da656357bb9e9dae72107447f0ed5623a2d8a4b94d4d0c72.npz",
+        "sha256": "faedc2c430788321597fab99fa82fd979c47086fd7937c25d8d2bcd831f1532b"
+      },
+      "id": "bc8b2422ddb839f0da656357bb9e9dae72107447f0ed5623a2d8a4b94d4d0c72",
+      "metadata": {
+        "path": "evidence/training/trials/bc8b2422ddb839f0da656357bb9e9dae72107447f0ed5623a2d8a4b94d4d0c72.json",
+        "sha256": "3bfd2ec67ef2e3a7e6f769e1c8dc48eafe8929b1afccf22d1b98693908b5e388"
+      },
+      "score_sha256": "79217baa702ef5da94eefcfdc176dddc13e24b183f1091980a9288df40f47a26"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/4d29d5e0b5ba31b70f0f3cbf6e062bffe64d8d6a77becb2b8a64bba56e2756c0.npz",
+        "sha256": "957030a76e7661ac55603189104192b902b355014b39db6bd84f654dac8bb61d"
+      },
+      "case": {
+        "atmosphere_seed": 310004,
+        "condition": "clean",
+        "detector_seed": 410004,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/4d29d5e0b5ba31b70f0f3cbf6e062bffe64d8d6a77becb2b8a64bba56e2756c0.npz",
+        "sha256": "881bbf5baa3ec0fdff5342f32e6bf635b44da9ba31b76b6145f9eae38fde7d9a"
+      },
+      "id": "4d29d5e0b5ba31b70f0f3cbf6e062bffe64d8d6a77becb2b8a64bba56e2756c0",
+      "metadata": {
+        "path": "evidence/training/trials/4d29d5e0b5ba31b70f0f3cbf6e062bffe64d8d6a77becb2b8a64bba56e2756c0.json",
+        "sha256": "dd66acb2f9afbc3a9d05ee1184383e029a76f2e55c61e4ffb17e690e626095bc"
+      },
+      "score_sha256": "6366afed49145f6ab65840dd949bfdf000d3153fad2b8467ddc4618cca39fb4c"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/02d631bdc5d6c18543558202d33acfecd925e7054fc74ee74ba6de97f738c7c4.npz",
+        "sha256": "588690ffb0cd2c7c082e39797bc679be8e0e98c0f2982b44c8099f413c32730b"
+      },
+      "case": {
+        "atmosphere_seed": 310005,
+        "condition": "clean",
+        "detector_seed": 410005,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/02d631bdc5d6c18543558202d33acfecd925e7054fc74ee74ba6de97f738c7c4.npz",
+        "sha256": "9d0fe44f4cae2ee1ee1e28ee4aeea44e32c9604546e0ae527339bb2bc7ca969a"
+      },
+      "id": "02d631bdc5d6c18543558202d33acfecd925e7054fc74ee74ba6de97f738c7c4",
+      "metadata": {
+        "path": "evidence/training/trials/02d631bdc5d6c18543558202d33acfecd925e7054fc74ee74ba6de97f738c7c4.json",
+        "sha256": "56ba669f0321e1cd424ed1cbe9707249eeba4fbecc8a09f80244879903f3d5ec"
+      },
+      "score_sha256": "79f405b79a5c1d6ab3ed733dc7d1b7d2d620ee3d7f414f5e6888563ca1aa6c3c"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9b3f57cc1860a1c59ceac6d67566304cd6f5903944cd906f51ed273734fb22ce.npz",
+        "sha256": "e3b65122cb0cc1b337b5e781ad894e828de852903023529d0e4dbc751a013d23"
+      },
+      "case": {
+        "atmosphere_seed": 310006,
+        "condition": "clean",
+        "detector_seed": 410006,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9b3f57cc1860a1c59ceac6d67566304cd6f5903944cd906f51ed273734fb22ce.npz",
+        "sha256": "3cdd7f39d2a2226fda3e57a4597a1759d2bbc1b8a882199fb2fbef17947b26e8"
+      },
+      "id": "9b3f57cc1860a1c59ceac6d67566304cd6f5903944cd906f51ed273734fb22ce",
+      "metadata": {
+        "path": "evidence/training/trials/9b3f57cc1860a1c59ceac6d67566304cd6f5903944cd906f51ed273734fb22ce.json",
+        "sha256": "e2d3f7bf1d5d2ef4adce9cd62018bad6d2cdac53aaa46c82c9aacaaa9664e8a9"
+      },
+      "score_sha256": "cd10c3bbbc0cb97f0e2b17fef9c5d42eb4dee1ab9afddda26b448e1f5f6dc0d3"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/18e08736b62453df72b2c497e9bb92b3e1e3c42d1655bfd83209a9cc8b497c99.npz",
+        "sha256": "1a5a877391768bae94f6505dc45963bf3eca176fc69162d8a4bc95918d4292ea"
+      },
+      "case": {
+        "atmosphere_seed": 310007,
+        "condition": "clean",
+        "detector_seed": 410007,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/18e08736b62453df72b2c497e9bb92b3e1e3c42d1655bfd83209a9cc8b497c99.npz",
+        "sha256": "374e0536a08fedc357972da6b31525fdaf5c201d2c1e4f021b16235116e951a5"
+      },
+      "id": "18e08736b62453df72b2c497e9bb92b3e1e3c42d1655bfd83209a9cc8b497c99",
+      "metadata": {
+        "path": "evidence/training/trials/18e08736b62453df72b2c497e9bb92b3e1e3c42d1655bfd83209a9cc8b497c99.json",
+        "sha256": "daca5a397dc2c849f333537e75ddfa92db7e76661741c6cd97a4b6ee19023466"
+      },
+      "score_sha256": "8b3e5739c6358c71324bdefff414adc5200feb7c60e8724f370cc68dc25c2d8f"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b9a9375f93c5f01f6ceaa363f308b14c0dda006df220efd9f170c7c87f709f4e.npz",
+        "sha256": "e44a3e1c63cccc668c287102445cb5840ce3dd4ba399cb11030509c3d7dc3974"
+      },
+      "case": {
+        "atmosphere_seed": 310008,
+        "condition": "clean",
+        "detector_seed": 410008,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b9a9375f93c5f01f6ceaa363f308b14c0dda006df220efd9f170c7c87f709f4e.npz",
+        "sha256": "c734eb9387462032f57e0a3423c1fb3c7c80fa5d13406c568c7483f1c73a1808"
+      },
+      "id": "b9a9375f93c5f01f6ceaa363f308b14c0dda006df220efd9f170c7c87f709f4e",
+      "metadata": {
+        "path": "evidence/training/trials/b9a9375f93c5f01f6ceaa363f308b14c0dda006df220efd9f170c7c87f709f4e.json",
+        "sha256": "4e7d1ea31c73574a2ba545c525ad78a02dff5b216251595d208c32f9f811f4f8"
+      },
+      "score_sha256": "353eb641d1d3d706700e1725ebdcffcd90a40f1b8c1ffad0ec9fa4ac32bebd28"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/63cb61302bb0772af175a3bef7aee71c022f12016e9be718c5430d162bed8635.npz",
+        "sha256": "927986b6d831104241de4c0e9d9be458e808eb904cc787f1004242729dcbb753"
+      },
+      "case": {
+        "atmosphere_seed": 310009,
+        "condition": "clean",
+        "detector_seed": 410009,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/63cb61302bb0772af175a3bef7aee71c022f12016e9be718c5430d162bed8635.npz",
+        "sha256": "e258851f5af8d679d567f90ed526d4bb75147b7dc7cc2ce73f4b1387174aa2a7"
+      },
+      "id": "63cb61302bb0772af175a3bef7aee71c022f12016e9be718c5430d162bed8635",
+      "metadata": {
+        "path": "evidence/training/trials/63cb61302bb0772af175a3bef7aee71c022f12016e9be718c5430d162bed8635.json",
+        "sha256": "c19c4d12433d416536921e66f3aca461ca2801f20004c0135e1387bbb3cc45c8"
+      },
+      "score_sha256": "f4fe41eb31c5f1057d39eee7a7960c3c987562a41897a29e3819e3cdfda80c93"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/c92aa97ef4de575678fde26cc0d6875e89f506b382f5f54a7db5f786001b82eb.npz",
+        "sha256": "61c95794c58c0c6bedb168ffab4c840014fabf857d0ecf050ae280eb9afe8b7a"
+      },
+      "case": {
+        "atmosphere_seed": 310010,
+        "condition": "clean",
+        "detector_seed": 410010,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/c92aa97ef4de575678fde26cc0d6875e89f506b382f5f54a7db5f786001b82eb.npz",
+        "sha256": "1e79d99d972899a8171dca670caa7175c773848c27cf2121846a5f2eb26c37d4"
+      },
+      "id": "c92aa97ef4de575678fde26cc0d6875e89f506b382f5f54a7db5f786001b82eb",
+      "metadata": {
+        "path": "evidence/training/trials/c92aa97ef4de575678fde26cc0d6875e89f506b382f5f54a7db5f786001b82eb.json",
+        "sha256": "9b825255f34e3fd04a7de8978f1559beafb07726b37ff4c102b60eb5cc33c54e"
+      },
+      "score_sha256": "2825f56fb85ca1c5cca9411d24f731e3668aa9da65eafd36813244a5a7b255e2"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/59d8285cdd6b1e233a06daa602b2832cab1b217e6d7b255107262d2acd073ced.npz",
+        "sha256": "8b8d40d4013a170f5287229820d620d6854d42d31edc845d38bd150904c61cda"
+      },
+      "case": {
+        "atmosphere_seed": 310011,
+        "condition": "clean",
+        "detector_seed": 410011,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/59d8285cdd6b1e233a06daa602b2832cab1b217e6d7b255107262d2acd073ced.npz",
+        "sha256": "f138a7bca16b7eab0cfac49812a5db568b7136984e0115d024f6b3999c1c274f"
+      },
+      "id": "59d8285cdd6b1e233a06daa602b2832cab1b217e6d7b255107262d2acd073ced",
+      "metadata": {
+        "path": "evidence/training/trials/59d8285cdd6b1e233a06daa602b2832cab1b217e6d7b255107262d2acd073ced.json",
+        "sha256": "a863c3bbe2b6ada048c7b6d0c7af82bc4da51b3d2e40c35536ed17caedcc7105"
+      },
+      "score_sha256": "794feac4d92105fd74007556d60324a39b340f6e0afe618b5575ed03da168a92"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/3a1c68f58969816d1da06e7556a4bbb436232fd5d68787717a7d0ceefb728bad.npz",
+        "sha256": "fea9e6d5f20389a4424f78b5b8d7179e67b491f5166c7849494c153e82b56351"
+      },
+      "case": {
+        "atmosphere_seed": 310012,
+        "condition": "clean",
+        "detector_seed": 410012,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/3a1c68f58969816d1da06e7556a4bbb436232fd5d68787717a7d0ceefb728bad.npz",
+        "sha256": "f7f2f89e1a6db99ad594a7f27238ed2a81750dfda35da29c9fbc78ee40a09859"
+      },
+      "id": "3a1c68f58969816d1da06e7556a4bbb436232fd5d68787717a7d0ceefb728bad",
+      "metadata": {
+        "path": "evidence/training/trials/3a1c68f58969816d1da06e7556a4bbb436232fd5d68787717a7d0ceefb728bad.json",
+        "sha256": "45b41c2360bc319343d5ce3ffc088e28c328d4f9223b373147db9af780a91cf0"
+      },
+      "score_sha256": "868e01faf08fda707c903dc4a931b098b509fc1845a614379085b07109342c13"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/87b8df80a21546627eb67c166be9604ce6e31c085e646e4fed2c2b70191c7977.npz",
+        "sha256": "5ade9079f244331c317d1f4ce8bb6ce9dbf197033c75d5c4bf3fefeecb33e150"
+      },
+      "case": {
+        "atmosphere_seed": 310013,
+        "condition": "clean",
+        "detector_seed": 410013,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/87b8df80a21546627eb67c166be9604ce6e31c085e646e4fed2c2b70191c7977.npz",
+        "sha256": "1629fa38d45bdc1af8d4e732b7020aa10a02846b4917035fb0dd3855bbd7674e"
+      },
+      "id": "87b8df80a21546627eb67c166be9604ce6e31c085e646e4fed2c2b70191c7977",
+      "metadata": {
+        "path": "evidence/training/trials/87b8df80a21546627eb67c166be9604ce6e31c085e646e4fed2c2b70191c7977.json",
+        "sha256": "7c0fd95e1ba1cad1fb219eaa5411f59572deab3f70f6e7ff932348c2d98903d4"
+      },
+      "score_sha256": "89bd34660d47f7efaa79924fccc1c0b367a5a938036fccdc7e814b4e5ec67511"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9b6086d0960c6436d9387cb2e70157da4b4d30df650e2b50a81357259b466626.npz",
+        "sha256": "50d1e3ad3f60f9886c46cee11aad415f0355d57d46841b384fe243c96b0753d6"
+      },
+      "case": {
+        "atmosphere_seed": 310014,
+        "condition": "clean",
+        "detector_seed": 410014,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9b6086d0960c6436d9387cb2e70157da4b4d30df650e2b50a81357259b466626.npz",
+        "sha256": "fe8f9ab7d58f8122fdc94af1b5aee719a5f5f178d14c061fecf71ee958f0e14d"
+      },
+      "id": "9b6086d0960c6436d9387cb2e70157da4b4d30df650e2b50a81357259b466626",
+      "metadata": {
+        "path": "evidence/training/trials/9b6086d0960c6436d9387cb2e70157da4b4d30df650e2b50a81357259b466626.json",
+        "sha256": "9168eb0e1cdf080a5cae2825495f5b95632f6d485590e920aeabdb82987a4693"
+      },
+      "score_sha256": "1a35b550cfa6b9bb22ae71607e41fe4b6077e4344ec3273e5300d51cfc3b7580"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/bcd71d3368976f7a41ebdd3042df42f6d076b448dfeb0f7bb088702206e52fe5.npz",
+        "sha256": "61568ee9b3ebb487837af6f6dcf2f185584955b48b94da90dc2f80b36d55e685"
+      },
+      "case": {
+        "atmosphere_seed": 310015,
+        "condition": "clean",
+        "detector_seed": 410015,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/bcd71d3368976f7a41ebdd3042df42f6d076b448dfeb0f7bb088702206e52fe5.npz",
+        "sha256": "71d7319d4f4a543d8cf7ee291b19fb0786ab017d05a1527ae74a34398ca79596"
+      },
+      "id": "bcd71d3368976f7a41ebdd3042df42f6d076b448dfeb0f7bb088702206e52fe5",
+      "metadata": {
+        "path": "evidence/training/trials/bcd71d3368976f7a41ebdd3042df42f6d076b448dfeb0f7bb088702206e52fe5.json",
+        "sha256": "bbf4c5b48ef306c5f63f07ef5aa84444b2981f40e25201f2e1b7d8218a01d2af"
+      },
+      "score_sha256": "c2758ab648ffd4e66f1467297ec541663efde0dcc9066f958f9eebf55651a5b0"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/4d970e9a05ee26804572ac611f119e6e176b50c94036a9f09aa3f1186daad5e6.npz",
+        "sha256": "8bacabc250376769a4e22338e67a209c24d6825daf80fc7a2d328a00154e8c92"
+      },
+      "case": {
+        "atmosphere_seed": 310016,
+        "condition": "clean",
+        "detector_seed": 410016,
+        "photons": 1000.0,
+        "regime_id": "regime-00",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/4d970e9a05ee26804572ac611f119e6e176b50c94036a9f09aa3f1186daad5e6.npz",
+        "sha256": "e7bf118c975afff404ca21921dfb9b8316b9e2209552ea51825d7f0dc61ad55a"
+      },
+      "id": "4d970e9a05ee26804572ac611f119e6e176b50c94036a9f09aa3f1186daad5e6",
+      "metadata": {
+        "path": "evidence/training/trials/4d970e9a05ee26804572ac611f119e6e176b50c94036a9f09aa3f1186daad5e6.json",
+        "sha256": "ef394c0029fe3c4656f47cfe5bdec250f7acb837161dd0c9105fa22ec605510c"
+      },
+      "score_sha256": "bde529f8a4ba6f5fbdb992dadb06aa6b3af4ab242806cd1d3886d24c4137ce46"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/990879fedf81797f0b588166ff7b4e767aa763e5807da47450aa88b54faafe4d.npz",
+        "sha256": "5b21113a4d997ffdb364ac18a1728b3998e3d615300aadf70a8cf1b60a3f773f"
+      },
+      "case": {
+        "atmosphere_seed": 310001,
+        "condition": "clean",
+        "detector_seed": 410001,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/990879fedf81797f0b588166ff7b4e767aa763e5807da47450aa88b54faafe4d.npz",
+        "sha256": "ba624f20aea00ddd755c186a8a694512255592318f0e8319140980043b567a21"
+      },
+      "id": "990879fedf81797f0b588166ff7b4e767aa763e5807da47450aa88b54faafe4d",
+      "metadata": {
+        "path": "evidence/training/trials/990879fedf81797f0b588166ff7b4e767aa763e5807da47450aa88b54faafe4d.json",
+        "sha256": "e7b84dc457b2097f99a4fbfdc3d4b3c5a230846c6d1f9879642084afe5f6d353"
+      },
+      "score_sha256": "280579f6078c32224d0410dfdb346e91453abb0e57798a5a72d123b1a2969583"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/6f75377aef3e0ce2499240b85460ae73ed18f3ab2405db7f5f7097fc25f70b3e.npz",
+        "sha256": "b9305d31a643d6ad77e2d58d457cd12d105d32003fc86bc274efdac766d62944"
+      },
+      "case": {
+        "atmosphere_seed": 310002,
+        "condition": "clean",
+        "detector_seed": 410002,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/6f75377aef3e0ce2499240b85460ae73ed18f3ab2405db7f5f7097fc25f70b3e.npz",
+        "sha256": "1952e0dafc096847f9d050e9c0434d2333af399dcee102540579420b13f8cfa4"
+      },
+      "id": "6f75377aef3e0ce2499240b85460ae73ed18f3ab2405db7f5f7097fc25f70b3e",
+      "metadata": {
+        "path": "evidence/training/trials/6f75377aef3e0ce2499240b85460ae73ed18f3ab2405db7f5f7097fc25f70b3e.json",
+        "sha256": "0a80ca1157236585db1ea0f56e00dce7e6a143c5545a512eaed197035a50c48d"
+      },
+      "score_sha256": "c70f1183c4069d80d925fa6d31ce64bd783b714b3e216e38d8dfc71a951fd80e"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b786b0d114f026abc5288338006156c0683e6127db2f0d94ab827cea03406bd3.npz",
+        "sha256": "99075fd237a74ad47402bfb6e6a7bc8f6f71e73d89e77959a8d26c83637ed547"
+      },
+      "case": {
+        "atmosphere_seed": 310003,
+        "condition": "clean",
+        "detector_seed": 410003,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b786b0d114f026abc5288338006156c0683e6127db2f0d94ab827cea03406bd3.npz",
+        "sha256": "cae740c42fd87e68ca987058e2ed518b00bef88f2c200027982f7912e23f85ef"
+      },
+      "id": "b786b0d114f026abc5288338006156c0683e6127db2f0d94ab827cea03406bd3",
+      "metadata": {
+        "path": "evidence/training/trials/b786b0d114f026abc5288338006156c0683e6127db2f0d94ab827cea03406bd3.json",
+        "sha256": "a51f5a60595031982676f8909ff5ac64726459d00e27a3ad1b9fac47f83d4ea6"
+      },
+      "score_sha256": "157776f183d8aba5ec4e282edb445052dd44fe371eb4a639a84a1a14715aec32"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/22363d7bb9aa86f662d6a0c9c17bec91032d8b1a691baa3b3c12f010ac79ca17.npz",
+        "sha256": "f5c1caafc22d6fd50fa5605bbdff60dd63d607ae7be6572955cfa168994aa3ce"
+      },
+      "case": {
+        "atmosphere_seed": 310004,
+        "condition": "clean",
+        "detector_seed": 410004,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/22363d7bb9aa86f662d6a0c9c17bec91032d8b1a691baa3b3c12f010ac79ca17.npz",
+        "sha256": "bc1124a96b62e11e57176641c3faad2af42c8076a421195738c57fb06fa8eeba"
+      },
+      "id": "22363d7bb9aa86f662d6a0c9c17bec91032d8b1a691baa3b3c12f010ac79ca17",
+      "metadata": {
+        "path": "evidence/training/trials/22363d7bb9aa86f662d6a0c9c17bec91032d8b1a691baa3b3c12f010ac79ca17.json",
+        "sha256": "38a5a84f9683513dc978c76f3b65b544d53aae743f9e8a186fcd1c241dc4807e"
+      },
+      "score_sha256": "e991f63baa058c9abb48a792c7bb30dbe719f46457852ff780c23100b5982340"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/f5c3ad75188ab493f7b709f3a12af392a51cadd9bfbc7143a42676753a25b42c.npz",
+        "sha256": "43c5ce6901ff4023bc0c8529774dbe582a9d047cc24bffdf634424fd3f14fb6d"
+      },
+      "case": {
+        "atmosphere_seed": 310005,
+        "condition": "clean",
+        "detector_seed": 410005,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/f5c3ad75188ab493f7b709f3a12af392a51cadd9bfbc7143a42676753a25b42c.npz",
+        "sha256": "4a36bba73ad55e0921acc8db2c6c1540987184ecf76bbf681c1bd86ace586922"
+      },
+      "id": "f5c3ad75188ab493f7b709f3a12af392a51cadd9bfbc7143a42676753a25b42c",
+      "metadata": {
+        "path": "evidence/training/trials/f5c3ad75188ab493f7b709f3a12af392a51cadd9bfbc7143a42676753a25b42c.json",
+        "sha256": "870eba4c78ceb9de9f10cfa247667ffa0363b522861e6888d5b96670c3f7406d"
+      },
+      "score_sha256": "25c09deb15bfee2b8fa65478a5061f82b9a6880374bf944384f68bc61305dd5e"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/7de4dc80ebb4194fe85eea545f9a4a935715116e73a3d56c669b39abe1ea21f4.npz",
+        "sha256": "d4ebf0e931ba0bdc8fb01dfd9c561cc65b6c7bc05a7705b68400c3b3fd0295e9"
+      },
+      "case": {
+        "atmosphere_seed": 310006,
+        "condition": "clean",
+        "detector_seed": 410006,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/7de4dc80ebb4194fe85eea545f9a4a935715116e73a3d56c669b39abe1ea21f4.npz",
+        "sha256": "1be2cca86fe9194bd9517b76805b18367d3acf2ccd4986f69f28632ba6bec22e"
+      },
+      "id": "7de4dc80ebb4194fe85eea545f9a4a935715116e73a3d56c669b39abe1ea21f4",
+      "metadata": {
+        "path": "evidence/training/trials/7de4dc80ebb4194fe85eea545f9a4a935715116e73a3d56c669b39abe1ea21f4.json",
+        "sha256": "aaa1c14826d29c722345c49d723a0b6e8622c219e5851bdb80b18272ca415b3e"
+      },
+      "score_sha256": "d7ef5ef801eb80ed496e3e499747feccc8889591af89e733b584756cdd605f39"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/06a4496ee0826a702c152ea8457045bafdbdb0ca77f5cccdc90154d9bc318b41.npz",
+        "sha256": "57afd7514b9df640b42c0bbff0b20a8906eab9b3f23f8f9308db4fab9e96b0d2"
+      },
+      "case": {
+        "atmosphere_seed": 310007,
+        "condition": "clean",
+        "detector_seed": 410007,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/06a4496ee0826a702c152ea8457045bafdbdb0ca77f5cccdc90154d9bc318b41.npz",
+        "sha256": "7dd102d1360b7e93202e8ebb51f21ed0eb9f1be4a5605e9979ececace3413eba"
+      },
+      "id": "06a4496ee0826a702c152ea8457045bafdbdb0ca77f5cccdc90154d9bc318b41",
+      "metadata": {
+        "path": "evidence/training/trials/06a4496ee0826a702c152ea8457045bafdbdb0ca77f5cccdc90154d9bc318b41.json",
+        "sha256": "6ced5fa43dcfae8e23ebdc286c36a85661395ac303b479548f53fc89e681702c"
+      },
+      "score_sha256": "092351139de669bbda053ddcb2ce643510d0995aba5da639ac7ebd61a7742048"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/7e18cc2342959a7a9965367c8c8e0ebbcb591fa84ed1d7735e171ee696c6dc90.npz",
+        "sha256": "b86c0d580608be34d71b50b1eba68c45af985e8f8b93d88db91bf46e15fb0bb8"
+      },
+      "case": {
+        "atmosphere_seed": 310008,
+        "condition": "clean",
+        "detector_seed": 410008,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/7e18cc2342959a7a9965367c8c8e0ebbcb591fa84ed1d7735e171ee696c6dc90.npz",
+        "sha256": "7e6cdd291691a2563c03f40e3b3b9d9fbbc4debf3743d6690ea1128d167de96f"
+      },
+      "id": "7e18cc2342959a7a9965367c8c8e0ebbcb591fa84ed1d7735e171ee696c6dc90",
+      "metadata": {
+        "path": "evidence/training/trials/7e18cc2342959a7a9965367c8c8e0ebbcb591fa84ed1d7735e171ee696c6dc90.json",
+        "sha256": "ea0492c41ff5e8f485b6ea64c87aabddef94ff603226942016804664eff0ee01"
+      },
+      "score_sha256": "5527b1d97c727195512dc91b4e4ffa1e440d1e662d507ff1086188a781074815"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/dc11dae8de84d499fc2b86185e7ab6738968117a83c8026ca5cfbd8e405c73cc.npz",
+        "sha256": "6620a98090ed4b428cce008ed2152c4a650266403759cd5e35e351443b9caa93"
+      },
+      "case": {
+        "atmosphere_seed": 310009,
+        "condition": "clean",
+        "detector_seed": 410009,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/dc11dae8de84d499fc2b86185e7ab6738968117a83c8026ca5cfbd8e405c73cc.npz",
+        "sha256": "c8bfb39eeda1e10718a966ab9c31230f671cdd9a09b183f0d4ad0f5f1fc067f6"
+      },
+      "id": "dc11dae8de84d499fc2b86185e7ab6738968117a83c8026ca5cfbd8e405c73cc",
+      "metadata": {
+        "path": "evidence/training/trials/dc11dae8de84d499fc2b86185e7ab6738968117a83c8026ca5cfbd8e405c73cc.json",
+        "sha256": "cc03e91bf65049bee668423b8f552f58fa833a59d39559a7a0f544b1b8c31d12"
+      },
+      "score_sha256": "98b8a266e593ead86483df49f7ad527f0a45cae56c0d4a8a57d17907343dc968"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/070f768e28863f1e270ae6edcbb2b867142dd1c8d21147a95c8e99e528eb496f.npz",
+        "sha256": "7972df38383d3b6c0c911aa0051f41227c8511be5a68b29257cfaa37a0448061"
+      },
+      "case": {
+        "atmosphere_seed": 310010,
+        "condition": "clean",
+        "detector_seed": 410010,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/070f768e28863f1e270ae6edcbb2b867142dd1c8d21147a95c8e99e528eb496f.npz",
+        "sha256": "935f85c2a3635b1af55be1d5d1c8b26655fd2e396f011399571d6e8dd5bf9001"
+      },
+      "id": "070f768e28863f1e270ae6edcbb2b867142dd1c8d21147a95c8e99e528eb496f",
+      "metadata": {
+        "path": "evidence/training/trials/070f768e28863f1e270ae6edcbb2b867142dd1c8d21147a95c8e99e528eb496f.json",
+        "sha256": "667cad526c106279308963af5132fc36ee1be355b9b6e1f5b0d061be81c55dc6"
+      },
+      "score_sha256": "dc97d309c9b81b25f7704ec6be60b455c6de92d5dbb6d930b36b6f953a0482ab"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/5762bcbb0511ccfc26ad50f5dad50e28615551c7acd50b62bd600db25d2b6ac7.npz",
+        "sha256": "428be46217220357e32546a19469d08db7e6fdd3ad7aa6b633b6d00251d31999"
+      },
+      "case": {
+        "atmosphere_seed": 310011,
+        "condition": "clean",
+        "detector_seed": 410011,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/5762bcbb0511ccfc26ad50f5dad50e28615551c7acd50b62bd600db25d2b6ac7.npz",
+        "sha256": "0a9980cea492b8845225c4bf7bca8f574020cbff3fee34e3044c8db5aaa41548"
+      },
+      "id": "5762bcbb0511ccfc26ad50f5dad50e28615551c7acd50b62bd600db25d2b6ac7",
+      "metadata": {
+        "path": "evidence/training/trials/5762bcbb0511ccfc26ad50f5dad50e28615551c7acd50b62bd600db25d2b6ac7.json",
+        "sha256": "2c95e8661770d496748b5c73271fb754ee58b905c7b2a6b7f666a3fd58dd1775"
+      },
+      "score_sha256": "bec57bec2f9435c18b4b3481fadcd08fbf51475dd8d5080fdaed986885bf98c4"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/c8feef198b594af951edeb7592996e189f6fc2034db6054df56d200845463bf9.npz",
+        "sha256": "22939b4471355683a53b32849ce049188f9632013d04533924bce86a3ff53a99"
+      },
+      "case": {
+        "atmosphere_seed": 310012,
+        "condition": "clean",
+        "detector_seed": 410012,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/c8feef198b594af951edeb7592996e189f6fc2034db6054df56d200845463bf9.npz",
+        "sha256": "65394696aca00d1e895f6855bb464a14af7d8be071be7cce99df3ba889746be9"
+      },
+      "id": "c8feef198b594af951edeb7592996e189f6fc2034db6054df56d200845463bf9",
+      "metadata": {
+        "path": "evidence/training/trials/c8feef198b594af951edeb7592996e189f6fc2034db6054df56d200845463bf9.json",
+        "sha256": "57815ed05f582567e15970456ebeddd0526211c3395057b9a0a19e7b683b7fd2"
+      },
+      "score_sha256": "5f3beb1026d041faddc3dfb5822e8130af16f56020471ad5cef26e61e57db62e"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/26373dfa2289a8719ee66bdcec3ba7f6aab027c63836b3db47a93fa37f05214e.npz",
+        "sha256": "5b5e22218751c2384bbfe4c78ebeb02e14f3447010e7e6fd5a2bea2f907a60a2"
+      },
+      "case": {
+        "atmosphere_seed": 310013,
+        "condition": "clean",
+        "detector_seed": 410013,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/26373dfa2289a8719ee66bdcec3ba7f6aab027c63836b3db47a93fa37f05214e.npz",
+        "sha256": "3c4c8b31eb6aba88c7e3e608e8653bdb25e8ed05747aad134d872bc2901f1721"
+      },
+      "id": "26373dfa2289a8719ee66bdcec3ba7f6aab027c63836b3db47a93fa37f05214e",
+      "metadata": {
+        "path": "evidence/training/trials/26373dfa2289a8719ee66bdcec3ba7f6aab027c63836b3db47a93fa37f05214e.json",
+        "sha256": "691b08a2d0916a4148ab7c15f97bd653e7a998d62064bd5dd4f0f50633235ad4"
+      },
+      "score_sha256": "e8dc65e4013722818e53ab66a51c2dea1b63616ac7cc4d851d32feb39185932d"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/26dbc0023e134c20ac520788655299bde1557b964d9e39c27dd6e246c3fa7a39.npz",
+        "sha256": "d3dcfde965ec383ccdb6ca9aa2be64b1c780f99b7bd372ae04adde065898bdb0"
+      },
+      "case": {
+        "atmosphere_seed": 310014,
+        "condition": "clean",
+        "detector_seed": 410014,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/26dbc0023e134c20ac520788655299bde1557b964d9e39c27dd6e246c3fa7a39.npz",
+        "sha256": "62e77929d2d64d5ccd1854dfa5e60af9d794ea08c243de5cd24f015aac251a64"
+      },
+      "id": "26dbc0023e134c20ac520788655299bde1557b964d9e39c27dd6e246c3fa7a39",
+      "metadata": {
+        "path": "evidence/training/trials/26dbc0023e134c20ac520788655299bde1557b964d9e39c27dd6e246c3fa7a39.json",
+        "sha256": "31d7c7bd44d1761ce53aa49639001e53e6a7bcf6251059b401dd06e2467ef68d"
+      },
+      "score_sha256": "2dd853607905b263e54433d03af706a2788840aae91021734797a9baced1984a"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/68a111de2ebb1b9d78bda503c3f856405a9badf72ae85b4726c2c9a7303bceaf.npz",
+        "sha256": "b711387513335679a8835bc82d72683bbeadd3d48fca7301463d7fdc20854c1f"
+      },
+      "case": {
+        "atmosphere_seed": 310015,
+        "condition": "clean",
+        "detector_seed": 410015,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/68a111de2ebb1b9d78bda503c3f856405a9badf72ae85b4726c2c9a7303bceaf.npz",
+        "sha256": "332a901f089cff08436c683c618ac54165183f97e81c19b0f27363ade82e6dcc"
+      },
+      "id": "68a111de2ebb1b9d78bda503c3f856405a9badf72ae85b4726c2c9a7303bceaf",
+      "metadata": {
+        "path": "evidence/training/trials/68a111de2ebb1b9d78bda503c3f856405a9badf72ae85b4726c2c9a7303bceaf.json",
+        "sha256": "e0e15c1da869457f67875866498b85f3b53bccceb90c1e0bad61dd62fb4ae475"
+      },
+      "score_sha256": "b2d5b4e1e96bbfd3fd26683e608d33633b92e34090353b85a52d428caf7ab337"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/d598982e22ec9a5b62f18b414a437837ec5ca7e53859a20b182025ae38c0c03d.npz",
+        "sha256": "f2f668f0b860b429f02f83ac6600ca1176c0ecef10afaba3a456b4a5f5ac37fe"
+      },
+      "case": {
+        "atmosphere_seed": 310016,
+        "condition": "clean",
+        "detector_seed": 410016,
+        "photons": 1000.0,
+        "regime_id": "regime-01",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/d598982e22ec9a5b62f18b414a437837ec5ca7e53859a20b182025ae38c0c03d.npz",
+        "sha256": "9bb36a61d5fc554a5ed4890da78fd0f6a905608b8424b9ad09b00ba727b8cb10"
+      },
+      "id": "d598982e22ec9a5b62f18b414a437837ec5ca7e53859a20b182025ae38c0c03d",
+      "metadata": {
+        "path": "evidence/training/trials/d598982e22ec9a5b62f18b414a437837ec5ca7e53859a20b182025ae38c0c03d.json",
+        "sha256": "8096d88d296a80c72c2e1dcc446d17299b3b1c4c6a34f72a1cb429b24ba73f4c"
+      },
+      "score_sha256": "6f2120a8fe7094c5c28593e087c26bd6ccf69fde74746a72661ba63e46b669a9"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/99baeb0008544eef9b684f20123997159a046c77180990313718e89e4ffa97d3.npz",
+        "sha256": "c9a7460c6c242c2c23b605f4ad4581cc843126ef18cbe91d58dfc1e209249165"
+      },
+      "case": {
+        "atmosphere_seed": 310001,
+        "condition": "clean",
+        "detector_seed": 410001,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/99baeb0008544eef9b684f20123997159a046c77180990313718e89e4ffa97d3.npz",
+        "sha256": "9c0846279c6bd87e9ba74093d6d7ed1c526a548ccf20dfb79988b97104b75153"
+      },
+      "id": "99baeb0008544eef9b684f20123997159a046c77180990313718e89e4ffa97d3",
+      "metadata": {
+        "path": "evidence/training/trials/99baeb0008544eef9b684f20123997159a046c77180990313718e89e4ffa97d3.json",
+        "sha256": "0df65763c00f257535805f9e292752dd48e8c2df43ac7510229161e0f56864c5"
+      },
+      "score_sha256": "7e9e392e06cb0efc6158c021c96dee9a281b6a8a26c0591eb1c9c0d4b4534185"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/a5358ee0100759ab689143e7db22c333297a9ca2cd61729d5481fc3e5e79f465.npz",
+        "sha256": "36773534c65780ff3fb1cedd9a6cd8d791a45c4f75e3dafa57f4754f48de6a63"
+      },
+      "case": {
+        "atmosphere_seed": 310002,
+        "condition": "clean",
+        "detector_seed": 410002,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/a5358ee0100759ab689143e7db22c333297a9ca2cd61729d5481fc3e5e79f465.npz",
+        "sha256": "7e6e1f06b4a80776607adafa50dcd71b682c9f29c8c000db32d8e4b647263419"
+      },
+      "id": "a5358ee0100759ab689143e7db22c333297a9ca2cd61729d5481fc3e5e79f465",
+      "metadata": {
+        "path": "evidence/training/trials/a5358ee0100759ab689143e7db22c333297a9ca2cd61729d5481fc3e5e79f465.json",
+        "sha256": "a20e68025e6e08e1588b328f0119601dcafe1e6a937e375b6f08ae975f00884f"
+      },
+      "score_sha256": "962356dd72de6bfec40d91ee072e657cf0956a0c395c0fa45cd78a7bb91ce4f7"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/f632ba6749b7508651400b12beadcaf4c0a16f85cf6aff106756f00465f66ee0.npz",
+        "sha256": "6326dffa8b64402cdbd278733210c7d78c28b13162c000c3c028ea31e9bcf384"
+      },
+      "case": {
+        "atmosphere_seed": 310003,
+        "condition": "clean",
+        "detector_seed": 410003,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/f632ba6749b7508651400b12beadcaf4c0a16f85cf6aff106756f00465f66ee0.npz",
+        "sha256": "35366e5e1ccb9891cc0b742da78e4712167d24b56025384c424983a5ed9ce480"
+      },
+      "id": "f632ba6749b7508651400b12beadcaf4c0a16f85cf6aff106756f00465f66ee0",
+      "metadata": {
+        "path": "evidence/training/trials/f632ba6749b7508651400b12beadcaf4c0a16f85cf6aff106756f00465f66ee0.json",
+        "sha256": "56c19b2f1c11689ad2649dc23ce648473f8ad4345cb0ed7df2ebb76971986d53"
+      },
+      "score_sha256": "88f9948acbe1fce9fd171cc81d5c6f2e568e6df79c6ac7de26dd8acd44fdbc0f"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/57b81b66f8b3b7058b44836bb86b5fd69486d94dae6ecb4a7b3a76cc17c1656c.npz",
+        "sha256": "89d6ae4609dec2ecc1ebbb5e3663ab83f8909f44e2d369446c70918e220ad9b3"
+      },
+      "case": {
+        "atmosphere_seed": 310004,
+        "condition": "clean",
+        "detector_seed": 410004,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/57b81b66f8b3b7058b44836bb86b5fd69486d94dae6ecb4a7b3a76cc17c1656c.npz",
+        "sha256": "5f78dc66a702843363fb357e18dc2488bca0fb9ec598abcb6ea798d1db9bfe84"
+      },
+      "id": "57b81b66f8b3b7058b44836bb86b5fd69486d94dae6ecb4a7b3a76cc17c1656c",
+      "metadata": {
+        "path": "evidence/training/trials/57b81b66f8b3b7058b44836bb86b5fd69486d94dae6ecb4a7b3a76cc17c1656c.json",
+        "sha256": "3db3e7bb2387c8626d3533c253446d18d2762cf262fa7b3fa6dfaed6f4b551ff"
+      },
+      "score_sha256": "2ce9264c9279eff5cb4e8aad5b1f46ef3302d44a38609b77000ae91a94a1305f"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/e2c39ed573432f4fb3bfe458dc81e36f04d1be8a57da64693f26bbfa4fb5fb70.npz",
+        "sha256": "541caa9b2160baa9a8aa555b16eab69e322f9967a2d459bdf64063121e469705"
+      },
+      "case": {
+        "atmosphere_seed": 310005,
+        "condition": "clean",
+        "detector_seed": 410005,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/e2c39ed573432f4fb3bfe458dc81e36f04d1be8a57da64693f26bbfa4fb5fb70.npz",
+        "sha256": "4d5505fc69e9029ca2bf3ad83320ba34d665ccaa0d56d65439d8981a66493cb1"
+      },
+      "id": "e2c39ed573432f4fb3bfe458dc81e36f04d1be8a57da64693f26bbfa4fb5fb70",
+      "metadata": {
+        "path": "evidence/training/trials/e2c39ed573432f4fb3bfe458dc81e36f04d1be8a57da64693f26bbfa4fb5fb70.json",
+        "sha256": "56606f1c8b47365cd4e5f50cdccecb4ef55c89b49e574004e1414efa0dd8896c"
+      },
+      "score_sha256": "75af50832a7f7a21c88a2090be6f37fedc35f8247e797e480ce15a92c78bff43"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/37796f4a9e878bae8cf4150624f37fe1a231cda606cd24b8344e57b0c745721d.npz",
+        "sha256": "963404cb423a41c160dfb04447fd784e0e0780ca100325515f64145217388507"
+      },
+      "case": {
+        "atmosphere_seed": 310006,
+        "condition": "clean",
+        "detector_seed": 410006,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/37796f4a9e878bae8cf4150624f37fe1a231cda606cd24b8344e57b0c745721d.npz",
+        "sha256": "a8602e449c8526beb907a1267ea1c36fec0182733651e5f1b406e10ef5d0f2b8"
+      },
+      "id": "37796f4a9e878bae8cf4150624f37fe1a231cda606cd24b8344e57b0c745721d",
+      "metadata": {
+        "path": "evidence/training/trials/37796f4a9e878bae8cf4150624f37fe1a231cda606cd24b8344e57b0c745721d.json",
+        "sha256": "44eedc81b50eeaf68b48ad3137792627258ab4adb33d28fe46c93ff854c201c7"
+      },
+      "score_sha256": "69f501424a21d928ae501114540c27a2a83f49abbccb3662d2b4bfb35a29cdfe"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b5f0ea1d4127bc5f10e2d96c527842866cb7c7d5cb8737348e57cdafb0882ac9.npz",
+        "sha256": "2475838312982d4641f9a7987fc1c4c9a728fe6be4057f969841edc596a4b35e"
+      },
+      "case": {
+        "atmosphere_seed": 310007,
+        "condition": "clean",
+        "detector_seed": 410007,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b5f0ea1d4127bc5f10e2d96c527842866cb7c7d5cb8737348e57cdafb0882ac9.npz",
+        "sha256": "e828d4393fa3b6ed4f97353116dd7b5784f9aa67aa86e13329d4b1b51ba09ae0"
+      },
+      "id": "b5f0ea1d4127bc5f10e2d96c527842866cb7c7d5cb8737348e57cdafb0882ac9",
+      "metadata": {
+        "path": "evidence/training/trials/b5f0ea1d4127bc5f10e2d96c527842866cb7c7d5cb8737348e57cdafb0882ac9.json",
+        "sha256": "66b94eccc351c5bc82f4f4f7c8e4484b0e1e440459b16f9063c20d49d511d298"
+      },
+      "score_sha256": "39527d820490b30ec27148d4a29475883d6329e0a9be39c8e5237d32dcf00334"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/84adc11ddc340a51bf468ab87ed7e2869a1740cddd6a455dbd0f19b85cb8ebbf.npz",
+        "sha256": "ccb6dc6a1fbab0d86b9c33a1426713327acf2a66ffaeb7e23b1d8af8e09df345"
+      },
+      "case": {
+        "atmosphere_seed": 310008,
+        "condition": "clean",
+        "detector_seed": 410008,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/84adc11ddc340a51bf468ab87ed7e2869a1740cddd6a455dbd0f19b85cb8ebbf.npz",
+        "sha256": "b3e52cfb260c5b39127e86d4bf3b10ffb72a0a0e0fab6cf0183343022463315e"
+      },
+      "id": "84adc11ddc340a51bf468ab87ed7e2869a1740cddd6a455dbd0f19b85cb8ebbf",
+      "metadata": {
+        "path": "evidence/training/trials/84adc11ddc340a51bf468ab87ed7e2869a1740cddd6a455dbd0f19b85cb8ebbf.json",
+        "sha256": "5d3bb895cb3fd65aa31b3ccbd64b9032b38293bf91716c719c21019be4864905"
+      },
+      "score_sha256": "c97ca0ea2d57654314f8162948a8d9a83eeb1239a9e7d65e01785b0641c4bce4"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/aecaf725949f3726f1769578f0df206f6cf4cba69c37fcbd91ab7b7d1f6c85e7.npz",
+        "sha256": "54c2b2fd56ada53a872dded190ea219e39aa94dec4cf78b5be1e23eaa60c047d"
+      },
+      "case": {
+        "atmosphere_seed": 310009,
+        "condition": "clean",
+        "detector_seed": 410009,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/aecaf725949f3726f1769578f0df206f6cf4cba69c37fcbd91ab7b7d1f6c85e7.npz",
+        "sha256": "b8865f6f69aa25580c052005fc3108bddd94803ec4a3069ace047ef689b39347"
+      },
+      "id": "aecaf725949f3726f1769578f0df206f6cf4cba69c37fcbd91ab7b7d1f6c85e7",
+      "metadata": {
+        "path": "evidence/training/trials/aecaf725949f3726f1769578f0df206f6cf4cba69c37fcbd91ab7b7d1f6c85e7.json",
+        "sha256": "0b81c8cf878411dca317ee1e0858c4b980f07aef37185117bc0a375c5de75a0b"
+      },
+      "score_sha256": "a9fd514bb2dc3270f5e82ab21e87aaa075a3ddd3423b28890a8be922f249c7bd"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/8278ce7fb6db43f74c9907ab3ae9fe104a7241d6dcebe708f48148db178693ac.npz",
+        "sha256": "803042319a97eb929e1d238f9ef7ee82db9bfcfda049df89ad3e4ecfa689d933"
+      },
+      "case": {
+        "atmosphere_seed": 310010,
+        "condition": "clean",
+        "detector_seed": 410010,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/8278ce7fb6db43f74c9907ab3ae9fe104a7241d6dcebe708f48148db178693ac.npz",
+        "sha256": "6cf8948e039dbb28c8b795c5a13287174c3f5c46ad20dfd62670f2dea1ed8374"
+      },
+      "id": "8278ce7fb6db43f74c9907ab3ae9fe104a7241d6dcebe708f48148db178693ac",
+      "metadata": {
+        "path": "evidence/training/trials/8278ce7fb6db43f74c9907ab3ae9fe104a7241d6dcebe708f48148db178693ac.json",
+        "sha256": "828165b5f9bb39734820e5102af0968b7ad44ffcec69b86261a87b9d5a2b64b6"
+      },
+      "score_sha256": "a40250b33cb7960d21a6858a3e98d357181c204c1ee7dfe8ce63ba6bf5fc2971"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/e327dc4e519b5651e5e3510470ac8279eeb0045cca491fdf819a8d122a41a722.npz",
+        "sha256": "7c7e61dee56862201c4b42ac83443a65c78b5a7762e8ab5388e1a4b7fee2ff73"
+      },
+      "case": {
+        "atmosphere_seed": 310011,
+        "condition": "clean",
+        "detector_seed": 410011,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/e327dc4e519b5651e5e3510470ac8279eeb0045cca491fdf819a8d122a41a722.npz",
+        "sha256": "dd345bded3557e29b631daba57861d21b4758a44831b53e1ceb3fb3b10fa3dd0"
+      },
+      "id": "e327dc4e519b5651e5e3510470ac8279eeb0045cca491fdf819a8d122a41a722",
+      "metadata": {
+        "path": "evidence/training/trials/e327dc4e519b5651e5e3510470ac8279eeb0045cca491fdf819a8d122a41a722.json",
+        "sha256": "1d7b6c75deda78971df9da06c8f985e5fae77887545b9aede1002f55c853295d"
+      },
+      "score_sha256": "81436150b4b9a8d2438e5101aae4aab4f84e3dc91332e8c478810dfbfa0ed37a"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/cb9b3c26e5c3f009b7fb2242a392337580144fe53d6f83e544df0b956089a584.npz",
+        "sha256": "da526c613a838db23b453ef0ac2094466efa525b4401a47756c0690d5156c006"
+      },
+      "case": {
+        "atmosphere_seed": 310012,
+        "condition": "clean",
+        "detector_seed": 410012,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/cb9b3c26e5c3f009b7fb2242a392337580144fe53d6f83e544df0b956089a584.npz",
+        "sha256": "1c51d6f0f39f5f9b4735c97565fea362e451b66d14057c4c7cc1f09bcf2d66fc"
+      },
+      "id": "cb9b3c26e5c3f009b7fb2242a392337580144fe53d6f83e544df0b956089a584",
+      "metadata": {
+        "path": "evidence/training/trials/cb9b3c26e5c3f009b7fb2242a392337580144fe53d6f83e544df0b956089a584.json",
+        "sha256": "d1d39b808979e91f5dd3ea08cf945eeb6548915a725d6397ac1f2ee169345be2"
+      },
+      "score_sha256": "658f94ad2e98973c73b6cfd81780ec4001203b26c5b2eb13e0f4309c4a2a80fb"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/ee17f1d2248664156889e411017ea67dc0e7956f409e3ef165f1dfbde65a0142.npz",
+        "sha256": "f69b54ae86fdcc3996bbbf98c219526d9125efd83bee093303e39d994db3ab80"
+      },
+      "case": {
+        "atmosphere_seed": 310013,
+        "condition": "clean",
+        "detector_seed": 410013,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/ee17f1d2248664156889e411017ea67dc0e7956f409e3ef165f1dfbde65a0142.npz",
+        "sha256": "2a55cae7faae5c765e6abc7456a3ea7471a54eea07f4113b404f4d1e910df2bd"
+      },
+      "id": "ee17f1d2248664156889e411017ea67dc0e7956f409e3ef165f1dfbde65a0142",
+      "metadata": {
+        "path": "evidence/training/trials/ee17f1d2248664156889e411017ea67dc0e7956f409e3ef165f1dfbde65a0142.json",
+        "sha256": "2666433d0d46cb127f0c51131e570efb398fcc755097c17eda9f88dd3b865f13"
+      },
+      "score_sha256": "65443ff6f61225b44c556dfb35f88854853062db13892b5be0e33f83ca23221b"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/373eac17d377021b5069af7dd7c5229d8bac900b062986f99cffe0dfbbb31b59.npz",
+        "sha256": "2e93b9f4231daa3594b74c5f03b0c9fc93dc7db08b6cad2e2e67a03969a36407"
+      },
+      "case": {
+        "atmosphere_seed": 310014,
+        "condition": "clean",
+        "detector_seed": 410014,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/373eac17d377021b5069af7dd7c5229d8bac900b062986f99cffe0dfbbb31b59.npz",
+        "sha256": "fd579b1f57a8f9680682832707af80533f564ec825685f13ccdd47be4f2fb3a9"
+      },
+      "id": "373eac17d377021b5069af7dd7c5229d8bac900b062986f99cffe0dfbbb31b59",
+      "metadata": {
+        "path": "evidence/training/trials/373eac17d377021b5069af7dd7c5229d8bac900b062986f99cffe0dfbbb31b59.json",
+        "sha256": "19ac36f2e565df1827a39918612671e650505d863f5946b483cae6663c6617f4"
+      },
+      "score_sha256": "2262fc387d6d7f11f69231a279b8d5c01717880692ec50f9986b63f79723050e"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9d4a7ebb79194e5f15568a34959858035ae03947ced1ef8f85d36ed7e36e114f.npz",
+        "sha256": "92b60503f8ec5a8cbabaa9595d0f667ce8b55bfd58343602f1cded794cb67af6"
+      },
+      "case": {
+        "atmosphere_seed": 310015,
+        "condition": "clean",
+        "detector_seed": 410015,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9d4a7ebb79194e5f15568a34959858035ae03947ced1ef8f85d36ed7e36e114f.npz",
+        "sha256": "8794c46a2434870430666480b4f8c43eea75ade40078f3b3e2959eaf7ea693f8"
+      },
+      "id": "9d4a7ebb79194e5f15568a34959858035ae03947ced1ef8f85d36ed7e36e114f",
+      "metadata": {
+        "path": "evidence/training/trials/9d4a7ebb79194e5f15568a34959858035ae03947ced1ef8f85d36ed7e36e114f.json",
+        "sha256": "38aeaf26e19737a3d6dd3c140f76057ce6ac74a44c2a2bc05cfd62597d9258ec"
+      },
+      "score_sha256": "6b71530c8b198854bc3aa844f1cf82800994ce5808ae719138905cb5bf7d38ba"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/cf32f68cc59b4844a4c9d03db499f7007e16d17a1dc7d1a39b6914bfa8254e04.npz",
+        "sha256": "2bc34d1cf65055ede4d8b3f2d326f3056517665723ca5989f22f2551d3b9099d"
+      },
+      "case": {
+        "atmosphere_seed": 310016,
+        "condition": "clean",
+        "detector_seed": 410016,
+        "photons": 1000000.0,
+        "regime_id": "regime-02",
+        "role": "training",
+        "wind_scale": 0.5
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/cf32f68cc59b4844a4c9d03db499f7007e16d17a1dc7d1a39b6914bfa8254e04.npz",
+        "sha256": "4ac322ac772c6778e01cc16aa7b472ba0f16591f49a290e4c27586f58de885b5"
+      },
+      "id": "cf32f68cc59b4844a4c9d03db499f7007e16d17a1dc7d1a39b6914bfa8254e04",
+      "metadata": {
+        "path": "evidence/training/trials/cf32f68cc59b4844a4c9d03db499f7007e16d17a1dc7d1a39b6914bfa8254e04.json",
+        "sha256": "85c4b175764b4255858839e87241ee4029f922bc200c7436ecfc3d77f2cc50b1"
+      },
+      "score_sha256": "025dee3c039ec93675bb4804cab94f83f218d91d63d878cc210e39bd4f566d70"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/bb10e5cdd77690de81dd26084ce9f0b75e5f53489803246a94f2858336e78217.npz",
+        "sha256": "da82100efe0e917eafe36a004be4baff3fe1e7f6bd770a6b66fa22cc2aa1e32b"
+      },
+      "case": {
+        "atmosphere_seed": 310001,
+        "condition": "clean",
+        "detector_seed": 410001,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/bb10e5cdd77690de81dd26084ce9f0b75e5f53489803246a94f2858336e78217.npz",
+        "sha256": "aecfe92ec3270767396227e0ce825ac38c469b007863b6a0133310af9a6d9bdf"
+      },
+      "id": "bb10e5cdd77690de81dd26084ce9f0b75e5f53489803246a94f2858336e78217",
+      "metadata": {
+        "path": "evidence/training/trials/bb10e5cdd77690de81dd26084ce9f0b75e5f53489803246a94f2858336e78217.json",
+        "sha256": "c171fd31addc02f83ebbbbf1d1e9b4e837799e28009de96cf36b113fd35022ac"
+      },
+      "score_sha256": "953c80bad1a344bc6962fe3ee223c7d24833fc37841e094024e057982c95ffea"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/39d6aa6a4f511db5cf874c980b7c5a6bdd34ca586003a19f542b111e840338fe.npz",
+        "sha256": "608eb3304dbba6ee21bd31e4bf02c19e67eaa4c27e2dac93043e5a3b5aeebfae"
+      },
+      "case": {
+        "atmosphere_seed": 310002,
+        "condition": "clean",
+        "detector_seed": 410002,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/39d6aa6a4f511db5cf874c980b7c5a6bdd34ca586003a19f542b111e840338fe.npz",
+        "sha256": "2e75b613242e25236cd4f5ecccf2b80ca10c0fa6971522e05cac5f210445d28d"
+      },
+      "id": "39d6aa6a4f511db5cf874c980b7c5a6bdd34ca586003a19f542b111e840338fe",
+      "metadata": {
+        "path": "evidence/training/trials/39d6aa6a4f511db5cf874c980b7c5a6bdd34ca586003a19f542b111e840338fe.json",
+        "sha256": "eb34aab713126c21121f181516637d9adbe8de8bce275dc2384da7584f9b6e07"
+      },
+      "score_sha256": "21e66f67de60fb67ceca8143032e0e6ad5506da80f7696766c0aca782d758f77"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/ce53edd45338ff098e465ee3852519ed24e86da34848a98299952cd3f809ec07.npz",
+        "sha256": "87a337835eb4b53b684bd405be6ea53dffed1923788514ce0e9f90c064662d78"
+      },
+      "case": {
+        "atmosphere_seed": 310003,
+        "condition": "clean",
+        "detector_seed": 410003,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/ce53edd45338ff098e465ee3852519ed24e86da34848a98299952cd3f809ec07.npz",
+        "sha256": "95562194f21368d6749389bcf33aec962d5daa6463227d9ccda7b26077645704"
+      },
+      "id": "ce53edd45338ff098e465ee3852519ed24e86da34848a98299952cd3f809ec07",
+      "metadata": {
+        "path": "evidence/training/trials/ce53edd45338ff098e465ee3852519ed24e86da34848a98299952cd3f809ec07.json",
+        "sha256": "423c63094639adde0f28b4c379f371c2aa3e25c7eee9f163e17009f165f8f238"
+      },
+      "score_sha256": "b0ab6a485022ff0e033e14a62de78dcdaa16a107a67c1a458442a7c5911d1d10"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/5567fdbc211c293901b4c236f32ee8d170a2a02b0b67cfd94fa5f0a237dde2e1.npz",
+        "sha256": "942ea1c6f8b58a518a5717f6bcd83f34aacb501ca0226a57e787d7e006309cba"
+      },
+      "case": {
+        "atmosphere_seed": 310004,
+        "condition": "clean",
+        "detector_seed": 410004,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/5567fdbc211c293901b4c236f32ee8d170a2a02b0b67cfd94fa5f0a237dde2e1.npz",
+        "sha256": "8143576122552e2a503130236147af9b33bc8824abf0fc4fc462b8cc8930512b"
+      },
+      "id": "5567fdbc211c293901b4c236f32ee8d170a2a02b0b67cfd94fa5f0a237dde2e1",
+      "metadata": {
+        "path": "evidence/training/trials/5567fdbc211c293901b4c236f32ee8d170a2a02b0b67cfd94fa5f0a237dde2e1.json",
+        "sha256": "c13e0acf1b5739a63504e9657d68a94afc87072e3ee92a27f610b9556af830ef"
+      },
+      "score_sha256": "3ac065bede9101eb71f0f7655ec46ae1d1774cdf1ebe74b6e38163321cd0c4c5"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/995bcbb750ef77c699e204a1ea4007482851842a9cd7ed83bcfdb59d478bc54c.npz",
+        "sha256": "0c08f639ff99227ef8ee8d74f2e484c66f2b1b034221373fa0cf4c3f4a7c38b9"
+      },
+      "case": {
+        "atmosphere_seed": 310005,
+        "condition": "clean",
+        "detector_seed": 410005,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/995bcbb750ef77c699e204a1ea4007482851842a9cd7ed83bcfdb59d478bc54c.npz",
+        "sha256": "dc39a7f424e8843739cbe80d460e900c31832a39639531a9c38f5799f298b1bd"
+      },
+      "id": "995bcbb750ef77c699e204a1ea4007482851842a9cd7ed83bcfdb59d478bc54c",
+      "metadata": {
+        "path": "evidence/training/trials/995bcbb750ef77c699e204a1ea4007482851842a9cd7ed83bcfdb59d478bc54c.json",
+        "sha256": "58c396b6d0e3d8e3994c35a9040f17ca806d4b558ce570ed309fc154a96a5106"
+      },
+      "score_sha256": "4b6acd79393d275a290ccedc2d6ab085944c94c96e29a5f06eff15163193b639"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/d511b506818b31b4bd31809fe4bc97e2fd29f509d38e42285595a9c488872c32.npz",
+        "sha256": "ebf2b451e7053a878cab1f75224f3f1a283f0383a24c236e18676863c67c3642"
+      },
+      "case": {
+        "atmosphere_seed": 310006,
+        "condition": "clean",
+        "detector_seed": 410006,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/d511b506818b31b4bd31809fe4bc97e2fd29f509d38e42285595a9c488872c32.npz",
+        "sha256": "86ae208d786727e84577d496ccd0804058d8c43ce32e1d247fe32df0be7db040"
+      },
+      "id": "d511b506818b31b4bd31809fe4bc97e2fd29f509d38e42285595a9c488872c32",
+      "metadata": {
+        "path": "evidence/training/trials/d511b506818b31b4bd31809fe4bc97e2fd29f509d38e42285595a9c488872c32.json",
+        "sha256": "759b4e72da5867e569bb36e0c2cbf91ba3f79a1e0381070c455005c4fba01450"
+      },
+      "score_sha256": "8fb1e5818d3b0f8b64d969ddaacb252cc76c62691c21518e282d86edf0705e64"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b7249e2d47bb93c9a97fb66fe4ce4b16eb0f0bdf320a7da7caf0984088ffb2c9.npz",
+        "sha256": "e05e103dd7620631aee4a093fbedcb89c610f4bb081217d75089eba1f9919d30"
+      },
+      "case": {
+        "atmosphere_seed": 310007,
+        "condition": "clean",
+        "detector_seed": 410007,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b7249e2d47bb93c9a97fb66fe4ce4b16eb0f0bdf320a7da7caf0984088ffb2c9.npz",
+        "sha256": "14a583538fae9cf8a63980693c3631e1410e75a5531c31657a2c8af727117b65"
+      },
+      "id": "b7249e2d47bb93c9a97fb66fe4ce4b16eb0f0bdf320a7da7caf0984088ffb2c9",
+      "metadata": {
+        "path": "evidence/training/trials/b7249e2d47bb93c9a97fb66fe4ce4b16eb0f0bdf320a7da7caf0984088ffb2c9.json",
+        "sha256": "dccf6d2ccde359de2fa0bb7a7c2f0c6998d8508b70b790d167dc43c131207205"
+      },
+      "score_sha256": "7b73488e8e00b2587cdb3214c178513103cfd2970c695cc228bb535244532dc3"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9018412df60cbae575858840aa0dd7c05e94a37769f74eaaadc0330592e3e6f5.npz",
+        "sha256": "69ba83a2b70283347e09380053758ce44e2e2f275f3ab4b5de698540d50e9eb7"
+      },
+      "case": {
+        "atmosphere_seed": 310008,
+        "condition": "clean",
+        "detector_seed": 410008,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9018412df60cbae575858840aa0dd7c05e94a37769f74eaaadc0330592e3e6f5.npz",
+        "sha256": "206f3461a436c0215d0e2a9de1aa09d24c14e846dc439cf400006f387d808c6d"
+      },
+      "id": "9018412df60cbae575858840aa0dd7c05e94a37769f74eaaadc0330592e3e6f5",
+      "metadata": {
+        "path": "evidence/training/trials/9018412df60cbae575858840aa0dd7c05e94a37769f74eaaadc0330592e3e6f5.json",
+        "sha256": "34f4cc91d0765b772cf24ea582a774f482dfdc503e35b5d7efc8d28db71085ec"
+      },
+      "score_sha256": "cb51ff5e9953e832fdcc3f525976cfffba7a636acf0a15422c4904a517f16e4d"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/be652ac4f3821d126e2f82a6006b74ff4ff3c2c825e189d1fbd189167f09c2a1.npz",
+        "sha256": "49551c50117ee29ff04f9f52e8c847c47bfcebd51fe86de76efa8054e97c8bda"
+      },
+      "case": {
+        "atmosphere_seed": 310009,
+        "condition": "clean",
+        "detector_seed": 410009,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/be652ac4f3821d126e2f82a6006b74ff4ff3c2c825e189d1fbd189167f09c2a1.npz",
+        "sha256": "2458a919c5a254f0c3a13c3f078feeb509c0aecfea0b1d2c24c7f3105e16fec7"
+      },
+      "id": "be652ac4f3821d126e2f82a6006b74ff4ff3c2c825e189d1fbd189167f09c2a1",
+      "metadata": {
+        "path": "evidence/training/trials/be652ac4f3821d126e2f82a6006b74ff4ff3c2c825e189d1fbd189167f09c2a1.json",
+        "sha256": "b7ae260c84c8d91cb947666e50081c0b240b7e6e15992e86feca7536a0939e43"
+      },
+      "score_sha256": "27462ac10166f55004680c6597a0840697a81c757d751f711b063fda4b440032"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9b65d128798a5cc17e84219cea0e8a880091bb30b99129323b03b389f657b8f9.npz",
+        "sha256": "f26fc7c02a39f0d45c64a216f8b4945e6ed88d44585cbcb67940914138133136"
+      },
+      "case": {
+        "atmosphere_seed": 310010,
+        "condition": "clean",
+        "detector_seed": 410010,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9b65d128798a5cc17e84219cea0e8a880091bb30b99129323b03b389f657b8f9.npz",
+        "sha256": "7f2c1b55164e329753bb868e60ca33e3221b1ee73360aa72d29e65e83a00a2b6"
+      },
+      "id": "9b65d128798a5cc17e84219cea0e8a880091bb30b99129323b03b389f657b8f9",
+      "metadata": {
+        "path": "evidence/training/trials/9b65d128798a5cc17e84219cea0e8a880091bb30b99129323b03b389f657b8f9.json",
+        "sha256": "6e596c1400c7c5ebc690db720c3745db894c852fe6c1b2860576d93279c93936"
+      },
+      "score_sha256": "4ac0cacea2fb590816026526bdfa087f8ca88ec3cea943830572b41668790c3b"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/3ba012dd1417eeaa203ad98d760d464cbec319e8aac88aebcacf8c5659c2680b.npz",
+        "sha256": "0a94283c21c01b8e08a57ce72d29f9fa137d157a6b9bfdc7a58f08d1ffe6e979"
+      },
+      "case": {
+        "atmosphere_seed": 310011,
+        "condition": "clean",
+        "detector_seed": 410011,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/3ba012dd1417eeaa203ad98d760d464cbec319e8aac88aebcacf8c5659c2680b.npz",
+        "sha256": "26244a5745900f623bbbaac255dff2b00c9a345f630a2d0b4f0af11a9a939db8"
+      },
+      "id": "3ba012dd1417eeaa203ad98d760d464cbec319e8aac88aebcacf8c5659c2680b",
+      "metadata": {
+        "path": "evidence/training/trials/3ba012dd1417eeaa203ad98d760d464cbec319e8aac88aebcacf8c5659c2680b.json",
+        "sha256": "a63e5926b5c82eadada76f0b6eac83d832058e99a8c7672f3778904bc19c5051"
+      },
+      "score_sha256": "5b95ab709563bcd3311ef4409683b59bffe4e8190475dea6e7103868f0134cac"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/b9ce88c540857db577ab0ed91232d6ae33dff0f175f3deb629dd83752180dd78.npz",
+        "sha256": "4732a3a4e4d1aeb9133f1605f9fc68a5482bd744a402a6eb4c80af2654f7e4e6"
+      },
+      "case": {
+        "atmosphere_seed": 310012,
+        "condition": "clean",
+        "detector_seed": 410012,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/b9ce88c540857db577ab0ed91232d6ae33dff0f175f3deb629dd83752180dd78.npz",
+        "sha256": "3068fd729f3b346d24a8ea1cb1c8d5b505b98473eaf2400922af82d9aeb571b1"
+      },
+      "id": "b9ce88c540857db577ab0ed91232d6ae33dff0f175f3deb629dd83752180dd78",
+      "metadata": {
+        "path": "evidence/training/trials/b9ce88c540857db577ab0ed91232d6ae33dff0f175f3deb629dd83752180dd78.json",
+        "sha256": "8dd1d738f88a2fe80043c633e87cb1a5f56ca36465b9bdab750780c932203009"
+      },
+      "score_sha256": "3496086a2b9b582b5d55f9f496e4056c5be8fd1d3e96011624a9015a11ed10a0"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/e108732b137b6a95e40227b4ff117804b2a6b6304753c51384670493b54c721a.npz",
+        "sha256": "9db60d959e9772d3d4950bedcede205ab18e7a339652dfe7486e0467634974a7"
+      },
+      "case": {
+        "atmosphere_seed": 310013,
+        "condition": "clean",
+        "detector_seed": 410013,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/e108732b137b6a95e40227b4ff117804b2a6b6304753c51384670493b54c721a.npz",
+        "sha256": "6e653c05d08e8672122eb7642b6e874464113fd03b3d3ea7747ab299f32c7507"
+      },
+      "id": "e108732b137b6a95e40227b4ff117804b2a6b6304753c51384670493b54c721a",
+      "metadata": {
+        "path": "evidence/training/trials/e108732b137b6a95e40227b4ff117804b2a6b6304753c51384670493b54c721a.json",
+        "sha256": "14a0d2f04d0f10ff720ec3d8bf6b9760c95b9631746923af4b274046d74d87e6"
+      },
+      "score_sha256": "5cc15dcfa98f35e53b7be1a9546ffff8f98ae6ee8a675f9d9b01ddf7c40d5238"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/9d63e58ecac563ed1934af1be9f3b5552ee6d8c53f4d8238206eabbd328f6555.npz",
+        "sha256": "618ad32684f84ddf4ddfec70cbc5657d4e215dd05e1b417f6c9984aa771688c9"
+      },
+      "case": {
+        "atmosphere_seed": 310014,
+        "condition": "clean",
+        "detector_seed": 410014,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/9d63e58ecac563ed1934af1be9f3b5552ee6d8c53f4d8238206eabbd328f6555.npz",
+        "sha256": "f9e19b19ba7b06125868a1becf2b6b0e33a7425b71ce3a1b93be5bb0bea5f28c"
+      },
+      "id": "9d63e58ecac563ed1934af1be9f3b5552ee6d8c53f4d8238206eabbd328f6555",
+      "metadata": {
+        "path": "evidence/training/trials/9d63e58ecac563ed1934af1be9f3b5552ee6d8c53f4d8238206eabbd328f6555.json",
+        "sha256": "87105288fc5f86017ca23ff8a4c0e3341a34107cc64955449c11566799441e40"
+      },
+      "score_sha256": "6919a7c389f683f6cd90a9509038ac183aced71f24f859310ceb36ca6902d61b"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/74e9d2d4680a598291e458306fe092fd8d9dc6f8b5767a4b97a8cd9f7bcbd419.npz",
+        "sha256": "d8e084a5d8bc92363c9dcd66fac1896144d8dddf8e5ca070cedb8a8e2f1cddbd"
+      },
+      "case": {
+        "atmosphere_seed": 310015,
+        "condition": "clean",
+        "detector_seed": 410015,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/74e9d2d4680a598291e458306fe092fd8d9dc6f8b5767a4b97a8cd9f7bcbd419.npz",
+        "sha256": "7ab7814ab16a4d85940787d8eecc54424bd77acf318a4232e175057877a6ccbc"
+      },
+      "id": "74e9d2d4680a598291e458306fe092fd8d9dc6f8b5767a4b97a8cd9f7bcbd419",
+      "metadata": {
+        "path": "evidence/training/trials/74e9d2d4680a598291e458306fe092fd8d9dc6f8b5767a4b97a8cd9f7bcbd419.json",
+        "sha256": "6b5b2fe1cd9ad23dc2233a9ca8a2aba96c046e1a9c48aadeb5c6ace3a5dd5a97"
+      },
+      "score_sha256": "139754ccfdf129464da89ca3889dde0edb95db4d06fa406d8fccc38b7023fd61"
+    },
+    {
+      "artifact": {
+        "path": "evidence/training/trials/63a2bbcbe99b15e3a77e1d4ef69347ce0223e986f8de86c193d8138a8c6b0978.npz",
+        "sha256": "44c589a50681a633e85daae89f7c99a4b281f891fb4604551f904e00c505ad3b"
+      },
+      "case": {
+        "atmosphere_seed": 310016,
+        "condition": "clean",
+        "detector_seed": 410016,
+        "photons": 1000000.0,
+        "regime_id": "regime-03",
+        "role": "training",
+        "wind_scale": 2.0
+      },
+      "detector_artifact": {
+        "path": "evidence/training/detectors/63a2bbcbe99b15e3a77e1d4ef69347ce0223e986f8de86c193d8138a8c6b0978.npz",
+        "sha256": "1c5b1fc599aeb6d871edc979a8fca1fd4e42aadd4769f9411d8f0bd8deb12734"
+      },
+      "id": "63a2bbcbe99b15e3a77e1d4ef69347ce0223e986f8de86c193d8138a8c6b0978",
+      "metadata": {
+        "path": "evidence/training/trials/63a2bbcbe99b15e3a77e1d4ef69347ce0223e986f8de86c193d8138a8c6b0978.json",
+        "sha256": "5862896d1ca79060fe4c8f7f0fbf24c8dd9f3dcfd78ea01324ad33d8a6efd739"
+      },
+      "score_sha256": "28b8176165dda93370385e41392b7d76d5739750c60063d7e6d79b23ce531af0"
+    }
+  ],
+  "validation_released": false
+}

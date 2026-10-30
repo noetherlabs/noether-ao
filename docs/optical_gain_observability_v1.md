@@ -2,14 +2,15 @@
 
 ## Status and question
 
-This is a frozen, unexecuted P2 protocol. The machine-readable
+The P2 study completed 64 training and 240 validation runs. Its
+[validation result](../results/optical_gain_observability_v1/README.md) failed the
+frozen gate in all four regimes, so evaluation remains withheld. The following
+protocol is unchanged. The machine-readable
 [configuration](../configs/optical_gain_observability_v1.yaml) is bound to the base
 simulation by SHA256; the generated [plan](../plans/optical_gain_observability_v1.json)
-contains seed identities and budgets, with every outcome, threshold and release field
-set to false. The causal detector, physical training/validation adapter, complete
-retention checks, resumable record ledger, training-calibration publisher and
-validation-release barrier are implemented. Their tests use synthetic arrays and
-mocked physics boundaries and do not create a study threshold or decision.
+contains seed identities and budgets. Its false outcome, threshold and release
+fields describe the original plan, not the acquired result. The result packet
+contains the frozen threshold and validation decision artifacts.
 
 The question is narrow: **can a training-calibrated lower-tail transform of the
 existing whitened residual score detect the simplified scalar optical-gain ramp under
@@ -238,7 +239,8 @@ uses two training and two paired validation roots on a 24-frame plant, passes al
 implementation gates, reconstructs its derived files byte for byte and never enters
 evaluation. Its decision is `evaluation_withheld`: one of two clean runs alarmed and
 neither gain run qualified as detected. Those reduced outcomes are implementation
-smoke evidence only. No P2 v1 threshold, validation decision or outcome exists yet.
+smoke evidence only. The separate full P2 v1 validation result is linked above;
+the reduced runner check does not contribute to that cohort or its thresholds.
 
 The physical callback entry points enforce the full storage envelope before every
 chunk. The check adds current free bytes to filesystem blocks already allocated by
