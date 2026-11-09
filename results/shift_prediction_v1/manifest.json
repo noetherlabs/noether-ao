@@ -1,0 +1,19 @@
+{
+ "protocol": "v1",
+ "environment": {
+  "python": "3.9.7",
+  "numpy": "1.22.3",
+  "matplotlib": "3.5.1"
+ },
+ "sources": {
+  "shift_prediction.py": "346d501d336c7aa54ca9f82eceeada25f8512b4db7943f3b660cf4a9319a042b",
+  "run_shift_prediction.py": "9102edc3389a7f62acac67818c352fab37cef61f09f63e0a816d34b2d5b613ee"
+ },
+ "outputs": {
+  "README.md": "7b48eb2d914f81379a7f24fbcfeb5941474186a49dfd4d462b669dc3b38e6172",
+  "importance.png": "2367dd24c8022b6074008202caba372a7c43ea305c041f8ffef2475f422e2870",
+  "posthoc.json": "e3409fa49138641879bccbecdcdc7f9551f23dca4ab77e0e6f695255ec40847a",
+  "results.json": "f8d512db49bc8f9a889d2664cf4d3f1ea9cea203f190d61e1511d0679e1d2e35",
+  "skill.png": "e54e010228d6b5907b59933a085ef450a490626ca15835673381ead0ed1d3b53"
+ }
+}
