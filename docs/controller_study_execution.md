@@ -144,3 +144,34 @@ successful final chunk.
 
 These are study resource costs, not per-frame latency distributions or deadline
 guarantees. The simulated loop frequency and storage estimate imply neither.
+
+## Completed-cohort reporting
+
+After every released evaluation case has a terminal record, reconstruct the
+descriptive report from retained arrays:
+
+```sh
+.venv/bin/python scripts/report_controller_study.py \
+  --run runs/controller-study-v1 --out runs/controller-study-v1-report.json
+```
+
+The report rechecks frozen selection and provenance, rejects missing or unexpected
+trial identities, and reconstructs post-burn and fault-window metrics from raw
+arrays. It does not acquire trials, change selection, or refit a model. The
+analysis checkout must be clean and committed; its source and runtime are recorded
+separately from the acquisition provenance. Write the derived report outside the
+retained run. Existing reports are never replaced.
+
+Primary paired comparisons retain the complete predeclared family, including
+withheld controllers. Simultaneous Student-t intervals use seed-level differences;
+failed or nonfinite pairs receive no interval. A superiority verdict also requires
+every trial of the proposed winner to satisfy the usefulness and saturation gates.
+Fault-window intervals are exploratory pointwise intervals and do not receive an
+additional superiority verdict. A condition with a failed seed has no aggregate
+mean computed from only its surviving trials. All individual records remain in
+the report.
+
+Cost summaries retain incomplete attempts with unknown total elapsed time and keep
+nested kernel and inclusive operation costs separate. Missing cost measurements
+are labelled as not recorded. These summaries do not establish a control-loop
+latency or a hardware deadline.
