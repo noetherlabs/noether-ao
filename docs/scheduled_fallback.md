@@ -96,3 +96,7 @@ compares reconstructed results with every retained trial and summary. Integrity
 hashes bind exported bytes; they do not authenticate historical acquisition
 times, validate the optical simulator against hardware, or supply a stability
 or safety certificate.
+
+The separate [scheduled-handover API](controller_handover.md) makes command
+matching and issued-state transfer explicit for new experiments. It does not
+change the acquisition or interpretation of this retained study.

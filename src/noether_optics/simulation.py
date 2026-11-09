@@ -171,7 +171,8 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
          predictor: jax.Array, threshold: float = 1e30, fallback: bool = False,
          fault: str = 'none', params: tuple | None = None,
          differentiable_noise: bool = False, *, command_probe: jax.Array | None = None,
-         measurement_perturbation: jax.Array | None = None) -> dict[str,jax.Array]:
+         measurement_perturbation: jax.Array | None = None,
+         handover_frame: int | None = None, handover_mode: str | None = None) -> dict[str,jax.Array]:
     """Run a causal delayed AO loop via lax.scan.
 
     Evaluation uses exact Poisson shot noise plus Gaussian read noise. Training's
@@ -184,6 +185,12 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
     noise, in the sensor's output units. Neither input replaces detector noise.
     Opting in adds command-stage and perturbation telemetry; the default path and
     output schema remain unchanged. Callers must establish independent streams.
+
+    An optional scheduled predictive-to-integrator handover preserves the FIFO.
+    ``issued_state`` uses the last issued command as integrator memory;
+    ``command_matched`` keeps the outgoing command at the boundary, then uses
+    the integrator. For this one-state target the latter is exactly an
+    issued-state handover one frame later, not a distinct transient compensator.
     """
     if controller not in CONTROLLERS or fault not in FAULTS:
         raise ValueError('Unknown controller or fault')
@@ -192,6 +199,12 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
         raise ValueError('Delay must be at least one frame')
     m, mb = config['modes'], cal['twin_modes']
     instrumented = command_probe is not None or measurement_perturbation is not None
+    handover = handover_frame is not None or handover_mode is not None
+    if handover:
+        from .recovery import validate_handover
+        validate_handover(config, len(phases), handover_frame, handover_mode)
+        if controller != 'predictive' or fallback or instrumented or differentiable_noise:
+            raise ValueError('Scheduled handover requires uninstrumented predictive evaluation without detector fallback')
     if instrumented:
         if fault == 'stuck_actuator':
             raise ValueError('Instrumented modal commands do not describe a stuck-actuator surface')
@@ -277,7 +290,7 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
             fit = jax.lax.fori_loop(0, config['forward_steps'], improve, prior)
         else:
             fit = estimate_linear
-        # Classical state follows actual issued command, so switching is bumpless.
+        # Integrator memory follows the issued command; output continuity is not implied.
         ci = leak*command + gain*jnp.pad(estimate_linear,(0,m-mb))
         pseudo = applied + jnp.pad(fit,(0,m-mb))
         cf = leak*command + gain*jnp.pad(fit,(0,m-mb))
@@ -295,6 +308,13 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
         if controller in ('forward','fixed','learned'):
             candidate = jnp.where(unavailable,command,candidate)
         candidate = jnp.where(latched, ci, candidate)
+        if handover:
+            outgoing_requested = candidate
+            triggered = t >= handover_frame
+            target_active = (triggered if handover_mode == 'issued_state'
+                             else t > handover_frame)
+            candidate = jnp.where(target_active, ci, candidate)
+            handover_requested = candidate
         if instrumented:
             feedback_requested = candidate
             candidate = candidate + probe
@@ -311,6 +331,10 @@ def loop(config: dict, cal: dict, phases: jax.Array, seed: int, controller: str,
         if instrumented:
             output.update(feedback_requested=feedback_requested, probe_requested=probe,
                           combined_requested=candidate, measurement_perturbation=perturbation)
+        if handover:
+            output.update(handover_triggered=triggered, handover_target_active=target_active,
+                          outgoing_requested=outgoing_requested,
+                          handover_requested=handover_requested)
         return (next_fifo,clipped,pseudo,next_prediction,latched),output
 
     initial = (jnp.zeros((delay,m)),zero,zero,zero,jnp.asarray(False))
