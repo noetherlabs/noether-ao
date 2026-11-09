@@ -5,9 +5,9 @@ turbulence crosses a 38 cm pupil sampled at an assumed 1 kHz. The target is
 the least-squares (Z) tilt along the wind, in arcsec. Inputs are the measured
 global tilt and a 4 x 4 grid of subaperture tilts.
 
-Models reach the data only through ``PastOnly``, which returns lagged past
-inputs and refuses anything else; the evaluator alone holds targets and the
-train/test split. NumPy only: the benchmark does not use the JAX optics.
+Trusted benchmark models use ``PastOnly`` to request lagged inputs relative
+to evaluator-supplied anchors. This indexing contract is not a sandbox for
+untrusted models. NumPy only: the benchmark does not use the JAX optics.
 """
 
 from __future__ import annotations
@@ -114,19 +114,36 @@ def simulate(regime, seed, n=N, r0=0.04, L0=20.0, drift=False):
     return truth[:, 0], measured
 
 
-# ------------------------------------------------------------ the one door
+# ---------------------------------------------------------- history access
 
 class PastOnly:
-    """The only access a model has to the data: lagged past inputs."""
+    """Bounds-checked lagged inputs for trusted, evaluator-anchored models.
+
+    Lags include zero (the anchor frame). The evaluator controls the anchors;
+    Python callers can still access the underlying array or choose other anchors.
+    """
 
     def __init__(self, measured):
-        self._m = measured
+        self._m = np.asarray(measured)
+        if self._m.ndim != 2 or 0 in self._m.shape:
+            raise ValueError("measured must be a nonempty frame-by-channel array")
 
     def window(self, idx, lags, channels):
-        lags = np.asarray(lags)
-        if lags.min() < 0 or lags.max() >= HIST:
-            raise ValueError("a model asked for future frames or more than 1,000 frames of history")
-        return self._m[idx[:, None] - lags[None, :]][:, :, list(channels)].reshape(len(idx), -1)
+        def indices(value, name, limit):
+            a = np.asarray(value)
+            if a.ndim != 1 or a.size == 0 or a.dtype.kind not in "iu":
+                raise ValueError(f"{name} must be a nonempty one-dimensional integer array")
+            if np.any(a < 0) or np.any(a >= limit):
+                raise ValueError(f"{name} must lie in [0, {limit})")
+            return a.astype(np.intp, copy=False)
+
+        idx = indices(idx, "anchors", self._m.shape[0])
+        lags = indices(lags, "lags", HIST)
+        channels = indices(channels, "channels", self._m.shape[1])
+        if np.any(idx < lags.max()):
+            raise ValueError("requested history precedes the start of the recording")
+        rows = idx[:, None] - lags[None, :]
+        return self._m[rows[:, :, None], channels[None, None, :]].reshape(len(idx), -1)
 
 
 def _ridge(X, y, lam):
@@ -229,6 +246,7 @@ class RandomFeatures(GlobalLinear):
 
 
 MODELS = [NoChange, GlobalLinear, SpatialLinear, RandomFeatures]
+# Historical result key; this is a more-data reference, not a mathematical bound.
 UPPER = "upper bound (global linear, 400k frames)"
 SHUFFLED = "shuffled-target check"
 
@@ -241,14 +259,20 @@ def skill(pred, target):
 
 
 def split(h):
+    if (isinstance(h, (bool, np.bool_)) or not isinstance(h, (int, np.integer))
+            or not 0 < h < min(NTRAIN - HIST, N - NTRAIN - HIST)):
+        raise ValueError("horizon must be a positive integer leaving nonempty training and test sets")
+    h = int(h)
     tr = np.arange(HIST, NTRAIN - h)
     te = np.arange(NTRAIN + HIST, N - h)
     # leakage guard: no training target, and no test input window, crosses NTRAIN
-    assert tr.max() + h < NTRAIN and te.min() - (HIST - 1) >= NTRAIN
+    if tr.max() + h >= NTRAIN or te.min() - (HIST - 1) < NTRAIN:
+        raise ValueError("training targets and test histories must be disjoint")
     return tr, te
 
 
 def upper_bound(runs, h):
+    """More-data global-linear reference; the legacy name is not a bound claim."""
     X, y = [], []
     for target, measured in runs:
         idx = np.arange(HIST, N - h)
@@ -258,7 +282,11 @@ def upper_bound(runs, h):
 
 
 def range_forecast(target, measured, q_twin):
-    """Bands for the next 10,000 frames issued every 1,000 frames on the test half."""
+    """Marginal coverage over overlapping forecast-window/time pairs.
+
+    The legacy ``conformal`` key denotes an empirical training quantile. With
+    dependent windows and drifting seeing, no conformal guarantee is claimed.
+    """
     x = measured[:, 0]
 
     def windows(lo, hi):

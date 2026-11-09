@@ -1,11 +1,33 @@
-# Shift prediction and range forecasting: frozen protocol (v1)
+# Shift prediction and range forecasting (v1)
 
 Given the last 1,000 frames from a solar tip-tilt or Shack–Hartmann sensor,
 how well can the image shift be predicted $h$ frames ahead, and how well can
-the range of shifts over the next 10,000 frames be forecast? This protocol was
-written before any model was run. A result that breaks it is not reported as a
-result. The [results](../results/shift_prediction_v1/README.md) follow it,
-together with one post-hoc check that is labelled as such.
+the range of shifts over the next 10,000 frames be forecast? This exploratory
+simulation study compares four predictors and three range bands. It does not
+establish closed-loop performance or reliability on an instrument.
+
+## Retained results
+
+The archived run uses three regimes and five seeds per regime. Skill is
+one minus mean squared prediction error divided by test-target variance.
+
+| Comparison | Observed result | Interpretation |
+| --- | --- | --- |
+| Global linear versus no change, 10 frames | Mean skill 0.910 versus 0.746 in the single-layer regime | Short-horizon prediction is useful in this simulator. |
+| Random features versus global linear, 10 and 20 frames | No positive paired interval in six comparisons; five negative intervals and one crossing zero | No detected advantage for this candidate; not an equivalence result. |
+| Spatial versus global inputs with shared noise, 20 frames | Paired skill gains 0.098, 0.139 and 0.140 across the three regimes | Post-hoc evidence; sensing geometry and history length remain confounded. |
+| Empirical range band under drift | Mean marginal coverage 93.0%, 93.7% and 92.9% against nominal 95.4% | Calibration did not attain the target on these runs. |
+
+The [original report and artifacts](../results/shift_prediction_v1/README.md)
+are preserved byte-for-byte with their
+[manifest](../results/shift_prediction_v1/manifest.json). The report uses the
+historical labels “pre-registered,” “upper bound” and “conformal.” The public
+commit history contains protocol and results together and does not establish
+independent preregistration; the interpretation here supersedes those labels.
+The archive records Python 3.9.7 and NumPy 1.22.3, rather than the repository's
+current locked environment. It retains per-seed summary results, not raw frame
+streams or fitted models; hashes establish artifact integrity, not independent
+reproduction of the original acquisition.
 
 ## Data
 
@@ -21,8 +43,9 @@ $$\theta_t = \frac{\lambda}{2\pi}\,\frac{\sum_{p\in P} x_p\,\phi_t(p)}{\sum_{p\i
 
 where $P$ is the circular pupil and $\phi_t$ is the phase at frame $t$. The
 inputs are the measured global tilt and a 4 × 4 grid of 9 cm subaperture
-tilts, each with white noise. A subaperture collects 1/16 of the light, so its
-noise is four times the global noise.
+tilts, each with white noise. The model assigns each subaperture four times
+the global noise standard deviation, motivated by a nominal 1/16 photon share.
+This is an assumed noise model, not a detector calibration.
 
 | Regime | Layers (share of turbulence, speed) | Global-tilt noise |
 | --- | --- | --- |
@@ -31,18 +54,28 @@ noise is four times the global noise.
 | Low contrast | 100% at 10 m/s | 0.15 arcsec |
 
 Seeds 0–4 are for evaluation. Seed 99 drives the twin used to calibrate one
-range band, and seeds 100–109 drive the upper-bound model. No model or
-calibration sees an evaluation seed during design.
+range band, and seeds 100–109 drive the more-data global-linear reference.
+Predictors are fitted separately on the training half of each evaluation-seed
+recording; seed separation applies to the twin and more-data reference.
 
 ## Splits and access
 
 Training uses frames before 20,000, and test targets start at
 $20{,}000 + 1{,}000 + h$, so no test target or input window overlaps
-training; `split` asserts this at every horizon. Ridge penalties and feature
-scales are chosen on the last 25% of the training half only.
+training; `split` checks this at every horizon. Ridge penalties use the last
+25% of their fitting rows for inner selection. The random-feature candidate
+also selects a feature scale inside the outer training half. Inner folds have
+overlapping histories and no embargo, and feature normalization uses all
+outer-training rows before inner selection. This limits interpretation of
+inner selection scores; the outer test histories remain disjoint.
 
-Models never touch the arrays. They receive a `PastOnly` view whose single
-method returns inputs at non-negative lags below 1,000 and raises otherwise.
+Trusted models use `PastOnly` with evaluator-supplied anchor frames. It checks
+integer anchors, lags and channels, disallows negative lags or lags of 1,000
+or more, and rejects histories preceding the recording. Lag zero includes the
+anchor frame. This is an indexing contract, not isolation from untrusted Python
+code: callers can access the array or choose other anchors. Valid benchmark
+anchors already contain the required history; the bounds fix does not change
+their selected samples.
 
 ## Metrics
 
@@ -57,17 +90,23 @@ The range forecast issues a band for the next 10,000 frames every 1,000 frames,
 from the mean $m$ and standard deviation $s$ of the last 1,000 measured frames:
 $|\theta - m| \le q\,s$. It is evaluated with drifting seeing: $\log r_0$
 wanders smoothly over roughly 3–7 cm with a correlation time of about 5 s. The
-report gives frame coverage (target 95.4%) and the mean half-width $q\,s$.
+report gives coverage over forecast-window/time pairs (nominal 95.4%) and the
+mean half-width $q\,s$. Overlapping windows count some physical frames repeatedly.
+This is not the probability that an entire 10,000-frame path lies inside its band.
 Coverage alone is not a win, because a wider band always covers more.
 
 | Band | $q$ |
 | --- | --- |
 | Naive | 2 |
 | Twin | $2\sqrt{R}$, with $R$ the ratio of next-10,000 to last-1,000 spread in an independent drifting twin run |
-| Conformal | The 95.4% quantile of $|\theta-m|/s$ over windows in the training half of the same run |
+| Empirical training quantile | The 95.4% quantile of $|\theta-m|/s$ over windows in the training half of the same run |
 
-Every number is a mean and sample standard deviation over five seeds. Every
-claimed difference between two models has a paired 95% t-interval.
+Summary tables report means and sample standard deviations over five seeds;
+paired comparisons report pointwise 95% t-intervals, without multiplicity
+adjustment. The empirical band retains the legacy JSON key `conformal`, but
+overlapping dependent windows and drifting seeing do not support an
+exchangeability-based conformal coverage guarantee. No independent-frame
+confidence interval or simultaneous path-coverage guarantee is reported.
 
 ## Models
 
@@ -77,46 +116,59 @@ claimed difference between two models has a paired 95% t-interval.
 | Global linear | Global tilt at 48 lags spanning 1,000 frames; ridge regression |
 | Full-sensor linear | Global tilt and 16 subapertures at 20 lags; ridge regression |
 | Nonlinear | Global linear inputs plus 500 random Fourier features; ridge regression |
-| Upper bound | Global linear trained on 400,000 frames from seeds 100–109 |
+| More-data reference | Global linear fitted to eligible rows from 400,000 simulated frames across seeds 100–109 |
 
-## Honesty checks
+The more-data reference is not a mathematical upper bound. Its legacy JSON key
+and function name are preserved for compatibility. Global and spatial models
+also have different lag sets, so their comparison does not isolate sensor
+information at matched history.
 
-Each check must pass, or the results are void.
+## Execution checks
 
 1. A global linear model trained on shuffled targets scores at most 0.02.
-2. `split` asserts that training and test ranges, history windows included,
+2. `split` checks that training and test ranges, history windows included,
    do not overlap.
-3. The finite-data model's gap to the upper bound is reported.
+3. The finite-data model's gap to the more-data reference is reported.
 4. The run records SHA-256 digests of its code and outputs.
 
-## Pre-registered claims
+## Exploratory questions
 
-- **E1.** Frame-by-frame skill is about 0 beyond roughly $D/v$ for every model.
-  Falsified if any model scores above 0.05 at 1,000 frames.
-- **E2.** For Gaussian simulated turbulence the nonlinear challenger does not
-  beat the linear model, since the optimal predictor of a Gaussian process is
-  linear. Falsified if its paired gain at 10 or 20 frames has a 95% interval
-  entirely above 0.
-- **E3.** The full sensor beats the global tilt alone below $D/v$. Falsified if
-  the paired gain at 10 or 20 frames has a 95% interval that includes 0.
-- **E4.** Conformal range bands reach coverage within 1 point of 95.4% on
-  held-out windows, and the naive band falls short.
+- **E1.** Do the four tested model means exceed 0.05 skill at 1,000 frames?
+  None does. A finite model comparison cannot establish a universal horizon
+  of predictability or a no-information theorem.
+- **E2.** Does the tested random-feature model improve on global linear at
+  10 or 20 frames? No positive paired interval is observed. Failure to detect
+  superiority is not equivalence and does not rule out other nonlinear models.
+- **E3.** Do spatial inputs improve skill at 10 and 20 frames? All six original
+  intervals are positive, but the independent sensor noise adds information.
+  The post-hoc comparison below addresses only part of that confounding.
+- **E4.** Does the empirical band achieve mean coverage within one percentage
+  point of 95.4% in every regime? It does not. These are descriptive marginal
+  coverage measurements under the particular simulated drift.
 
 ## Post-hoc check
 
 After the run, review found that the global tilt and the subapertures carry
-independent noise. The full-sensor model therefore sees the global tilt twice,
-which a real Shack–Hartmann does not allow, since it derives the global tilt
-from its subapertures. `run_posthoc` repeats the E3 comparison with the global
-tilt computed from the measured subapertures and a subapertures-only model.
-It was not pre-registered, and its effect sizes replace those of E3.
+independent noise, giving the full-sensor model extra noisy sensing information.
+`run_posthoc` repeats the E3 comparison with the global input computed from the
+measured subapertures and a subapertures-only model. This check is post hoc.
+The mean of local slopes is not the circular-pupil Z-tilt operator, and the
+square subaperture grid samples outside the pupil at its corners. Different
+lag sets remain. Gains therefore cannot be uniquely attributed to upwind
+prediction rather than estimation and measurement geometry. The wind-delay
+diagnostic returns one correlation peak, not independent velocities for both
+layers. Vibration, tracking drift, detector nonlinearity and closed-loop
+feedback are outside this study.
 
 ## Reproduce
 
 ```sh
-.venv/bin/python scripts/run_shift_prediction.py
+.venv/bin/python scripts/run_shift_prediction.py --out results/shift_prediction_local
 ```
 
-The run takes about 15 minutes on a laptop CPU and writes
-`results/shift_prediction_v1/`. The benchmark uses NumPy and Matplotlib only,
-not the JAX optics.
+Use the [locked environment](reproduction.md) and a new output directory;
+existing artifacts are never overwritten. This runs the simulation and models
+again rather than reconstructing raw evidence from the historical archive.
+Runtime and peak memory depend on the host. The benchmark uses NumPy and
+Matplotlib, not the JAX optics. Changed environments require comparison of
+new outputs before asserting numerical reproduction.
