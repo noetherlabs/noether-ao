@@ -12,6 +12,7 @@ import shutil
 
 from .controller_evidence import load_arrays, save_arrays, save_metadata, check_provenance_binding
 from .controller_selection import _bytes, _case_id, _read
+from .controller_costs import cost_identity, measure_call
 
 
 def validate_trials(ledger, base: dict, limit: int) -> dict:
@@ -47,6 +48,10 @@ class _TrialExecutor:
         return arrays, refs
 
     def __call__(self, case, training):
+        return measure_call("trial_inclusive", {"case": case},
+                            lambda: self._execute(case, training))
+
+    def _execute(self, case, training):
         check_provenance_binding(self.ledger, self.base, training["evidence"])
         candidate = case["candidate"]
         model = training["models"].get(candidate["id"])
@@ -103,7 +108,10 @@ class _TrialExecutor:
         kernel_key = (candidate["id"], case["stage"], case["photons"], case["wind_scale"], case["fault"])
         if kernel_key not in self.kernels:
             self.kernels[kernel_key] = controller_kernel(cfg, cal, candidate["controller"], case["fault"], predictor)
-        outputs = self.kernels[kernel_key](phase["phase"], case["seed"], params)
+        with cost_identity(stage=case["stage"], case=case):
+            device_outputs = self.kernels[kernel_key](phase["phase"], case["seed"], params)
+            outputs = measure_call("output_conversion", {}, lambda: {
+                name: np.asarray(value) for name, value in device_outputs.items()})
         relative = f"evidence/{case['stage']}/trials/{_case_id(case)}"
         raw = save_arrays(self.ledger, relative + ".npz", {key: np.asarray(value) for key, value in outputs.items()})
         summaries = paired_metrics(outputs, reference, cfg)

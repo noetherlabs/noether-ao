@@ -166,9 +166,11 @@ def controller_kernel(cfg: dict, cal: dict, controller: str, fault: str = "none"
     predictor = np.array(predictor, dtype=np.float64, copy=True)
     if predictor.shape != (config["modes"], 2) or not np.isfinite(predictor).all():
         raise ValueError("Invalid frozen predictor coefficients")
-    compiled = jax.jit(lambda phases, seed, params: loop(
+    from .controller_costs import measured_jit
+    compiled = measured_jit(jax.jit(lambda phases, seed, params: loop(
         config, cal, phases, seed, controller, jnp.asarray(predictor),
-        fault=fault, params=params, fallback=False, differentiable_noise=False))
+        fault=fault, params=params, fallback=False, differentiable_noise=False)),
+        "controller", {"controller": controller, "fault": fault})
 
     def execute(phases, seed, params=None):
         if np.shape(phases) != (config["frames"], config["n"], config["n"]):
@@ -182,7 +184,7 @@ def controller_kernel(cfg: dict, cal: dict, controller: str, fault: str = "none"
                 raise ValueError("Learned trials require the frozen width-eight model")
         elif params is not None:
             raise ValueError("Only learned trials accept network parameters")
-        return jax.block_until_ready(compiled(jnp.asarray(phases), seed, params))
+        return jax.block_until_ready(compiled(phases, seed, params))
     return execute
 
 

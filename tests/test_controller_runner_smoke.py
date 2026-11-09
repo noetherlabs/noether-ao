@@ -1,6 +1,8 @@
 """Pre-acquisition checks for the nonreserved end-to-end runner smoke."""
 from copy import deepcopy
 import importlib.util
+import hashlib
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -82,3 +84,41 @@ def test_runner_smoke_rebuild_rejects_inventory_drift(tmp_path, damage):
 
     with pytest.raises(ValueError, match="changed"):
         runner._verify_protected(tmp_path)
+
+
+@pytest.mark.parametrize("damage", [None, "source", "manifest", "incomplete", "extra", "sequence",
+                                     "missing_compile", "negative_time", "interrupted", "synthetic"])
+def test_cost_gate_requires_complete_bound_nonsynthetic_attempts(tmp_path, damage):
+    runner = runner_module()
+    manifest = {"provenance": {"source_commit": "fixture"}, "config": {"study_id": "fixture"}}
+    directory = tmp_path / "costs"
+    directory.mkdir()
+    for stage in ("training", "validation", "evaluation"):
+        rows = [{"sequence": 0, "kind": "attempt_start", "stage": stage,
+                 "clock": "perf_counter_ns", "provenance": manifest["provenance"],
+                 "manifest_sha256": hashlib.sha256(runner._json_bytes(manifest)).hexdigest()}]
+        rows += [{"sequence": i, "kind": "operation", "operation": operation,
+                  "status": "completed", "elapsed_ns": 100}
+                 for i, operation in enumerate(("input_placement", "lower_and_compile", "kernel_execution"), 1)]
+        rows.append({"sequence": 4, "kind": "attempt_end", "status": "completed", "elapsed_ns": 400})
+        if stage == "training":
+            if damage == "source":
+                rows[0]["provenance"] = {"source_commit": "changed"}
+            elif damage == "manifest":
+                rows[0]["manifest_sha256"] = "changed"
+            elif damage == "incomplete":
+                rows.pop()
+            elif damage == "sequence":
+                rows[2]["sequence"] = 4
+            elif damage == "missing_compile":
+                rows[2]["operation"] = "kernel_execution"
+            elif damage == "negative_time":
+                rows[1]["elapsed_ns"] = -1
+            elif damage == "interrupted":
+                rows[-1]["status"] = "interrupted"
+            elif damage == "synthetic":
+                rows[0]["clock"] = "synthetic_test_clock"
+        (directory / (stage + ".jsonl")).write_text("".join(json.dumps(row) + "\n" for row in rows))
+    if damage == "extra":
+        (directory / "interrupted.jsonl").write_text("{}\n")
+    assert runner._cost_records_valid(tmp_path, manifest) is (damage is None)

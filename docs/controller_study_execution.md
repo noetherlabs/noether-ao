@@ -26,7 +26,7 @@ Training advances in bounded chunks:
 ```sh
 .venv/bin/noether-optics study-train \
   --config configs/controller_study_v1.yaml --out runs/controller-study-v1 \
-  --create --pilot-limit 1 --model-limit 1
+  --create --pilot-limit 1 --model-limit 1 --measure-costs
 ```
 
 Use `--create` only for a new directory; omit it on subsequent calls. Limits bound
@@ -38,11 +38,11 @@ After training is complete:
 
 ```sh
 .venv/bin/noether-optics study-validate \
-  --config configs/controller_study_v1.yaml --out runs/controller-study-v1 --limit 1
+  --config configs/controller_study_v1.yaml --out runs/controller-study-v1 --limit 1 --measure-costs
 .venv/bin/noether-optics study-select \
   --config configs/controller_study_v1.yaml --out runs/controller-study-v1
 .venv/bin/noether-optics study-evaluate \
-  --config configs/controller_study_v1.yaml --out runs/controller-study-v1 --limit 1
+  --config configs/controller_study_v1.yaml --out runs/controller-study-v1 --limit 1 --measure-costs
 ```
 
 Repeat validation chunks until the declared cohort is complete before selecting.
@@ -101,7 +101,7 @@ statistical controller comparison. Use fresh output directories for acquisition:
 
 ```sh
 .venv/bin/python scripts/smoke_controller_physics.py --out runs/controller-components
-.venv/bin/python scripts/run_controller_study_smoke.py --out runs/controller-runner
+.venv/bin/python scripts/run_controller_study_smoke.py --out results/controller-runner --measure-costs
 ```
 
 Reconstruct saved reports without acquiring new trials:
@@ -111,6 +111,36 @@ Reconstruct saved reports without acquiring new trials:
 .venv/bin/python scripts/run_controller_study_smoke.py --rebuild results/controller_runner_smoke_v1
 ```
 
-Timing acquisition runs outside CI. Compilation and execution costs require
-separate synchronized measurements; they are not inferred from the simulated
-loop frequency or storage estimates.
+## Resource costs
+
+Use `--measure-costs` for every full-study acquisition chunk. It is rejected in CI
+before opening a study. Run without other compute on the host. The per-run lock
+excludes cooperating measured writers; it cannot exclude unrelated applications.
+
+Each invocation writes an exclusive `costs/*.jsonl` file bound to the run manifest,
+source and runtime. It records input placement, lowering/compilation and
+synchronized execution of the controller or gradient kernel separately. Kernel
+executables are reused across seeds and parameter values with the same shapes,
+dtypes, weak-type signature and input devices. Compilation records describe the
+observed cache state, not guaranteed cold compilation. Controller output
+conversion is recorded separately. A fresh process retains its own compilation
+costs.
+
+Pilot, fitted-model and trial records also retain inclusive elapsed spans. These
+include their nested kernels and the relevant preparation, checks and persistence;
+do not add enclosing and nested costs. Predictor numerical fitting has its own
+span. Learned fitting includes optimizer bookkeeping, gradient-journal replay and
+host conversion; primitive dispatch/compilation outside the explicitly lowered
+kernels is not separated from that enclosing span. Invocation cost additionally
+includes stage audits and accounting writes; admission precedes that span.
+
+Every completed operation is flushed independently. Unexpected exceptions retain
+an interrupted attempt; a process killed before the end record leaves an incomplete
+attempt, never a zero-cost observation. A declared predictor numerical failure
+completes its measured operation and remains a failed scientific outcome. Reused
+terminal records and replayed gradients do not create new kernel executions.
+Retain interrupted and resumed attempts together, rather than reporting only the
+successful final chunk.
+
+These are study resource costs, not per-frame latency distributions or deadline
+guarantees. The simulated loop frequency and storage estimate imply neither.

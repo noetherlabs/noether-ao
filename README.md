@@ -53,6 +53,7 @@ The [results report](docs/results.md) gives methods, uncertainty and limitations
 
 - [Architecture](docs/architecture.md)
 - [Methods and study protocols](docs/README.md)
+- [Controller study and resource costs](docs/controller_study_execution.md)
 - [Reproducing results](docs/reproduction.md)
 - [Development and tests](CONTRIBUTING.md)
 

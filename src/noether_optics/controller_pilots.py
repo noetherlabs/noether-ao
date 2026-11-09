@@ -4,8 +4,8 @@
       -> full raw outputs -> measured telemetry -> immutable ready/failed record
     complete pilot cohort -> independent predictor fits -> terminal model/evidence
 
-Callers must open the run with fresh source/runtime provenance. No timings, stage
-CLI, learned-fit scheduling or aggregate training binding are performed here.
+Callers must open the run with fresh source/runtime provenance. An opt-in cost
+recorder observes new work; no stage CLI or aggregate training binding lives here.
 """
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from .controller_evidence import (check_provenance_binding, check_training_open,
 from .controller_physics import (FULL_OUTPUT_KEYS, NumericalTrainingFailure, _identity,
     episode_config, fit_measured_predictor, measured_telemetry, training_cases)
 from .controller_protocol import study_plan
+from .controller_costs import cost_identity, measure_call
 from .controller_selection import _bytes, _case_id, _digest, _read
 
 PILOTS = "evidence/training/pilots"
@@ -94,7 +95,7 @@ def acquire_pilots(ledger, base, shared_evidence, limit):
                 key = _case_id(case)
                 if key in records:
                     continue
-                row = execute(case)
+                row = measure_call("pilot_inclusive", {"case": case}, lambda: execute(case))
                 _admit(ledger, base, shared_evidence)
                 if _journal(ledger, shared_evidence) != journal:
                     raise ValueError("Pilot journal changed during execution")
@@ -204,7 +205,10 @@ class _PilotExecutor:
         regime = (case["photons"], case["wind_scale"])
         if regime not in self.kernels:
             self.kernels[regime] = controller_kernel(cfg, self.cal, "integrator", "none")
-        outputs = {key: np.asarray(value) for key, value in self.kernels[regime](phases, case["seed"]).items()}
+        with cost_identity(stage="pilot", case=case):
+            device_outputs = self.kernels[regime](phases, case["seed"])
+            outputs = measure_call("output_conversion", {}, lambda: {
+                name: np.asarray(value) for name, value in device_outputs.items()})
         key = _case_id(case)
         row["outputs"] = save_arrays(self.ledger, f"{PILOTS}/outputs/{key}.npz", outputs)
         _check_outputs(outputs, cfg)
@@ -277,7 +281,9 @@ def fit_predictor_record(ledger, base, candidate, shared_evidence):
                         raise ValueError("Saved pilot telemetry differs from measured reconstruction")
                     episodes.append({"case": row["case"], "telemetry": measured})
                 try:
-                    fitted = fit_measured_predictor(ledger.config, candidate, episodes, base["modes"])
+                    fitted = measure_call("predictor_fit", {"candidate": candidate["id"]},
+                        lambda: fit_measured_predictor(ledger.config, candidate, episodes, base["modes"]),
+                        completed_errors=(NumericalTrainingFailure,))
                 except NumericalTrainingFailure as failed:
                     fitted, error = failed.evidence, str(failed)
             _admit(ledger, base, shared_evidence)

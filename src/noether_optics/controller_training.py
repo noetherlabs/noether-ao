@@ -18,6 +18,7 @@ import optax
 
 from .controller_physics import _identity, episode_config, paired_open_loop, training_cases
 from .controller_protocol import study_plan
+from .controller_costs import cost_identity, measured_jit
 from .simulation import initialize_weights, loop
 
 
@@ -34,7 +35,7 @@ def _episode_kernel(cfg: dict, cal: dict):
         variance = jnp.mean(outputs["variance"][config["burn_in"]:])
         return variance / open_variance, finite
 
-    return jax.jit(jax.value_and_grad(objective, has_aux=True))
+    return measured_jit(jax.jit(jax.value_and_grad(objective, has_aux=True)), "learned_gradient")
 
 
 def _arrays(tree):
@@ -61,7 +62,7 @@ def fit_learned_controller(base: dict, study: dict, candidate: dict,
     An optional episode_evaluator(step, case, parameters, phases, denominator,
     compute) can journal/replay evaluations. It must return compute's exact result
     and propagate errors. The numerical loop still owns every optimizer update.
-    This function acquires no timings and writes no files.
+    Optional kernel cost instrumentation does not change fitting or replay rules.
     """
     cases, configs, denominators, found = _training_inputs(base, study, candidate, cal, episodes)
 
@@ -92,8 +93,9 @@ def fit_learned_controller(base: dict, study: dict, candidate: dict,
             def compute():
                 if key not in kernels:
                     kernels[key] = _episode_kernel(config_by_regime[key], cal)
-                return jax.block_until_ready(kernels[key](
-                    parameters, jnp.asarray(phases), case["seed"], denominator))
+                with cost_identity(step=step, case=case, candidate=candidate["id"]):
+                    return jax.block_until_ready(kernels[key](
+                        parameters, phases, case["seed"], denominator))
             (loss, finite), gradient = (compute() if episode_evaluator is None else episode_evaluator(
                 step, deepcopy(case), parameters, phases, denominator, compute))
             record["episode_losses"].append(float(loss))

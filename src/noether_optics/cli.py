@@ -48,6 +48,9 @@ def main() -> None:
     evaluation.add_argument("--out", required=True)
     evaluation.add_argument("--limit", type=_positive_integer, required=True,
                             help="Maximum new evaluation records")
+    for command in (training, validation, evaluation):
+        command.add_argument("--measure-costs", action="store_true",
+                             help="Record synchronized costs locally without concurrent compute")
     resources = commands.add_parser("study-resources")
     resources.add_argument("--config", required=True)
     resources.add_argument("--target", required=True,
@@ -90,6 +93,9 @@ def main() -> None:
     observability_report.add_argument("--config", required=True)
     observability_report.add_argument("--out", required=True)
     args = parser.parse_args()
+    if getattr(args, "measure_costs", False):
+        from .controller_costs import require_local_measurement
+        require_local_measurement()
     if args.experiment == "observability-resources":
         from .observability_resources import load_resource_inputs, resource_preflight
         protocol, base = load_resource_inputs(Path(args.config))
@@ -151,6 +157,7 @@ def main() -> None:
             raise SystemExit(2)
         return
     if args.experiment == "study-train":
+        from .controller_costs import record_costs
         from .controller_evidence import open_study_run
         from .controller_resources import load_resource_inputs, resource_preflight
         from .controller_training_stage import run_training_chunk
@@ -164,15 +171,18 @@ def main() -> None:
             open_options["min_free_bytes"] = preflight["budget"]["required_free_bytes"]
         ledger, base, evidence = open_study_run(
             Path(args.out), Path(args.config), **open_options)
-        result = run_training_chunk(
-            ledger, base, evidence, pilot_limit=args.pilot_limit, model_limit=args.model_limit)
+        with record_costs(ledger, "training", enabled=args.measure_costs):
+            result = run_training_chunk(
+                ledger, base, evidence, pilot_limit=args.pilot_limit, model_limit=args.model_limit)
         print(json.dumps(result, sort_keys=True))
         return
     if args.experiment == "study-validate":
+        from .controller_costs import record_costs
         from .controller_evidence import open_study_run
         from .controller_trials import validate_trials
         ledger, base, _ = open_study_run(Path(args.out), Path(args.config))
-        result = validate_trials(ledger, base, args.limit)
+        with record_costs(ledger, "validation", enabled=args.measure_costs):
+            result = validate_trials(ledger, base, args.limit)
         print(json.dumps(result, sort_keys=True))
         return
     if args.experiment == "study-select":
@@ -182,10 +192,12 @@ def main() -> None:
         print(json.dumps(result, sort_keys=True))
         return
     if args.experiment == "study-evaluate":
+        from .controller_costs import record_costs
         from .controller_evidence import open_study_run
         from .controller_trials import evaluate_trials
         ledger, base, _ = open_study_run(Path(args.out), Path(args.config))
-        result = evaluate_trials(ledger, base, args.limit)
+        with record_costs(ledger, "evaluation", enabled=args.measure_costs):
+            result = evaluate_trials(ledger, base, args.limit)
         print(json.dumps(result, sort_keys=True))
         return
     from .artifacts import load_config

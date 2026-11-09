@@ -5,8 +5,8 @@
 
 The numerical work remains in the pilot, predictor and learned-fit modules. This
 coordinator adds deterministic ordering, chunk budgets, restart discovery and the
-all-candidates barrier. It does not access validation/evaluation cohorts, collect
-timings, expose a CLI or weaken a terminal failure into a retry.
+all-candidates barrier. Optional inclusive cost spans never affect the scientific
+stage gates or weaken a terminal failure into a retry.
 """
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from .controller_pilots import acquire_pilots, fit_predictor_record, load_learne
 from .controller_protocol import study_plan
 from .controller_selection import _case_id, _read
 from .controller_training_journal import fit_learned_record, load_learned_record
+from .controller_costs import measure_call
 
 
 def run_training_chunk(ledger, base, shared_evidence, *, pilot_limit, model_limit):
@@ -48,13 +49,14 @@ def run_training_chunk(ledger, base, shared_evidence, *, pilot_limit, model_limi
             if candidate["id"] in terminal:
                 continue
             if candidate["controller"] == "predictive":
-                result = fit_predictor_record(ledger, base, candidate, shared_evidence)
+                result = measure_call("predictor_fit_inclusive", {"candidate": candidate["id"]},
+                    lambda: fit_predictor_record(ledger, base, candidate, shared_evidence))
             else:
                 if learned_inputs is None:
                     learned_inputs = load_learned_inputs(ledger, base, shared_evidence)
                 cal, episodes = learned_inputs
-                result = fit_learned_record(
-                    ledger, base, candidate, cal, episodes, shared_evidence)
+                result = measure_call("learned_fit_inclusive", {"candidate": candidate["id"]},
+                    lambda: fit_learned_record(ledger, base, candidate, cal, episodes, shared_evidence))
             terminal[candidate["id"]] = result
             written += 1
             if written == model_limit:

@@ -1,8 +1,8 @@
 """Exercise the complete study command sequence on reduced nonreserved inputs.
 
 This smoke completes training and validation, freezes selection, and persists one
-held-out evaluation trial.  It does not complete the evaluation cohort, collect
-timings, or support any controller-performance claim.
+held-out evaluation trial. Optional synchronized cost acquisition checks the cost
+recording path; it does not complete the cohort or support a performance claim.
 """
 from __future__ import annotations
 
@@ -150,6 +150,8 @@ def _derive(root: Path) -> dict:
             and len(list((run / "evaluation").glob("*.json"))) == EVALUATION_LIMIT,
         "source_provenance_bound": source["commit"] == manifest["provenance"]["source_commit"],
     }
+    if commands.get("measure_costs", False):
+        gates["cost_records_complete_and_bound"] = _cost_records_valid(run, manifest)
     return {
         "schema_version": 1,
         "kind": "controller_runner_smoke",
@@ -166,8 +168,36 @@ def _derive(root: Path) -> dict:
         "gates": gates,
         "all_pass": all(gates.values()),
         "scope": ("End-to-end command and evidence smoke with one held-out trial; "
-                  "not a complete evaluation cohort, timing result or controller claim."),
+                  "not a complete evaluation cohort, latency result or controller claim."),
     }
+
+
+def _cost_records_valid(run: Path, manifest: dict) -> bool:
+    paths = list((run / "costs").glob("*.jsonl"))
+    if len(paths) != 3:
+        return False
+    stages = set()
+    for path in paths:
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        if len(rows) < 3:
+            return False
+        header, end = rows[0], rows[-1]
+        if (header.get("kind") != "attempt_start" or end.get("kind") != "attempt_end"
+                or end.get("status") != "completed" or header.get("clock") != "perf_counter_ns"
+                or type(end.get("elapsed_ns")) is not int or end["elapsed_ns"] < 0
+                or header.get("provenance") != manifest["provenance"]
+                or header.get("manifest_sha256") != hashlib.sha256(_json_bytes(manifest)).hexdigest()
+                or [row.get("sequence") for row in rows] != list(range(len(rows)))):
+            return False
+        stages.add(header["stage"])
+        operations = rows[1:-1]
+        if (not {"input_placement", "lower_and_compile", "kernel_execution"}
+                <= {row.get("operation") for row in operations}
+                or any(row.get("kind") != "operation" or row.get("status") != "completed"
+                       or type(row.get("elapsed_ns")) is not int or row["elapsed_ns"] < 0
+                       for row in operations)):
+            return False
+    return stages == {"training", "validation", "evaluation"}
 
 
 def _report(summary: dict) -> str:
@@ -218,7 +248,7 @@ def rebuild(root: Path) -> dict:
     return summary
 
 
-def run(config_path: Path, root: Path) -> dict:
+def run(config_path: Path, root: Path, *, measure_costs: bool = False) -> dict:
     if os.environ.get("CI"):
         raise RuntimeError("Run physical smoke artifacts locally, outside CI")
     if subprocess.check_output(
@@ -243,21 +273,23 @@ def run(config_path: Path, root: Path) -> dict:
     run_argument = _relative(run_root)
     fitted_models = sum(row["controller"] in ("predictive", "learned")
                         for row in plan["candidates"])
+    cost_arguments = ["--measure-costs"] if measure_costs else []
     resources = _invoke(["study-resources", "--config", config_argument,
                          "--target", run_argument], environment)
     root.mkdir(parents=True, exist_ok=False)
     commands = {
+        "measure_costs": measure_costs,
         "seed_audit": audit,
         "resources": resources,
         "training": _invoke(["study-train", "--config", config_argument, "--out", run_argument,
                              "--create", "--pilot-limit", str(plan["planned_training_episodes"]),
-                             "--model-limit", str(fitted_models)], environment),
+                             "--model-limit", str(fitted_models), *cost_arguments], environment),
         "validation": _invoke(["study-validate", "--config", config_argument, "--out", run_argument,
-                               "--limit", str(plan["planned_validation_trials"])], environment),
+                               "--limit", str(plan["planned_validation_trials"]), *cost_arguments], environment),
         "selection": _invoke(["study-select", "--config", config_argument,
                               "--out", run_argument], environment),
         "evaluation": _invoke(["study-evaluate", "--config", config_argument, "--out", run_argument,
-                               "--limit", str(EVALUATION_LIMIT)], environment),
+                               "--limit", str(EVALUATION_LIMIT), *cost_arguments], environment),
     }
     commands["selection_recheck"] = _invoke(
         ["study-select", "--config", config_argument, "--out", run_argument], environment)
@@ -271,10 +303,14 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--out", type=Path)
     parser.add_argument("--rebuild", type=Path)
+    parser.add_argument("--measure-costs", action="store_true")
     args = parser.parse_args()
     if (args.out is None) == (args.rebuild is None):
         parser.error("Choose exactly one of --out or --rebuild")
-    summary = rebuild(args.rebuild) if args.rebuild else run(args.config, args.out)
+    if args.rebuild and args.measure_costs:
+        parser.error("Rebuilding retained evidence cannot acquire costs")
+    summary = rebuild(args.rebuild) if args.rebuild else run(
+        args.config, args.out, measure_costs=args.measure_costs)
     print(json.dumps(summary, indent=2, allow_nan=False))
     if not summary["all_pass"]:
         raise SystemExit(1)
