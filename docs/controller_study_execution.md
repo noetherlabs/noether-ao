@@ -175,3 +175,22 @@ Cost summaries retain incomplete attempts with unknown total elapsed time and ke
 nested kernel and inclusive operation costs separate. Missing cost measurements
 are labelled as not recorded. These summaries do not establish a control-loop
 latency or a hardware deadline.
+
+The completed [Prediction Boundary report](../results/controller_study_v1/README.md)
+contains 600 validation and 600 evaluation records. Its separate NumPy audit
+reconstructs finite-grid residual variance, coherent pupil Strehl and zero-DM
+references from saved phase screens and applied commands, and checks command
+delay and modal clipping:
+
+```sh
+.venv/bin/python scripts/audit_controller_physical_metrics.py \
+  --run runs/controller-study-v1 --report runs/controller-study-v1-report.json \
+  --out runs/controller-study-v1-physical-audit.json
+```
+
+This audit requires the complete retained acquisition, not only the published
+summary files. It uses the saved pupil and basis; it does not independently
+reproduce the atmospheric statistics, sensor, controller or hardware. Tolerances
+are fixed in the script. A mismatch withholds the audit result; it is not repaired
+by changing retained arrays. The raw-verified report remains the authority for
+cohort identity, model selection, statistical reconstruction and failure handling.

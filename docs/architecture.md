@@ -17,6 +17,7 @@ estimation, and fixed or learned mixtures of forward and inverse commands.
 | Validation barrier | `study-validate` dispatch, complete-training admission and positive bounded trial chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Selection | `study-select` dispatch, complete validation audit, eligibility checks and frozen models before held-out evaluation | [CLI](../src/noether_optics/cli.py), [study ledger](../src/noether_optics/controller_selection.py) |
 | Evaluation barrier | `study-evaluate` dispatch, frozen-selection admission and positive bounded held-out chunks | [CLI](../src/noether_optics/cli.py), [trial adapters](../src/noether_optics/controller_trials.py), [study ledger](../src/noether_optics/controller_selection.py) |
+| Physical accounting audit | NumPy reconstruction of residual and reference metrics, command delay and modal bounds from retained arrays | [audit](../scripts/audit_controller_physical_metrics.py) |
 | Resource preflight | Static array-schema accounting, shared conservative archive envelope and read-only target-filesystem admission | [controller sizing](../src/noether_optics/controller_resources.py), [observability sizing](../src/noether_optics/observability_resources.py), [envelope](../src/noether_optics/resource_envelope.py), [CLI](../src/noether_optics/cli.py) |
 | Optical-gain evidence gates | Protocol-bound stage resumption, causal detector, complete-cohort threshold and validation freezes, release-gated evaluation, and immutable descriptive inference | [stage ledger](../src/noether_optics/observability_run.py), [detector and calibration](../src/noether_optics/observability_detector.py), [validation release](../src/noether_optics/observability_validation.py), [evaluation report](../src/noether_optics/observability_evaluation.py), [frozen protocol](optical_gain_observability_v1.md) |
 
@@ -42,9 +43,10 @@ remain measurements for an isolated run; they are not inferred by this estimator
   finite periodic frozen-flow atmosphere. Independent checks cover sampled PSFs
   and the matched finite-grid pyramid response. Focal-support convergence and
   instrument validation remain outside that evidence.
-- Baseline control results use short runs and a small held-out seed set. The
-  baseline predictor uses ideal training telemetry and classical gains are fixed.
-  The new study addresses these comparison limits; its outcomes remain pending.
+- Earlier v0 control results use short runs, ideal predictor-training telemetry
+  and fixed classical gains. The completed [controller study](../results/controller_study_v1/README.md)
+  uses measured pilot telemetry, validation-selected settings and ten paired
+  held-out seeds per condition. Its conditional findings remain simulation evidence.
 - Learned weights use Gaussian pathwise training noise and exact Poisson/read
   noise at evaluation. This mismatch and the finite training budget remain limits.
 - The detector has no proven safe set or recovery guarantee. Fault coverage and

@@ -22,7 +22,8 @@
 - [Optical-gain observability](optical_gain_observability_v1.md)
 - [Shift prediction and range forecasting](shift_prediction.md)
 
-The controller protocol specifies a planned evaluation. Optical-gain observability
+The controller study completed [600 held-out evaluation trials](../results/controller_study_v1/README.md)
+after frozen training and validation. Optical-gain observability
 completed its [validation study](../results/optical_gain_observability_v1/README.md)
 and withheld evaluation after failing its frozen gate. Reduced checks and
 exploratory results are labelled separately from complete studies.

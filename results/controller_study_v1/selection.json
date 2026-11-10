@@ -1,0 +1,721 @@
+{
+  "manifest_sha256": "50002feeff2a8aaccf53bff3c87cc3b2b778456f0851a8f79ac6f8fe0bdae2d3",
+  "result": {
+    "candidates": [
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-00",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.3903784967042367
+      },
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-01",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.43047751139156665
+      },
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-02",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.2245766941406174
+      },
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-03",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.22725381781830878
+      },
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-04",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.1932502461788166
+      },
+      {
+        "candidate": {
+          "controller": "integrator",
+          "id": "integrator-05",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.19457207066250123
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-00",
+          "parameters": {
+            "horizon": 1,
+            "ridge": 0.001
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.18703789809848687
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-01",
+          "parameters": {
+            "horizon": 1,
+            "ridge": 0.01
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.17793085055590507
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-02",
+          "parameters": {
+            "horizon": 2,
+            "ridge": 0.001
+          }
+        },
+        "eligible": false,
+        "rejected_trials": [
+          {
+            "case_id": "d4293068d75827ebf6328f20ce6c6d528fd4fc49b9a22976cb4ada7da7c00535",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "7c9f6a52fec5e3e2592997cb1eca69f617171adc54a7e4be354c90c232280efc",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "c4012a36805cd3ceed615e8f231f6eb3520c4c9981be39ca7fb0e4ebe0d08df8",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "48dcc1d00909df1687656ead9186c8a226e323c8ee7f40b9e0263d7fe4df3a98",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "0044866515749b41c10141aa064fc46b16643a3bfcc7d580346377e826817a5c",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "cdd1513be6cd0879b5608516e25efecafe4dc2ae0aeb61d58a8be4712d6300b6",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "c4bbecf2c113e09008acbe13dfc5030c23805fd2df123606abe9511d63cb8f2f",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "6da289a9e071d289e9064afda7a5487a6623a22075b0cd6a4f9fb217faa4ab3e",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "ef6d5718af112f958a9404e9e7e9d035e050459ef3adb1b87d719f364f50b774",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "3242f239e17f905e9b91b1ec715cb91a298248be51a95112a949fff75b791c58",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "fc7cfbad257f78e57f051bf37e5fe2d64b3e7466a3ccc398e11473afd3c08529",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "4aafed055288d6ad3051189cc7911b324e9360e45aac4038cb06a90b4e6d844f",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "e3b5462de05c38d09c60d137f41f8e79d40f547be0c135671021089965b095a4",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "703206cab6d92e72da0683ea70e9d5d37088f8f93c07327824fac6834d67122f",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          }
+        ],
+        "score": null
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-03",
+          "parameters": {
+            "horizon": 2,
+            "ridge": 0.01
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.17804402067392147
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-04",
+          "parameters": {
+            "horizon": 3,
+            "ridge": 0.001
+          }
+        },
+        "eligible": false,
+        "rejected_trials": [
+          {
+            "case_id": "550d07967143eaec0458dae1f07a55c37af51479a5681632314672c83e2d0dfb",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "b95ed27c64323ff02e607dcfd44fcc5367b11d330b90056ad0bdb419cd48ed6b",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "773b55d11b55c6d4f3241fb2c8878edb6105da3d75700718b030fb7ff87cc9cf",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "0ce9dfc13b9ed73a28aee7a595e70f09f0d847e8432cf72256b4060cccf147b3",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "2e9bff1eb62a8c8ff4cb260526b0d7b588544283c89ec87d629c7aff76124f51",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "929a682ad74193d471baa8ffea6d13a36a52cd0e6001fa9975b970ba7cc97445",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "4206d291cb83e4f40c67729d8a6fe3fcf0c23f40bddcdf7aafc5155895d8c7d6",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "2a7a1dbe106bfe8dd5914c454d4461c402fb80a177d8fb16abf5c7053d000c3e",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "8857b64cf02bd9733a5793915c44f84205277ecd13f0aff1fea6bc11bc8e2e31",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "89484b1f171b09d11e5fbe90856f4567d7a3eb87d76e4f7f4aed1fd2cee44f19",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "494fa0a692bd5a093ba26f7710b21628eb5fc9d6a8354040cba2168c24a7f829",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "be338d0f3d15af67b39470c1e5e99ac79157be4360eb5e87fe37aaf2d96382e7",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "aa31d04bfff9cf52daff967e7318776190b3d446b162077174e42aea09404b43",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "7b6a8bce973ef5dc15390ba9dc890adc8f013a7cd10a6678986a3ec1e2439054",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "10f31157ea875f73e1eb786b23e3e9007e3dc6148ca080e7eab7014ad8098c02",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "76b114b899a539a7041199285d9f3ba9843a462f2648ef92e36f007d49101e21",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "f6f4aeacd1acc7090831365f4ba5dff71d9513701ecee46060bc3ab21a673151",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "52115e67f6d41c51ec8ea1d16de53f10565c086b4d887328b74102011332a6a0",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          }
+        ],
+        "score": null
+      },
+      {
+        "candidate": {
+          "controller": "predictive",
+          "id": "predictive-05",
+          "parameters": {
+            "horizon": 3,
+            "ridge": 0.01
+          }
+        },
+        "eligible": false,
+        "rejected_trials": [
+          {
+            "case_id": "e7afc4c8e1e382f3a6ec89518c662fc1b9b798dadd3b067549ee48dc06285c1f",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "d0294f5a821530c5eb99b886c0c2ca170e2b8ae55fc9d99212c88a9d48ec80a3",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "041e1bbaa49d22b434b6844cbed91b21be21b3a41b3e44f10f117431494c3a42",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "0144e0c8d502fe25c3443a6a2fa5b91d9a3b56e7eef3c90909dadd0956e6e24f",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "989de0e0467ed204ea039dcedab44b227fe227386520553e864e6b2780408cca",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "e52fcb041cb26bf6c0345aca8b1d47fdc8ed2b92d7b75bf37042e6328ec1bd90",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          },
+          {
+            "case_id": "c4fa0c88c98562eca02bd70b7691a38a452a96b1d9273d6c33f6c72cd7771532",
+            "reasons": [
+              "saturation_limit",
+              "not_below_open_loop"
+            ]
+          }
+        ],
+        "score": null
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-00",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.35828154003089613
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-01",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.36668335512356875
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-02",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.2108179187288978
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-03",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.212752663183135
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-04",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.1934609702868556
+      },
+      {
+        "candidate": {
+          "controller": "forward",
+          "id": "forward-05",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.19480046621818403
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-00",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.36960695489538037
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-01",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.3790552179693022
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-02",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.21010427893974634
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-03",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.21186772940829987
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-04",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.19234495246600145
+      },
+      {
+        "candidate": {
+          "controller": "fixed",
+          "id": "fixed-05",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.1935898130871609
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-00",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.3651160226204381
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-01",
+          "parameters": {
+            "gain": 0.1,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.3677099003085525
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-02",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.21025669312338474
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-03",
+          "parameters": {
+            "gain": 0.3,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.2121579896941727
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-04",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.99
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.1906662201208879
+      },
+      {
+        "candidate": {
+          "controller": "learned",
+          "id": "learned-05",
+          "parameters": {
+            "gain": 0.5,
+            "leak": 0.999
+          }
+        },
+        "eligible": true,
+        "rejected_trials": [],
+        "score": 0.19228948371345084
+      }
+    ],
+    "completed_validation_trials": 600,
+    "failed_validation_records": 0,
+    "pairwise_family": 120,
+    "selected": {
+      "fixed": {
+        "controller": "fixed",
+        "id": "fixed-04",
+        "parameters": {
+          "gain": 0.5,
+          "leak": 0.99
+        }
+      },
+      "forward": {
+        "controller": "forward",
+        "id": "forward-04",
+        "parameters": {
+          "gain": 0.5,
+          "leak": 0.99
+        }
+      },
+      "integrator": {
+        "controller": "integrator",
+        "id": "integrator-04",
+        "parameters": {
+          "gain": 0.5,
+          "leak": 0.99
+        }
+      },
+      "learned": {
+        "controller": "learned",
+        "id": "learned-04",
+        "parameters": {
+          "gain": 0.5,
+          "leak": 0.99
+        }
+      },
+      "predictive": {
+        "controller": "predictive",
+        "id": "predictive-01",
+        "parameters": {
+          "horizon": 1,
+          "ridge": 0.01
+        }
+      }
+    },
+    "validation_records": 600
+  },
+  "training_sha256": "fa92d7f58709bb6c64a740d87192206422fd8a00eb2e1fd9a0a866a9222c87eb",
+  "validation_sha256": "18786c81248d8a45ff5b936ec4a3cc3effec1394e0d5ab55be146471f9c7a49b"
+}
