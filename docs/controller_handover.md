@@ -86,7 +86,8 @@ not a deployable detection method. A fault-free run with the same event measures
 a prescribed false intervention. Neither yields a false-alarm rate by itself.
 Command continuity also does not establish reduced optical error, stability,
 physical actuator safety or useful recovery. Measure paired finite-horizon
-residual cost, absolute performance, command changes and sustained recovery.
+[residual cost, command changes and sustained recovery](recovery_outcomes.md),
+alongside absolute performance.
 The modal clip is a simulation bound; physical stroke and slew limits require
 an instrument-specific actuator mapping.
 
