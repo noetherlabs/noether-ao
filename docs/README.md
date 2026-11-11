@@ -15,6 +15,7 @@
 - [HCIPy and SPECULA calibration comparisons](wfs_calibration.md)
 - [Closed-loop response identification](identification.md)
 - [Scheduled controller handover](scheduled_fallback.md)
+- [Prospective recovery study and execution](recovery_study_v1.md)
 
 ## Study protocols
 

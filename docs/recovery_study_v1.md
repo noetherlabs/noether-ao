@@ -5,9 +5,10 @@ controller to a fixed leaky integrator. Its operational question is whether a
 fallback improves the subsequent trajectory under the observed regime. It does
 not evaluate a fault detector or claim that the fallback is safe.
 
-**Status:** statistical contract and reduction implementation. The 64-root cohort
-has not been acquired. Acquisition requires a scoped historical-stream exclusion
-inventory, a frozen runner, bounded execution and independent raw reconstruction.
+**Status:** statistical contract, bounded acquisition and raw-reconstruction
+implementation. The 64-root cohort has not been acquired. Acquisition requires
+a reviewed historical-stream exclusion inventory and externally supervised
+execution; implementation checks are not scientific results.
 
 ## Design
 
@@ -93,3 +94,59 @@ The statistical reducer accepts reconstructed paired outcomes. It does not
 authenticate those inputs, verify physical artifacts, or prove that acquisition
 occurred. A release must bind the frozen protocol, source, environment, complete
 raw cohort and independent reconstruction report separately.
+
+## Execution and reconstruction
+
+The acquisition driver reuses the development runner's physical kernels and
+artifact writers. Each root is an immutable packet containing its 12 cases and
+36 terminal trials, the complete protocol, source and runtime identity, and
+global case indices. The driver verifies finished packets before resuming the
+next unattempted root in the declared order.
+
+With the frozen controller inputs available locally, run under an external
+wall-time, memory and storage supervisor:
+
+```sh
+python -m noether_optics.recovery_acquisition \
+  --controller-run runs/prediction-boundary-v1 \
+  --out runs/recovery-study-v1 \
+  --exclusion-sha256 "$EXCLUSION_SHA256" \
+  --max-roots 1
+```
+
+`EXCLUSION_SHA256` identifies the historical-stream inventory reviewed before
+acquisition. Recording that digest is not itself an exclusion audit. The output
+reserve remains 105,033,365,984 bytes. The supervisor must additionally enforce
+wall-time, process memory, output size and exclusive execution. A smaller
+`--max-roots` changes only the amount of work in one invocation; it does not
+change the 64-root cohort or permit outcome-dependent stopping.
+
+Completed packets are checked and never rerun. An interrupted root remains on
+disk and blocks automatic continuation; this driver does not repair or resample
+partial roots. Source, runtime or input changes also block resume. Nonfinite
+terminal arrays are retained and can complete a packet with withheld outcomes.
+
+Only the full acquisition produces `acquisition.json`. That receipt records
+completion of acquisition, without a scientific verdict. From the same frozen
+checkout and runtime, reconstruct the full cohort separately:
+
+```sh
+python scripts/audit_recovery_study.py \
+  --run runs/recovery-study-v1 \
+  --controller-run runs/prediction-boundary-v1 \
+  --out runs/recovery-study-v1-report.json
+```
+
+The audit verifies every retained file, dispatch identity, configuration,
+calibration and predictor. It checks command delay and clipping, recomputes
+phase variance and coherent pupil peak with the independent NumPy reducer,
+and reconstructs paired outcomes before applying the fixed statistical rule.
+The physical tolerance is `5e-12 + 5e-12 * abs(reference)`, unchanged from the
+development audit. Missing records or inconsistent evidence prevent a report;
+nonfinite outcomes withhold the affected contrast. A zero or otherwise invalid
+normalizing integral is an undefined estimand and prevents statistical reporting.
+
+This checks finite-grid physical accounting using saved phase, pupil and basis.
+It does not independently validate the atmosphere, wavefront-sensor model or
+instrument performance. Raw arrays and local execution receipts belong outside
+the source repository.

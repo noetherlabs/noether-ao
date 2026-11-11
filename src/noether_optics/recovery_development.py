@@ -130,6 +130,15 @@ def acquire_arm(run, identity, config, execute, phases, seed, *, warm):
 
 
 def run_development(output, controller_run, *, smoke=False):
+    return _run_protocol(output, controller_run, protocol(smoke=smoke))
+
+
+def _run_protocol(output, controller_run, spec, *, case_indices=None, binding=None):
+    """Shared physics path; a study shard selects fixed global case indices.
+
+    Only the development wrapper and frozen study driver call this function.
+    The complete protocol remains in every shard, including its unrun roots.
+    """
     from .atmosphere import phase_sequence
     from .controller_physics import controller_kernel, episode_config, paired_open_loop
     from .recovery import scheduled_handover_kernel
@@ -141,14 +150,22 @@ def run_development(output, controller_run, *, smoke=False):
         raise ValueError('Use a fresh output outside the retained controller study')
     if not output.parent.is_dir() or shutil.disk_usage(output.parent).free < MIN_FREE_BYTES:
         raise RuntimeError('Development output requires the declared free-space reserve')
-    spec = protocol(smoke=smoke)
+    schedule = cases(spec)
+    shard = case_indices is not None
+    indices = list(range(len(schedule))) if case_indices is None else list(case_indices)
+    if (not indices or any(type(i) is not int or i < 0 or i >= len(schedule) for i in indices)
+            or indices != sorted(set(indices))):
+        raise ValueError('Require ordered unique case indices within the protocol')
     predictor, frozen_cal, selection = load_training(controller_run)
     inputs = capture_inputs(ROOT / 'configs/controller_study_v1.yaml', ROOT)
     for name in ('base', 'study'):
         if hashlib.sha256(_bytes(inputs[name])).hexdigest() != INPUTS[f'evidence/provenance/{name}.json']:
             raise ValueError('Development configuration differs from the frozen controller study')
-    run = DevelopmentRun(output, {'protocol': spec, 'source': inputs['source'],
-                                 'runtime': inputs['runtime'], 'base': inputs['base']})
+    manifest = {'protocol': spec, 'source': inputs['source'],
+                'runtime': inputs['runtime'], 'base': inputs['base']}
+    if shard:
+        manifest.update(case_indices=indices, collection=binding)
+    run = DevelopmentRun(output, manifest)
     before = time.perf_counter()
     try:
         # Recreate callables, then require exact numeric agreement with the saved
@@ -166,7 +183,8 @@ def run_development(output, controller_run, *, smoke=False):
         save_metadata(run, 'evidence/original-selection.json', selection)
         kernels, phases_by_key, references = {}, {}, {}
         outcomes, terminals = [], []
-        for index, case in enumerate(cases(spec)):
+        for index in indices:
+            case = schedule[index]
             if shutil.disk_usage(output).free < MIN_FREE_BYTES:
                 raise RuntimeError('Free-space reserve would be violated before the next case')
             cfg = episode_config(inputs['base'], inputs['study'], 'evaluation',
@@ -219,13 +237,14 @@ def run_development(output, controller_run, *, smoke=False):
             if _hash_file(controller_run / name) != digest:
                 raise ValueError('Frozen training input changed during acquisition')
         run.verify()
-        status = 'complete_finite_development' if all(
+        kind = 'study_shard' if shard else 'development'
+        status = f'complete_finite_{kind}' if all(
             result['status'] == 'finite_pair' for row in outcomes for result in row['contrasts'].values()
-        ) else 'complete_development_with_withheld_outcomes'
+        ) else f'complete_{kind}_with_withheld_outcomes'
         result = {
-            'schema': spec['schema'], 'status': status, 'smoke': smoke,
+            'schema': spec['schema'], 'status': status, 'smoke': spec.get('smoke', False),
             'cases': outcomes, 'terminal_records': len(terminals),
-            'expected_terminal_records': len(cases(spec)) * len(ARMS),
+            'expected_terminal_records': len(indices) * len(ARMS),
             'calibration': calibration_ref, 'predictor': predictor_ref,
             'acquisition_inclusive_seconds': time.perf_counter() - before,
             'interpretation': spec['interpretation'],
