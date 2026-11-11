@@ -147,6 +147,10 @@ guarantees. The simulated loop frequency and storage estimate imply neither.
 
 ## Completed-cohort reporting
 
+For the released cohort, first [download and verify the raw evidence](release_integrity.md).
+This reuses the completed acquisition; it does not require rerunning training or
+evaluation.
+
 After every released evaluation case has a terminal record, reconstruct the
 descriptive report from retained arrays:
 

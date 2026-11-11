@@ -41,6 +41,8 @@ integrator in 5 of 12 simulated conditions; seven comparisons remained uncertain
 The learned mixture did not beat both classical baselines in any condition.
 [Prediction Boundary](results/controller_study_v1/README.md) reports all conditions,
 simultaneous uncertainty intervals, resource costs and evidence limitations.
+The [raw evidence](https://huggingface.co/datasets/noetherlabs/prediction-boundary-v1)
+is available under CC-BY-4.0; see [download and verification](docs/release_integrity.md).
 
 ## Earlier v0 findings
 

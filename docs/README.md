@@ -4,6 +4,7 @@
 
 - [Architecture and model assumptions](architecture.md)
 - [Installation, experiments and report reconstruction](reproduction.md)
+- [Prediction Boundary data download and integrity](release_integrity.md)
 - [Numerical findings and limitations](results.md)
 - [Development and tests](../CONTRIBUTING.md)
 

@@ -141,12 +141,14 @@ The [manifest](manifest.json), [training freeze](training.json),
 bind the retained evidence. The report SHA-256 is
 `d0f0ee69bcc19cd5aa0408197343cb2155508237f28692b857a5fa728ddf06be`.
 
-This directory publishes the report and frozen metadata. Full raw sensor,
-phase, command and training archives are retained separately and are **not
-included in this repository release**. Metadata alone cannot reproduce the raw
-verification. With the complete original run, the [execution guide](../../docs/controller_study_execution.md)
-describes acquisition and report reconstruction. The additional physical audit
-recomputes residual variance, coherent pupil Strehl, zero-DM references, applied
+This directory publishes the report and frozen metadata. The complete raw sensor,
+phase, command and training archives are available separately on
+[Hugging Face](https://huggingface.co/datasets/noetherlabs/prediction-boundary-v1/tree/73234e5a6a1374568179562aab76f9f6caa9354e)
+under CC-BY-4.0: 7,228 original files, 40,354,588,319 bytes. The
+[download and verification guide](../../docs/release_integrity.md) pins the dataset
+revision and manifest hash. The [execution guide](../../docs/controller_study_execution.md)
+describes report reconstruction from the complete download. The additional
+physical audit recomputes residual variance, coherent pupil Strehl, zero-DM references, applied
 command delay and modal bounds from saved arrays using NumPy without importing
 the simulation kernel. It shares the saved basis and atmosphere; it is not an
 independent optical-model or hardware validation.
