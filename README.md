@@ -67,5 +67,6 @@ The [results report](docs/results.md) gives methods, uncertainty and limitations
 - [Reproducing results](docs/reproduction.md)
 - [Development and tests](CONTRIBUTING.md)
 
-The source is publicly available. No open-source license has been granted for
-project-owned code; third-party notices retain their stated terms.
+Project-owned code is licensed under [Apache-2.0](LICENSE). Third-party
+components and retained contributions keep their original notices. Separately
+distributed datasets carry the terms stated in their dataset cards.

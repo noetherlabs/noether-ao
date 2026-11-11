@@ -28,6 +28,7 @@ unchanged. Describe what changed, why, and which checks ran.
 
 ## Distribution
 
-Project-owned code does not yet have an open-source license or external
-contribution agreement. Public availability alone does not grant redistribution
-rights. The retained Diffraction-Dragrace patch includes its upstream MIT notice.
+Project-owned code is licensed under [Apache-2.0](LICENSE). Preserve third-party
+copyright and license notices; the retained Diffraction-Dragrace contribution
+includes its upstream MIT notice. Dataset releases state their own distribution
+terms in the accompanying dataset card.
