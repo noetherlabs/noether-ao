@@ -7,7 +7,9 @@ steps became, and whether an apparent recovery persisted.
 
 This is an analysis primitive. It does not define a cohort, detect a fault, choose
 a response, or establish controller safety. The prospective recovery comparison
-has not run. See [controller handover](controller_handover.md) for the implemented
+has not run. The [development pilot](recovery_development.md) acquires complete
+paired histories for resource and variability assessment before that freeze.
+See [controller handover](controller_handover.md) for the implemented
 transfer mechanics and their one-frame-delay equivalence.
 
 ## Fixed-horizon cost
