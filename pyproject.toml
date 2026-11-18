@@ -30,6 +30,9 @@ dependencies = [
 noether-optics = "noether_optics.cli:main"
 
 [project.optional-dependencies]
+receiver = [
+    "noether-physics @ git+https://github.com/noetherlabs/noether-link-audit.git@d4259edb2573f03c743f3fb55e792dff6e2da04d#subdirectory=packages/noether_physics",
+]
 dragrace = [
     "lentil==0.8.9",
     "poppy==1.1.2",
@@ -48,3 +51,6 @@ testpaths = ["tests"]
 abcdlux = { git = "https://github.com/LouisDesdoigts/abcdLux", rev = "62bfb8be619ce7387ab0df4f9f74bb5f6f833979" }
 prysm = { git = "https://github.com/brandondube/prysm.git", rev = "5008f47803af6ff69eed474fca049456076e4a7d" }
 pyproper3 = { url = "https://downloads.sourceforge.net/project/proper-library/proper_v3.3.7_python.zip" }
+
+[tool.hatch.metadata]
+allow-direct-references = true
