@@ -5,10 +5,11 @@ controller to a fixed leaky integrator. Its operational question is whether a
 fallback improves the subsequent trajectory under the observed regime. It does
 not evaluate a fault detector or claim that the fallback is safe.
 
-**Status:** statistical contract, bounded acquisition and raw-reconstruction
-implementation. The 64-root cohort has not been acquired. Acquisition requires
-a reviewed historical-stream exclusion inventory and externally supervised
-execution; implementation checks are not scientific results.
+**Status:** all 64 roots acquired and independently reconstructed: 768 cases,
+2,304 finite arm records and 24 primary contrasts. The
+[complete report](../results/recovery_study_v1/README.md) retains all outcomes
+and uncertainty. The frozen design below is unchanged; it does not establish
+detector performance or hardware reliability.
 
 ## Design
 

@@ -1,0 +1,231 @@
+{
+  "case": {
+    "fault": "none",
+    "photons": 1000.0,
+    "seed": 2026111101,
+    "wind_scale": 0.5
+  },
+  "interpretation": "Representative low-flux slow-wind clean case. Protocol supplies the other condition values; configuration includes dormant fault definitions.",
+  "resolved_configuration": {
+    "burn_in": 128,
+    "command_clip_rad": 5.0,
+    "delay_frames": 2,
+    "detector": {
+      "calibration_quantile": 0.995
+    },
+    "detector_n": 64,
+    "diameter_m": 1.0,
+    "dt_s": 0.001,
+    "estimate_clip_rad": 3.0,
+    "faults": {
+      "drift_frames": 32,
+      "end": 512,
+      "model_phase_scale": 1.6,
+      "onset": 256,
+      "optical_gain": 0.35,
+      "shift_pixels": 2,
+      "stuck_radius_d": 0.08,
+      "vibration_hz": 40.0,
+      "vibration_rad": 0.7
+    },
+    "fidelity": {
+      "equivalence_fraction": 0.05,
+      "fluxes": [
+        100.0,
+        1000.0,
+        10000.0,
+        100000.0,
+        1000000.0
+      ],
+      "levels": [
+        {
+          "modes": 100,
+          "n": 32,
+          "name": "low",
+          "wavelengths_m": [
+            7.5e-07
+          ]
+        },
+        {
+          "modes": 150,
+          "n": 64,
+          "name": "medium",
+          "wavelengths_m": [
+            6.5e-07,
+            7.5e-07,
+            8.5e-07
+          ]
+        },
+        {
+          "modes": 200,
+          "n": 96,
+          "name": "high",
+          "wavelengths_m": [
+            6.5e-07,
+            7e-07,
+            7.5e-07,
+            8e-07,
+            8.5e-07
+          ]
+        }
+      ],
+      "m1_result": "results/m1",
+      "truth": {
+        "modes": 200,
+        "n": 96,
+        "wavelengths_m": [
+          6.5e-07,
+          7e-07,
+          7.5e-07,
+          8e-07,
+          8.5e-07
+        ]
+      }
+    },
+    "forward_ridge": 1e-05,
+    "forward_step": 0.5,
+    "forward_steps": 3,
+    "frames": 512,
+    "gain": 0.5,
+    "layers": [
+      {
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ],
+        "weight": 0.6
+      },
+      {
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ],
+        "weight": 0.4
+      }
+    ],
+    "leak": 0.99,
+    "mixed": {
+      "faults": [
+        "none",
+        "optical_gain",
+        "vibration"
+      ],
+      "fluxes": [
+        1000.0,
+        100000.0
+      ],
+      "learning_rate": 0.02,
+      "training_frames": 32,
+      "training_steps": 20,
+      "winds": [
+        0.5,
+        2.0
+      ]
+    },
+    "modes": 100,
+    "n": 32,
+    "photons": 1000.0,
+    "predictor_ridge": 0.01,
+    "r0_m": 0.4,
+    "read_noise_e": 0.3,
+    "reconstructor_ridge": 1e-06,
+    "screen_factor": 8,
+    "seeds": [
+      2026111101,
+      2026111102,
+      2026111103,
+      2026111104,
+      2026111105,
+      2026111106,
+      2026111107,
+      2026111108,
+      2026111109,
+      2026111110,
+      2026111111,
+      2026111112,
+      2026111113,
+      2026111114,
+      2026111115,
+      2026111116,
+      2026111117,
+      2026111118,
+      2026111119,
+      2026111120,
+      2026111121,
+      2026111122,
+      2026111123,
+      2026111124,
+      2026111125,
+      2026111126,
+      2026111127,
+      2026111128,
+      2026111129,
+      2026111130,
+      2026111131,
+      2026111132,
+      2026111133,
+      2026111134,
+      2026111135,
+      2026111136,
+      2026111137,
+      2026111138,
+      2026111139,
+      2026111140,
+      2026111141,
+      2026111142,
+      2026111143,
+      2026111144,
+      2026111145,
+      2026111146,
+      2026111147,
+      2026111148,
+      2026111149,
+      2026111150,
+      2026111151,
+      2026111152,
+      2026111153,
+      2026111154,
+      2026111155,
+      2026111156,
+      2026111157,
+      2026111158,
+      2026111159,
+      2026111160,
+      2026111161,
+      2026111162,
+      2026111163,
+      2026111164
+    ],
+    "sensor": "pyramid",
+    "validation": {
+      "delays": [
+        1,
+        2,
+        4
+      ],
+      "fitting_frames": 32,
+      "fitting_modes": [
+        100,
+        196,
+        324,
+        484
+      ],
+      "fitting_n": 96,
+      "fitting_slope_tolerance": 0.4,
+      "psf_tolerance": 1e-08,
+      "r0_slope_tolerance": 0.1,
+      "r0_values": [
+        0.2,
+        0.3,
+        0.4
+      ]
+    },
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "wind_scale": 0.5
+  }
+}
