@@ -40,9 +40,14 @@ jobs:
         run: |
           .venv/bin/python - <<'PYTHON'
           import xml.etree.ElementTree as ET
-          cases = [case for case in ET.parse("correctness.xml").iter("testcase")
-                   if "test_receiver" in case.get("classname", "")]
-          assert len(cases) >= 50, "Receiver tests were not collected"
-          assert all(case.find(tag) is None for case in cases
-                     for tag in ("skipped", "failure", "error"))
+          cases = list(ET.parse("correctness.xml").iter("testcase"))
+          required = {"test_receiver": 50, "test_receiver_calibration": 91,
+                      "test_receiver_calibration_runner": 25,
+                      "test_receiver_calibration_audit": 20}
+          for module, minimum in required.items():
+              selected = [case for case in cases
+                          if case.get("classname", "").split(".")[-1] == module]
+              assert len(selected) >= minimum, f"Missing receiver tests: {module}"
+              assert all(case.find(tag) is None for case in selected
+                         for tag in ("skipped", "failure", "error"))
           PYTHON

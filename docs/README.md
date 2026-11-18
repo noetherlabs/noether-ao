@@ -15,6 +15,7 @@
 - [HCIPy and SPECULA calibration comparisons](wfs_calibration.md)
 - [Closed-loop response identification](identification.md)
 - [Passive Gaussian receiver observation](receiver.md)
+- [Calibration utility at a Gaussian receiver](receiver_calibration_development_v1.md)
 - [Scheduled controller handover](scheduled_fallback.md)
 - [Frozen recovery study and execution](recovery_study_v1.md)
 - [When recovery hurts: complete 64-root results](../results/recovery_study_v1/README.md)

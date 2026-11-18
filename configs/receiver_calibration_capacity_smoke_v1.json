@@ -1,0 +1,152 @@
+{
+  "artifact_limits": {
+    "logical_scientific_bytes_per_condition": 16777216,
+    "retained_bytes_per_condition": 33554432,
+    "study_bytes": 1073741824
+  },
+  "base_config": {
+    "burn_in": 0,
+    "command_clip_rad": 5.0,
+    "delay_frames": 2,
+    "detector_n": 64,
+    "diameter_m": 1.0,
+    "dt_s": 0.001,
+    "estimate_clip_rad": 3.0,
+    "faults": {
+      "drift_frames": 32,
+      "model_phase_scale": 1.6,
+      "optical_gain": 0.35,
+      "shift_pixels": 2,
+      "stuck_radius_d": 0.08,
+      "vibration_hz": 40.0,
+      "vibration_rad": 0.7
+    },
+    "forward_ridge": 1e-05,
+    "forward_step": 0.5,
+    "forward_steps": 3,
+    "gain": 0.3,
+    "layers": [
+      {
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ],
+        "weight": 0.6
+      },
+      {
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ],
+        "weight": 0.4
+      }
+    ],
+    "leak": 0.999,
+    "modes": 16,
+    "n": 32,
+    "predictor_ridge": 0.01,
+    "r0_m": 0.4,
+    "read_noise_e": 0.3,
+    "reconstructor_ridge": 1e-06,
+    "screen_factor": 8,
+    "sensor": "linear",
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "wind_scale": 1.0
+  },
+  "conditions": [
+    {
+      "id": "nominal-low_flux",
+      "photons": 1000.0,
+      "sensor_response": "nominal"
+    },
+    {
+      "id": "nominal-high_flux",
+      "photons": 1000000.0,
+      "sensor_response": "nominal"
+    },
+    {
+      "id": "coupled-low_flux",
+      "photons": 1000.0,
+      "sensor_response": "coupled"
+    },
+    {
+      "id": "coupled-high_flux",
+      "photons": 1000000.0,
+      "sensor_response": "coupled"
+    }
+  ],
+  "controller": {
+    "command_clip_rad": 5.0,
+    "gain": 0.3,
+    "kind": "integrator",
+    "leak": 0.999
+  },
+  "coupled_response": {
+    "diagonal_first": 0.55,
+    "diagonal_last": 0.9,
+    "lower_diagonal": -0.04,
+    "upper_diagonal": 0.08
+  },
+  "endpoint": {
+    "alpha": 0.05,
+    "charged_frames": 896,
+    "commissioning_window": [
+      128,
+      384
+    ],
+    "condition_interval_correction": "Bonferroni",
+    "descriptive_low_coupling_threshold": 0.2,
+    "primary": "equally weighted root mean of paired charged coupling difference across four conditions",
+    "service_window": [
+      0,
+      640
+    ]
+  },
+  "failure_policy": "Retain worse outcomes and withheld fits; no reroll. Missing outcomes receive utility bounds rather than complete-case substitution.",
+  "fit": {
+    "instrument": "delayed_requested_probe",
+    "maximum_reconstructor_gain": 3.0,
+    "method": "iv",
+    "minimum_relevance": 0.05,
+    "rcond": 1e-10
+  },
+  "probe": {
+    "additional_measurement_perturbation": 0.0,
+    "amplitude_rad": 0.05,
+    "distribution": "rademacher",
+    "schedule": "fixed across conditions within a root"
+  },
+  "receiver": {
+    "focal_length_m": 4.0,
+    "mode_radius_m": 4.4e-06,
+    "receiver_wavelength_m": 1.55e-06
+  },
+  "receiver_package": {
+    "distribution": "noether-physics",
+    "files": {
+      "__init__.py": "1efed06d626a62518daf0b8379db0e98c5ba065a28b05c1a90845b480d40e63c",
+      "coupling.py": "c8e303b802ba076403b95c3794fc86cb4a5999c435792e4c6ebe41e9b9f79aad",
+      "differentiable.py": "b377595d896f3353193ef07afe45023b0ad3cdd920c29b54f7b753f5fe9d2f39"
+    },
+    "git_commit": "d4259edb2573f03c743f3fb55e792dff6e2da04d",
+    "version": "0.1.0"
+  },
+  "roots": [
+    "smoke00"
+  ],
+  "schema": "noether-receiver-calibration-development/1",
+  "scope": "Full-shape capacity qualification only: one fresh root across four conditions; not scientific comparison evidence.",
+  "study_id": "receiver-calibration-capacity-smoke-20261118-v1",
+  "windows": {
+    "commissioning_frames": 384,
+    "delay_frames": 2,
+    "probe_start": 128,
+    "probe_stop": 256,
+    "service_frames": 640
+  }
+}

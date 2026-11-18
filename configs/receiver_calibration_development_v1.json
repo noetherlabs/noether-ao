@@ -1,0 +1,159 @@
+{
+  "schema": "noether-receiver-calibration-development/1",
+  "study_id": "receiver-calibration-utility-development-20261118-v1",
+  "scope": "Two independent commissioning/service recordings; fixed integrator; synthetic phase-only receiver utility.",
+  "roots": [
+    "r00",
+    "r01",
+    "r02",
+    "r03",
+    "r04",
+    "r05",
+    "r06",
+    "r07"
+  ],
+  "windows": {
+    "commissioning_frames": 384,
+    "probe_start": 128,
+    "probe_stop": 256,
+    "service_frames": 640,
+    "delay_frames": 2
+  },
+  "controller": {
+    "kind": "integrator",
+    "gain": 0.3,
+    "leak": 0.999,
+    "command_clip_rad": 5.0
+  },
+  "base_config": {
+    "n": 32,
+    "modes": 16,
+    "sensor": "linear",
+    "detector_n": 64,
+    "wavelength_m": 7.5e-07,
+    "wavelengths_m": [
+      7.5e-07
+    ],
+    "diameter_m": 1.0,
+    "r0_m": 0.4,
+    "screen_factor": 8,
+    "layers": [
+      {
+        "weight": 0.6,
+        "outer_scale_m": 25.0,
+        "velocity_m_s": [
+          10.0,
+          0.0
+        ]
+      },
+      {
+        "weight": 0.4,
+        "outer_scale_m": 15.0,
+        "velocity_m_s": [
+          -7.0,
+          7.0
+        ]
+      }
+    ],
+    "wind_scale": 1.0,
+    "dt_s": 0.001,
+    "delay_frames": 2,
+    "read_noise_e": 0.3,
+    "gain": 0.3,
+    "leak": 0.999,
+    "reconstructor_ridge": 1e-06,
+    "forward_ridge": 1e-05,
+    "forward_steps": 3,
+    "forward_step": 0.5,
+    "estimate_clip_rad": 3.0,
+    "command_clip_rad": 5.0,
+    "predictor_ridge": 0.01,
+    "burn_in": 0,
+    "faults": {
+      "stuck_radius_d": 0.08,
+      "optical_gain": 0.35,
+      "drift_frames": 32,
+      "shift_pixels": 2,
+      "vibration_rad": 0.7,
+      "vibration_hz": 40.0,
+      "model_phase_scale": 1.6
+    }
+  },
+  "conditions": [
+    {
+      "id": "nominal-low_flux",
+      "sensor_response": "nominal",
+      "photons": 1000.0
+    },
+    {
+      "id": "nominal-high_flux",
+      "sensor_response": "nominal",
+      "photons": 1000000.0
+    },
+    {
+      "id": "coupled-low_flux",
+      "sensor_response": "coupled",
+      "photons": 1000.0
+    },
+    {
+      "id": "coupled-high_flux",
+      "sensor_response": "coupled",
+      "photons": 1000000.0
+    }
+  ],
+  "coupled_response": {
+    "diagonal_first": 0.55,
+    "diagonal_last": 0.9,
+    "upper_diagonal": 0.08,
+    "lower_diagonal": -0.04
+  },
+  "receiver": {
+    "receiver_wavelength_m": 1.55e-06,
+    "focal_length_m": 4.0,
+    "mode_radius_m": 4.4e-06
+  },
+  "probe": {
+    "distribution": "rademacher",
+    "amplitude_rad": 0.05,
+    "schedule": "fixed across conditions within a root",
+    "additional_measurement_perturbation": 0.0
+  },
+  "fit": {
+    "method": "iv",
+    "instrument": "delayed_requested_probe",
+    "rcond": 1e-10,
+    "minimum_relevance": 0.05,
+    "maximum_reconstructor_gain": 3.0
+  },
+  "endpoint": {
+    "primary": "equally weighted root mean of paired charged coupling difference across four conditions",
+    "commissioning_window": [
+      128,
+      384
+    ],
+    "service_window": [
+      0,
+      640
+    ],
+    "charged_frames": 896,
+    "alpha": 0.05,
+    "descriptive_low_coupling_threshold": 0.2,
+    "condition_interval_correction": "Bonferroni"
+  },
+  "failure_policy": "Retain worse outcomes and withheld fits; no reroll. Missing outcomes receive utility bounds rather than complete-case substitution.",
+  "artifact_limits": {
+    "logical_scientific_bytes_per_condition": 16777216,
+    "retained_bytes_per_condition": 33554432,
+    "study_bytes": 1073741824
+  },
+  "receiver_package": {
+    "distribution": "noether-physics",
+    "version": "0.1.0",
+    "git_commit": "d4259edb2573f03c743f3fb55e792dff6e2da04d",
+    "files": {
+      "__init__.py": "1efed06d626a62518daf0b8379db0e98c5ba065a28b05c1a90845b480d40e63c",
+      "coupling.py": "c8e303b802ba076403b95c3794fc86cb4a5999c435792e4c6ebe41e9b9f79aad",
+      "differentiable.py": "b377595d896f3353193ef07afe45023b0ad3cdd920c29b54f7b753f5fe9d2f39"
+    }
+  }
+}
