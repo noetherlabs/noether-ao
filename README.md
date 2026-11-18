@@ -44,6 +44,10 @@ simultaneous uncertainty intervals, resource costs and evidence limitations.
 The [raw evidence](https://huggingface.co/datasets/noetherlabs/prediction-boundary-v1)
 is available under CC-BY-4.0; see [download and verification](docs/release_integrity.md).
 
+Read the [technical report](https://www.noether.one/research/prediction-boundary),
+or run the [companion notebook](https://colab.research.google.com/github/noetherlabs/noether-ao/blob/9481ebff1e26ff0289b753b896bac1a72d6ea631/notebooks/prediction-boundary.ipynb)
+to reconstruct all 120 primary comparisons from published trial metrics.
+
 ## Earlier v0 findings
 
 <!-- BEGIN HEADLINES -->
