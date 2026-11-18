@@ -1,0 +1,96 @@
+{
+  "acquisition_audit_sha256": "bb9856f2549d4931da7c3e539ec22447c5ad553fcd07e77cb93beac7a3ee7251",
+  "active_rng_root_count": 40,
+  "collisions": [],
+  "detector_base_argument_count": 16,
+  "detector_offset_no_wrap": true,
+  "integer_identity_count": 56,
+  "namespace": "receiver-calibration-utility-development-20261118-v1",
+  "rows": [
+    {
+      "commissioning-detector": 2112078062,
+      "commissioning-detector-base": 2111978062,
+      "commissioning-phase": 1337361308,
+      "probe": 579107456,
+      "root": "r00",
+      "service-detector": 1334620575,
+      "service-detector-base": 1334520575,
+      "service-phase": 2111165163
+    },
+    {
+      "commissioning-detector": 996111359,
+      "commissioning-detector-base": 996011359,
+      "commissioning-phase": 4088992190,
+      "probe": 428476358,
+      "root": "r01",
+      "service-detector": 1059501543,
+      "service-detector-base": 1059401543,
+      "service-phase": 4270652096
+    },
+    {
+      "commissioning-detector": 2386353122,
+      "commissioning-detector-base": 2386253122,
+      "commissioning-phase": 746748423,
+      "probe": 118608411,
+      "root": "r02",
+      "service-detector": 3769570645,
+      "service-detector-base": 3769470645,
+      "service-phase": 1687092210
+    },
+    {
+      "commissioning-detector": 1178579748,
+      "commissioning-detector-base": 1178479748,
+      "commissioning-phase": 2673923418,
+      "probe": 2014275635,
+      "root": "r03",
+      "service-detector": 215243090,
+      "service-detector-base": 215143090,
+      "service-phase": 1905454019
+    },
+    {
+      "commissioning-detector": 2836231319,
+      "commissioning-detector-base": 2836131319,
+      "commissioning-phase": 3297486521,
+      "probe": 3410314322,
+      "root": "r04",
+      "service-detector": 1052800718,
+      "service-detector-base": 1052700718,
+      "service-phase": 22715446
+    },
+    {
+      "commissioning-detector": 3031224173,
+      "commissioning-detector-base": 3031124173,
+      "commissioning-phase": 3307993562,
+      "probe": 2778254429,
+      "root": "r05",
+      "service-detector": 1960346288,
+      "service-detector-base": 1960246288,
+      "service-phase": 176527968
+    },
+    {
+      "commissioning-detector": 291977960,
+      "commissioning-detector-base": 291877960,
+      "commissioning-phase": 3008058141,
+      "probe": 1487502998,
+      "root": "r06",
+      "service-detector": 694772440,
+      "service-detector-base": 694672440,
+      "service-phase": 1740482953
+    },
+    {
+      "commissioning-detector": 50793729,
+      "commissioning-detector-base": 50693729,
+      "commissioning-phase": 466454194,
+      "probe": 1314066408,
+      "root": "r07",
+      "service-detector": 2867967280,
+      "service-detector-base": 2867867280,
+      "service-phase": 950536417
+    }
+  ],
+  "schema": "receiver-calibration-seed-audit/1",
+  "scope": "Public reproduction projection of the acquired development stream table. Original scoped audit checked declared historical identities; it was not a universal historical-exposure certificate. This projection excludes private inventory locations and has a different file digest from the acquisition audit.",
+  "status": "scoped_disjoint",
+  "uint32_bounds_valid": true,
+  "unique": true
+}

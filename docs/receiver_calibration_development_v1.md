@@ -10,8 +10,10 @@ the comparison before acquisition. The
 [single-trial runner](../scripts/run_receiver_calibration_development.py)
 records one root and one condition; the
 [independent reader](../scripts/audit_receiver_calibration.py) reconstructs its
-physical residual and utility from retained arrays. This document specifies an
-experiment, not a measured improvement or a hardware qualification.
+physical residual and utility from retained arrays. The completed
+[development comparison](../results/receiver_calibration_development_v1/README.md)
+withheld all 32 corrections and measured the associated probing cost.
+The protocol below defines that comparison; it does not qualify hardware.
 
 ## Comparison
 

@@ -1,0 +1,643 @@
+{
+  "cells": [
+    {
+      "audit_sha256": "61144c4daa538679346abd0526ddd4a655cdb441db90ed39d1def95041f35eef",
+      "charged_mean_delta": -0.0019829706798127344,
+      "commissioning_cost": 1.77674172911221,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r00",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "d01942f73e2b751a9058e4ac44468388f61a542eca2808729d703fb1cd6886c4",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "89a0fa113af86d25c038eaf9f49c70795c491e4830fa9ae4c864492d74ade3bf",
+      "charged_mean_delta": -0.001980742971138357,
+      "commissioning_cost": 1.7747457021399677,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r00",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "5112db7e98d88396a83142cc42560e1aea082e4531b9526dcb6dcf746285a413",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "11e6b894919d2f4410029924637bcf116f07bf3f7f3a0a8f8b926f1a3121e1b4",
+      "charged_mean_delta": -0.002329660297359439,
+      "commissioning_cost": 2.0873756264340573,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r00",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "f3d0619a0c9618a8715bcb91f96b62dc5c1450b94d2ba31ab8abd3f7d6185fa4",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "2e10ae7db9512ffcbc0942e075e8d5db174132a31876f56a7af79d1966c31f89",
+      "charged_mean_delta": -0.0023373197694590156,
+      "commissioning_cost": 2.094238513435278,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r00",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "b580a026efcf2bc1922a87f7bfab693116c9d61bc01294964ca5acc716a802ec",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "f970151e11bf31212c4bdc9561bb0c81bd57219c4dc9591e76f85e100fd41989",
+      "charged_mean_delta": -0.0021085064985468236,
+      "commissioning_cost": 1.8892218226979538,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r01",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "05f6149f71d1fca74f1dc57a01c4ebe794560dc3ded0829fb28ebf79b803da25",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "b0e699f1fc0726186654f86ae64d4e53e3afc312d7554b264c0e1f64b85e6d3a",
+      "charged_mean_delta": -0.002151142124926476,
+      "commissioning_cost": 1.9274233439341222,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r01",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "037900cb538a8fa7af2d3fc6b75fee8c734f3b612a650b542fed32d83c565569",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "8971946e230b41081f7de008c3301f99a4f7fede8261916cd4c43d9d1b0feee4",
+      "charged_mean_delta": -0.0023576021349856245,
+      "commissioning_cost": 2.1124115129471197,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r01",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "4c0535d484b0cb7ee268e6b241986250beab5c61f5b73359da19adbf731e5e6f",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "96bcf9feda2caf517da5fe2d9f9ca8a431a0ed1ef2a24501d637a693d687e0c2",
+      "charged_mean_delta": -0.0024107133318648755,
+      "commissioning_cost": 2.1599991453509286,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r01",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "6ce6a6118cdc59b6e6f4e561c0f52482e981b95bf5c9358587e48418141d4182",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "d8763be03a3f07ea4af083a442a4568c339f930685f83073a633e1c740b7c70f",
+      "charged_mean_delta": -0.0025061093016392278,
+      "commissioning_cost": 2.245473934268748,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r02",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "43caf32f07b7eceed368ee270a6a75ac89efbe40d45fcf4e7715e877b3aba667",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "157f98b777e6b523e8f4f7dc3b04473093b9cd0adc2e2de4b14f62ed80f7737e",
+      "charged_mean_delta": -0.0025075460523462123,
+      "commissioning_cost": 2.246761262902206,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r02",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "acad272f9441272c9e3ca54d0997d25803b6c625201647535452f67525e79d43",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "d853ec4063229bd7ff363585274fe1b52f515e8280f3bc999f7195474fad84ff",
+      "charged_mean_delta": -0.0034040137589425442,
+      "commissioning_cost": 3.0499963280125195,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r02",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "1e9942a729f3cfb4cf4857571158e6cc648a33167439347c2841d22790c33f8f",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "4b915d59ca5149044885d529b37e73c48c6fece6f86ba148c1c96ea1eb681e09",
+      "charged_mean_delta": -0.003393496397573604,
+      "commissioning_cost": 3.040572772225949,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r02",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "68434bbb357b572dd31dff8204f6acc13d22dbf4ad46cd87ff19bd57e3ccb8d9",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "bd409ccf38e34ce42472daec58202d65cb7911d283a43f6b01e2d89a6a2d2198",
+      "charged_mean_delta": -0.0023244952186849696,
+      "commissioning_cost": 2.082747715941733,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r03",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "514db5b36bd5135033f07af6c669bfff24c861e8f57af532a53cac5a555bdd10",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "018fa032220fd1353391cd6e923b2ac893b52cd6eb41af03cbb5be8d79673286",
+      "charged_mean_delta": -0.0022919071858235546,
+      "commissioning_cost": 2.053548838497905,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r03",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "c93320f6eda9cdcadb069ba647925eeac729e5d0bdb753ccc6d848fa5f3a57e8",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "afe0ca66f8de5c8fda0ea7ffe75589f2ab5ad6acd4a41a74bb2feb5c06d0134f",
+      "charged_mean_delta": -0.0026235176636644243,
+      "commissioning_cost": 2.350671826643324,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r03",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "cf3b1c5b5c378ceb42863ce5b54e9625580bab4ac9bb883dfd2879e399aeeb63",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "68872cc34c2d4424a7ae2ed9fbce3981928aadcda27c640463c52d3e13a7886f",
+      "charged_mean_delta": -0.002576188678806135,
+      "commissioning_cost": 2.308265056210297,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r03",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "f5f560c7d266bd913b6e485c13dc374cb7653028c573521580b5a1659a06ed78",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "4159c712f5c33cb78055d2d9978385bfe5769a9397b262861fbccec88968b6ed",
+      "charged_mean_delta": -0.002401540910743036,
+      "commissioning_cost": 2.15178065602576,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r04",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "4e3e8a6cd0e3b22387e60fb296f06b83571e271bd5d497f38a59e547aba8931a",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "769ec018c6c60d8bace4a593f1030220cbe9413b597d98266a5fb80c52c399b0",
+      "charged_mean_delta": -0.0024238775098252862,
+      "commissioning_cost": 2.1717942488034563,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r04",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "df3770c013e29230e4ee96ff60f73558c3fd4f624e674d0681bfaa6f1dc7de02",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "262e4ba40aa356475514a7a7c55bd2103bbc8197f5e59f38c4cd51cc52295107",
+      "charged_mean_delta": -0.002951226436342911,
+      "commissioning_cost": 2.644298886963248,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r04",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "78aa2dfdd1b4d511e85cd346b7966f45873e8055772a3d884afe980f3a925e9b",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "54482f504d3cd06a631f9819c32075bd6237f872702d030dcea742bbfecee2da",
+      "charged_mean_delta": -0.002965482551685198,
+      "commissioning_cost": 2.6570723663099374,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r04",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "94dff9daf29af522812a525280a373294a8d40f3a1f3528d7dad1913c7193646",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "2ed612bcdb3374dc44a3ff96269c01c305fcc0d8ea2c7c36d6923c848ee40e36",
+      "charged_mean_delta": -0.0022721345507527376,
+      "commissioning_cost": 2.035832557474453,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r05",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "b8e296fb6c38bd61686b6380b7b9aa63a3acb5c51be847302347ade0f670c644",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "17ddfd364592d07652020bf1f21e0737fc9fe70c684ce3077b4acbeafc491e30",
+      "charged_mean_delta": -0.0022793336695425413,
+      "commissioning_cost": 2.042282967910117,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r05",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "5f2a72357e4f73e2ae228aea69ad5a07ae0eca9acf47f64462851f0b47024f25",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "425b1a2d09d6903699b2c27c8ba8b79b02f745ce00a909d460981491db8ac0ab",
+      "charged_mean_delta": -0.002776777475401803,
+      "commissioning_cost": 2.4879926179600154,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r05",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "2898d03552c1449f8e243f790685c51d36c4652c6555849d772d2574eee5f537",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "9afadc787c9e52307ac42ff86d419e2c7f49e56d937b80b28a524844c1c7e02c",
+      "charged_mean_delta": -0.0027577073046007464,
+      "commissioning_cost": 2.470905744922269,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "reconstructor_gain_budget",
+      "fit_status": "withheld",
+      "root_id": "r05",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "ac7b5bc3b2b894543dfceb0c6267cce8df0f504f3812dcdedd115d1feaa1656b",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "4353b0d939ad471aa8a84e5585a6989e2db3bd3ba5688ff689fe05f3bd01e1c7",
+      "charged_mean_delta": -0.001946371592714597,
+      "commissioning_cost": 1.7439489470722789,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r06",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "8852079f4d32b4d5c97113edc080ee1c70a54cc981af537ca74e3cbb44f00ada",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "dd7a2cef175868946ea34865ea579944ba32dd802eac7169ccf986e8d72e6c4d",
+      "charged_mean_delta": -0.0019452828977436231,
+      "commissioning_cost": 1.7429734763782863,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r06",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "cfec643c08ffff07f60dfee9ccea6ba7d9b60a0d4dd41c4db6d9c34d417c68d9",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "6cf1726e285b02316c3118d349eef73e42883e5cff79b9b5e80965cf03a19eb3",
+      "charged_mean_delta": -0.0022608355293280364,
+      "commissioning_cost": 2.0257086342779207,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r06",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "cf2b8b140833a971dad2a00bd5de2f73422a069ed48ff4700dcd2f9900628dd7",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "c7644470663153211b85d93ca9812290dbecbeef22e5b2b9a163fb4a56475544",
+      "charged_mean_delta": -0.002235969884887899,
+      "commissioning_cost": 2.0034290168595574,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r06",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "9255818e5feb61bffc3750432b612600f99bd27bee3f00d678483282607967d4",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "951c365d3eba80bc864186c1b617196663fd7ebc7db45f8e6737854ff3afacf2",
+      "charged_mean_delta": -0.002024756293581876,
+      "commissioning_cost": 1.814181639049361,
+      "condition_id": "nominal-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r07",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "1f25710617b2b782862ee670d2d19ec92c754ef196c1b9042d089ca24aa8b722",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "c44b4a72e8d3e6b8ab7e3816ec9db1aae26a6b156ef404930fd3007d6e91ef7a",
+      "charged_mean_delta": -0.0020206192804917656,
+      "commissioning_cost": 1.810474875320622,
+      "condition_id": "nominal-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r07",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "6c7866817f012f58e35d5079fae7740314adc43650232e68dbdbb86d41f7b800",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "35891b637287bf934629b86174b48376ddd3ac369969eb1ea3715c8617be276d",
+      "charged_mean_delta": -0.0025192447048863176,
+      "commissioning_cost": 2.2572432555781408,
+      "condition_id": "coupled-low_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r07",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "f083b91b7c8b754073fbe6b0740d6ac35de4cab10e106fdfd5e01e90fd8c91d8",
+      "unknown_reason": null
+    },
+    {
+      "audit_sha256": "bf1f3d5be73a8296237fb523a82b84ba0cdde13412552aaa976d814cd80737b0",
+      "charged_mean_delta": -0.0025099606579106273,
+      "commissioning_cost": 2.248924749487922,
+      "condition_id": "coupled-high_flux",
+      "fit_reason": "weak_instruments",
+      "fit_status": "withheld",
+      "root_id": "r07",
+      "service_gain": 0.0,
+      "status": "completed",
+      "terminal_sha256": "bbdfb78337b531333da89cb5b04a564472d83754d58b8cc11d79e2273435d8b4",
+      "unknown_reason": null
+    }
+  ],
+  "conditions": [
+    "nominal-low_flux",
+    "nominal-high_flux",
+    "coupled-low_flux",
+    "coupled-high_flux"
+  ],
+  "config_sha256": "cca9e0a9779e9cd14601cdbc9dd1927d19cfc2d6991368b548f6f6ae0ec46de9",
+  "roots": [
+    "r00",
+    "r01",
+    "r02",
+    "r03",
+    "r04",
+    "r05",
+    "r06",
+    "r07"
+  ],
+  "schema": "noether-receiver-calibration-development-result/1",
+  "scope": "Synthetic phase-only development evidence from independent commissioning and service recordings. No continuous handover, physical received-energy, hardware or controller-superiority claim.",
+  "seed_audit_sha256": "bb9856f2549d4931da7c3e539ec22447c5ad553fcd07e77cb93beac7a3ee7251",
+  "source_commit": "9eee3a6ef31db196d0dcb2099e8cf8003e3aebbf",
+  "statistics": {
+    "condition_statistics": {
+      "coupled-high_flux": {
+        "bounds": [
+          -0.0026483548220985124,
+          -0.0026483548220985124
+        ],
+        "mean_delta": -0.0026483548220985124,
+        "missing_outcomes": 0,
+        "statistics": {
+          "alpha": 0.0125,
+          "degrees_of_freedom": 7,
+          "hoeffding_interval": [
+            -1.0,
+            1.0
+          ],
+          "mean": -0.002648354822098513,
+          "n_roots": 8,
+          "standard_error": 0.00013465580759130903,
+          "student_t_interval": [
+            -0.0030974716557747883,
+            -0.0021992379884222374
+          ]
+        }
+      },
+      "coupled-low_flux": {
+        "bounds": [
+          -0.0026528597501138873,
+          -0.0026528597501138873
+        ],
+        "mean_delta": -0.0026528597501138873,
+        "missing_outcomes": 0,
+        "statistics": {
+          "alpha": 0.0125,
+          "degrees_of_freedom": 7,
+          "hoeffding_interval": [
+            -1.0,
+            1.0
+          ],
+          "mean": -0.0026528597501138873,
+          "n_roots": 8,
+          "standard_error": 0.0001357941259942465,
+          "student_t_interval": [
+            -0.0031057732113993807,
+            -0.002199946288828394
+          ]
+        }
+      },
+      "nominal-high_flux": {
+        "bounds": [
+          -0.002200056461479727,
+          -0.002200056461479727
+        ],
+        "mean_delta": -0.002200056461479727,
+        "missing_outcomes": 0,
+        "statistics": {
+          "alpha": 0.0125,
+          "degrees_of_freedom": 7,
+          "hoeffding_interval": [
+            -1.0,
+            1.0
+          ],
+          "mean": -0.0022000564614797274,
+          "n_roots": 8,
+          "standard_error": 7.403732547075786e-05,
+          "student_t_interval": [
+            -0.002446992778479936,
+            -0.0019531201444795187
+          ]
+        }
+      },
+      "nominal-low_flux": {
+        "bounds": [
+          -0.0021958606308095,
+          -0.0021958606308095
+        ],
+        "mean_delta": -0.0021958606308095,
+        "missing_outcomes": 0,
+        "statistics": {
+          "alpha": 0.0125,
+          "degrees_of_freedom": 7,
+          "hoeffding_interval": [
+            -1.0,
+            1.0
+          ],
+          "mean": -0.0021958606308095,
+          "n_roots": 8,
+          "standard_error": 7.38480018799407e-05,
+          "student_t_interval": [
+            -0.0024421654977952686,
+            -0.0019495557638237316
+          ]
+        }
+      }
+    },
+    "mean_bounds": [
+      -0.002424282916125407,
+      -0.002424282916125407
+    ],
+    "mean_delta": -0.002424282916125407,
+    "n_conditions": 4,
+    "n_missing_cells": 0,
+    "n_roots": 8,
+    "primary": {
+      "alpha": 0.05,
+      "degrees_of_freedom": 7,
+      "hoeffding_interval": [
+        -0.9627470742360461,
+        0.9578985084037953
+      ],
+      "mean": -0.0024242829161254067,
+      "n_roots": 8,
+      "standard_error": 0.00010248997721325715,
+      "student_t_interval": [
+        -0.002666633201789066,
+        -0.002181932630461747
+      ]
+    },
+    "root_values": [
+      {
+        "bounds": [
+          -0.0021576734294423867,
+          -0.0021576734294423867
+        ],
+        "mean_delta": -0.0021576734294423867,
+        "missing_outcomes": 0,
+        "root_id": "r00"
+      },
+      {
+        "bounds": [
+          -0.00225699102258095,
+          -0.00225699102258095
+        ],
+        "mean_delta": -0.00225699102258095,
+        "missing_outcomes": 0,
+        "root_id": "r01"
+      },
+      {
+        "bounds": [
+          -0.0029527913776253973,
+          -0.0029527913776253973
+        ],
+        "mean_delta": -0.0029527913776253973,
+        "missing_outcomes": 0,
+        "root_id": "r02"
+      },
+      {
+        "bounds": [
+          -0.002454027186744771,
+          -0.002454027186744771
+        ],
+        "mean_delta": -0.002454027186744771,
+        "missing_outcomes": 0,
+        "root_id": "r03"
+      },
+      {
+        "bounds": [
+          -0.002685531852149108,
+          -0.002685531852149108
+        ],
+        "mean_delta": -0.002685531852149108,
+        "missing_outcomes": 0,
+        "root_id": "r04"
+      },
+      {
+        "bounds": [
+          -0.0025214882500744574,
+          -0.0025214882500744574
+        ],
+        "mean_delta": -0.0025214882500744574,
+        "missing_outcomes": 0,
+        "root_id": "r05"
+      },
+      {
+        "bounds": [
+          -0.002097114976168539,
+          -0.002097114976168539
+        ],
+        "mean_delta": -0.002097114976168539,
+        "missing_outcomes": 0,
+        "root_id": "r06"
+      },
+      {
+        "bounds": [
+          -0.0022686452342176467,
+          -0.0022686452342176467
+        ],
+        "mean_delta": -0.0022686452342176467,
+        "missing_outcomes": 0,
+        "root_id": "r07"
+      }
+    ],
+    "status": "complete"
+  },
+  "status": "complete",
+  "study_id": "receiver-calibration-utility-development-20261118-v1",
+  "uncertainty": "Eight independent root blocks. Primary t interval and the four-condition Bonferroni family are separate predeclared summaries, not a joint 95% family. Missing cells retain bounds.",
+  "units": {
+    "charged_mean_delta": "absolute coupling difference per charged frame",
+    "commissioning_cost": "coupling-frame loss",
+    "service_gain": "coupling-frame gain"
+  }
+}
